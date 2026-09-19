@@ -38,6 +38,13 @@ jobs:
       - name: Verify
         run: pnpm verify
 
+      - name: Panchangam fixture audit (informational)
+        # Reports how far the verified fixture set is from the §9.1 bar of 60.
+        # Non-blocking: the debt is tracked in content/REVIEW_QUEUE.md, and a
+        # red X here would say nothing new on every PR until it closes.
+        continue-on-error: true
+        run: pnpm fixtures:audit
+
   expo-checks:
     name: expo config + doctor
     runs-on: ubuntu-latest

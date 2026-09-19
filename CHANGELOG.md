@@ -51,7 +51,7 @@ entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
   are 17.** The other 77 fixtures are engine snapshots and are labelled as such;
   they guard against regressions and prove nothing about correctness. Closing
   this needs a reference panchangam or a Prokerala key (dev-only, §3.4).
-  `pnpm --filter @epooja/panchangam-fixtures audit` tracks it.
+  `pnpm fixtures:audit` tracks it.
 - The ayanamsa model is unvalidated at the arc-second level for the same reason
   (ADR 0002 §1).
 
