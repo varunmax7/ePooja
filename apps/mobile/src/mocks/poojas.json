@@ -1,0 +1,59 @@
+{
+  "note": "Phase 1 mock data for the static screens. Ritual values are the Telugu from content/enums (themselves PENDING_PANDIT_REVIEW); mantra lines are ⟨TODO_PANDIT: …⟩ placeholders because §0.4 forbids inventing Sanskrit. Phase 3 replaces the panchangam values with the live engine and Phase 4 replaces the puja content with real packs.",
+  "sections": [
+    {
+      "id": "nitya",
+      "title": "Daily",
+      "items": [
+        {
+          "slug": "nitya-puja",
+          "title": "Nitya Puja",
+          "titleTe": "⟨TODO_PANDIT: nitya_puja_te⟩",
+          "duration": "15 / 30 min",
+          "steps": 14,
+          "downloaded": true,
+          "icon": "candle"
+        }
+      ]
+    },
+    {
+      "id": "deity",
+      "title": "Deity poojas",
+      "items": [
+        {
+          "slug": "ganapathi",
+          "title": "Ganapathi Puja",
+          "titleTe": "⟨TODO_PANDIT: ganapathi_te⟩",
+          "duration": "25 / 45 min",
+          "steps": 18,
+          "downloaded": true,
+          "icon": "flower-tulip"
+        },
+        {
+          "slug": "lakshmi",
+          "title": "Lakshmi Puja",
+          "titleTe": "⟨TODO_PANDIT: lakshmi_te⟩",
+          "duration": "25 / 45 min",
+          "steps": 18,
+          "downloaded": false,
+          "icon": "flower-poppy"
+        },
+        {
+          "slug": "shiva",
+          "title": "Shiva Puja",
+          "titleTe": "⟨TODO_PANDIT: shiva_te⟩",
+          "duration": "25 / 45 min",
+          "steps": 16,
+          "downloaded": false,
+          "icon": "water"
+        }
+      ]
+    },
+    {
+      "id": "festival",
+      "title": "Festivals",
+      "note": "Coming in a later release (§2)",
+      "items": []
+    }
+  ]
+}

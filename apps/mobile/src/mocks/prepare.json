@@ -1,0 +1,55 @@
+{
+  "note": "Phase 1 mock data for the static screens. Ritual values are the Telugu from content/enums (themselves PENDING_PANDIT_REVIEW); mantra lines are ⟨TODO_PANDIT: …⟩ placeholders because §0.4 forbids inventing Sanskrit. Phase 3 replaces the panchangam values with the live engine and Phase 4 replaces the puja content with real packs.",
+  "slug": "nitya-puja",
+  "title": "Pooja Preparation",
+  "subtitle": "Nitya Puja · ≈ 15 min",
+  "checklistTitle": "Essentials for Today's Ritual",
+  "items": [
+    {
+      "id": "deepam",
+      "label": "Lamp and wicks",
+      "icon": "candle",
+      "checked": true
+    },
+    {
+      "id": "akshatalu",
+      "label": "Akshatalu (turmeric rice)",
+      "icon": "rice",
+      "checked": true
+    },
+    {
+      "id": "pushpam",
+      "label": "Fresh flowers",
+      "icon": "flower",
+      "checked": true
+    },
+    {
+      "id": "dhupam",
+      "label": "Incense",
+      "icon": "smoke",
+      "checked": true
+    },
+    {
+      "id": "kalasham",
+      "label": "Kalasham with water",
+      "icon": "cup-water",
+      "checked": false
+    },
+    {
+      "id": "naivedyam",
+      "label": "Naivedyam offering",
+      "icon": "bowl-mix",
+      "checked": false,
+      "optional": false
+    }
+  ],
+  "recipe": {
+    "id": "pulihora",
+    "eyebrow": "Offerings Recipe Preview:",
+    "title": "Pulihora",
+    "subtitle": "⟨TODO_PANDIT: pulihora_te⟩",
+    "buttonLabel": "View Recipe"
+  },
+  "startLabel": "Start Pooja",
+  "warning": "2 items still unchecked — you can start anyway."
+}

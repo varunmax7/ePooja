@@ -1,0 +1,51 @@
+{
+  "note": "Phase 1 mock data for the static screens. Ritual values are the Telugu from content/enums (themselves PENDING_PANDIT_REVIEW); mantra lines are ⟨TODO_PANDIT: …⟩ placeholders because §0.4 forbids inventing Sanskrit. Phase 3 replaces the panchangam values with the live engine and Phase 4 replaces the puja content with real packs.",
+  "slug": "nitya-puja",
+  "title": "Nitya Puja",
+  "subtitle": "Chant Player",
+  "step": {
+    "index": 4,
+    "total": 14,
+    "title": "Kalasha Puja",
+    "progress": 0.42,
+    "elapsed": "1:12",
+    "remaining": "-1:38"
+  },
+  "mode": "guided",
+  "modeLabels": {
+    "chant": "Chant Mode",
+    "guided": "Guided Narration"
+  },
+  "lines": [
+    {
+      "id": "l1",
+      "text": "⟨TODO_PANDIT: kalasha_line_1⟩",
+      "transliteration": "⟨TODO_PANDIT: kalasha_line_1_iast⟩"
+    },
+    {
+      "id": "l2",
+      "text": "⟨TODO_PANDIT: kalasha_line_2⟩",
+      "transliteration": "⟨TODO_PANDIT: kalasha_line_2_iast⟩"
+    },
+    {
+      "id": "l3",
+      "text": "⟨TODO_PANDIT: kalasha_line_3⟩",
+      "transliteration": "⟨TODO_PANDIT: kalasha_line_3_iast⟩"
+    }
+  ],
+  "actionPrompt": {
+    "te": "ఇప్పుడు అక్షతలు తీసుకొని కలశంపై చల్లండి…",
+    "en": "Take the akshatalu and sprinkle them over the kalasham.",
+    "doneLabel": "Done"
+  },
+  "lampPrompt": {
+    "te": "ఇప్పుడు దీపం వెలిగించండి",
+    "en": "Light the lamp now."
+  },
+  "transport": {
+    "play": "Play",
+    "pause": "Pause",
+    "previous": "Previous step",
+    "next": "Next step"
+  }
+}

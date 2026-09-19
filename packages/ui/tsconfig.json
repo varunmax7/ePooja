@@ -1,7 +1,9 @@
 {
-  "extends": "@epooja/config/tsconfig/library.json",
+  "extends": "@epooja/config/tsconfig/react-native.json",
   "compilerOptions": {
-    "noEmit": true
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "types": ["node"]
   },
-  "include": ["src/**/*", "*.mjs", "*.ts"]
+  "include": ["src/**/*", "*.mjs"]
 }
