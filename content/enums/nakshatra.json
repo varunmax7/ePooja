@@ -1,0 +1,336 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "nakshatra",
+  "note": "Telugu common forms seeded from §9.2. Locative example from §9.2: Rohini -> 'రోహిణీ నక్షత్రే'.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "ashvini",
+      "index": 1,
+      "te": "అశ్విని",
+      "iast": "⟨TODO_PANDIT: nakshatra_ashvini_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_ashvini_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_ashvini_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_ashvini_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.ashvini"
+    },
+    {
+      "id": "bharani",
+      "index": 2,
+      "te": "భరణి",
+      "iast": "⟨TODO_PANDIT: nakshatra_bharani_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_bharani_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_bharani_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_bharani_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.bharani"
+    },
+    {
+      "id": "krittika",
+      "index": 3,
+      "te": "కృత్తిక",
+      "iast": "⟨TODO_PANDIT: nakshatra_krittika_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_krittika_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_krittika_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_krittika_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.krittika"
+    },
+    {
+      "id": "rohini",
+      "index": 4,
+      "te": "రోహిణి",
+      "iast": "⟨TODO_PANDIT: nakshatra_rohini_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_rohini_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_rohini_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_rohini_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.rohini"
+    },
+    {
+      "id": "mrigashira",
+      "index": 5,
+      "te": "మృగశిర",
+      "iast": "⟨TODO_PANDIT: nakshatra_mrigashira_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_mrigashira_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_mrigashira_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_mrigashira_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.mrigashira"
+    },
+    {
+      "id": "ardra",
+      "index": 6,
+      "te": "ఆర్ద్ర",
+      "iast": "⟨TODO_PANDIT: nakshatra_ardra_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_ardra_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_ardra_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_ardra_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.ardra"
+    },
+    {
+      "id": "punarvasu",
+      "index": 7,
+      "te": "పునర్వసు",
+      "iast": "⟨TODO_PANDIT: nakshatra_punarvasu_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_punarvasu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_punarvasu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_punarvasu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.punarvasu"
+    },
+    {
+      "id": "pushyami",
+      "index": 8,
+      "te": "పుష్యమి",
+      "iast": "⟨TODO_PANDIT: nakshatra_pushyami_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_pushyami_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_pushyami_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_pushyami_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.pushyami"
+    },
+    {
+      "id": "ashlesha",
+      "index": 9,
+      "te": "ఆశ్లేష",
+      "iast": "⟨TODO_PANDIT: nakshatra_ashlesha_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_ashlesha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_ashlesha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_ashlesha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.ashlesha"
+    },
+    {
+      "id": "makha",
+      "index": 10,
+      "te": "మఖ",
+      "iast": "⟨TODO_PANDIT: nakshatra_makha_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_makha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_makha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_makha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.makha"
+    },
+    {
+      "id": "pubba",
+      "index": 11,
+      "te": "పుబ్బ",
+      "iast": "⟨TODO_PANDIT: nakshatra_pubba_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_pubba_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_pubba_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_pubba_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.pubba"
+    },
+    {
+      "id": "uttara",
+      "index": 12,
+      "te": "ఉత్తర",
+      "iast": "⟨TODO_PANDIT: nakshatra_uttara_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_uttara_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_uttara_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_uttara_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.uttara"
+    },
+    {
+      "id": "hasta",
+      "index": 13,
+      "te": "హస్త",
+      "iast": "⟨TODO_PANDIT: nakshatra_hasta_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_hasta_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_hasta_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_hasta_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.hasta"
+    },
+    {
+      "id": "chitta",
+      "index": 14,
+      "te": "చిత్త",
+      "iast": "⟨TODO_PANDIT: nakshatra_chitta_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_chitta_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_chitta_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_chitta_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.chitta"
+    },
+    {
+      "id": "svati",
+      "index": 15,
+      "te": "స్వాతి",
+      "iast": "⟨TODO_PANDIT: nakshatra_svati_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_svati_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_svati_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_svati_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.svati"
+    },
+    {
+      "id": "vishakha",
+      "index": 16,
+      "te": "విశాఖ",
+      "iast": "⟨TODO_PANDIT: nakshatra_vishakha_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_vishakha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_vishakha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_vishakha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.vishakha"
+    },
+    {
+      "id": "anuradha",
+      "index": 17,
+      "te": "అనూరాధ",
+      "iast": "⟨TODO_PANDIT: nakshatra_anuradha_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_anuradha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_anuradha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_anuradha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.anuradha"
+    },
+    {
+      "id": "jyeshtha",
+      "index": 18,
+      "te": "జ్యేష్ఠ",
+      "iast": "⟨TODO_PANDIT: nakshatra_jyeshtha_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_jyeshtha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_jyeshtha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_jyeshtha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.jyeshtha"
+    },
+    {
+      "id": "mula",
+      "index": 19,
+      "te": "మూల",
+      "iast": "⟨TODO_PANDIT: nakshatra_mula_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_mula_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_mula_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_mula_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.mula"
+    },
+    {
+      "id": "purvashadha",
+      "index": 20,
+      "te": "పూర్వాషాఢ",
+      "iast": "⟨TODO_PANDIT: nakshatra_purvashadha_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_purvashadha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_purvashadha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_purvashadha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.purvashadha"
+    },
+    {
+      "id": "uttarashadha",
+      "index": 21,
+      "te": "ఉత్తరాషాఢ",
+      "iast": "⟨TODO_PANDIT: nakshatra_uttarashadha_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_uttarashadha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_uttarashadha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_uttarashadha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.uttarashadha"
+    },
+    {
+      "id": "shravanam",
+      "index": 22,
+      "te": "శ్రవణం",
+      "iast": "⟨TODO_PANDIT: nakshatra_shravanam_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_shravanam_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_shravanam_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_shravanam_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.shravanam"
+    },
+    {
+      "id": "dhanishta",
+      "index": 23,
+      "te": "ధనిష్ఠ",
+      "iast": "⟨TODO_PANDIT: nakshatra_dhanishta_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_dhanishta_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_dhanishta_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_dhanishta_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.dhanishta"
+    },
+    {
+      "id": "shatabhisham",
+      "index": 24,
+      "te": "శతభిషం",
+      "iast": "⟨TODO_PANDIT: nakshatra_shatabhisham_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_shatabhisham_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_shatabhisham_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_shatabhisham_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.shatabhisham"
+    },
+    {
+      "id": "purvabhadra",
+      "index": 25,
+      "te": "పూర్వాభాద్ర",
+      "iast": "⟨TODO_PANDIT: nakshatra_purvabhadra_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_purvabhadra_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_purvabhadra_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_purvabhadra_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.purvabhadra"
+    },
+    {
+      "id": "uttarabhadra",
+      "index": 26,
+      "te": "ఉత్తరాభాద్ర",
+      "iast": "⟨TODO_PANDIT: nakshatra_uttarabhadra_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_uttarabhadra_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_uttarabhadra_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_uttarabhadra_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.uttarabhadra"
+    },
+    {
+      "id": "revati",
+      "index": 27,
+      "te": "రేవతి",
+      "iast": "⟨TODO_PANDIT: nakshatra_revati_iast⟩",
+      "dev": "⟨TODO_PANDIT: nakshatra_revati_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: nakshatra_revati_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: nakshatra_revati_locative_iast⟩"
+      },
+      "audioTokenId": "enum.nakshatra.revati"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "masa",
+  "note": "Amanta (Chandramana) months, Chaitra first. An adhika masa reuses the same value with the `adhika` prefix token.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "chaitra",
+      "index": 1,
+      "te": "చైత్రం",
+      "iast": "⟨TODO_PANDIT: masa_chaitra_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_chaitra_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_chaitra_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_chaitra_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.chaitra"
+    },
+    {
+      "id": "vaishakha",
+      "index": 2,
+      "te": "వైశాఖం",
+      "iast": "⟨TODO_PANDIT: masa_vaishakha_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_vaishakha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_vaishakha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_vaishakha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.vaishakha"
+    },
+    {
+      "id": "jyeshtha",
+      "index": 3,
+      "te": "జ్యేష్ఠం",
+      "iast": "⟨TODO_PANDIT: masa_jyeshtha_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_jyeshtha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_jyeshtha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_jyeshtha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.jyeshtha"
+    },
+    {
+      "id": "ashadha",
+      "index": 4,
+      "te": "ఆషాఢం",
+      "iast": "⟨TODO_PANDIT: masa_ashadha_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_ashadha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_ashadha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_ashadha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.ashadha"
+    },
+    {
+      "id": "shravana",
+      "index": 5,
+      "te": "శ్రావణం",
+      "iast": "⟨TODO_PANDIT: masa_shravana_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_shravana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_shravana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_shravana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.shravana"
+    },
+    {
+      "id": "bhadrapada",
+      "index": 6,
+      "te": "భాద్రపదం",
+      "iast": "⟨TODO_PANDIT: masa_bhadrapada_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_bhadrapada_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_bhadrapada_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_bhadrapada_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.bhadrapada"
+    },
+    {
+      "id": "ashvayuja",
+      "index": 7,
+      "te": "ఆశ్వయుజం",
+      "iast": "⟨TODO_PANDIT: masa_ashvayuja_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_ashvayuja_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_ashvayuja_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_ashvayuja_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.ashvayuja"
+    },
+    {
+      "id": "kartika",
+      "index": 8,
+      "te": "కార్తీకం",
+      "iast": "⟨TODO_PANDIT: masa_kartika_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_kartika_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_kartika_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_kartika_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.kartika"
+    },
+    {
+      "id": "margashira",
+      "index": 9,
+      "te": "మార్గశిరం",
+      "iast": "⟨TODO_PANDIT: masa_margashira_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_margashira_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_margashira_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_margashira_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.margashira"
+    },
+    {
+      "id": "pushya",
+      "index": 10,
+      "te": "పుష్యం",
+      "iast": "⟨TODO_PANDIT: masa_pushya_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_pushya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_pushya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_pushya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.pushya"
+    },
+    {
+      "id": "magha",
+      "index": 11,
+      "te": "మాఘం",
+      "iast": "⟨TODO_PANDIT: masa_magha_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_magha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_magha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_magha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.magha"
+    },
+    {
+      "id": "phalguna",
+      "index": 12,
+      "te": "ఫాల్గుణం",
+      "iast": "⟨TODO_PANDIT: masa_phalguna_iast⟩",
+      "dev": "⟨TODO_PANDIT: masa_phalguna_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: masa_phalguna_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: masa_phalguna_locative_iast⟩"
+      },
+      "audioTokenId": "enum.masa.phalguna"
+    }
+  ]
+}

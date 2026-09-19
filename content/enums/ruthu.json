@@ -1,0 +1,84 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "ruthu",
+  "note": "Six ruthuvus, each spanning two masas (§9.1).",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "vasanta",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: ruthu_vasanta_te⟩",
+      "iast": "Vasanta",
+      "dev": "⟨TODO_PANDIT: ruthu_vasanta_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ruthu_vasanta_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ruthu_vasanta_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ruthu.vasanta"
+    },
+    {
+      "id": "grishma",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: ruthu_grishma_te⟩",
+      "iast": "Grīṣma",
+      "dev": "⟨TODO_PANDIT: ruthu_grishma_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ruthu_grishma_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ruthu_grishma_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ruthu.grishma"
+    },
+    {
+      "id": "varsha",
+      "index": 3,
+      "te": "⟨TODO_PANDIT: ruthu_varsha_te⟩",
+      "iast": "Varṣa",
+      "dev": "⟨TODO_PANDIT: ruthu_varsha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ruthu_varsha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ruthu_varsha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ruthu.varsha"
+    },
+    {
+      "id": "sharad",
+      "index": 4,
+      "te": "⟨TODO_PANDIT: ruthu_sharad_te⟩",
+      "iast": "Śarad",
+      "dev": "⟨TODO_PANDIT: ruthu_sharad_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ruthu_sharad_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ruthu_sharad_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ruthu.sharad"
+    },
+    {
+      "id": "hemanta",
+      "index": 5,
+      "te": "⟨TODO_PANDIT: ruthu_hemanta_te⟩",
+      "iast": "Hemanta",
+      "dev": "⟨TODO_PANDIT: ruthu_hemanta_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ruthu_hemanta_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ruthu_hemanta_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ruthu.hemanta"
+    },
+    {
+      "id": "shishira",
+      "index": 6,
+      "te": "⟨TODO_PANDIT: ruthu_shishira_te⟩",
+      "iast": "Śiśira",
+      "dev": "⟨TODO_PANDIT: ruthu_shishira_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ruthu_shishira_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ruthu_shishira_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ruthu.shishira"
+    }
+  ]
+}

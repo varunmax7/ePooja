@@ -1,0 +1,402 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "tithi",
+  "note": "Ids are positional and match the engine's tithiId(). §9.2 supplies no tithi names, so every display form is pandit-supplied.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "shukla_1",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: tithi_shukla_1_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_1_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_1_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_1_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_1_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_1",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_2",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: tithi_shukla_2_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_2_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_2_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_2_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_2_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_2",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_3",
+      "index": 3,
+      "te": "⟨TODO_PANDIT: tithi_shukla_3_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_3_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_3_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_3_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_3_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_3",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_4",
+      "index": 4,
+      "te": "⟨TODO_PANDIT: tithi_shukla_4_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_4_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_4_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_4_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_4_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_4",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_5",
+      "index": 5,
+      "te": "⟨TODO_PANDIT: tithi_shukla_5_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_5_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_5_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_5_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_5_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_5",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_6",
+      "index": 6,
+      "te": "⟨TODO_PANDIT: tithi_shukla_6_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_6_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_6_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_6_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_6_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_6",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_7",
+      "index": 7,
+      "te": "⟨TODO_PANDIT: tithi_shukla_7_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_7_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_7_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_7_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_7_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_7",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_8",
+      "index": 8,
+      "te": "⟨TODO_PANDIT: tithi_shukla_8_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_8_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_8_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_8_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_8_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_8",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_9",
+      "index": 9,
+      "te": "⟨TODO_PANDIT: tithi_shukla_9_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_9_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_9_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_9_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_9_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_9",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_10",
+      "index": 10,
+      "te": "⟨TODO_PANDIT: tithi_shukla_10_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_10_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_10_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_10_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_10_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_10",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_11",
+      "index": 11,
+      "te": "⟨TODO_PANDIT: tithi_shukla_11_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_11_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_11_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_11_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_11_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_11",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_12",
+      "index": 12,
+      "te": "⟨TODO_PANDIT: tithi_shukla_12_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_12_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_12_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_12_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_12_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_12",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_13",
+      "index": 13,
+      "te": "⟨TODO_PANDIT: tithi_shukla_13_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_13_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_13_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_13_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_13_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_13",
+      "paksha": "shukla"
+    },
+    {
+      "id": "shukla_14",
+      "index": 14,
+      "te": "⟨TODO_PANDIT: tithi_shukla_14_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_shukla_14_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_shukla_14_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_shukla_14_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_shukla_14_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.shukla_14",
+      "paksha": "shukla"
+    },
+    {
+      "id": "pournami",
+      "index": 15,
+      "te": "⟨TODO_PANDIT: tithi_pournami_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_pournami_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_pournami_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_pournami_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_pournami_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.pournami",
+      "paksha": "shukla"
+    },
+    {
+      "id": "krishna_1",
+      "index": 16,
+      "te": "⟨TODO_PANDIT: tithi_krishna_1_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_1_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_1_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_1_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_1_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_1",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_2",
+      "index": 17,
+      "te": "⟨TODO_PANDIT: tithi_krishna_2_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_2_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_2_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_2_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_2_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_2",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_3",
+      "index": 18,
+      "te": "⟨TODO_PANDIT: tithi_krishna_3_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_3_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_3_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_3_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_3_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_3",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_4",
+      "index": 19,
+      "te": "⟨TODO_PANDIT: tithi_krishna_4_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_4_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_4_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_4_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_4_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_4",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_5",
+      "index": 20,
+      "te": "⟨TODO_PANDIT: tithi_krishna_5_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_5_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_5_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_5_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_5_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_5",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_6",
+      "index": 21,
+      "te": "⟨TODO_PANDIT: tithi_krishna_6_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_6_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_6_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_6_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_6_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_6",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_7",
+      "index": 22,
+      "te": "⟨TODO_PANDIT: tithi_krishna_7_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_7_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_7_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_7_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_7_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_7",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_8",
+      "index": 23,
+      "te": "⟨TODO_PANDIT: tithi_krishna_8_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_8_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_8_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_8_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_8_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_8",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_9",
+      "index": 24,
+      "te": "⟨TODO_PANDIT: tithi_krishna_9_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_9_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_9_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_9_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_9_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_9",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_10",
+      "index": 25,
+      "te": "⟨TODO_PANDIT: tithi_krishna_10_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_10_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_10_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_10_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_10_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_10",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_11",
+      "index": 26,
+      "te": "⟨TODO_PANDIT: tithi_krishna_11_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_11_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_11_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_11_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_11_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_11",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_12",
+      "index": 27,
+      "te": "⟨TODO_PANDIT: tithi_krishna_12_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_12_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_12_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_12_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_12_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_12",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_13",
+      "index": 28,
+      "te": "⟨TODO_PANDIT: tithi_krishna_13_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_13_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_13_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_13_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_13_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_13",
+      "paksha": "krishna"
+    },
+    {
+      "id": "krishna_14",
+      "index": 29,
+      "te": "⟨TODO_PANDIT: tithi_krishna_14_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_krishna_14_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_krishna_14_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_krishna_14_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_krishna_14_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.krishna_14",
+      "paksha": "krishna"
+    },
+    {
+      "id": "amavasya",
+      "index": 30,
+      "te": "⟨TODO_PANDIT: tithi_amavasya_te⟩",
+      "iast": "⟨TODO_PANDIT: tithi_amavasya_iast⟩",
+      "dev": "⟨TODO_PANDIT: tithi_amavasya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: tithi_amavasya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: tithi_amavasya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.tithi.amavasya",
+      "paksha": "krishna"
+    }
+  ]
+}

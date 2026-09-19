@@ -1,0 +1,36 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "ayana",
+  "note": "Uttarayanam runs from Makara Sankranti to Karkataka Sankranti (§9.1).",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "uttarayana",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: ayana_uttarayana_te⟩",
+      "iast": "⟨TODO_PANDIT: ayana_uttarayana_iast⟩",
+      "dev": "⟨TODO_PANDIT: ayana_uttarayana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ayana_uttarayana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ayana_uttarayana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ayana.uttarayana"
+    },
+    {
+      "id": "dakshinayana",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: ayana_dakshinayana_te⟩",
+      "iast": "⟨TODO_PANDIT: ayana_dakshinayana_iast⟩",
+      "dev": "⟨TODO_PANDIT: ayana_dakshinayana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: ayana_dakshinayana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: ayana_dakshinayana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.ayana.dakshinayana"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "rasi",
+  "note": "Sidereal rasis, Mesha first. §9.2 lists no spellings, so every display form is pandit-supplied.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "mesha",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: rasi_mesha_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_mesha_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_mesha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_mesha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_mesha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.mesha"
+    },
+    {
+      "id": "vrishabha",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: rasi_vrishabha_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_vrishabha_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_vrishabha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_vrishabha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_vrishabha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.vrishabha"
+    },
+    {
+      "id": "mithuna",
+      "index": 3,
+      "te": "⟨TODO_PANDIT: rasi_mithuna_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_mithuna_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_mithuna_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_mithuna_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_mithuna_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.mithuna"
+    },
+    {
+      "id": "karkataka",
+      "index": 4,
+      "te": "⟨TODO_PANDIT: rasi_karkataka_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_karkataka_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_karkataka_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_karkataka_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_karkataka_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.karkataka"
+    },
+    {
+      "id": "simha",
+      "index": 5,
+      "te": "⟨TODO_PANDIT: rasi_simha_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_simha_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_simha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_simha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_simha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.simha"
+    },
+    {
+      "id": "kanya",
+      "index": 6,
+      "te": "⟨TODO_PANDIT: rasi_kanya_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_kanya_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_kanya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_kanya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_kanya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.kanya"
+    },
+    {
+      "id": "tula",
+      "index": 7,
+      "te": "⟨TODO_PANDIT: rasi_tula_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_tula_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_tula_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_tula_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_tula_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.tula"
+    },
+    {
+      "id": "vrischika",
+      "index": 8,
+      "te": "⟨TODO_PANDIT: rasi_vrischika_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_vrischika_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_vrischika_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_vrischika_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_vrischika_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.vrischika"
+    },
+    {
+      "id": "dhanassu",
+      "index": 9,
+      "te": "⟨TODO_PANDIT: rasi_dhanassu_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_dhanassu_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_dhanassu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_dhanassu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_dhanassu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.dhanassu"
+    },
+    {
+      "id": "makara",
+      "index": 10,
+      "te": "⟨TODO_PANDIT: rasi_makara_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_makara_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_makara_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_makara_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_makara_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.makara"
+    },
+    {
+      "id": "kumbha",
+      "index": 11,
+      "te": "⟨TODO_PANDIT: rasi_kumbha_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_kumbha_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_kumbha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_kumbha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_kumbha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.kumbha"
+    },
+    {
+      "id": "meena",
+      "index": 12,
+      "te": "⟨TODO_PANDIT: rasi_meena_te⟩",
+      "iast": "⟨TODO_PANDIT: rasi_meena_iast⟩",
+      "dev": "⟨TODO_PANDIT: rasi_meena_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: rasi_meena_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: rasi_meena_locative_iast⟩"
+      },
+      "audioTokenId": "enum.rasi.meena"
+    }
+  ]
+}

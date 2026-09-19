@@ -1,0 +1,108 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "dik",
+  "note": "Eight directions, IAST seeded from §9.2.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "purva",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: dik_purva_te⟩",
+      "iast": "pūrva",
+      "dev": "⟨TODO_PANDIT: dik_purva_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_purva_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_purva_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.purva"
+    },
+    {
+      "id": "agneya",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: dik_agneya_te⟩",
+      "iast": "āgneya",
+      "dev": "⟨TODO_PANDIT: dik_agneya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_agneya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_agneya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.agneya"
+    },
+    {
+      "id": "dakshina",
+      "index": 3,
+      "te": "⟨TODO_PANDIT: dik_dakshina_te⟩",
+      "iast": "dakṣiṇa",
+      "dev": "⟨TODO_PANDIT: dik_dakshina_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_dakshina_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_dakshina_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.dakshina"
+    },
+    {
+      "id": "nairriti",
+      "index": 4,
+      "te": "⟨TODO_PANDIT: dik_nairriti_te⟩",
+      "iast": "nairṛti",
+      "dev": "⟨TODO_PANDIT: dik_nairriti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_nairriti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_nairriti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.nairriti"
+    },
+    {
+      "id": "paschima",
+      "index": 5,
+      "te": "⟨TODO_PANDIT: dik_paschima_te⟩",
+      "iast": "paścima",
+      "dev": "⟨TODO_PANDIT: dik_paschima_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_paschima_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_paschima_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.paschima"
+    },
+    {
+      "id": "vayavya",
+      "index": 6,
+      "te": "⟨TODO_PANDIT: dik_vayavya_te⟩",
+      "iast": "vāyavya",
+      "dev": "⟨TODO_PANDIT: dik_vayavya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_vayavya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_vayavya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.vayavya"
+    },
+    {
+      "id": "uttara",
+      "index": 7,
+      "te": "⟨TODO_PANDIT: dik_uttara_te⟩",
+      "iast": "uttara",
+      "dev": "⟨TODO_PANDIT: dik_uttara_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_uttara_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_uttara_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.uttara"
+    },
+    {
+      "id": "ishanya",
+      "index": 8,
+      "te": "⟨TODO_PANDIT: dik_ishanya_te⟩",
+      "iast": "īśānya",
+      "dev": "⟨TODO_PANDIT: dik_ishanya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: dik_ishanya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: dik_ishanya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.dik.ishanya"
+    }
+  ]
+}

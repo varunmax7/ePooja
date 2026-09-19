@@ -1,0 +1,96 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "vasara",
+  "note": "Sankalpam forms seeded from §9.2, Sunday first (index 1 = weekday 0). The Sankalpam appends వాసరే; Thursday also appears as బృహస్పతి.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "bhanu",
+      "index": 1,
+      "te": "భాను",
+      "iast": "⟨TODO_PANDIT: vasara_bhanu_iast⟩",
+      "dev": "⟨TODO_PANDIT: vasara_bhanu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: vasara_bhanu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: vasara_bhanu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.vasara.bhanu"
+    },
+    {
+      "id": "indu",
+      "index": 2,
+      "te": "ఇందు",
+      "iast": "⟨TODO_PANDIT: vasara_indu_iast⟩",
+      "dev": "⟨TODO_PANDIT: vasara_indu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: vasara_indu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: vasara_indu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.vasara.indu"
+    },
+    {
+      "id": "bhauma",
+      "index": 3,
+      "te": "భౌమ",
+      "iast": "⟨TODO_PANDIT: vasara_bhauma_iast⟩",
+      "dev": "⟨TODO_PANDIT: vasara_bhauma_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: vasara_bhauma_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: vasara_bhauma_locative_iast⟩"
+      },
+      "audioTokenId": "enum.vasara.bhauma"
+    },
+    {
+      "id": "saumya",
+      "index": 4,
+      "te": "సౌమ్య",
+      "iast": "⟨TODO_PANDIT: vasara_saumya_iast⟩",
+      "dev": "⟨TODO_PANDIT: vasara_saumya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: vasara_saumya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: vasara_saumya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.vasara.saumya"
+    },
+    {
+      "id": "guru",
+      "index": 5,
+      "te": "గురు",
+      "iast": "⟨TODO_PANDIT: vasara_guru_iast⟩",
+      "dev": "⟨TODO_PANDIT: vasara_guru_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: vasara_guru_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: vasara_guru_locative_iast⟩"
+      },
+      "audioTokenId": "enum.vasara.guru"
+    },
+    {
+      "id": "bhrigu",
+      "index": 6,
+      "te": "భృగు",
+      "iast": "⟨TODO_PANDIT: vasara_bhrigu_iast⟩",
+      "dev": "⟨TODO_PANDIT: vasara_bhrigu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: vasara_bhrigu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: vasara_bhrigu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.vasara.bhrigu"
+    },
+    {
+      "id": "sthira",
+      "index": 7,
+      "te": "స్థిర",
+      "iast": "⟨TODO_PANDIT: vasara_sthira_iast⟩",
+      "dev": "⟨TODO_PANDIT: vasara_sthira_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: vasara_sthira_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: vasara_sthira_locative_iast⟩"
+      },
+      "audioTokenId": "enum.vasara.sthira"
+    }
+  ]
+}

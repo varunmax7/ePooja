@@ -1,0 +1,11 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "gotra",
+  "note": "§9.2: a curated list of ~60 gotras, pandit-supplied. Empty until then; the app falls back to a custom gotra with self-recite audio (§9.4 gotraCustom).",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": []
+}

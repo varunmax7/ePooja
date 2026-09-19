@@ -1,0 +1,732 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "samvatsara",
+  "note": "IAST names seeded from implementation.md §9.2; the pandit supplies Telugu, Devanagari and the locative Sankalpam forms.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "prabhava",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: samvatsara_prabhava_te⟩",
+      "iast": "Prabhava",
+      "dev": "⟨TODO_PANDIT: samvatsara_prabhava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_prabhava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_prabhava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.prabhava"
+    },
+    {
+      "id": "vibhava",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: samvatsara_vibhava_te⟩",
+      "iast": "Vibhava",
+      "dev": "⟨TODO_PANDIT: samvatsara_vibhava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vibhava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vibhava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vibhava"
+    },
+    {
+      "id": "shukla",
+      "index": 3,
+      "te": "⟨TODO_PANDIT: samvatsara_shukla_te⟩",
+      "iast": "Śukla",
+      "dev": "⟨TODO_PANDIT: samvatsara_shukla_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_shukla_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_shukla_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.shukla"
+    },
+    {
+      "id": "pramoduta",
+      "index": 4,
+      "te": "⟨TODO_PANDIT: samvatsara_pramoduta_te⟩",
+      "iast": "Pramodūta",
+      "dev": "⟨TODO_PANDIT: samvatsara_pramoduta_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_pramoduta_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_pramoduta_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.pramoduta"
+    },
+    {
+      "id": "prajotpatti",
+      "index": 5,
+      "te": "⟨TODO_PANDIT: samvatsara_prajotpatti_te⟩",
+      "iast": "Prajotpatti",
+      "dev": "⟨TODO_PANDIT: samvatsara_prajotpatti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_prajotpatti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_prajotpatti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.prajotpatti"
+    },
+    {
+      "id": "angirasa",
+      "index": 6,
+      "te": "⟨TODO_PANDIT: samvatsara_angirasa_te⟩",
+      "iast": "Āṅgīrasa",
+      "dev": "⟨TODO_PANDIT: samvatsara_angirasa_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_angirasa_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_angirasa_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.angirasa"
+    },
+    {
+      "id": "shrimukha",
+      "index": 7,
+      "te": "⟨TODO_PANDIT: samvatsara_shrimukha_te⟩",
+      "iast": "Śrīmukha",
+      "dev": "⟨TODO_PANDIT: samvatsara_shrimukha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_shrimukha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_shrimukha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.shrimukha"
+    },
+    {
+      "id": "bhava",
+      "index": 8,
+      "te": "⟨TODO_PANDIT: samvatsara_bhava_te⟩",
+      "iast": "Bhāva",
+      "dev": "⟨TODO_PANDIT: samvatsara_bhava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_bhava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_bhava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.bhava"
+    },
+    {
+      "id": "yuva",
+      "index": 9,
+      "te": "⟨TODO_PANDIT: samvatsara_yuva_te⟩",
+      "iast": "Yuva",
+      "dev": "⟨TODO_PANDIT: samvatsara_yuva_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_yuva_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_yuva_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.yuva"
+    },
+    {
+      "id": "dhatu",
+      "index": 10,
+      "te": "⟨TODO_PANDIT: samvatsara_dhatu_te⟩",
+      "iast": "Dhātu",
+      "dev": "⟨TODO_PANDIT: samvatsara_dhatu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_dhatu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_dhatu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.dhatu"
+    },
+    {
+      "id": "ishvara",
+      "index": 11,
+      "te": "⟨TODO_PANDIT: samvatsara_ishvara_te⟩",
+      "iast": "Īśvara",
+      "dev": "⟨TODO_PANDIT: samvatsara_ishvara_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_ishvara_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_ishvara_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.ishvara"
+    },
+    {
+      "id": "bahudhanya",
+      "index": 12,
+      "te": "⟨TODO_PANDIT: samvatsara_bahudhanya_te⟩",
+      "iast": "Bahudhānya",
+      "dev": "⟨TODO_PANDIT: samvatsara_bahudhanya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_bahudhanya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_bahudhanya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.bahudhanya"
+    },
+    {
+      "id": "pramathi",
+      "index": 13,
+      "te": "⟨TODO_PANDIT: samvatsara_pramathi_te⟩",
+      "iast": "Pramāthi",
+      "dev": "⟨TODO_PANDIT: samvatsara_pramathi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_pramathi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_pramathi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.pramathi"
+    },
+    {
+      "id": "vikrama",
+      "index": 14,
+      "te": "⟨TODO_PANDIT: samvatsara_vikrama_te⟩",
+      "iast": "Vikrama",
+      "dev": "⟨TODO_PANDIT: samvatsara_vikrama_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vikrama_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vikrama_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vikrama"
+    },
+    {
+      "id": "vrisha",
+      "index": 15,
+      "te": "⟨TODO_PANDIT: samvatsara_vrisha_te⟩",
+      "iast": "Vṛṣa",
+      "dev": "⟨TODO_PANDIT: samvatsara_vrisha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vrisha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vrisha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vrisha"
+    },
+    {
+      "id": "chitrabhanu",
+      "index": 16,
+      "te": "⟨TODO_PANDIT: samvatsara_chitrabhanu_te⟩",
+      "iast": "Citrabhānu",
+      "dev": "⟨TODO_PANDIT: samvatsara_chitrabhanu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_chitrabhanu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_chitrabhanu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.chitrabhanu"
+    },
+    {
+      "id": "svabhanu",
+      "index": 17,
+      "te": "⟨TODO_PANDIT: samvatsara_svabhanu_te⟩",
+      "iast": "Svabhānu",
+      "dev": "⟨TODO_PANDIT: samvatsara_svabhanu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_svabhanu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_svabhanu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.svabhanu"
+    },
+    {
+      "id": "tarana",
+      "index": 18,
+      "te": "⟨TODO_PANDIT: samvatsara_tarana_te⟩",
+      "iast": "Tāraṇa",
+      "dev": "⟨TODO_PANDIT: samvatsara_tarana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_tarana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_tarana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.tarana"
+    },
+    {
+      "id": "parthiva",
+      "index": 19,
+      "te": "⟨TODO_PANDIT: samvatsara_parthiva_te⟩",
+      "iast": "Pārthiva",
+      "dev": "⟨TODO_PANDIT: samvatsara_parthiva_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_parthiva_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_parthiva_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.parthiva"
+    },
+    {
+      "id": "vyaya",
+      "index": 20,
+      "te": "⟨TODO_PANDIT: samvatsara_vyaya_te⟩",
+      "iast": "Vyaya",
+      "dev": "⟨TODO_PANDIT: samvatsara_vyaya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vyaya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vyaya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vyaya"
+    },
+    {
+      "id": "sarvajit",
+      "index": 21,
+      "te": "⟨TODO_PANDIT: samvatsara_sarvajit_te⟩",
+      "iast": "Sarvajit",
+      "dev": "⟨TODO_PANDIT: samvatsara_sarvajit_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_sarvajit_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_sarvajit_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.sarvajit"
+    },
+    {
+      "id": "sarvadhari",
+      "index": 22,
+      "te": "⟨TODO_PANDIT: samvatsara_sarvadhari_te⟩",
+      "iast": "Sarvadhāri",
+      "dev": "⟨TODO_PANDIT: samvatsara_sarvadhari_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_sarvadhari_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_sarvadhari_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.sarvadhari"
+    },
+    {
+      "id": "virodhi",
+      "index": 23,
+      "te": "⟨TODO_PANDIT: samvatsara_virodhi_te⟩",
+      "iast": "Virodhi",
+      "dev": "⟨TODO_PANDIT: samvatsara_virodhi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_virodhi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_virodhi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.virodhi"
+    },
+    {
+      "id": "vikriti",
+      "index": 24,
+      "te": "⟨TODO_PANDIT: samvatsara_vikriti_te⟩",
+      "iast": "Vikṛti",
+      "dev": "⟨TODO_PANDIT: samvatsara_vikriti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vikriti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vikriti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vikriti"
+    },
+    {
+      "id": "khara",
+      "index": 25,
+      "te": "⟨TODO_PANDIT: samvatsara_khara_te⟩",
+      "iast": "Khara",
+      "dev": "⟨TODO_PANDIT: samvatsara_khara_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_khara_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_khara_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.khara"
+    },
+    {
+      "id": "nandana",
+      "index": 26,
+      "te": "⟨TODO_PANDIT: samvatsara_nandana_te⟩",
+      "iast": "Nandana",
+      "dev": "⟨TODO_PANDIT: samvatsara_nandana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_nandana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_nandana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.nandana"
+    },
+    {
+      "id": "vijaya",
+      "index": 27,
+      "te": "⟨TODO_PANDIT: samvatsara_vijaya_te⟩",
+      "iast": "Vijaya",
+      "dev": "⟨TODO_PANDIT: samvatsara_vijaya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vijaya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vijaya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vijaya"
+    },
+    {
+      "id": "jaya",
+      "index": 28,
+      "te": "⟨TODO_PANDIT: samvatsara_jaya_te⟩",
+      "iast": "Jaya",
+      "dev": "⟨TODO_PANDIT: samvatsara_jaya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_jaya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_jaya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.jaya"
+    },
+    {
+      "id": "manmatha",
+      "index": 29,
+      "te": "⟨TODO_PANDIT: samvatsara_manmatha_te⟩",
+      "iast": "Manmatha",
+      "dev": "⟨TODO_PANDIT: samvatsara_manmatha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_manmatha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_manmatha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.manmatha"
+    },
+    {
+      "id": "durmukhi",
+      "index": 30,
+      "te": "⟨TODO_PANDIT: samvatsara_durmukhi_te⟩",
+      "iast": "Durmukhi",
+      "dev": "⟨TODO_PANDIT: samvatsara_durmukhi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_durmukhi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_durmukhi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.durmukhi"
+    },
+    {
+      "id": "hevilambi",
+      "index": 31,
+      "te": "⟨TODO_PANDIT: samvatsara_hevilambi_te⟩",
+      "iast": "Hevilambi",
+      "dev": "⟨TODO_PANDIT: samvatsara_hevilambi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_hevilambi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_hevilambi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.hevilambi"
+    },
+    {
+      "id": "vilambi",
+      "index": 32,
+      "te": "⟨TODO_PANDIT: samvatsara_vilambi_te⟩",
+      "iast": "Vilambi",
+      "dev": "⟨TODO_PANDIT: samvatsara_vilambi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vilambi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vilambi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vilambi"
+    },
+    {
+      "id": "vikari",
+      "index": 33,
+      "te": "⟨TODO_PANDIT: samvatsara_vikari_te⟩",
+      "iast": "Vikāri",
+      "dev": "⟨TODO_PANDIT: samvatsara_vikari_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vikari_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vikari_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vikari"
+    },
+    {
+      "id": "sharvari",
+      "index": 34,
+      "te": "⟨TODO_PANDIT: samvatsara_sharvari_te⟩",
+      "iast": "Śārvari",
+      "dev": "⟨TODO_PANDIT: samvatsara_sharvari_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_sharvari_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_sharvari_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.sharvari"
+    },
+    {
+      "id": "plava",
+      "index": 35,
+      "te": "⟨TODO_PANDIT: samvatsara_plava_te⟩",
+      "iast": "Plava",
+      "dev": "⟨TODO_PANDIT: samvatsara_plava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_plava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_plava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.plava"
+    },
+    {
+      "id": "shubhakrit",
+      "index": 36,
+      "te": "⟨TODO_PANDIT: samvatsara_shubhakrit_te⟩",
+      "iast": "Śubhakṛt",
+      "dev": "⟨TODO_PANDIT: samvatsara_shubhakrit_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_shubhakrit_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_shubhakrit_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.shubhakrit"
+    },
+    {
+      "id": "shobhakrit",
+      "index": 37,
+      "te": "⟨TODO_PANDIT: samvatsara_shobhakrit_te⟩",
+      "iast": "Śobhakṛt",
+      "dev": "⟨TODO_PANDIT: samvatsara_shobhakrit_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_shobhakrit_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_shobhakrit_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.shobhakrit"
+    },
+    {
+      "id": "krodhi",
+      "index": 38,
+      "te": "⟨TODO_PANDIT: samvatsara_krodhi_te⟩",
+      "iast": "Krodhi",
+      "dev": "⟨TODO_PANDIT: samvatsara_krodhi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_krodhi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_krodhi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.krodhi"
+    },
+    {
+      "id": "vishvavasu",
+      "index": 39,
+      "te": "⟨TODO_PANDIT: samvatsara_vishvavasu_te⟩",
+      "iast": "Viśvāvasu",
+      "dev": "⟨TODO_PANDIT: samvatsara_vishvavasu_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_vishvavasu_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_vishvavasu_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.vishvavasu"
+    },
+    {
+      "id": "parabhava",
+      "index": 40,
+      "te": "⟨TODO_PANDIT: samvatsara_parabhava_te⟩",
+      "iast": "Parābhava",
+      "dev": "⟨TODO_PANDIT: samvatsara_parabhava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_parabhava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_parabhava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.parabhava"
+    },
+    {
+      "id": "plavanga",
+      "index": 41,
+      "te": "⟨TODO_PANDIT: samvatsara_plavanga_te⟩",
+      "iast": "Plavaṅga",
+      "dev": "⟨TODO_PANDIT: samvatsara_plavanga_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_plavanga_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_plavanga_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.plavanga"
+    },
+    {
+      "id": "kilaka",
+      "index": 42,
+      "te": "⟨TODO_PANDIT: samvatsara_kilaka_te⟩",
+      "iast": "Kīlaka",
+      "dev": "⟨TODO_PANDIT: samvatsara_kilaka_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_kilaka_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_kilaka_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.kilaka"
+    },
+    {
+      "id": "saumya",
+      "index": 43,
+      "te": "⟨TODO_PANDIT: samvatsara_saumya_te⟩",
+      "iast": "Saumya",
+      "dev": "⟨TODO_PANDIT: samvatsara_saumya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_saumya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_saumya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.saumya"
+    },
+    {
+      "id": "sadharana",
+      "index": 44,
+      "te": "⟨TODO_PANDIT: samvatsara_sadharana_te⟩",
+      "iast": "Sādhāraṇa",
+      "dev": "⟨TODO_PANDIT: samvatsara_sadharana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_sadharana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_sadharana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.sadharana"
+    },
+    {
+      "id": "virodhikrit",
+      "index": 45,
+      "te": "⟨TODO_PANDIT: samvatsara_virodhikrit_te⟩",
+      "iast": "Virodhikṛt",
+      "dev": "⟨TODO_PANDIT: samvatsara_virodhikrit_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_virodhikrit_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_virodhikrit_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.virodhikrit"
+    },
+    {
+      "id": "paridhavi",
+      "index": 46,
+      "te": "⟨TODO_PANDIT: samvatsara_paridhavi_te⟩",
+      "iast": "Paridhāvi",
+      "dev": "⟨TODO_PANDIT: samvatsara_paridhavi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_paridhavi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_paridhavi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.paridhavi"
+    },
+    {
+      "id": "pramadicha",
+      "index": 47,
+      "te": "⟨TODO_PANDIT: samvatsara_pramadicha_te⟩",
+      "iast": "Pramādīca",
+      "dev": "⟨TODO_PANDIT: samvatsara_pramadicha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_pramadicha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_pramadicha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.pramadicha"
+    },
+    {
+      "id": "ananda",
+      "index": 48,
+      "te": "⟨TODO_PANDIT: samvatsara_ananda_te⟩",
+      "iast": "Ānanda",
+      "dev": "⟨TODO_PANDIT: samvatsara_ananda_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_ananda_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_ananda_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.ananda"
+    },
+    {
+      "id": "rakshasa",
+      "index": 49,
+      "te": "⟨TODO_PANDIT: samvatsara_rakshasa_te⟩",
+      "iast": "Rākṣasa",
+      "dev": "⟨TODO_PANDIT: samvatsara_rakshasa_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_rakshasa_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_rakshasa_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.rakshasa"
+    },
+    {
+      "id": "nala",
+      "index": 50,
+      "te": "⟨TODO_PANDIT: samvatsara_nala_te⟩",
+      "iast": "Nala",
+      "dev": "⟨TODO_PANDIT: samvatsara_nala_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_nala_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_nala_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.nala"
+    },
+    {
+      "id": "pingala",
+      "index": 51,
+      "te": "⟨TODO_PANDIT: samvatsara_pingala_te⟩",
+      "iast": "Piṅgala",
+      "dev": "⟨TODO_PANDIT: samvatsara_pingala_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_pingala_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_pingala_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.pingala"
+    },
+    {
+      "id": "kalayukti",
+      "index": 52,
+      "te": "⟨TODO_PANDIT: samvatsara_kalayukti_te⟩",
+      "iast": "Kālayukti",
+      "dev": "⟨TODO_PANDIT: samvatsara_kalayukti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_kalayukti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_kalayukti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.kalayukti"
+    },
+    {
+      "id": "siddharthi",
+      "index": 53,
+      "te": "⟨TODO_PANDIT: samvatsara_siddharthi_te⟩",
+      "iast": "Siddhārthi",
+      "dev": "⟨TODO_PANDIT: samvatsara_siddharthi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_siddharthi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_siddharthi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.siddharthi"
+    },
+    {
+      "id": "raudri",
+      "index": 54,
+      "te": "⟨TODO_PANDIT: samvatsara_raudri_te⟩",
+      "iast": "Raudri",
+      "dev": "⟨TODO_PANDIT: samvatsara_raudri_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_raudri_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_raudri_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.raudri"
+    },
+    {
+      "id": "durmati",
+      "index": 55,
+      "te": "⟨TODO_PANDIT: samvatsara_durmati_te⟩",
+      "iast": "Durmati",
+      "dev": "⟨TODO_PANDIT: samvatsara_durmati_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_durmati_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_durmati_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.durmati"
+    },
+    {
+      "id": "dundubhi",
+      "index": 56,
+      "te": "⟨TODO_PANDIT: samvatsara_dundubhi_te⟩",
+      "iast": "Dundubhi",
+      "dev": "⟨TODO_PANDIT: samvatsara_dundubhi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_dundubhi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_dundubhi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.dundubhi"
+    },
+    {
+      "id": "rudhirodgari",
+      "index": 57,
+      "te": "⟨TODO_PANDIT: samvatsara_rudhirodgari_te⟩",
+      "iast": "Rudhirodgāri",
+      "dev": "⟨TODO_PANDIT: samvatsara_rudhirodgari_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_rudhirodgari_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_rudhirodgari_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.rudhirodgari"
+    },
+    {
+      "id": "raktakshi",
+      "index": 58,
+      "te": "⟨TODO_PANDIT: samvatsara_raktakshi_te⟩",
+      "iast": "Raktākṣi",
+      "dev": "⟨TODO_PANDIT: samvatsara_raktakshi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_raktakshi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_raktakshi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.raktakshi"
+    },
+    {
+      "id": "krodhana",
+      "index": 59,
+      "te": "⟨TODO_PANDIT: samvatsara_krodhana_te⟩",
+      "iast": "Krodhana",
+      "dev": "⟨TODO_PANDIT: samvatsara_krodhana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_krodhana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_krodhana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.krodhana"
+    },
+    {
+      "id": "akshaya",
+      "index": 60,
+      "te": "⟨TODO_PANDIT: samvatsara_akshaya_te⟩",
+      "iast": "Akṣaya",
+      "dev": "⟨TODO_PANDIT: samvatsara_akshaya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: samvatsara_akshaya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: samvatsara_akshaya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.samvatsara.akshaya"
+    }
+  ]
+}

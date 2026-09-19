@@ -1,0 +1,336 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "yoga",
+  "note": "IAST names seeded from §9.2.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "vishkambha",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: yoga_vishkambha_te⟩",
+      "iast": "Viṣkambha",
+      "dev": "⟨TODO_PANDIT: yoga_vishkambha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_vishkambha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_vishkambha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.vishkambha"
+    },
+    {
+      "id": "priti",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: yoga_priti_te⟩",
+      "iast": "Prīti",
+      "dev": "⟨TODO_PANDIT: yoga_priti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_priti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_priti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.priti"
+    },
+    {
+      "id": "ayushman",
+      "index": 3,
+      "te": "⟨TODO_PANDIT: yoga_ayushman_te⟩",
+      "iast": "Āyuṣmān",
+      "dev": "⟨TODO_PANDIT: yoga_ayushman_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_ayushman_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_ayushman_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.ayushman"
+    },
+    {
+      "id": "saubhagya",
+      "index": 4,
+      "te": "⟨TODO_PANDIT: yoga_saubhagya_te⟩",
+      "iast": "Saubhāgya",
+      "dev": "⟨TODO_PANDIT: yoga_saubhagya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_saubhagya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_saubhagya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.saubhagya"
+    },
+    {
+      "id": "shobhana",
+      "index": 5,
+      "te": "⟨TODO_PANDIT: yoga_shobhana_te⟩",
+      "iast": "Śobhana",
+      "dev": "⟨TODO_PANDIT: yoga_shobhana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_shobhana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_shobhana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.shobhana"
+    },
+    {
+      "id": "atiganda",
+      "index": 6,
+      "te": "⟨TODO_PANDIT: yoga_atiganda_te⟩",
+      "iast": "Atigaṇḍa",
+      "dev": "⟨TODO_PANDIT: yoga_atiganda_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_atiganda_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_atiganda_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.atiganda"
+    },
+    {
+      "id": "sukarma",
+      "index": 7,
+      "te": "⟨TODO_PANDIT: yoga_sukarma_te⟩",
+      "iast": "Sukarma",
+      "dev": "⟨TODO_PANDIT: yoga_sukarma_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_sukarma_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_sukarma_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.sukarma"
+    },
+    {
+      "id": "dhriti",
+      "index": 8,
+      "te": "⟨TODO_PANDIT: yoga_dhriti_te⟩",
+      "iast": "Dhṛti",
+      "dev": "⟨TODO_PANDIT: yoga_dhriti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_dhriti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_dhriti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.dhriti"
+    },
+    {
+      "id": "shula",
+      "index": 9,
+      "te": "⟨TODO_PANDIT: yoga_shula_te⟩",
+      "iast": "Śūla",
+      "dev": "⟨TODO_PANDIT: yoga_shula_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_shula_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_shula_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.shula"
+    },
+    {
+      "id": "ganda",
+      "index": 10,
+      "te": "⟨TODO_PANDIT: yoga_ganda_te⟩",
+      "iast": "Gaṇḍa",
+      "dev": "⟨TODO_PANDIT: yoga_ganda_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_ganda_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_ganda_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.ganda"
+    },
+    {
+      "id": "vriddhi",
+      "index": 11,
+      "te": "⟨TODO_PANDIT: yoga_vriddhi_te⟩",
+      "iast": "Vṛddhi",
+      "dev": "⟨TODO_PANDIT: yoga_vriddhi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_vriddhi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_vriddhi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.vriddhi"
+    },
+    {
+      "id": "dhruva",
+      "index": 12,
+      "te": "⟨TODO_PANDIT: yoga_dhruva_te⟩",
+      "iast": "Dhruva",
+      "dev": "⟨TODO_PANDIT: yoga_dhruva_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_dhruva_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_dhruva_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.dhruva"
+    },
+    {
+      "id": "vyaghata",
+      "index": 13,
+      "te": "⟨TODO_PANDIT: yoga_vyaghata_te⟩",
+      "iast": "Vyāghāta",
+      "dev": "⟨TODO_PANDIT: yoga_vyaghata_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_vyaghata_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_vyaghata_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.vyaghata"
+    },
+    {
+      "id": "harshana",
+      "index": 14,
+      "te": "⟨TODO_PANDIT: yoga_harshana_te⟩",
+      "iast": "Harṣaṇa",
+      "dev": "⟨TODO_PANDIT: yoga_harshana_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_harshana_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_harshana_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.harshana"
+    },
+    {
+      "id": "vajra",
+      "index": 15,
+      "te": "⟨TODO_PANDIT: yoga_vajra_te⟩",
+      "iast": "Vajra",
+      "dev": "⟨TODO_PANDIT: yoga_vajra_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_vajra_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_vajra_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.vajra"
+    },
+    {
+      "id": "siddhi",
+      "index": 16,
+      "te": "⟨TODO_PANDIT: yoga_siddhi_te⟩",
+      "iast": "Siddhi",
+      "dev": "⟨TODO_PANDIT: yoga_siddhi_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_siddhi_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_siddhi_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.siddhi"
+    },
+    {
+      "id": "vyatipata",
+      "index": 17,
+      "te": "⟨TODO_PANDIT: yoga_vyatipata_te⟩",
+      "iast": "Vyatīpāta",
+      "dev": "⟨TODO_PANDIT: yoga_vyatipata_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_vyatipata_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_vyatipata_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.vyatipata"
+    },
+    {
+      "id": "variyan",
+      "index": 18,
+      "te": "⟨TODO_PANDIT: yoga_variyan_te⟩",
+      "iast": "Varīyān",
+      "dev": "⟨TODO_PANDIT: yoga_variyan_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_variyan_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_variyan_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.variyan"
+    },
+    {
+      "id": "parigha",
+      "index": 19,
+      "te": "⟨TODO_PANDIT: yoga_parigha_te⟩",
+      "iast": "Parigha",
+      "dev": "⟨TODO_PANDIT: yoga_parigha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_parigha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_parigha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.parigha"
+    },
+    {
+      "id": "shiva",
+      "index": 20,
+      "te": "⟨TODO_PANDIT: yoga_shiva_te⟩",
+      "iast": "Śiva",
+      "dev": "⟨TODO_PANDIT: yoga_shiva_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_shiva_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_shiva_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.shiva"
+    },
+    {
+      "id": "siddha",
+      "index": 21,
+      "te": "⟨TODO_PANDIT: yoga_siddha_te⟩",
+      "iast": "Siddha",
+      "dev": "⟨TODO_PANDIT: yoga_siddha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_siddha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_siddha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.siddha"
+    },
+    {
+      "id": "sadhya",
+      "index": 22,
+      "te": "⟨TODO_PANDIT: yoga_sadhya_te⟩",
+      "iast": "Sādhya",
+      "dev": "⟨TODO_PANDIT: yoga_sadhya_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_sadhya_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_sadhya_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.sadhya"
+    },
+    {
+      "id": "shubha",
+      "index": 23,
+      "te": "⟨TODO_PANDIT: yoga_shubha_te⟩",
+      "iast": "Śubha",
+      "dev": "⟨TODO_PANDIT: yoga_shubha_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_shubha_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_shubha_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.shubha"
+    },
+    {
+      "id": "shukla",
+      "index": 24,
+      "te": "⟨TODO_PANDIT: yoga_shukla_te⟩",
+      "iast": "Śukla",
+      "dev": "⟨TODO_PANDIT: yoga_shukla_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_shukla_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_shukla_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.shukla"
+    },
+    {
+      "id": "brahma",
+      "index": 25,
+      "te": "⟨TODO_PANDIT: yoga_brahma_te⟩",
+      "iast": "Brahma",
+      "dev": "⟨TODO_PANDIT: yoga_brahma_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_brahma_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_brahma_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.brahma"
+    },
+    {
+      "id": "indra",
+      "index": 26,
+      "te": "⟨TODO_PANDIT: yoga_indra_te⟩",
+      "iast": "Indra",
+      "dev": "⟨TODO_PANDIT: yoga_indra_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_indra_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_indra_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.indra"
+    },
+    {
+      "id": "vaidhriti",
+      "index": 27,
+      "te": "⟨TODO_PANDIT: yoga_vaidhriti_te⟩",
+      "iast": "Vaidhṛti",
+      "dev": "⟨TODO_PANDIT: yoga_vaidhriti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: yoga_vaidhriti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: yoga_vaidhriti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.yoga.vaidhriti"
+    }
+  ]
+}

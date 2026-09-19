@@ -1,0 +1,144 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "karana",
+  "note": "Order matches the engine's KARANA_IDS: Kimstughna, the seven movable karanas, then Shakuni, Chatushpada, Naga (§9.1).",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "kimstughna",
+      "index": 1,
+      "te": "⟨TODO_PANDIT: karana_kimstughna_te⟩",
+      "iast": "Kiṁstughna",
+      "dev": "⟨TODO_PANDIT: karana_kimstughna_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_kimstughna_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_kimstughna_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.kimstughna"
+    },
+    {
+      "id": "bava",
+      "index": 2,
+      "te": "⟨TODO_PANDIT: karana_bava_te⟩",
+      "iast": "Bava",
+      "dev": "⟨TODO_PANDIT: karana_bava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_bava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_bava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.bava"
+    },
+    {
+      "id": "balava",
+      "index": 3,
+      "te": "⟨TODO_PANDIT: karana_balava_te⟩",
+      "iast": "Bālava",
+      "dev": "⟨TODO_PANDIT: karana_balava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_balava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_balava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.balava"
+    },
+    {
+      "id": "kaulava",
+      "index": 4,
+      "te": "⟨TODO_PANDIT: karana_kaulava_te⟩",
+      "iast": "Kaulava",
+      "dev": "⟨TODO_PANDIT: karana_kaulava_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_kaulava_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_kaulava_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.kaulava"
+    },
+    {
+      "id": "taitila",
+      "index": 5,
+      "te": "⟨TODO_PANDIT: karana_taitila_te⟩",
+      "iast": "Taitila",
+      "dev": "⟨TODO_PANDIT: karana_taitila_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_taitila_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_taitila_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.taitila"
+    },
+    {
+      "id": "garaja",
+      "index": 6,
+      "te": "⟨TODO_PANDIT: karana_garaja_te⟩",
+      "iast": "Garaja",
+      "dev": "⟨TODO_PANDIT: karana_garaja_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_garaja_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_garaja_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.garaja"
+    },
+    {
+      "id": "vanija",
+      "index": 7,
+      "te": "⟨TODO_PANDIT: karana_vanija_te⟩",
+      "iast": "Vaṇija",
+      "dev": "⟨TODO_PANDIT: karana_vanija_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_vanija_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_vanija_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.vanija"
+    },
+    {
+      "id": "vishti",
+      "index": 8,
+      "te": "⟨TODO_PANDIT: karana_vishti_te⟩",
+      "iast": "Viṣṭi",
+      "dev": "⟨TODO_PANDIT: karana_vishti_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_vishti_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_vishti_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.vishti"
+    },
+    {
+      "id": "shakuni",
+      "index": 9,
+      "te": "⟨TODO_PANDIT: karana_shakuni_te⟩",
+      "iast": "Śakuni",
+      "dev": "⟨TODO_PANDIT: karana_shakuni_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_shakuni_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_shakuni_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.shakuni"
+    },
+    {
+      "id": "chatushpada",
+      "index": 10,
+      "te": "⟨TODO_PANDIT: karana_chatushpada_te⟩",
+      "iast": "Catuṣpāda",
+      "dev": "⟨TODO_PANDIT: karana_chatushpada_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_chatushpada_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_chatushpada_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.chatushpada"
+    },
+    {
+      "id": "naga",
+      "index": 11,
+      "te": "⟨TODO_PANDIT: karana_naga_te⟩",
+      "iast": "Nāga",
+      "dev": "⟨TODO_PANDIT: karana_naga_dev⟩",
+      "locative": {
+        "te": "⟨TODO_PANDIT: karana_naga_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: karana_naga_locative_iast⟩"
+      },
+      "audioTokenId": "enum.karana.naga"
+    }
+  ]
+}
