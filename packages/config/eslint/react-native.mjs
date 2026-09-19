@@ -6,7 +6,8 @@
  */
 
 // Telugu (U+0C00–U+0C7F) and Devanagari (U+0900–U+097F, U+A8E0–U+A8FF, U+1CD0–U+1CFF).
-const INDIC_TEXT = String.raw`[ऀ-ॿఀ-౿᳐-᳿꣠-ꣿ]`;
+const INDIC_TEXT =
+  String.raw`[\u0900-\u097F\u0C00-\u0C7F\u1CD0-\u1CFF\uA8E0-\uA8FF]`;
 const HEX_COLOR = String.raw`^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$`;
 const CSS_COLOR_FN = String.raw`^(?:rgba?|hsla?)\(`;
 

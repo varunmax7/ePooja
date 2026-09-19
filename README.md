@@ -17,7 +17,7 @@ of rules you must not break while working in this repo.
 | ----- | ------------------------------------------------------ | --------------------------------------- |
 | 0     | Foundations: monorepo, Expo app shell, CI, audio spike | **built — spike awaiting a device run** |
 | 1     | Design system & static screens                         | not started                             |
-| 2     | Panchangam engine                                      | not started                             |
+| 2     | Panchangam engine                                      | **built — 17/60 fixtures verified**     |
 | 3–10  | see `implementation.md` §10                            | not started                             |
 
 ## Repository layout
@@ -25,7 +25,7 @@ of rules you must not break while working in this repo.
 ```
 apps/mobile/      Expo app (Expo Router, NativeWind, Skia, RNTP)
 packages/
-  panchangam/     pure TS — Panchangam engine (Phase 2)
+  panchangam/     pure TS — Panchangam engine
   sankalpam/      pure TS — Sankalpam text + audio plan (Phases 5, 7)
   content/        zod schemas, types, loaders for content packs (Phase 4)
   ui/             design tokens + primitive components (Phase 1)

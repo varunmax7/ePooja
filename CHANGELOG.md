@@ -3,6 +3,72 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 2] — Panchangam engine — 2026-09-19
+
+### Built
+
+- **`@epooja/panchangam`** — the on-device engine per §9.1, pure TypeScript with
+  no React Native, Expo, network or clock reads:
+  - `getPanchangam({instant, lat, lng, tz})`, `getDayPanchangam(date, loc, {basis})`,
+    `findTransitions(anga, from, to)`, `getMonth(year, month, loc)`.
+  - Lahiri ayanamsa, apparent of-date Sun/Moon longitudes, sidereal conversion.
+  - Tithi, paksha, nakshatra + pada, yoga, karana (all 11, with the fixed ones
+    at the right half-tithis), vasara from the most recent sunrise.
+  - Amanta masa with **adhika detection**, ruthuvu, ayana, and the 60-year
+    samvatsara keyed off the most recent Ugadi.
+  - Sunrise/sunset, Rahu kalam / Yamagandam / Gulika kalam, prayer timings.
+  - Anga transitions by bracket-and-bisect to the §9.1 precision of 30 s.
+  - Memoized per date and per location rounded to 0.01°.
+- **`content/enums/*.json`** — all twelve enumerations §9.2 calls for, 202 values,
+  every one `PENDING_PANDIT_REVIEW`.
+- **`@epooja/content`** — the zod schema for enum files: id/index/audioToken
+  consistency, and script validation that rejects look-alike glyphs in Telugu
+  and Devanagari fields (§3.3 — the client spec's `ఎవంగුణ` contains a Sinhala
+  character, and there is a test that this is caught).
+- **`tools/panchangam-fixtures`** — fixture format, generator and an audit
+  command that reports the shortfall against the §9.1 bar.
+- **Tests** — 284 in the engine, 52 in content. 100% branch coverage on the anga
+  calculators (enforced by thresholds), 99.6% statements overall. Tithi
+  boundaries are cross-validated against astronomy-engine's independent phase
+  search; engine ids are cross-checked against the content enums.
+- **Benchmarks** — `pnpm bench`: `getPanchangam` cold runs at 1.5 ms mean /
+  1.7 ms p95 against a 20 ms budget.
+- **`docs/adr/0002-panchangam.md`** — ayanamsa, sunrise convention, time basis,
+  and the conventions §9.1 left open.
+
+### Verified against outside authorities
+
+- Samvatsara anchors from §9.1: Krodhi (38), Vishvavasu (39), Parabhava (40).
+- Adhika Shravana 2023 detected at 17 Jul – 16 Aug, with correct boundary
+  behaviour at sunrise on the last day.
+- Ugadi new moons for 2024, 2025 and 2026.
+- Weekday, Rahu kalam segment and sunrise/sunset times for Hyderabad, and DST
+  transitions in New York, London and Sydney.
+
+### Not met
+
+- **§9.1 asks for ≥ 60 fixtures verified against a reference panchangam. There
+  are 17.** The other 77 fixtures are engine snapshots and are labelled as such;
+  they guard against regressions and prove nothing about correctness. Closing
+  this needs a reference panchangam or a Prokerala key (dev-only, §3.4).
+  `pnpm --filter @epooja/panchangam-fixtures audit` tracks it.
+- The ayanamsa model is unvalidated at the arc-second level for the same reason
+  (ADR 0002 §1).
+
+### Deviations (ADR 0002)
+
+- Benchmarks are a standalone harness plus a budget test, because Vitest 5
+  removed the `bench` API.
+- `PanchangamData` lives in `@epooja/panchangam` rather than `@epooja/content`,
+  so the engine does not depend on the content package.
+
+### New `TODO_PANDIT` items
+
+202 values × the `locative` form, plus the missing Telugu, IAST and Devanagari
+fields and the empty gotra list — all itemised in `content/REVIEW_QUEUE.md`.
+Two engine conventions also need a pandit's word: the adhika-Chaitra year start
+and the prayer-timing windows.
+
 ## [Phase 0] — Foundations — 2026-09-19
 
 ### Built
