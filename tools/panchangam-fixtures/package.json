@@ -1,0 +1,25 @@
+{
+  "name": "@epooja/panchangam-fixtures",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Builds and audits the golden fixture set for @epooja/panchangam (§9.1)",
+  "type": "module",
+  "scripts": {
+    "generate": "tsx src/generate.ts",
+    "audit": "tsx src/audit.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@epooja/panchangam": "workspace:*"
+  },
+  "devDependencies": {
+    "@epooja/config": "workspace:*",
+    "@types/node": "^26.0.0",
+    "eslint": "^9.39.5",
+    "tsx": "^4.20.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.0"
+  }
+}

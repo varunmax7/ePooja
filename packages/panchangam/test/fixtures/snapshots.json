@@ -1,0 +1,4013 @@
+{
+  "note": "Engine snapshots, NOT verified values. They lock in current behaviour so refactors cannot change it silently. Phase 2 acceptance needs ≥ 60 fixtures verified against a reference panchangam — see content/REVIEW_QUEUE.md.",
+  "tolerances": {
+    "sunriseMinutes": 1,
+    "transitionMinutes": 2
+  },
+  "fixtures": [
+    {
+      "id": "hyderabad-2026-09-14",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-14",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_3",
+          "index": 3
+        },
+        "nakshatra": {
+          "id": "chitta",
+          "index": 14,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "brahma",
+          "index": 25
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 6
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "06:03",
+        "sunset": "18:19",
+        "rahuKalam": ["07:35", "09:07"],
+        "tithiEndsAt": "2026-09-14T01:37:21.449Z",
+        "nakshatraEndsAt": "2026-09-14T08:24:28.012Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-15",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-15",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_4",
+          "index": 4
+        },
+        "nakshatra": {
+          "id": "svati",
+          "index": 15,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "indra",
+          "index": 26
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 8
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "06:04",
+        "sunset": "18:18",
+        "rahuKalam": ["15:14", "16:46"],
+        "tithiEndsAt": "2026-09-15T02:14:45.108Z",
+        "nakshatraEndsAt": "2026-09-15T09:50:22.608Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-16",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-16",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_5",
+          "index": 5
+        },
+        "nakshatra": {
+          "id": "vishakha",
+          "index": 16,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "vaidhriti",
+          "index": 27
+        },
+        "karana": {
+          "id": "balava",
+          "index": 10
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "06:04",
+        "sunset": "18:17",
+        "rahuKalam": ["12:10", "13:42"],
+        "tithiEndsAt": "2026-09-16T03:29:45.782Z",
+        "nakshatraEndsAt": "2026-09-16T11:51:47.657Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-17",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-17",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_6",
+          "index": 6
+        },
+        "nakshatra": {
+          "id": "anuradha",
+          "index": 17,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "vishkambha",
+          "index": 1
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 12
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "06:04",
+        "sunset": "18:16",
+        "rahuKalam": ["13:42", "15:13"],
+        "tithiEndsAt": "2026-09-17T05:18:10.360Z",
+        "nakshatraEndsAt": "2026-09-17T14:23:05.673Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-18",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-18",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_7",
+          "index": 7
+        },
+        "nakshatra": {
+          "id": "jyeshtha",
+          "index": 18,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "priti",
+          "index": 2
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 14
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "06:04",
+        "sunset": "18:15",
+        "rahuKalam": ["10:38", "12:10"],
+        "tithiEndsAt": "2026-09-18T07:31:32.607Z",
+        "nakshatraEndsAt": "2026-09-18T17:14:04.950Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-19",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-19",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_8",
+          "index": 8
+        },
+        "nakshatra": {
+          "id": "mula",
+          "index": 19,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "ayushman",
+          "index": 3
+        },
+        "karana": {
+          "id": "bava",
+          "index": 16
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "06:04",
+        "sunset": "18:15",
+        "rahuKalam": ["09:07", "10:38"],
+        "tithiEndsAt": "2026-09-19T09:57:13.160Z",
+        "nakshatraEndsAt": "2026-09-19T20:12:27.223Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-20",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-20",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_9",
+          "index": 9
+        },
+        "nakshatra": {
+          "id": "purvashadha",
+          "index": 20,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "saubhagya",
+          "index": 4
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 18
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:04",
+        "sunset": "18:14",
+        "rahuKalam": ["16:42", "18:14"],
+        "tithiEndsAt": "2026-09-20T12:21:50.472Z",
+        "nakshatraEndsAt": "2026-09-20T23:03:47.660Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-21",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-21",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_10",
+          "index": 10
+        },
+        "nakshatra": {
+          "id": "uttarashadha",
+          "index": 21,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "shobhana",
+          "index": 5
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 19
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "06:04",
+        "sunset": "18:13",
+        "rahuKalam": ["07:35", "09:06"],
+        "tithiEndsAt": "2026-09-21T14:31:20.811Z",
+        "nakshatraEndsAt": "2026-09-22T01:36:09.093Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-22",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-22",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_11",
+          "index": 11
+        },
+        "nakshatra": {
+          "id": "uttarashadha",
+          "index": 21,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "atiganda",
+          "index": 6
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 21
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "06:04",
+        "sunset": "18:12",
+        "rahuKalam": ["15:10", "16:41"],
+        "tithiEndsAt": "2026-09-22T16:13:47.006Z",
+        "nakshatraEndsAt": "2026-09-22T01:36:17.006Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-23",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-23",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_12",
+          "index": 12
+        },
+        "nakshatra": {
+          "id": "shravanam",
+          "index": 22,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "sukarma",
+          "index": 7
+        },
+        "karana": {
+          "id": "bava",
+          "index": 23
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "06:05",
+        "sunset": "18:11",
+        "rahuKalam": ["12:08", "13:39"],
+        "tithiEndsAt": "2026-09-23T17:20:42.824Z",
+        "nakshatraEndsAt": "2026-09-23T03:38:24.543Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-24",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-24",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_13",
+          "index": 13
+        },
+        "nakshatra": {
+          "id": "dhanishta",
+          "index": 23,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "dhriti",
+          "index": 8
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 25
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "06:05",
+        "sunset": "18:10",
+        "rahuKalam": ["13:38", "15:09"],
+        "tithiEndsAt": "2026-09-24T17:48:37.347Z",
+        "nakshatraEndsAt": "2026-09-24T05:04:40.629Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-25",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-25",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_14",
+          "index": 14
+        },
+        "nakshatra": {
+          "id": "shatabhisham",
+          "index": 24,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "shula",
+          "index": 9
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 27
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "06:05",
+        "sunset": "18:09",
+        "rahuKalam": ["10:37", "12:07"],
+        "tithiEndsAt": "2026-09-25T17:37:09.503Z",
+        "nakshatraEndsAt": "2026-09-25T05:51:55.440Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-26",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-26",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "pournami",
+          "index": 15
+        },
+        "nakshatra": {
+          "id": "purvabhadra",
+          "index": 25,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "ganda",
+          "index": 10
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 29
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "06:05",
+        "sunset": "18:09",
+        "rahuKalam": ["09:06", "10:36"],
+        "tithiEndsAt": "2026-09-26T16:48:46.965Z",
+        "nakshatraEndsAt": "2026-09-26T06:01:33.371Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-09-27",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-27",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_1",
+          "index": 16
+        },
+        "nakshatra": {
+          "id": "uttarabhadra",
+          "index": 26,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "vriddhi",
+          "index": 11
+        },
+        "karana": {
+          "id": "balava",
+          "index": 31
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:05",
+        "sunset": "18:08",
+        "rahuKalam": ["16:37", "18:08"],
+        "tithiEndsAt": "2026-09-27T15:29:07.257Z",
+        "nakshatraEndsAt": "2026-09-27T05:37:26.476Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-14",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-14",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_3",
+          "index": 3
+        },
+        "nakshatra": {
+          "id": "chitta",
+          "index": 14,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "brahma",
+          "index": 25
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 6
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "05:55",
+        "sunset": "18:10",
+        "rahuKalam": ["07:27", "08:59"],
+        "tithiEndsAt": "2026-09-14T01:37:23.934Z",
+        "nakshatraEndsAt": "2026-09-14T08:24:30.497Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-15",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-15",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_4",
+          "index": 4
+        },
+        "nakshatra": {
+          "id": "svati",
+          "index": 15,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "indra",
+          "index": 26
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 8
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "05:55",
+        "sunset": "18:09",
+        "rahuKalam": ["15:06", "16:37"],
+        "tithiEndsAt": "2026-09-15T02:14:24.946Z",
+        "nakshatraEndsAt": "2026-09-15T09:50:23.540Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-16",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-16",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_5",
+          "index": 5
+        },
+        "nakshatra": {
+          "id": "vishakha",
+          "index": 16,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "vaidhriti",
+          "index": 27
+        },
+        "karana": {
+          "id": "balava",
+          "index": 10
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "05:55",
+        "sunset": "18:08",
+        "rahuKalam": ["12:02", "13:33"],
+        "tithiEndsAt": "2026-09-16T03:29:45.159Z",
+        "nakshatraEndsAt": "2026-09-16T11:51:47.034Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-17",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-17",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_6",
+          "index": 6
+        },
+        "nakshatra": {
+          "id": "anuradha",
+          "index": 17,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "vishkambha",
+          "index": 1
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 12
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "05:55",
+        "sunset": "18:07",
+        "rahuKalam": ["13:33", "15:04"],
+        "tithiEndsAt": "2026-09-17T05:18:08.180Z",
+        "nakshatraEndsAt": "2026-09-17T14:23:03.493Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-18",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-18",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_7",
+          "index": 7
+        },
+        "nakshatra": {
+          "id": "jyeshtha",
+          "index": 18,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "priti",
+          "index": 2
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 14
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "05:55",
+        "sunset": "18:07",
+        "rahuKalam": ["10:30", "12:01"],
+        "tithiEndsAt": "2026-09-18T07:31:28.868Z",
+        "nakshatraEndsAt": "2026-09-18T17:14:01.211Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-19",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-19",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_8",
+          "index": 8
+        },
+        "nakshatra": {
+          "id": "mula",
+          "index": 19,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "ayushman",
+          "index": 3
+        },
+        "karana": {
+          "id": "bava",
+          "index": 16
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "05:56",
+        "sunset": "18:06",
+        "rahuKalam": ["08:58", "10:29"],
+        "tithiEndsAt": "2026-09-19T09:57:28.953Z",
+        "nakshatraEndsAt": "2026-09-19T20:12:21.922Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-20",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-20",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_9",
+          "index": 9
+        },
+        "nakshatra": {
+          "id": "purvashadha",
+          "index": 20,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "saubhagya",
+          "index": 4
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 18
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "05:56",
+        "sunset": "18:05",
+        "rahuKalam": ["16:34", "18:05"],
+        "tithiEndsAt": "2026-09-20T12:21:43.609Z",
+        "nakshatraEndsAt": "2026-09-20T23:04:01.891Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-21",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-21",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_10",
+          "index": 10
+        },
+        "nakshatra": {
+          "id": "uttarashadha",
+          "index": 21,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "shobhana",
+          "index": 5
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 19
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "05:56",
+        "sunset": "18:04",
+        "rahuKalam": ["07:27", "08:58"],
+        "tithiEndsAt": "2026-09-21T14:31:12.384Z",
+        "nakshatraEndsAt": "2026-09-22T01:36:00.666Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-22",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-22",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_11",
+          "index": 11
+        },
+        "nakshatra": {
+          "id": "uttarashadha",
+          "index": 21,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "atiganda",
+          "index": 6
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 21
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "05:56",
+        "sunset": "18:03",
+        "rahuKalam": ["15:01", "16:32"],
+        "tithiEndsAt": "2026-09-22T16:13:37.014Z",
+        "nakshatraEndsAt": "2026-09-22T01:36:07.014Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-23",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-23",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_12",
+          "index": 12
+        },
+        "nakshatra": {
+          "id": "shravanam",
+          "index": 22,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "sukarma",
+          "index": 7
+        },
+        "karana": {
+          "id": "bava",
+          "index": 23
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "05:56",
+        "sunset": "18:02",
+        "rahuKalam": ["11:59", "13:30"],
+        "tithiEndsAt": "2026-09-23T17:20:52.360Z",
+        "nakshatraEndsAt": "2026-09-23T03:38:34.079Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-24",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-24",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_13",
+          "index": 13
+        },
+        "nakshatra": {
+          "id": "dhanishta",
+          "index": 23,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "dhriti",
+          "index": 8
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 25
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "05:56",
+        "sunset": "18:02",
+        "rahuKalam": ["13:30", "15:00"],
+        "tithiEndsAt": "2026-09-24T17:48:45.317Z",
+        "nakshatraEndsAt": "2026-09-24T05:04:27.505Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-25",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-25",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_14",
+          "index": 14
+        },
+        "nakshatra": {
+          "id": "shatabhisham",
+          "index": 24,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "shula",
+          "index": 9
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 27
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "05:56",
+        "sunset": "18:01",
+        "rahuKalam": ["10:28", "11:59"],
+        "tithiEndsAt": "2026-09-25T17:37:15.904Z",
+        "nakshatraEndsAt": "2026-09-25T05:51:40.748Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-26",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-26",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "pournami",
+          "index": 15
+        },
+        "nakshatra": {
+          "id": "purvabhadra",
+          "index": 25,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "ganda",
+          "index": 10
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 29
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "05:56",
+        "sunset": "18:00",
+        "rahuKalam": ["08:57", "10:28"],
+        "tithiEndsAt": "2026-09-26T16:48:51.800Z",
+        "nakshatraEndsAt": "2026-09-26T06:01:38.206Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-09-27",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-27",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_1",
+          "index": 16
+        },
+        "nakshatra": {
+          "id": "uttarabhadra",
+          "index": 26,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "vriddhi",
+          "index": 11
+        },
+        "karana": {
+          "id": "balava",
+          "index": 31
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "05:56",
+        "sunset": "17:59",
+        "rahuKalam": ["16:29", "17:59"],
+        "tithiEndsAt": "2026-09-27T15:29:10.524Z",
+        "nakshatraEndsAt": "2026-09-27T05:37:29.742Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-14",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-14",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_3",
+          "index": 3
+        },
+        "nakshatra": {
+          "id": "chitta",
+          "index": 14,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "brahma",
+          "index": 25
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 6
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "06:01",
+        "sunset": "18:14",
+        "rahuKalam": ["07:32", "09:04"],
+        "tithiEndsAt": "2026-09-14T01:37:29.185Z",
+        "nakshatraEndsAt": "2026-09-14T08:24:35.748Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-15",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-15",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_4",
+          "index": 4
+        },
+        "nakshatra": {
+          "id": "svati",
+          "index": 15,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "indra",
+          "index": 26
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 8
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "06:01",
+        "sunset": "18:13",
+        "rahuKalam": ["15:10", "16:42"],
+        "tithiEndsAt": "2026-09-15T02:14:25.208Z",
+        "nakshatraEndsAt": "2026-09-15T09:50:23.802Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-16",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-16",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_5",
+          "index": 5
+        },
+        "nakshatra": {
+          "id": "vishakha",
+          "index": 16,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "vaidhriti",
+          "index": 27
+        },
+        "karana": {
+          "id": "balava",
+          "index": 10
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "06:01",
+        "sunset": "18:13",
+        "rahuKalam": ["12:07", "13:38"],
+        "tithiEndsAt": "2026-09-16T03:29:40.424Z",
+        "nakshatraEndsAt": "2026-09-16T11:52:03.393Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-17",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-17",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_6",
+          "index": 6
+        },
+        "nakshatra": {
+          "id": "anuradha",
+          "index": 17,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "vishkambha",
+          "index": 1
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 12
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "06:01",
+        "sunset": "18:12",
+        "rahuKalam": ["13:38", "15:09"],
+        "tithiEndsAt": "2026-09-17T05:18:19.536Z",
+        "nakshatraEndsAt": "2026-09-17T14:22:53.755Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-18",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-18",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_7",
+          "index": 7
+        },
+        "nakshatra": {
+          "id": "jyeshtha",
+          "index": 18,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "priti",
+          "index": 2
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 14
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "06:01",
+        "sunset": "18:11",
+        "rahuKalam": ["10:35", "12:06"],
+        "tithiEndsAt": "2026-09-18T07:31:35.213Z",
+        "nakshatraEndsAt": "2026-09-18T17:14:07.557Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-19",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-19",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_8",
+          "index": 8
+        },
+        "nakshatra": {
+          "id": "mula",
+          "index": 19,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "ayushman",
+          "index": 3
+        },
+        "karana": {
+          "id": "bava",
+          "index": 16
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "06:01",
+        "sunset": "18:10",
+        "rahuKalam": ["09:03", "10:34"],
+        "tithiEndsAt": "2026-09-19T09:57:09.190Z",
+        "nakshatraEndsAt": "2026-09-19T20:12:23.252Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-20",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-20",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_9",
+          "index": 9
+        },
+        "nakshatra": {
+          "id": "purvashadha",
+          "index": 20,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "saubhagya",
+          "index": 4
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 18
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:01",
+        "sunset": "18:10",
+        "rahuKalam": ["16:39", "18:10"],
+        "tithiEndsAt": "2026-09-20T12:22:01.014Z",
+        "nakshatraEndsAt": "2026-09-20T23:03:58.201Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-21",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-21",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_10",
+          "index": 10
+        },
+        "nakshatra": {
+          "id": "uttarashadha",
+          "index": 21,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "shobhana",
+          "index": 5
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 19
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "06:01",
+        "sunset": "18:09",
+        "rahuKalam": ["07:32", "09:03"],
+        "tithiEndsAt": "2026-09-21T14:31:03.671Z",
+        "nakshatraEndsAt": "2026-09-22T01:36:13.046Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-22",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-22",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_11",
+          "index": 11
+        },
+        "nakshatra": {
+          "id": "uttarashadha",
+          "index": 21,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "atiganda",
+          "index": 6
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 21
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "06:01",
+        "sunset": "18:08",
+        "rahuKalam": ["15:06", "16:37"],
+        "tithiEndsAt": "2026-09-22T16:13:44.366Z",
+        "nakshatraEndsAt": "2026-09-22T01:36:14.366Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-23",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-23",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_12",
+          "index": 12
+        },
+        "nakshatra": {
+          "id": "shravanam",
+          "index": 22,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "sukarma",
+          "index": 7
+        },
+        "karana": {
+          "id": "bava",
+          "index": 23
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "06:01",
+        "sunset": "18:07",
+        "rahuKalam": ["12:04", "13:35"],
+        "tithiEndsAt": "2026-09-23T17:20:54.682Z",
+        "nakshatraEndsAt": "2026-09-23T03:38:36.401Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-24",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-24",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_13",
+          "index": 13
+        },
+        "nakshatra": {
+          "id": "dhanishta",
+          "index": 23,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "dhriti",
+          "index": 8
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 25
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "06:01",
+        "sunset": "18:07",
+        "rahuKalam": ["13:35", "15:05"],
+        "tithiEndsAt": "2026-09-24T17:48:42.608Z",
+        "nakshatraEndsAt": "2026-09-24T05:04:24.795Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-25",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-25",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_14",
+          "index": 14
+        },
+        "nakshatra": {
+          "id": "shatabhisham",
+          "index": 24,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "shula",
+          "index": 9
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 27
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "06:01",
+        "sunset": "18:06",
+        "rahuKalam": ["10:33", "12:03"],
+        "tithiEndsAt": "2026-09-25T17:37:08.162Z",
+        "nakshatraEndsAt": "2026-09-25T05:51:54.099Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-26",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-26",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "pournami",
+          "index": 15
+        },
+        "nakshatra": {
+          "id": "purvabhadra",
+          "index": 25,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "ganda",
+          "index": 10
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 29
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "06:01",
+        "sunset": "18:05",
+        "rahuKalam": ["09:02", "10:33"],
+        "tithiEndsAt": "2026-09-26T16:49:00.117Z",
+        "nakshatraEndsAt": "2026-09-26T06:01:25.430Z"
+      }
+    },
+    {
+      "id": "tirupati-2026-09-27",
+      "place": {
+        "id": "tirupati",
+        "label": "Tirupati",
+        "lat": 13.6288,
+        "lng": 79.4192,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-27",
+      "source": "engine-snapshot",
+      "why": "Fourteen consecutive days in a Telugu city",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_1",
+          "index": 16
+        },
+        "nakshatra": {
+          "id": "uttarabhadra",
+          "index": 26,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "vriddhi",
+          "index": 11
+        },
+        "karana": {
+          "id": "balava",
+          "index": 31
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:01",
+        "sunset": "18:05",
+        "rahuKalam": ["16:34", "18:05"],
+        "tithiEndsAt": "2026-09-27T15:28:52.713Z",
+        "nakshatraEndsAt": "2026-09-27T05:37:33.026Z"
+      }
+    },
+    {
+      "id": "hyderabad-2023-07-17",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-07-17",
+      "source": "engine-snapshot",
+      "why": "Adhika Shravana 2023 boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "shobhakrit",
+          "index": 37
+        },
+        "ayana": "dakshinayana",
+        "ritu": "grishma",
+        "masa": {
+          "id": "ashadha",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "amavasya",
+          "index": 30
+        },
+        "nakshatra": {
+          "id": "punarvasu",
+          "index": 7,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "vyaghata",
+          "index": 13
+        },
+        "karana": {
+          "id": "chatushpada",
+          "index": 59
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "05:50",
+        "sunset": "18:53",
+        "rahuKalam": ["07:28", "09:06"],
+        "tithiEndsAt": "2023-07-17T18:31:48.586Z",
+        "nakshatraEndsAt": "2023-07-17T23:41:11.086Z"
+      }
+    },
+    {
+      "id": "hyderabad-2023-07-18",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-07-18",
+      "source": "engine-snapshot",
+      "why": "Adhika Shravana 2023 boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "shobhakrit",
+          "index": 37
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "shravana",
+          "adhika": true
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_1",
+          "index": 1
+        },
+        "nakshatra": {
+          "id": "pushyami",
+          "index": 8,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "harshana",
+          "index": 14
+        },
+        "karana": {
+          "id": "kimstughna",
+          "index": 1
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "05:50",
+        "sunset": "18:53",
+        "rahuKalam": ["15:37", "17:15"],
+        "tithiEndsAt": "2023-07-18T20:40:28.072Z",
+        "nakshatraEndsAt": "2023-07-19T02:27:27.603Z"
+      }
+    },
+    {
+      "id": "hyderabad-2023-08-01",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-08-01",
+      "source": "engine-snapshot",
+      "why": "Adhika Shravana 2023 boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "shobhakrit",
+          "index": 37
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "shravana",
+          "adhika": true
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "pournami",
+          "index": 15
+        },
+        "nakshatra": {
+          "id": "uttarashadha",
+          "index": 21,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "priti",
+          "index": 2
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 29
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "05:55",
+        "sunset": "18:49",
+        "rahuKalam": ["15:35", "17:12"],
+        "tithiEndsAt": "2023-08-01T18:31:42.844Z",
+        "nakshatraEndsAt": "2023-08-01T10:32:53.156Z"
+      }
+    },
+    {
+      "id": "hyderabad-2023-08-15",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-08-15",
+      "source": "engine-snapshot",
+      "why": "Adhika Shravana 2023 boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "shobhakrit",
+          "index": 37
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "shravana",
+          "adhika": true
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_14",
+          "index": 29
+        },
+        "nakshatra": {
+          "id": "pushyami",
+          "index": 8,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "vyatipata",
+          "index": 17
+        },
+        "karana": {
+          "id": "shakuni",
+          "index": 58
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "05:58",
+        "sunset": "18:42",
+        "rahuKalam": ["15:31", "17:06"],
+        "tithiEndsAt": "2023-08-15T07:13:21.989Z",
+        "nakshatraEndsAt": "2023-08-15T08:28:14.957Z"
+      }
+    },
+    {
+      "id": "hyderabad-2023-08-16",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-08-16",
+      "source": "engine-snapshot",
+      "why": "Adhika Shravana 2023 boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "shobhakrit",
+          "index": 37
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "shravana",
+          "adhika": true
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "amavasya",
+          "index": 30
+        },
+        "nakshatra": {
+          "id": "ashlesha",
+          "index": 9,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "variyan",
+          "index": 18
+        },
+        "karana": {
+          "id": "naga",
+          "index": 60
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "05:59",
+        "sunset": "18:41",
+        "rahuKalam": ["12:20", "13:55"],
+        "tithiEndsAt": "2023-08-16T09:38:05.119Z",
+        "nakshatraEndsAt": "2023-08-16T11:27:04.181Z"
+      }
+    },
+    {
+      "id": "hyderabad-2023-08-17",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-08-17",
+      "source": "engine-snapshot",
+      "why": "Adhika Shravana 2023 boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "shobhakrit",
+          "index": 37
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "shravana",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_1",
+          "index": 1
+        },
+        "nakshatra": {
+          "id": "makha",
+          "index": 10,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "parigha",
+          "index": 19
+        },
+        "karana": {
+          "id": "bava",
+          "index": 2
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "05:59",
+        "sunset": "18:40",
+        "rahuKalam": ["13:55", "15:30"],
+        "tithiEndsAt": "2023-08-17T12:05:57.784Z",
+        "nakshatraEndsAt": "2023-08-17T14:27:59.659Z"
+      }
+    },
+    {
+      "id": "hyderabad-2024-04-08",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2024-04-08",
+      "source": "engine-snapshot",
+      "why": "Ugadi — samvatsara and masa roll over",
+      "expect": {
+        "samvatsara": {
+          "id": "shobhakrit",
+          "index": 37
+        },
+        "ayana": "uttarayana",
+        "ritu": "shishira",
+        "masa": {
+          "id": "phalguna",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "amavasya",
+          "index": 30
+        },
+        "nakshatra": {
+          "id": "uttarabhadra",
+          "index": 26,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "indra",
+          "index": 26
+        },
+        "karana": {
+          "id": "chatushpada",
+          "index": 59
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "06:05",
+        "sunset": "18:30",
+        "rahuKalam": ["07:38", "09:11"],
+        "tithiEndsAt": "2024-04-08T18:20:51.834Z",
+        "nakshatraEndsAt": "2024-04-08T04:42:25.584Z"
+      }
+    },
+    {
+      "id": "hyderabad-2024-04-09",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2024-04-09",
+      "source": "engine-snapshot",
+      "why": "Ugadi — samvatsara and masa roll over",
+      "expect": {
+        "samvatsara": {
+          "id": "krodhi",
+          "index": 38
+        },
+        "ayana": "uttarayana",
+        "ritu": "vasanta",
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_1",
+          "index": 1
+        },
+        "nakshatra": {
+          "id": "revati",
+          "index": 27,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "vaidhriti",
+          "index": 27
+        },
+        "karana": {
+          "id": "kimstughna",
+          "index": 1
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "sunrise": "06:04",
+        "sunset": "18:30",
+        "rahuKalam": ["15:24", "16:57"],
+        "tithiEndsAt": "2024-04-09T15:01:28.882Z",
+        "nakshatraEndsAt": "2024-04-09T02:01:42.944Z"
+      }
+    },
+    {
+      "id": "hyderabad-2025-03-29",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2025-03-29",
+      "source": "engine-snapshot",
+      "why": "Ugadi — samvatsara and masa roll over",
+      "expect": {
+        "samvatsara": {
+          "id": "krodhi",
+          "index": 38
+        },
+        "ayana": "uttarayana",
+        "ritu": "shishira",
+        "masa": {
+          "id": "phalguna",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "amavasya",
+          "index": 30
+        },
+        "nakshatra": {
+          "id": "uttarabhadra",
+          "index": 26,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "brahma",
+          "index": 25
+        },
+        "karana": {
+          "id": "naga",
+          "index": 60
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "06:13",
+        "sunset": "18:28",
+        "rahuKalam": ["09:17", "10:48"],
+        "tithiEndsAt": "2025-03-29T10:57:44.988Z",
+        "nakshatraEndsAt": "2025-03-29T13:56:20.613Z"
+      }
+    },
+    {
+      "id": "hyderabad-2025-03-30",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2025-03-30",
+      "source": "engine-snapshot",
+      "why": "Ugadi — samvatsara and masa roll over",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        },
+        "ayana": "uttarayana",
+        "ritu": "vasanta",
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_1",
+          "index": 1
+        },
+        "nakshatra": {
+          "id": "revati",
+          "index": 27,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "indra",
+          "index": 26
+        },
+        "karana": {
+          "id": "bava",
+          "index": 2
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:12",
+        "sunset": "18:28",
+        "rahuKalam": ["16:56", "18:28"],
+        "tithiEndsAt": "2025-03-30T07:19:41.681Z",
+        "nakshatraEndsAt": "2025-03-30T11:04:41.681Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-03-19",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-03-19",
+      "source": "engine-snapshot",
+      "why": "Ugadi — samvatsara and masa roll over",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        },
+        "ayana": "uttarayana",
+        "ritu": "shishira",
+        "masa": {
+          "id": "phalguna",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "amavasya",
+          "index": 30
+        },
+        "nakshatra": {
+          "id": "uttarabhadra",
+          "index": 26,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "shukla",
+          "index": 24
+        },
+        "karana": {
+          "id": "naga",
+          "index": 60
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "06:21",
+        "sunset": "18:26",
+        "rahuKalam": ["13:54", "15:25"],
+        "tithiEndsAt": "2026-03-19T01:23:19.656Z",
+        "nakshatraEndsAt": "2026-03-19T22:34:34.656Z"
+      }
+    },
+    {
+      "id": "hyderabad-2026-03-20",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-03-20",
+      "source": "engine-snapshot",
+      "why": "Ugadi — samvatsara and masa roll over",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "uttarayana",
+        "ritu": "vasanta",
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_2",
+          "index": 2
+        },
+        "nakshatra": {
+          "id": "revati",
+          "index": 27,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "brahma",
+          "index": 25
+        },
+        "karana": {
+          "id": "balava",
+          "index": 3
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "06:20",
+        "sunset": "18:26",
+        "rahuKalam": ["10:52", "12:23"],
+        "tithiEndsAt": "2026-03-20T21:01:19.800Z",
+        "nakshatraEndsAt": "2026-03-20T20:57:27.769Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-01-14",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-01-14",
+      "source": "engine-snapshot",
+      "why": "Sankranti — ayana boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        },
+        "ayana": "dakshinayana",
+        "ritu": "hemanta",
+        "masa": {
+          "id": "pushya",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_11",
+          "index": 26
+        },
+        "nakshatra": {
+          "id": "anuradha",
+          "index": 17,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "ganda",
+          "index": 10
+        },
+        "karana": {
+          "id": "balava",
+          "index": 52
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        },
+        "sunrise": "06:39",
+        "sunset": "17:53",
+        "rahuKalam": ["12:16", "13:40"],
+        "tithiEndsAt": "2026-01-14T12:23:09.876Z",
+        "nakshatraEndsAt": "2026-01-14T21:33:00.501Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-01-15",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-01-15",
+      "source": "engine-snapshot",
+      "why": "Sankranti — ayana boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        },
+        "ayana": "uttarayana",
+        "ritu": "hemanta",
+        "masa": {
+          "id": "pushya",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_12",
+          "index": 27
+        },
+        "nakshatra": {
+          "id": "jyeshtha",
+          "index": 18,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "vriddhi",
+          "index": 11
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 53
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "06:39",
+        "sunset": "17:54",
+        "rahuKalam": ["13:41", "15:05"],
+        "tithiEndsAt": "2026-01-15T14:47:04.431Z",
+        "nakshatraEndsAt": "2026-01-16T00:16:57.399Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-07-16",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-07-16",
+      "source": "engine-snapshot",
+      "why": "Sankranti — ayana boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "uttarayana",
+        "ritu": "grishma",
+        "masa": {
+          "id": "ashadha",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_2",
+          "index": 2
+        },
+        "nakshatra": {
+          "id": "ashlesha",
+          "index": 9,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "siddhi",
+          "index": 16
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 4
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        },
+        "sunrise": "05:43",
+        "sunset": "18:43",
+        "rahuKalam": ["13:51", "15:28"],
+        "tithiEndsAt": "2026-07-16T03:23:23.563Z",
+        "nakshatraEndsAt": "2026-07-16T14:21:52.157Z"
+      }
+    },
+    {
+      "id": "vijayawada-2026-07-17",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-07-17",
+      "source": "engine-snapshot",
+      "why": "Sankranti — ayana boundary",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "grishma",
+        "masa": {
+          "id": "ashadha",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_3",
+          "index": 3
+        },
+        "nakshatra": {
+          "id": "makha",
+          "index": 10,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "vyatipata",
+          "index": 17
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 6
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "05:43",
+        "sunset": "18:43",
+        "rahuKalam": ["10:35", "12:13"],
+        "tithiEndsAt": "2026-07-17T00:58:10.274Z",
+        "nakshatraEndsAt": "2026-07-17T13:04:08.868Z"
+      }
+    },
+    {
+      "id": "newJersey-2026-03-07",
+      "place": {
+        "id": "newJersey",
+        "label": "Edison, New Jersey",
+        "lat": 40.5187,
+        "lng": -74.4121,
+        "tz": "America/New_York"
+      },
+      "date": "2026-03-07",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        },
+        "ayana": "uttarayana",
+        "ritu": "shishira",
+        "masa": {
+          "id": "phalguna",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_4",
+          "index": 19
+        },
+        "nakshatra": {
+          "id": "svati",
+          "index": 15,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "dhruva",
+          "index": 12
+        },
+        "karana": {
+          "id": "balava",
+          "index": 38
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "06:21",
+        "sunset": "17:55",
+        "rahuKalam": ["09:15", "10:42"],
+        "tithiEndsAt": "2026-03-07T13:47:38.644Z",
+        "nakshatraEndsAt": "2026-03-08T08:01:00.206Z"
+      }
+    },
+    {
+      "id": "newJersey-2026-03-08",
+      "place": {
+        "id": "newJersey",
+        "label": "Edison, New Jersey",
+        "lat": 40.5187,
+        "lng": -74.4121,
+        "tz": "America/New_York"
+      },
+      "date": "2026-03-08",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        },
+        "ayana": "uttarayana",
+        "ritu": "shishira",
+        "masa": {
+          "id": "phalguna",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_5",
+          "index": 20
+        },
+        "nakshatra": {
+          "id": "vishakha",
+          "index": 16,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "vyaghata",
+          "index": 13
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 40
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "07:20",
+        "sunset": "18:56",
+        "rahuKalam": ["17:29", "18:56"],
+        "tithiEndsAt": "2026-03-08T15:41:22.377Z",
+        "nakshatraEndsAt": "2026-03-09T10:40:47.220Z"
+      }
+    },
+    {
+      "id": "newJersey-2026-10-31",
+      "place": {
+        "id": "newJersey",
+        "label": "Edison, New Jersey",
+        "lat": 40.5187,
+        "lng": -74.4121,
+        "tz": "America/New_York"
+      },
+      "date": "2026-10-31",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "sharad",
+        "masa": {
+          "id": "ashvayuja",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_6",
+          "index": 21
+        },
+        "nakshatra": {
+          "id": "punarvasu",
+          "index": 7,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "siddha",
+          "index": 21
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 42
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "07:26",
+        "sunset": "17:55",
+        "rahuKalam": ["10:03", "11:22"],
+        "tithiEndsAt": "2026-10-31T11:27:44.568Z",
+        "nakshatraEndsAt": "2026-11-01T00:09:13.631Z"
+      }
+    },
+    {
+      "id": "newJersey-2026-11-01",
+      "place": {
+        "id": "newJersey",
+        "label": "Edison, New Jersey",
+        "lat": 40.5187,
+        "lng": -74.4121,
+        "tz": "America/New_York"
+      },
+      "date": "2026-11-01",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "sharad",
+        "masa": {
+          "id": "ashvayuja",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_8",
+          "index": 23
+        },
+        "nakshatra": {
+          "id": "pushyami",
+          "index": 8,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "shubha",
+          "index": 23
+        },
+        "karana": {
+          "id": "balava",
+          "index": 45
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:27",
+        "sunset": "16:54",
+        "rahuKalam": ["15:35", "16:54"],
+        "tithiEndsAt": "2026-11-02T07:40:44.010Z",
+        "nakshatraEndsAt": "2026-11-01T23:00:04.166Z"
+      }
+    },
+    {
+      "id": "dallas-2026-03-08",
+      "place": {
+        "id": "dallas",
+        "label": "Dallas",
+        "lat": 32.7767,
+        "lng": -96.797,
+        "tz": "America/Chicago"
+      },
+      "date": "2026-03-08",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        },
+        "ayana": "uttarayana",
+        "ritu": "shishira",
+        "masa": {
+          "id": "phalguna",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_5",
+          "index": 20
+        },
+        "nakshatra": {
+          "id": "vishakha",
+          "index": 16,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "vyaghata",
+          "index": 13
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 40
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "07:46",
+        "sunset": "19:29",
+        "rahuKalam": ["18:01", "19:29"],
+        "tithiEndsAt": "2026-03-08T15:41:25.800Z",
+        "nakshatraEndsAt": "2026-03-09T10:40:50.643Z"
+      }
+    },
+    {
+      "id": "dallas-2026-11-01",
+      "place": {
+        "id": "dallas",
+        "label": "Dallas",
+        "lat": 32.7767,
+        "lng": -96.797,
+        "tz": "America/Chicago"
+      },
+      "date": "2026-11-01",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "sharad",
+        "masa": {
+          "id": "ashvayuja",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_8",
+          "index": 23
+        },
+        "nakshatra": {
+          "id": "pushyami",
+          "index": 8,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "shubha",
+          "index": 23
+        },
+        "karana": {
+          "id": "balava",
+          "index": 45
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:45",
+        "sunset": "17:36",
+        "rahuKalam": ["16:14", "17:36"],
+        "tithiEndsAt": "2026-11-02T07:40:42.816Z",
+        "nakshatraEndsAt": "2026-11-01T23:00:02.972Z"
+      }
+    },
+    {
+      "id": "london-2026-03-28",
+      "place": {
+        "id": "london",
+        "label": "London",
+        "lat": 51.5072,
+        "lng": -0.1276,
+        "tz": "Europe/London"
+      },
+      "date": "2026-03-28",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "uttarayana",
+        "ritu": "vasanta",
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_11",
+          "index": 11
+        },
+        "nakshatra": {
+          "id": "pushyami",
+          "index": 8,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "sukarma",
+          "index": 7
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 21
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "05:45",
+        "sunset": "18:26",
+        "rahuKalam": ["08:55", "10:30"],
+        "tithiEndsAt": "2026-03-29T02:16:47.395Z",
+        "nakshatraEndsAt": "2026-03-28T09:19:43.177Z"
+      }
+    },
+    {
+      "id": "london-2026-03-29",
+      "place": {
+        "id": "london",
+        "label": "London",
+        "lat": 51.5072,
+        "lng": -0.1276,
+        "tz": "Europe/London"
+      },
+      "date": "2026-03-29",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "uttarayana",
+        "ritu": "vasanta",
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_12",
+          "index": 12
+        },
+        "nakshatra": {
+          "id": "ashlesha",
+          "index": 9,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "dhriti",
+          "index": 8
+        },
+        "karana": {
+          "id": "bava",
+          "index": 23
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:42",
+        "sunset": "19:28",
+        "rahuKalam": ["17:52", "19:28"],
+        "tithiEndsAt": "2026-03-30T01:40:03.594Z",
+        "nakshatraEndsAt": "2026-03-29T09:07:14.844Z"
+      }
+    },
+    {
+      "id": "london-2026-10-24",
+      "place": {
+        "id": "london",
+        "label": "London",
+        "lat": 51.5072,
+        "lng": -0.1276,
+        "tz": "Europe/London"
+      },
+      "date": "2026-10-24",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "sharad",
+        "masa": {
+          "id": "ashvayuja",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_13",
+          "index": 13
+        },
+        "nakshatra": {
+          "id": "uttarabhadra",
+          "index": 26,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "vyaghata",
+          "index": 13
+        },
+        "karana": {
+          "id": "taitila",
+          "index": 26
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "07:39",
+        "sunset": "17:48",
+        "rahuKalam": ["10:12", "11:28"],
+        "tithiEndsAt": "2026-10-24T08:07:11.897Z",
+        "nakshatraEndsAt": "2026-10-24T15:01:41.428Z"
+      }
+    },
+    {
+      "id": "london-2026-10-25",
+      "place": {
+        "id": "london",
+        "label": "London",
+        "lat": 51.5072,
+        "lng": -0.1276,
+        "tz": "Europe/London"
+      },
+      "date": "2026-10-25",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "sharad",
+        "masa": {
+          "id": "ashvayuja",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "pournami",
+          "index": 15
+        },
+        "nakshatra": {
+          "id": "revati",
+          "index": 27,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "harshana",
+          "index": 14
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 29
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:41",
+        "sunset": "16:46",
+        "rahuKalam": ["15:31", "16:46"],
+        "tithiEndsAt": "2026-10-26T04:11:38.174Z",
+        "nakshatraEndsAt": "2026-10-25T13:51:42.861Z"
+      }
+    },
+    {
+      "id": "sydney-2026-04-04",
+      "place": {
+        "id": "sydney",
+        "label": "Sydney",
+        "lat": -33.8688,
+        "lng": 151.2093,
+        "tz": "Australia/Sydney"
+      },
+      "date": "2026-04-04",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "uttarayana",
+        "ritu": "vasanta",
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_2",
+          "index": 17
+        },
+        "nakshatra": {
+          "id": "svati",
+          "index": 15,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "harshana",
+          "index": 14
+        },
+        "karana": {
+          "id": "garaja",
+          "index": 34
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "07:09",
+        "sunset": "18:46",
+        "rahuKalam": ["10:03", "11:30"],
+        "tithiEndsAt": "2026-04-04T04:39:28.744Z",
+        "nakshatraEndsAt": "2026-04-04T16:05:01.557Z"
+      }
+    },
+    {
+      "id": "sydney-2026-04-05",
+      "place": {
+        "id": "sydney",
+        "label": "Sydney",
+        "lat": -33.8688,
+        "lng": 151.2093,
+        "tz": "Australia/Sydney"
+      },
+      "date": "2026-04-05",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "uttarayana",
+        "ritu": "vasanta",
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_3",
+          "index": 18
+        },
+        "nakshatra": {
+          "id": "vishakha",
+          "index": 16,
+          "pada": 1
+        },
+        "yoga": {
+          "id": "vajra",
+          "index": 15
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 36
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:09",
+        "sunset": "17:45",
+        "rahuKalam": ["16:18", "17:45"],
+        "tithiEndsAt": "2026-04-05T06:30:15.591Z",
+        "nakshatraEndsAt": "2026-04-05T18:37:17.466Z"
+      }
+    },
+    {
+      "id": "sydney-2026-10-03",
+      "place": {
+        "id": "sydney",
+        "label": "Sydney",
+        "lat": -33.8688,
+        "lng": 151.2093,
+        "tz": "Australia/Sydney"
+      },
+      "date": "2026-10-03",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_7",
+          "index": 22
+        },
+        "nakshatra": {
+          "id": "mrigashira",
+          "index": 5,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "variyan",
+          "index": 18
+        },
+        "karana": {
+          "id": "bava",
+          "index": 44
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "05:30",
+        "sunset": "17:59",
+        "rahuKalam": ["08:37", "10:10"],
+        "tithiEndsAt": "2026-10-03T02:30:01.051Z",
+        "nakshatraEndsAt": "2026-10-02T21:24:30.582Z"
+      }
+    },
+    {
+      "id": "sydney-2026-10-04",
+      "place": {
+        "id": "sydney",
+        "label": "Sydney",
+        "lat": -33.8688,
+        "lng": 151.2093,
+        "tz": "Australia/Sydney"
+      },
+      "date": "2026-10-04",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "krishna_8",
+          "index": 23
+        },
+        "nakshatra": {
+          "id": "ardra",
+          "index": 6,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "parigha",
+          "index": 19
+        },
+        "karana": {
+          "id": "kaulava",
+          "index": 46
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "06:28",
+        "sunset": "18:59",
+        "rahuKalam": ["17:25", "18:59"],
+        "tithiEndsAt": "2026-10-04T00:22:05.789Z",
+        "nakshatraEndsAt": "2026-10-03T19:59:07.664Z"
+      }
+    },
+    {
+      "id": "dubai-2026-06-21",
+      "place": {
+        "id": "dubai",
+        "label": "Dubai",
+        "lat": 25.2048,
+        "lng": 55.2708,
+        "tz": "Asia/Dubai"
+      },
+      "date": "2026-06-21",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "uttarayana",
+        "ritu": "grishma",
+        "masa": {
+          "id": "jyeshtha",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_7",
+          "index": 7
+        },
+        "nakshatra": {
+          "id": "pubba",
+          "index": 11,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "siddhi",
+          "index": 16
+        },
+        "karana": {
+          "id": "vanija",
+          "index": 14
+        },
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "sunrise": "05:29",
+        "sunset": "19:11",
+        "rahuKalam": ["17:29", "19:11"],
+        "tithiEndsAt": "2026-06-21T09:50:54.962Z",
+        "nakshatraEndsAt": "2026-06-21T04:00:45.587Z"
+      }
+    },
+    {
+      "id": "dubai-2026-12-21",
+      "place": {
+        "id": "dubai",
+        "label": "Dubai",
+        "lat": 25.2048,
+        "lng": 55.2708,
+        "tz": "Asia/Dubai"
+      },
+      "date": "2026-12-21",
+      "source": "engine-snapshot",
+      "why": "NRI location — DST switch or solstice",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "hemanta",
+        "masa": {
+          "id": "margashira",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "shukla_12",
+          "index": 12
+        },
+        "nakshatra": {
+          "id": "bharani",
+          "index": 2,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "siddha",
+          "index": 21
+        },
+        "karana": {
+          "id": "balava",
+          "index": 24
+        },
+        "vasara": {
+          "id": "indu",
+          "weekday": 1
+        },
+        "sunrise": "06:59",
+        "sunset": "17:34",
+        "rahuKalam": ["08:19", "09:38"],
+        "tithiEndsAt": "2026-12-21T12:06:34.892Z",
+        "nakshatraEndsAt": "2026-12-21T07:38:20.361Z"
+      }
+    },
+    {
+      "id": "visakhapatnam-2026-09-11",
+      "place": {
+        "id": "visakhapatnam",
+        "label": "Visakhapatnam",
+        "lat": 17.6868,
+        "lng": 83.2185,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-11",
+      "source": "engine-snapshot",
+      "why": "Amavasya / Pournami day",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "shravana",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "amavasya",
+          "index": 30
+        },
+        "nakshatra": {
+          "id": "pubba",
+          "index": 11,
+          "pada": 3
+        },
+        "yoga": {
+          "id": "sadhya",
+          "index": 22
+        },
+        "karana": {
+          "id": "naga",
+          "index": 60
+        },
+        "vasara": {
+          "id": "bhrigu",
+          "weekday": 5
+        },
+        "sunrise": "05:44",
+        "sunset": "18:02",
+        "rahuKalam": ["10:21", "11:53"],
+        "tithiEndsAt": "2026-09-11T03:26:56.956Z",
+        "nakshatraEndsAt": "2026-09-11T07:45:41.956Z"
+      }
+    },
+    {
+      "id": "visakhapatnam-2026-09-26",
+      "place": {
+        "id": "visakhapatnam",
+        "label": "Visakhapatnam",
+        "lat": 17.6868,
+        "lng": 83.2185,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-26",
+      "source": "engine-snapshot",
+      "why": "Amavasya / Pournami day",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "shukla",
+        "tithi": {
+          "id": "pournami",
+          "index": 15
+        },
+        "nakshatra": {
+          "id": "purvabhadra",
+          "index": 25,
+          "pada": 4
+        },
+        "yoga": {
+          "id": "ganda",
+          "index": 10
+        },
+        "karana": {
+          "id": "vishti",
+          "index": 29
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "05:46",
+        "sunset": "17:50",
+        "rahuKalam": ["08:47", "10:17"],
+        "tithiEndsAt": "2026-09-26T16:48:51.567Z",
+        "nakshatraEndsAt": "2026-09-26T06:01:37.973Z"
+      }
+    },
+    {
+      "id": "visakhapatnam-2026-10-10",
+      "place": {
+        "id": "visakhapatnam",
+        "label": "Visakhapatnam",
+        "lat": 17.6868,
+        "lng": 83.2185,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-10-10",
+      "source": "engine-snapshot",
+      "why": "Amavasya / Pournami day",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        },
+        "ayana": "dakshinayana",
+        "ritu": "varsha",
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "paksha": "krishna",
+        "tithi": {
+          "id": "amavasya",
+          "index": 30
+        },
+        "nakshatra": {
+          "id": "hasta",
+          "index": 13,
+          "pada": 2
+        },
+        "yoga": {
+          "id": "indra",
+          "index": 26
+        },
+        "karana": {
+          "id": "chatushpada",
+          "index": 59
+        },
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        },
+        "sunrise": "05:49",
+        "sunset": "17:38",
+        "rahuKalam": ["08:46", "10:15"],
+        "tithiEndsAt": "2026-10-10T15:49:51.926Z",
+        "nakshatraEndsAt": "2026-10-10T16:12:00.833Z"
+      }
+    }
+  ]
+}

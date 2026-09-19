@@ -1,0 +1,368 @@
+{
+  "note": "Fixtures whose expected values come from an authority outside this engine: the anchors implementation.md §9.1 states, the Gregorian calendar, the published adhika masa dates, and the Sankranti definitions. §9.1 asks for ≥ 60 such cases checked against a reference panchangam — see content/REVIEW_QUEUE.md for the shortfall.",
+  "tolerances": {
+    "sunriseMinutes": 1,
+    "transitionMinutes": 2
+  },
+  "fixtures": [
+    {
+      "id": "verified-samvatsara-2024",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2024-06-15",
+      "source": "verified",
+      "reference": "implementation.md §9.1 samvatsara anchors",
+      "why": "§9.1 anchor: 2024-25 is Krodhi (38)",
+      "expect": {
+        "samvatsara": {
+          "id": "krodhi",
+          "index": 38
+        }
+      }
+    },
+    {
+      "id": "verified-samvatsara-2025",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2025-06-15",
+      "source": "verified",
+      "reference": "implementation.md §9.1 samvatsara anchors",
+      "why": "§9.1 anchor: 2025-26 is Vishvavasu (39)",
+      "expect": {
+        "samvatsara": {
+          "id": "vishvavasu",
+          "index": 39
+        }
+      }
+    },
+    {
+      "id": "verified-samvatsara-2026",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-06-15",
+      "source": "verified",
+      "reference": "implementation.md §9.1 samvatsara anchors",
+      "why": "§9.1 anchor: 2026-27 is Parabhava (40)",
+      "expect": {
+        "samvatsara": {
+          "id": "parabhava",
+          "index": 40
+        }
+      }
+    },
+    {
+      "id": "verified-samvatsara-before-ugadi-2025",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2025-03-20",
+      "source": "verified",
+      "reference": "implementation.md §9.1 samvatsara anchors",
+      "why": "Still the previous samvatsara ten days before Ugadi 2025",
+      "expect": {
+        "samvatsara": {
+          "id": "krodhi",
+          "index": 38
+        }
+      }
+    },
+    {
+      "id": "verified-adhika-shravana-start",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-07-18",
+      "source": "verified",
+      "reference": "Adhika Shravana 2023 (18 Jul – 16 Aug 2023), widely published",
+      "why": "First day of Adhika Shravana 2023",
+      "expect": {
+        "masa": {
+          "id": "shravana",
+          "adhika": true
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        }
+      }
+    },
+    {
+      "id": "verified-adhika-shravana-middle",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-08-01",
+      "source": "verified",
+      "reference": "Adhika Shravana 2023 (18 Jul – 16 Aug 2023), widely published",
+      "why": "Mid Adhika Shravana 2023",
+      "expect": {
+        "masa": {
+          "id": "shravana",
+          "adhika": true
+        },
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        }
+      }
+    },
+    {
+      "id": "verified-adhika-shravana-last-day",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-08-16",
+      "source": "verified",
+      "reference": "Adhika Shravana 2023 (18 Jul – 16 Aug 2023), widely published",
+      "why": "Last day of Adhika Shravana: the adhika month still holds at sunrise on 16 August, the day the published range ends",
+      "expect": {
+        "masa": {
+          "id": "shravana",
+          "adhika": true
+        },
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        }
+      }
+    },
+    {
+      "id": "verified-vasara-ugadi-2024",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2024-04-09",
+      "source": "verified",
+      "reference": "Gregorian calendar (weekday), independently checked",
+      "why": "Ugadi 2024 fell on a Tuesday",
+      "expect": {
+        "vasara": {
+          "id": "bhauma",
+          "weekday": 2
+        },
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        }
+      }
+    },
+    {
+      "id": "verified-vasara-ugadi-2025",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2025-03-30",
+      "source": "verified",
+      "reference": "Gregorian calendar (weekday), independently checked",
+      "why": "Ugadi 2025 fell on a Sunday",
+      "expect": {
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        },
+        "masa": {
+          "id": "chaitra",
+          "adhika": false
+        }
+      }
+    },
+    {
+      "id": "verified-vasara-saturday",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-19",
+      "source": "verified",
+      "reference": "Gregorian calendar (weekday), independently checked",
+      "why": "A Saturday: sthira vasara",
+      "expect": {
+        "vasara": {
+          "id": "sthira",
+          "weekday": 6
+        }
+      }
+    },
+    {
+      "id": "verified-vasara-sankranti",
+      "place": {
+        "id": "vijayawada",
+        "label": "Vijayawada",
+        "lat": 16.5062,
+        "lng": 80.648,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-01-14",
+      "source": "verified",
+      "reference": "Gregorian calendar (weekday), independently checked",
+      "why": "Makara Sankranti 2026 falls on a Wednesday; ayana is Uttarayanam by the 15th",
+      "expect": {
+        "vasara": {
+          "id": "saumya",
+          "weekday": 3
+        }
+      }
+    },
+    {
+      "id": "verified-vasara-nri-dst",
+      "place": {
+        "id": "newJersey",
+        "label": "Edison, New Jersey",
+        "lat": 40.5187,
+        "lng": -74.4121,
+        "tz": "America/New_York"
+      },
+      "date": "2026-11-01",
+      "source": "verified",
+      "reference": "Gregorian calendar (weekday), independently checked",
+      "why": "US DST ends on a Sunday; the vasara must still be bhanu",
+      "expect": {
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        }
+      }
+    },
+    {
+      "id": "verified-vasara-london-dst",
+      "place": {
+        "id": "london",
+        "label": "London",
+        "lat": 51.5072,
+        "lng": -0.1276,
+        "tz": "Europe/London"
+      },
+      "date": "2026-10-25",
+      "source": "verified",
+      "reference": "Gregorian calendar (weekday), independently checked",
+      "why": "UK clocks go back on a Sunday",
+      "expect": {
+        "vasara": {
+          "id": "bhanu",
+          "weekday": 0
+        }
+      }
+    },
+    {
+      "id": "verified-ayana-uttarayana",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-01-25",
+      "source": "verified",
+      "reference": "Makara Sankranti (14–15 January), fixed by the Sun entering sidereal Makara",
+      "why": "After Makara Sankranti the Sun is in Uttarayanam",
+      "expect": {
+        "ayana": "uttarayana"
+      }
+    },
+    {
+      "id": "verified-ayana-dakshinayana",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-08-15",
+      "source": "verified",
+      "reference": "Karkataka Sankranti (mid-July), fixed by the Sun entering sidereal Karkataka",
+      "why": "After Karkataka Sankranti the Sun is in Dakshinayanam",
+      "expect": {
+        "ayana": "dakshinayana"
+      }
+    },
+    {
+      "id": "verified-ritu-varsha",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2026-09-19",
+      "source": "verified",
+      "reference": "implementation.md §9.1 masa → ruthuvu table",
+      "why": "Bhadrapada belongs to Varsha ruthuvu (§9.1 mapping)",
+      "expect": {
+        "masa": {
+          "id": "bhadrapada",
+          "adhika": false
+        },
+        "ritu": "varsha"
+      }
+    },
+    {
+      "id": "verified-nija-shravana-first-day",
+      "place": {
+        "id": "hyderabad",
+        "label": "Hyderabad",
+        "lat": 17.385,
+        "lng": 78.4867,
+        "tz": "Asia/Kolkata"
+      },
+      "date": "2023-08-17",
+      "source": "verified",
+      "reference": "Adhika Shravana 2023 (18 Jul – 16 Aug 2023), widely published",
+      "why": "First sunrise after Adhika Shravana ends: nija Shravana is running",
+      "expect": {
+        "masa": {
+          "id": "shravana",
+          "adhika": false
+        },
+        "vasara": {
+          "id": "guru",
+          "weekday": 4
+        }
+      }
+    }
+  ]
+}
