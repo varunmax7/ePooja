@@ -1,0 +1,7 @@
+{
+  "extends": "@epooja/config/tsconfig/library.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src/**/*", "*.mjs", "*.ts"]
+}

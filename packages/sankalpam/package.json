@@ -1,0 +1,26 @@
+{
+  "name": "@epooja/sankalpam",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pure-TS Sankalpam builder: declined-form text assembly + audio clip plan",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@epooja/config": "workspace:*",
+    "@types/node": "^26.0.0",
+    "eslint": "^9.39.5",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.0"
+  }
+}
