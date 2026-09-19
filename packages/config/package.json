@@ -1,0 +1,33 @@
+{
+  "name": "@epooja/config",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Shared TypeScript, ESLint and Prettier presets for the ePooja monorepo",
+  "type": "module",
+  "exports": {
+    "./prettier": "./prettier.config.mjs",
+    "./eslint/base": "./eslint/base.mjs",
+    "./eslint/react-native": "./eslint/react-native.mjs",
+    "./eslint/pure-package": "./eslint/pure-package.mjs",
+    "./tsconfig/base.json": "./tsconfig/base.json",
+    "./tsconfig/library.json": "./tsconfig/library.json",
+    "./tsconfig/react-native.json": "./tsconfig/react-native.json"
+  },
+  "files": [
+    "eslint",
+    "tsconfig",
+    "prettier.config.mjs"
+  ],
+  "dependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "globals": "^16.5.0",
+    "typescript-eslint": "^8.59.0"
+  },
+  "peerDependencies": {
+    "eslint": ">=9",
+    "prettier": ">=3",
+    "typescript": ">=5.9"
+  }
+}

@@ -1,0 +1,12 @@
+# The plan is the client's document — never reformat it.
+implementation.md
+
+# Generated / machine-owned
+pnpm-lock.yaml
+node_modules
+.turbo
+dist
+coverage
+apps/mobile/.expo
+apps/mobile/ios
+apps/mobile/android

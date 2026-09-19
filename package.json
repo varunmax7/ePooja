@@ -1,0 +1,38 @@
+{
+  "name": "epooja",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ePooja \u2014 a digital Telugu Smartha purohit for iOS and Android",
+  "packageManager": "pnpm@10.34.5",
+  "engines": {
+    "node": ">=20.19.0",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "verify": "turbo run lint typecheck test",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "mobile": "pnpm --filter @epooja/mobile",
+    "clean": "git clean -xdf node_modules dist .turbo"
+  },
+  "devDependencies": {
+    "@epooja/config": "workspace:*",
+    "eslint": "^9.39.5",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.8",
+    "typescript": "~6.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "@sentry/cli",
+      "@shopify/react-native-skia",
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}

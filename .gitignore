@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+.pnpm-store/
+
+# build output
+dist/
+build/
+.turbo/
+*.tsbuildinfo
+
+# expo / react native
+apps/mobile/.expo/
+apps/mobile/ios/
+apps/mobile/android/
+apps/mobile/web-build/
+.expo-shared/
+
+# env & secrets
+.env
+.env.*
+!.env.example
+google-services.json
+GoogleService-Info.plist
+
+# test / coverage
+coverage/
+.jest-cache/
+
+# generated content packs
+content/**/pack.json
+content/audio/clips/
+
+# os / editor
+.DS_Store
+*.log
+.idea/
+.vscode/*
+!.vscode/extensions.json
