@@ -13,7 +13,9 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "bench": "tsx bench/panchangam.bench.ts",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "astronomy-engine": "^2.1.19",
@@ -23,7 +25,9 @@
   "devDependencies": {
     "@epooja/config": "workspace:*",
     "@types/node": "^26.0.0",
+    "@vitest/coverage-v8": "^5.0.1",
     "eslint": "^9.39.5",
+    "tsx": "^4.20.0",
     "typescript": "~6.0.3",
     "vitest": "^5.0.0"
   }
