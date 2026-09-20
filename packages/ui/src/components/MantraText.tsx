@@ -1,7 +1,7 @@
 import { View } from 'react-native';
-import { colors, spacing } from '../tokens.js';
-import { mantraStyleFor, textStyles, type MantraScript } from '../typography.js';
-import { Txt } from './Txt.js';
+import { colors, spacing } from '../tokens';
+import { mantraStyleFor, textStyles, type MantraScript } from '../typography';
+import { Txt } from './Txt';
 
 export interface MantraLineView {
   id: string;

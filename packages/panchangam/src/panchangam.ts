@@ -1,17 +1,17 @@
 import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
-import { nakshatraPada } from './angas.js';
-import { searchMoon, searchSun } from './astronomy.js';
-import { gulikaKalam, prayerTimings, rahuKalam, yamagandam } from './kalams.js';
-import { ayanaAt, lunarMonthAt, rituOf, samvatsaraAt } from './masa.js';
-import { addDays } from './math.js';
-import { angaAt } from './transitions.js';
+import { nakshatraPada } from './angas';
+import { searchMoon, searchSun } from './astronomy';
+import { gulikaKalam, prayerTimings, rahuKalam, yamagandam } from './kalams';
+import { ayanaAt, lunarMonthAt, rituOf, samvatsaraAt } from './masa';
+import { addDays } from './math';
+import { angaAt } from './transitions';
 import type {
   DayPanchangamOptions,
   GeoLocation,
   PanchangamData,
   PanchangamInput,
   Weekday,
-} from './types.js';
+} from './types';
 
 /** Thrown where the Sun does not rise or set on the requested day. */
 export class NoSunriseError extends Error {

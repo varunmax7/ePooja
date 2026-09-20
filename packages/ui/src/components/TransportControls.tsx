@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Canvas, Circle, RadialGradient, vec } from '@shopify/react-native-skia';
 import { Pressable, View } from 'react-native';
-import { colors, elevation, gradients, shadow, spacing } from '../tokens.js';
+import { colors, elevation, gradients, shadow, spacing } from '../tokens';
 
 export interface TransportControlsProps {
   playing: boolean;

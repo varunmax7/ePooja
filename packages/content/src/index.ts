@@ -6,7 +6,7 @@
  * in Phase 4.
  */
 
-export { reviewSchema, isApproved, type Review } from './review.js';
+export { reviewSchema, isApproved, type Review } from './review';
 
 export {
   enumFileSchema,
@@ -20,7 +20,7 @@ export {
   TODO_PANDIT_PATTERN,
   type EnumFile,
   type EnumValue,
-} from './enums.js';
+} from './enums';
 
 export const CONTENT_PACKAGE = {
   name: '@epooja/content',

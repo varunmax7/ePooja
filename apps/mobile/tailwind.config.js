@@ -18,6 +18,9 @@ module.exports = {
     '../../packages/ui/src/**/*.{js,jsx,ts,tsx}',
   ],
   presets: [require('nativewind/preset')],
+  // v1 is light-only (§10 Phase 1); dark mode arrives in v1.x as an explicit
+  // class rather than following the OS, so the app can force light today.
+  darkMode: 'class',
   theme: {
     extend: {
       colors: tokens.colors,

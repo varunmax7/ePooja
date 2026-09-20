@@ -8,8 +8,8 @@ import {
   vec,
 } from '@shopify/react-native-skia';
 import { Pressable, View } from 'react-native';
-import { colors, gradients, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, gradients, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export interface DateDialProps {
   weekday: string;

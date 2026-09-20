@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { colors, radius, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, radius, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export interface StepProgressProps {
   /** Already localized, e.g. "Step 4 of 16: Kalasha Puja". */
@@ -29,6 +29,9 @@ export function StepProgress({ caption, progress, elapsed, remaining }: StepProg
       </Txt>
 
       <View
+        // A plain View is not an accessibility element unless it says so, and
+        // screen-reader users need the step position announced.
+        accessible
         accessibilityRole="progressbar"
         accessibilityValue={{ min: 0, max: 100, now: Math.round(clamped * 100) }}
         style={{

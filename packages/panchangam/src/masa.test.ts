@@ -10,7 +10,7 @@ import {
   previousNewMoon,
   rituOf,
   samvatsaraAt,
-} from './masa.js';
+} from './masa';
 
 const at = (iso: string): Date => new Date(iso);
 

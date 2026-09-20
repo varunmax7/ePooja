@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import * as api from './index.js';
+import * as api from './index';
 
 /**
  * The package's public surface. App code (Phase 3), the Sankalpam builder

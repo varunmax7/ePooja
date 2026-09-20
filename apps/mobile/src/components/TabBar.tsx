@@ -1,5 +1,6 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import type { BottomTabBarProps } from '@react-navigation/bottom-tabs';
+// Expo Router vendors its own copy of the bottom-tabs types (SDK 57).
+import type { BottomTabBarProps } from 'expo-router/build/react-navigation/bottom-tabs';
 import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Txt, colors, elevation, radius, shadow, spacing } from '@epooja/ui';
@@ -35,8 +36,8 @@ export function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
     >
       {state.routes.map((route, index) => {
         const focused = state.index === index;
-        const { options } = descriptors[route.key] ?? { options: {} };
-        const label = options.title ?? route.name;
+        const options = descriptors[route.key]?.options;
+        const label = options?.title ?? route.name;
 
         return (
           <Pressable

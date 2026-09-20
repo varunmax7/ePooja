@@ -1,7 +1,7 @@
 import { View } from 'react-native';
-import { spacing } from '../tokens.js';
-import { Card } from './Card.js';
-import { Txt } from './Txt.js';
+import { spacing } from '../tokens';
+import { Card } from './Card';
+import { Txt } from './Txt';
 
 export interface FieldCardProps {
   label: string;

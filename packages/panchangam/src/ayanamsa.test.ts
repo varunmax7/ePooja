@@ -1,6 +1,6 @@
 import { MakeTime } from 'astronomy-engine';
 import { describe, expect, it } from 'vitest';
-import { julianDay, lahiriAyanamsa } from './ayanamsa.js';
+import { julianDay, lahiriAyanamsa } from './ayanamsa';
 
 const J2000_JD = 2_451_545.0;
 

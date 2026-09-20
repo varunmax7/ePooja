@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, View } from 'react-native';
-import { colors, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export interface FamilyChipProps {
   name: string;

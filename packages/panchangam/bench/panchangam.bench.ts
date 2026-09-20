@@ -15,7 +15,7 @@ import {
   getPanchangam,
   lunarMonthAt,
   samvatsaraAt,
-} from '../src/index.js';
+} from '../src/index';
 
 const HYDERABAD = { lat: 17.385, lng: 78.4867, tz: 'Asia/Kolkata' };
 const INSTANT = new Date('2026-09-19T06:00:00Z');

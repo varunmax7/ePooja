@@ -23,7 +23,7 @@ const VEDIC_TONE_KARSHANA = 0x1cd0;
 const VEDIC_TONE_SHARA = 0x1cd1;
 const VEDIC_SIGN_NIHSHVASA = 0x1ce1;
 
-interface Sample {
+interface SvaraSample {
   id: string;
   description: string;
   text: string;
@@ -33,7 +33,7 @@ function combine(base: number, ...marks: number[]): string {
   return String.fromCodePoint(base, ...marks);
 }
 
-const SAMPLES: Sample[] = [
+const SAMPLES: SvaraSample[] = [
   { id: 'te-plain', description: 'Telugu KA, no mark', text: combine(TELUGU_KA) },
   { id: 'te-udatta', description: 'Telugu KA + udatta U+0951', text: combine(TELUGU_KA, UDATTA) },
   { id: 'te-anudatta', description: 'Telugu KA + anudatta U+0952', text: combine(TELUGU_KA, ANUDATTA) },
@@ -100,17 +100,17 @@ export default function SvaraSpikeScreen() {
             </Txt>
             <View style={{ height: spacing[2] }} />
             <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: spacing[6] }}>
-              <Sample
+              <FontSample
                 caption={telugu ? 'Tiro Telugu' : 'Tiro Devanagari'}
                 family={telugu ? fontFamily.mantraTelugu : fontFamily.mantraDevanagari}
                 text={sample.text}
               />
-              <Sample
+              <FontSample
                 caption={telugu ? 'Noto Sans Telugu' : 'Mukta'}
                 family={telugu ? fontFamily.uiTelugu : fontFamily.uiBody}
                 text={sample.text}
               />
-              <Sample caption="System" family={undefined} text={sample.text} />
+              <FontSample caption="System" family={undefined} text={sample.text} />
             </View>
           </Card>
         );
@@ -119,7 +119,7 @@ export default function SvaraSpikeScreen() {
   );
 }
 
-function Sample({
+function FontSample({
   caption,
   family,
   text,

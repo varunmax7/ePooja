@@ -1,6 +1,6 @@
 import { Pressable, View } from 'react-native';
-import { colors, radius, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, radius, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export type PlayerMode = 'chant' | 'guided';
 

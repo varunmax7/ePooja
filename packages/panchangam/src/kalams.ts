@@ -1,4 +1,4 @@
-import type { PrayerTiming, Weekday } from './types.js';
+import type { PrayerTiming, Weekday } from './types';
 
 /**
  * Inauspicious periods (§9.1): daylight is divided into eight equal parts and

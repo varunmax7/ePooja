@@ -7,8 +7,8 @@ import {
   prayerTimings,
   rahuKalam,
   yamagandam,
-} from './kalams.js';
-import type { Weekday } from './types.js';
+} from './kalams';
+import type { Weekday } from './types';
 
 // A clean 12-hour day so segment boundaries land on exact 90-minute marks.
 const SUNRISE = new Date('2026-09-19T00:00:00Z');

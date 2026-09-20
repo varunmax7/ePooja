@@ -1,10 +1,10 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { KARANA_IDS } from './angas.js';
-import { MASA_IDS, RITU_IDS, SAMVATSARA_IDS } from './masa.js';
-import { VASARA_IDS } from './panchangam.js';
-import { NAKSHATRA_IDS, YOGA_IDS, tithiId } from './transitions.js';
+import { KARANA_IDS } from './angas';
+import { MASA_IDS, RITU_IDS, SAMVATSARA_IDS } from './masa';
+import { VASARA_IDS } from './panchangam';
+import { NAKSHATRA_IDS, YOGA_IDS, tithiId } from './transitions';
 
 /**
  * The engine computes ids; `content/enums/*.json` holds the Telugu, the

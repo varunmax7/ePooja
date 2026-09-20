@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Text, type StyleProp, type TextProps, type TextStyle } from 'react-native';
-import { colors } from '../tokens.js';
-import { textStyles, type TextStyleName } from '../typography.js';
+import { colors } from '../tokens';
+import { textStyles, type TextStyleName } from '../typography';
 
 export type TxtTone = 'ink' | 'inkMuted' | 'cream' | 'maroon' | 'gold' | 'danger' | 'success';
 

@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, View } from 'react-native';
-import { colors, elevation, shadow } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, elevation, shadow } from '../tokens';
+import { Txt } from './Txt';
 
 export interface AvatarRingProps {
   /** Initials shown when there is no photo. */

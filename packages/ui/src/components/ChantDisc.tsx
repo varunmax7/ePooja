@@ -9,7 +9,7 @@ import {
   withRepeat,
   withTiming,
 } from 'react-native-reanimated';
-import { colors } from '../tokens.js';
+import { colors } from '../tokens';
 
 export interface ChantDiscProps {
   playing: boolean;

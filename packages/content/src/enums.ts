@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { reviewSchema } from './review.js';
+import { reviewSchema } from './review';
 
 /**
  * Schema for `content/enums/*.json` (§9.2).

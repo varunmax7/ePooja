@@ -1,6 +1,6 @@
-import { moonSiderealLongitude, moonSunElongation, sunSiderealLongitude } from './astronomy.js';
-import { norm360 } from './math.js';
-import type { NakshatraPada, Paksha } from './types.js';
+import { moonSiderealLongitude, moonSunElongation, sunSiderealLongitude } from './astronomy';
+import { norm360 } from './math';
+import type { NakshatraPada, Paksha } from './types';
 
 export const TITHI_ARC = 12;
 export const NAKSHATRA_ARC = 360 / 27;

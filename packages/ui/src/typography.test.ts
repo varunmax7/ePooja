@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { fontFamily, mantraStyleFor, textStyles } from './typography.js';
+import { fontFamily, mantraStyleFor, textStyles } from './typography';
 
 describe('font families', () => {
   it('uses the §7.3 faces', () => {

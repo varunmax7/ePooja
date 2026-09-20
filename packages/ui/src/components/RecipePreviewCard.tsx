@@ -1,9 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image } from 'expo-image';
 import { View, type ImageSourcePropType } from 'react-native';
-import { colors, elevation, radius, shadow, spacing } from '../tokens.js';
-import { Button } from './Button.js';
-import { Txt } from './Txt.js';
+import { colors, elevation, radius, shadow, spacing } from '../tokens';
+import { Button } from './Button';
+import { Txt } from './Txt';
 
 export interface RecipePreviewCardProps {
   /** e.g. "Offerings Recipe Preview:" — localized by the caller. */

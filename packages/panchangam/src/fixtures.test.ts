@@ -1,8 +1,8 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { getDayPanchangam } from './panchangam.js';
-import type { GeoLocation } from './types.js';
+import { getDayPanchangam } from './panchangam';
+import type { GeoLocation } from './types';
 
 /**
  * The golden fixture runner (§9.1).

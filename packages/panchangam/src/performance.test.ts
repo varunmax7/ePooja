@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { clearPanchangamCache, getDayPanchangam, getMonth, getPanchangam } from './panchangam.js';
+import { clearPanchangamCache, getDayPanchangam, getMonth, getPanchangam } from './panchangam';
 
 /**
  * §9.1 sets a 20 ms budget for a day's Panchangam on a mid-range Android, and

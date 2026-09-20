@@ -12,8 +12,8 @@ import {
   rasiOf,
   tithiIndex,
   yogaIndex,
-} from './angas.js';
-import { moonSunElongation } from './astronomy.js';
+} from './angas';
+import { moonSunElongation } from './astronomy';
 
 /**
  * Phase instants come from astronomy-engine's own phase search, which is a

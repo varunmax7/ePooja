@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { colors, radius, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, radius, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export interface ProgressPillProps {
   /** e.g. "4/6 ready" — localized by the caller. */

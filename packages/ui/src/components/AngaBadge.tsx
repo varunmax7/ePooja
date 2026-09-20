@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
-import { colors, elevation, shadow, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, elevation, shadow, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export type AngaBadgeKind = 'tithi' | 'nakshatra' | 'ritu' | 'masa';
 

@@ -16,7 +16,7 @@ export {
   type Colors,
   type ColorScale,
   type ShadowToken,
-} from './tokens.js';
+} from './tokens';
 
 export {
   fontFamily,
@@ -26,37 +26,37 @@ export {
   type MantraScript,
   type TextStyleName,
   type TextStyleToken,
-} from './typography.js';
+} from './typography';
 
-export { Txt, type TxtProps, type TxtTone } from './components/Txt.js';
-export { Card, type CardProps, type CardTone } from './components/Card.js';
-export { Button, type ButtonProps, type ButtonTone } from './components/Button.js';
-export { FieldCard, type FieldCardProps } from './components/FieldCard.js';
-export { AvatarRing, type AvatarRingProps } from './components/AvatarRing.js';
-export { FamilyChip, type FamilyChipProps } from './components/FamilyChip.js';
-export { CheckRow, type CheckRowProps } from './components/CheckRow.js';
-export { TimingRow, type TimingRowProps } from './components/TimingRow.js';
-export { SunTimesCard, type SunTimesCardProps } from './components/SunTimesCard.js';
-export { AngaBadge, type AngaBadgeKind, type AngaBadgeProps } from './components/AngaBadge.js';
-export { CurvedHeader, type CurvedHeaderProps, type HeaderTone } from './components/CurvedHeader.js';
-export { DateDial, type DateDialProps } from './components/DateDial.js';
-export { ChantDisc, type ChantDiscProps } from './components/ChantDisc.js';
-export { StepProgress, type StepProgressProps } from './components/StepProgress.js';
+export { Txt, type TxtProps, type TxtTone } from './components/Txt';
+export { Card, type CardProps, type CardTone } from './components/Card';
+export { Button, type ButtonProps, type ButtonTone } from './components/Button';
+export { FieldCard, type FieldCardProps } from './components/FieldCard';
+export { AvatarRing, type AvatarRingProps } from './components/AvatarRing';
+export { FamilyChip, type FamilyChipProps } from './components/FamilyChip';
+export { CheckRow, type CheckRowProps } from './components/CheckRow';
+export { TimingRow, type TimingRowProps } from './components/TimingRow';
+export { SunTimesCard, type SunTimesCardProps } from './components/SunTimesCard';
+export { AngaBadge, type AngaBadgeKind, type AngaBadgeProps } from './components/AngaBadge';
+export { CurvedHeader, type CurvedHeaderProps, type HeaderTone } from './components/CurvedHeader';
+export { DateDial, type DateDialProps } from './components/DateDial';
+export { ChantDisc, type ChantDiscProps } from './components/ChantDisc';
+export { StepProgress, type StepProgressProps } from './components/StepProgress';
 export {
   MantraText,
   type MantraLineView,
   type MantraTextProps,
-} from './components/MantraText.js';
+} from './components/MantraText';
 export {
   TransportControls,
   type TransportControlsProps,
-} from './components/TransportControls.js';
-export { ModeToggle, type ModeToggleProps, type PlayerMode } from './components/ModeToggle.js';
+} from './components/TransportControls';
+export { ModeToggle, type ModeToggleProps, type PlayerMode } from './components/ModeToggle';
 export {
   RecipePreviewCard,
   type RecipePreviewCardProps,
-} from './components/RecipePreviewCard.js';
-export { ProgressPill, type ProgressPillProps } from './components/ProgressPill.js';
+} from './components/RecipePreviewCard';
+export { ProgressPill, type ProgressPillProps } from './components/ProgressPill';
 
 export const UI_PACKAGE = {
   name: '@epooja/ui',

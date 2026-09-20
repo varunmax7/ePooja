@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, View, type StyleProp, type ViewStyle } from 'react-native';
-import { colors, elevation, radius, shadow, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, elevation, radius, shadow, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export type ButtonTone = 'maroon' | 'gold' | 'ghost';
 export type ButtonSize = 'md' | 'lg';

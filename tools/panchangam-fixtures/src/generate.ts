@@ -11,7 +11,7 @@
 import { writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { getDayPanchangam } from '@epooja/panchangam';
-import { PLACES, type Fixture, type FixtureFile, type FixturePlace } from './types.js';
+import { PLACES, type Fixture, type FixtureFile, type FixturePlace } from './types';
 
 const OUTPUT = join(
   import.meta.dirname,

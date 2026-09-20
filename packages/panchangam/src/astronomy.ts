@@ -6,9 +6,9 @@ import {
   SearchRiseSet,
   SunPosition,
 } from 'astronomy-engine';
-import { julianDay, lahiriAyanamsa } from './ayanamsa.js';
-import { norm360 } from './math.js';
-import type { GeoLocation } from './types.js';
+import { julianDay, lahiriAyanamsa } from './ayanamsa';
+import { norm360 } from './math';
+import type { GeoLocation } from './types';
 
 /** Apparent geocentric tropical ecliptic longitude of the Sun, of date. */
 export function sunTropicalLongitude(instant: Date): number {

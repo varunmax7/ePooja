@@ -8,8 +8,8 @@ import {
   getMonth,
   getPanchangam,
   mostRecentSunrise,
-} from './panchangam.js';
-import type { GeoLocation } from './types.js';
+} from './panchangam';
+import type { GeoLocation } from './types';
 
 const HYDERABAD: GeoLocation = { lat: 17.385, lng: 78.4867, tz: 'Asia/Kolkata' };
 const NEW_JERSEY: GeoLocation = { lat: 40.0583, lng: -74.4057, tz: 'America/New_York' };

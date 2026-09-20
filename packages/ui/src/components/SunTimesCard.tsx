@@ -1,8 +1,8 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
-import { colors, spacing } from '../tokens.js';
-import { Card } from './Card.js';
-import { Txt } from './Txt.js';
+import { colors, spacing } from '../tokens';
+import { Card } from './Card';
+import { Txt } from './Txt';
 
 export interface SunTimesCardProps {
   sunriseLabel: string;

@@ -1,8 +1,8 @@
 import { SearchMoonPhase } from 'astronomy-engine';
-import { rasiOf } from './angas.js';
-import { sunSiderealLongitude } from './astronomy.js';
-import { addDays } from './math.js';
-import type { Ayana } from './types.js';
+import { rasiOf } from './angas';
+import { sunSiderealLongitude } from './astronomy';
+import { addDays } from './math';
+import type { Ayana } from './types';
 
 /** Amanta (Chandramana) masa ids, Chaitra first (§9.2). */
 export const MASA_IDS = [

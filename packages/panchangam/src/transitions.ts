@@ -1,7 +1,7 @@
-import { KARANA_ARC, NAKSHATRA_ARC, TITHI_ARC, YOGA_ARC, karanaFromHalfIndex } from './angas.js';
-import { moonSiderealLongitude, moonSunElongation, sunSiderealLongitude } from './astronomy.js';
-import { addDays, bisect, deltaAngle, norm360 } from './math.js';
-import type { AngaKind, AngaSpan } from './types.js';
+import { KARANA_ARC, NAKSHATRA_ARC, TITHI_ARC, YOGA_ARC, karanaFromHalfIndex } from './angas';
+import { moonSiderealLongitude, moonSunElongation, sunSiderealLongitude } from './astronomy';
+import { addDays, bisect, deltaAngle, norm360 } from './math';
+import type { AngaKind, AngaSpan } from './types';
 
 /**
  * Every anga is a slice of one monotonically increasing angle, so one

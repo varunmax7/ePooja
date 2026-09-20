@@ -1,8 +1,8 @@
 import { SearchMoonPhase } from 'astronomy-engine';
 import { describe, expect, it } from 'vitest';
-import { NAKSHATRA_IDS, YOGA_IDS, angaAt, findTransitions, tithiId } from './transitions.js';
-import { KARANA_IDS } from './angas.js';
-import type { AngaKind } from './types.js';
+import { NAKSHATRA_IDS, YOGA_IDS, angaAt, findTransitions, tithiId } from './transitions';
+import { KARANA_IDS } from './angas';
+import type { AngaKind } from './types';
 
 const INSTANT = new Date('2026-09-19T06:00:00Z');
 const kinds: AngaKind[] = ['tithi', 'nakshatra', 'yoga', 'karana'];

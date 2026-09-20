@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { colors, elevation, gradients, radius, shadow, spacing } from './tokens.js';
+import { colors, elevation, gradients, radius, shadow, spacing } from './tokens';
 
 /**
  * The palette is the client's, transcribed from §7.2. These tests pin it so a

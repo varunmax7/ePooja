@@ -7,7 +7,7 @@ import {
   isTodoPandit,
   parseEnumFile,
   pendingFields,
-} from './enums.js';
+} from './enums';
 
 const ENUM_DIR = join(import.meta.dirname, '../../../content/enums');
 

@@ -7,7 +7,7 @@
  */
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import type { FixtureFile } from './types.js';
+import type { FixtureFile } from './types';
 
 const FIXTURE_DIR = join(import.meta.dirname, '../../../packages/panchangam/test/fixtures');
 const REQUIRED_VERIFIED = 60;

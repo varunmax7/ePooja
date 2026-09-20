@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, bisect, deltaAngle, norm360 } from './math.js';
+import { addDays, bisect, deltaAngle, norm360 } from './math';
 
 describe('norm360', () => {
   it.each([

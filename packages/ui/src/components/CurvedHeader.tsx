@@ -1,8 +1,8 @@
 import { Canvas, LinearGradient, Path, Skia, vec } from '@shopify/react-native-skia';
 import type { ReactNode } from 'react';
 import { View, useWindowDimensions } from 'react-native';
-import { colors, gradients, spacing } from '../tokens.js';
-import { Txt } from './Txt.js';
+import { colors, gradients, spacing } from '../tokens';
+import { Txt } from './Txt';
 
 export type HeaderTone = 'maroon' | 'saffron';
 

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { View, type StyleProp, type ViewStyle } from 'react-native';
-import { colors, elevation, radius, shadow, spacing } from '../tokens.js';
+import { colors, elevation, radius, shadow, spacing } from '../tokens';
 
 export type CardTone = 'cream' | 'creamRaised' | 'outlined' | 'maroon';
 

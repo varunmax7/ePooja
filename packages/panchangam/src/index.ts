@@ -15,9 +15,9 @@ export {
   clearPanchangamCache,
   NoSunriseError,
   VASARA_IDS,
-} from './panchangam.js';
+} from './panchangam';
 
-export { angaAt, findTransitions, tithiId, NAKSHATRA_IDS, YOGA_IDS } from './transitions.js';
+export { angaAt, findTransitions, tithiId, NAKSHATRA_IDS, YOGA_IDS } from './transitions';
 
 export {
   tithiIndex,
@@ -30,7 +30,7 @@ export {
   rasiOf,
   KARANA_IDS,
   MOVABLE_KARANAS,
-} from './angas.js';
+} from './angas';
 
 export {
   lunarMonthAt,
@@ -43,7 +43,7 @@ export {
   MASA_IDS,
   RITU_IDS,
   SAMVATSARA_IDS,
-} from './masa.js';
+} from './masa';
 
 export {
   rahuKalam,
@@ -53,16 +53,16 @@ export {
   RAHU_SEGMENTS,
   YAMA_SEGMENTS,
   GULIKA_SEGMENTS,
-} from './kalams.js';
+} from './kalams';
 
-export { lahiriAyanamsa, julianDay } from './ayanamsa.js';
+export { lahiriAyanamsa, julianDay } from './ayanamsa';
 export {
   sunSiderealLongitude,
   moonSiderealLongitude,
   moonSunElongation,
   ayanamsaAt,
-} from './astronomy.js';
-export { norm360, deltaAngle } from './math.js';
+} from './astronomy';
+export { norm360, deltaAngle } from './math';
 
 export type {
   AngaKind,
@@ -76,7 +76,7 @@ export type {
   PanchangamInput,
   PrayerTiming,
   Weekday,
-} from './types.js';
+} from './types';
 
 export const PANCHANGAM_PACKAGE = {
   name: '@epooja/panchangam',
