@@ -42,7 +42,12 @@ export default function PrepareScreen() {
   return (
     <View style={{ flex: 1 }} className="bg-cream-50">
       <ScrollView contentContainerStyle={{ paddingBottom: spacing[9] * 2 }}>
-        <CurvedHeader title={prepare.title} subtitle={prepare.subtitle} tone="maroon" height={150} />
+        <CurvedHeader
+          title={prepare.title}
+          subtitle={prepare.subtitle}
+          tone="maroon"
+          height={150}
+        />
 
         <View style={{ paddingHorizontal: spacing[5], gap: spacing[5], marginTop: spacing[4] }}>
           <Card tone="cream" padding={5}>

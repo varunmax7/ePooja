@@ -32,6 +32,11 @@ export default function CalendarScreen() {
     ...Array.from({ length: FIRST_WEEKDAY }, () => null),
     ...Array.from({ length: DAYS_IN_MONTH }, (_, i) => i + 1),
   ];
+  // Pad the last week out to seven: the cells are `flex: 1`, so a short final
+  // row would spread its days evenly across the card instead of leaving them
+  // under their weekday columns.
+  while (cells.length % 7 !== 0) cells.push(null);
+
   const weeks: (number | null)[][] = [];
   for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
 
@@ -41,13 +46,23 @@ export default function CalendarScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ paddingBottom: spacing[8] }}
     >
-      <CurvedHeader title="Calendar" subtitle={`${today.date.month} ${today.date.year}`} height={130} />
+      <CurvedHeader
+        title="Calendar"
+        subtitle={`${today.date.month} ${today.date.year}`}
+        height={130}
+      />
 
       <View style={{ paddingHorizontal: spacing[5], marginTop: spacing[4], gap: spacing[4] }}>
         <Card tone="cream" padding={4}>
           <View style={{ flexDirection: 'row' }}>
             {WEEKDAYS.map((label, index) => (
-              <Txt key={index} variant="fieldLabel" tone="inkMuted" align="center" style={{ flex: 1 }}>
+              <Txt
+                key={index}
+                variant="fieldLabel"
+                tone="inkMuted"
+                align="center"
+                style={{ flex: 1 }}
+              >
                 {label}
               </Txt>
             ))}
@@ -60,7 +75,10 @@ export default function CalendarScreen() {
               {week.map((day, dayIndex) => {
                 const isToday = day === Number(today.date.day);
                 return (
-                  <View key={dayIndex} style={{ flex: 1, alignItems: 'center', paddingVertical: spacing[2] }}>
+                  <View
+                    key={dayIndex}
+                    style={{ flex: 1, alignItems: 'center', paddingVertical: spacing[2] }}
+                  >
                     {day === null ? (
                       <View style={{ height: 40 }} />
                     ) : (

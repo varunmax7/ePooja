@@ -1,12 +1,4 @@
-import {
-  Canvas,
-  Circle,
-  Group,
-  Path,
-  RadialGradient,
-  Skia,
-  vec,
-} from '@shopify/react-native-skia';
+import { Canvas, Circle, Group, Path, RadialGradient, Skia, vec } from '@shopify/react-native-skia';
 import { Pressable, View } from 'react-native';
 import { colors, gradients, spacing } from '../tokens';
 import { Txt } from './Txt';

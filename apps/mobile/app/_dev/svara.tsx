@@ -36,7 +36,11 @@ function combine(base: number, ...marks: number[]): string {
 const SAMPLES: SvaraSample[] = [
   { id: 'te-plain', description: 'Telugu KA, no mark', text: combine(TELUGU_KA) },
   { id: 'te-udatta', description: 'Telugu KA + udatta U+0951', text: combine(TELUGU_KA, UDATTA) },
-  { id: 'te-anudatta', description: 'Telugu KA + anudatta U+0952', text: combine(TELUGU_KA, ANUDATTA) },
+  {
+    id: 'te-anudatta',
+    description: 'Telugu KA + anudatta U+0952',
+    text: combine(TELUGU_KA, ANUDATTA),
+  },
   {
     id: 'te-karshana',
     description: 'Telugu KA + Vedic tone karshana U+1CD0',
@@ -53,7 +57,11 @@ const SAMPLES: SvaraSample[] = [
     text: combine(TELUGU_KA, VEDIC_SIGN_NIHSHVASA),
   },
   { id: 'dev-plain', description: 'Devanagari KA, no mark', text: combine(DEVANAGARI_KA) },
-  { id: 'dev-udatta', description: 'Devanagari KA + udatta U+0951', text: combine(DEVANAGARI_KA, UDATTA) },
+  {
+    id: 'dev-udatta',
+    description: 'Devanagari KA + udatta U+0951',
+    text: combine(DEVANAGARI_KA, UDATTA),
+  },
   {
     id: 'dev-anudatta',
     description: 'Devanagari KA + anudatta U+0952',

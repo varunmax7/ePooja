@@ -1,14 +1,20 @@
+import { Dimensions, StyleSheet, type TextStyle } from 'react-native';
 import { fireEvent, render } from '@testing-library/react-native';
 import {
   Button,
   CheckRow,
   FieldCard,
+  FontScaleProvider,
   MantraText,
   ModeToggle,
   ProgressPill,
   StepProgress,
   TimingRow,
   TransportControls,
+  Txt,
+  clampFontScale,
+  fontFamily,
+  textStyles,
 } from '@epooja/ui';
 
 /**
@@ -29,9 +35,7 @@ describe('Button', () => {
 
   it('does not fire when disabled', async () => {
     const onPress = jest.fn();
-    const { getByRole } = await render(
-      <Button label="Start Pooja" onPress={onPress} disabled />,
-    );
+    const { getByRole } = await render(<Button label="Start Pooja" onPress={onPress} disabled />);
 
     await fireEvent.press(getByRole('button', { name: 'Start Pooja' }));
     expect(onPress).not.toHaveBeenCalled();
@@ -40,9 +44,7 @@ describe('Button', () => {
 
 describe('CheckRow', () => {
   it('reports its checked state to screen readers', async () => {
-    const { getByRole } = await render(
-      <CheckRow label="Akshatalu" checked onToggle={jest.fn()} />,
-    );
+    const { getByRole } = await render(<CheckRow label="Akshatalu" checked onToggle={jest.fn()} />);
 
     expect(getByRole('checkbox', { name: 'Akshatalu' }).props.accessibilityState).toMatchObject({
       checked: true,
@@ -173,9 +175,7 @@ describe('MantraText', () => {
   ];
 
   it('renders every line with its transliteration', async () => {
-    const { getByText } = await render(
-      <MantraText lines={lines} activeIndex={0} script="te" />,
-    );
+    const { getByText } = await render(<MantraText lines={lines} activeIndex={0} script="te" />);
 
     expect(getByText('⟨TODO_PANDIT: line_1⟩')).toBeTruthy();
     expect(getByText('line two')).toBeTruthy();
@@ -187,5 +187,83 @@ describe('MantraText', () => {
     );
 
     expect(queryByText('line one')).toBeNull();
+  });
+});
+
+describe('Dynamic Type (§10 Phase 1: up to 130%)', () => {
+  const styleOf = (node: { props: { style?: unknown } }): TextStyle =>
+    StyleSheet.flatten(node.props.style as TextStyle);
+
+  it('lays text out at the token metrics when nothing is scaling', async () => {
+    const { getByText } = await render(
+      <FontScaleProvider scale={1}>
+        <Txt variant="screenTitle">Today</Txt>
+      </FontScaleProvider>,
+    );
+    const style = styleOf(getByText('Today'));
+
+    expect(style.fontSize).toBe(textStyles.screenTitle.fontSize);
+    expect(style.lineHeight).toBe(textStyles.screenTitle.lineHeight);
+  });
+
+  it('follows the OS text size when no override is set', async () => {
+    // The device is the default source; the override exists for the screenshot
+    // harness on web, where there is no OS setting to read.
+    const osScale = clampFontScale(Dimensions.get('window').fontScale);
+    const { getByText } = await render(<Txt variant="screenTitle">Today</Txt>);
+
+    expect(styleOf(getByText('Today')).fontSize).toBeCloseTo(
+      textStyles.screenTitle.fontSize * osScale,
+      1,
+    );
+  });
+
+  it('moves fontSize and lineHeight together at 130%', async () => {
+    const { getByText } = await render(
+      <FontScaleProvider scale={1.3}>
+        <Txt variant="screenTitle">Today</Txt>
+      </FontScaleProvider>,
+    );
+    const style = styleOf(getByText('Today'));
+
+    expect(style.fontSize).toBeCloseTo(textStyles.screenTitle.fontSize * 1.3, 1);
+    expect(style.lineHeight).toBeCloseTo(textStyles.screenTitle.lineHeight * 1.3, 1);
+  });
+
+  it("turns RN's own scaling off, so the OS cannot scale the size a second time", async () => {
+    const { getByText } = await render(<Txt>Today</Txt>);
+    expect(getByText('Today').props.allowFontScaling).toBe(false);
+  });
+
+  it('clamps past the ceiling the layouts are proven at', async () => {
+    const { getByText } = await render(
+      <FontScaleProvider scale={3}>
+        <Txt variant="body">Today</Txt>
+      </FontScaleProvider>,
+    );
+
+    expect(styleOf(getByText('Today')).fontSize).toBeCloseTo(textStyles.body.fontSize * 1.3, 1);
+  });
+
+  it('scales mantra lines too, keeping the svara headroom §7.3 requires', async () => {
+    const lines = [{ id: 'l1', text: '⟨TODO_PANDIT: line_1⟩' }];
+    const { getByText } = await render(
+      <FontScaleProvider scale={1.3}>
+        <MantraText lines={lines} activeIndex={0} script="te" />
+      </FontScaleProvider>,
+    );
+    const style = styleOf(getByText('⟨TODO_PANDIT: line_1⟩'));
+
+    expect(style.fontSize).toBeCloseTo(textStyles.mantraTelugu.fontSize * 1.3, 1);
+    expect(style.lineHeight! / style.fontSize!).toBeGreaterThanOrEqual(1.55);
+  });
+
+  it('keeps the per-script mantra face', async () => {
+    const lines = [{ id: 'l1', text: '⟨TODO_PANDIT: line_1⟩' }];
+    const { getByText } = await render(<MantraText lines={lines} activeIndex={0} script="dev" />);
+
+    expect(styleOf(getByText('⟨TODO_PANDIT: line_1⟩')).fontFamily).toBe(
+      fontFamily.mantraDevanagari,
+    );
   });
 });

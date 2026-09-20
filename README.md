@@ -16,7 +16,7 @@ of rules you must not break while working in this repo.
 | Phase | Scope                                                  | State                                   |
 | ----- | ------------------------------------------------------ | --------------------------------------- |
 | 0     | Foundations: monorepo, Expo app shell, CI, audio spike | **built — spike awaiting a device run** |
-| 1     | Design system & static screens                         | not started                             |
+| 1     | Design system & static screens                         | **built — awaiting `ui-reference.png`** |
 | 2     | Panchangam engine                                      | **built — 17/60 fixtures verified**     |
 | 3–10  | see `implementation.md` §10                            | not started                             |
 
@@ -32,7 +32,7 @@ packages/
   config/         shared tsconfig / ESLint / Prettier presets
 content/          ritual content as data (enums, pujas, samagri, audio manifest)
 supabase/         migrations, edge functions (Phase 8)
-tools/            content build, cue tapper, panchangam fixtures
+tools/            content build, cue tapper, panchangam fixtures, screenshots
 docs/adr/         architecture decision records
 ```
 
@@ -53,6 +53,15 @@ pnpm --filter @epooja/mobile android
 
 # Subsequent runs (Metro only, against the dev client you already installed):
 pnpm --filter @epooja/mobile start
+```
+
+The design system can also be rendered in a browser, which is how the Phase 1
+acceptance screenshots in `docs/screens/p1/` are produced. Web is not a
+shipping target (§2) — it exists for this:
+
+```bash
+pnpm --filter @epooja/mobile exec expo start --web   # in one shell
+pnpm screens:capture                                 # in another
 ```
 
 EAS builds (`development`, `preview`, `production` profiles are in

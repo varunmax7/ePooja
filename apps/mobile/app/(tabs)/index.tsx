@@ -5,6 +5,7 @@ import {
   AngaBadge,
   Button,
   Card,
+  CURVE_OVERHANG,
   CurvedHeader,
   DateDial,
   SunTimesCard,
@@ -35,14 +36,28 @@ export default function TodayScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ paddingBottom: spacing[8] }}
     >
-      <CurvedHeader title="Vedic Calendar – Today" subtitle={today.place} tone="maroon" height={150} />
+      <CurvedHeader
+        title="Vedic Calendar – Today"
+        subtitle={today.place}
+        tone="maroon"
+        height={150}
+      />
 
-      <View style={{ paddingHorizontal: spacing[5], marginTop: -spacing[5], gap: spacing[5] }}>
+      {/* The header's curve bulges CURVE_OVERHANG past its box; the anga labels
+          sit right under it, so start below the deepest point. */}
+      <View style={{ paddingHorizontal: spacing[5], marginTop: CURVE_OVERHANG, gap: spacing[5] }}>
         {/* Dial with an anga badge at each corner (§8.2). */}
         <View style={{ alignItems: 'center', gap: spacing[4] }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}
+          >
             <AngaBadge kind="tithi" label={tithi.label} value={tithi.value} />
-            <AngaBadge kind="nakshatra" label={nakshatra.label} value={nakshatra.value} align="right" />
+            <AngaBadge
+              kind="nakshatra"
+              label={nakshatra.label}
+              value={nakshatra.value}
+              align="right"
+            />
           </View>
 
           <DateDial
@@ -56,7 +71,9 @@ export default function TodayScreen() {
             accessibilityLabel={`${today.date.weekday} ${today.date.day} ${today.date.month} ${today.date.year}. Tap for the full panchangam.`}
           />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}
+          >
             <AngaBadge kind="ritu" label={ritu.label} value={ritu.value} />
             <AngaBadge kind="masa" label={masa.label} value={masa.value} align="right" />
           </View>

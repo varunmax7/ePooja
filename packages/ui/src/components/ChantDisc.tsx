@@ -21,9 +21,11 @@ export interface ChantDiscProps {
 }
 
 const BAR_COUNT = 28;
-const DEFAULT_PEAKS = Array.from({ length: BAR_COUNT }, (_, i) =>
-  // A calm, chant-like envelope rather than random noise.
-  0.35 + 0.45 * Math.abs(Math.sin((i / BAR_COUNT) * Math.PI * 3)),
+const DEFAULT_PEAKS = Array.from(
+  { length: BAR_COUNT },
+  (_, i) =>
+    // A calm, chant-like envelope rather than random noise.
+    0.35 + 0.45 * Math.abs(Math.sin((i / BAR_COUNT) * Math.PI * 3)),
 );
 
 /**

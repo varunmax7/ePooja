@@ -31,11 +31,7 @@ export default function RecipeScreen() {
           justifyContent: 'center',
         }}
       >
-        <MaterialCommunityIcons
-          name="bowl-mix"
-          size={56}
-          color={colors.maroon['700'] as string}
-        />
+        <MaterialCommunityIcons name="bowl-mix" size={56} color={colors.maroon['700'] as string} />
         <Txt variant="fieldLabel" tone="inkMuted">
           PHOTO PENDING
         </Txt>
@@ -51,7 +47,9 @@ export default function RecipeScreen() {
       </View>
 
       <Card tone="cream" padding={4}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <View
+          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+        >
           <Txt variant="cardTitle" tone="ink">
             Servings
           </Txt>
@@ -109,7 +107,10 @@ export default function RecipeScreen() {
         </Txt>
         <View style={{ height: spacing[2] }} />
         {recipe.steps.map((step, index) => (
-          <View key={step} style={{ flexDirection: 'row', gap: spacing[3], paddingVertical: spacing[2] }}>
+          <View
+            key={step}
+            style={{ flexDirection: 'row', gap: spacing[3], paddingVertical: spacing[2] }}
+          >
             <Txt variant="cardTitle" tone="gold">
               {index + 1}
             </Txt>

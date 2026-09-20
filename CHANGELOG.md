@@ -69,6 +69,92 @@ fields and the empty gotra list — all itemised in `content/REVIEW_QUEUE.md`.
 Two engine conventions also need a pandit's word: the adhika-Chaitra year start
 and the prayer-timing windows.
 
+## [Phase 1] — Design system & static screens — 2026-09-21
+
+### Built
+
+- **`@epooja/ui`** — the §7 design system, framework-free tokens plus the §7.4
+  primitives:
+  - `tokens.ts` / `tokens.json` (§7.2 palette, spacing, radius, shadow) and the
+    §7.3 type scale, both readable by Skia, the NativeWind theme and tests.
+  - 20 components: `Txt`, `Card`, `Button`, `FieldCard`, `AvatarRing`,
+    `FamilyChip`, `CheckRow`, `TimingRow`, `SunTimesCard`, `AngaBadge`,
+    `CurvedHeader`, `DateDial`, `ChantDisc`, `StepProgress`, `MantraText`,
+    `TransportControls`, `ModeToggle`, `RecipePreviewCard`, `ProgressPill`,
+    `FontScaleProvider`.
+  - `DateDial`, `ChantDisc`, `CurvedHeader` and the play coin are Skia
+    drawings; the dial and disc animate through Reanimated on the UI thread.
+- **Dynamic Type** — `fontScale.ts` + `FontScaleProvider`. React Native scales
+  `fontSize` by the OS text size and leaves `lineHeight` alone, which overlaps
+  lines and clips the svara marks §7.3 sets the 1.6 line-height to protect. So
+  `Txt` sets `allowFontScaling={false}` and scales the whole token itself,
+  clamped to the 0.85–1.3 range the layouts are proven at.
+- **Static screens** — Today, My Profile, Pooja Preparation and Chant Player
+  from the mockup, plus the tab bar, Poojas list, Pooja detail, Recipe and the
+  Vedic Calendar. All eight render from `apps/mobile/src/mocks/*.json`, shaped
+  to match what the Phase 2 engine already returns.
+- **`/_dev/components`** — the Storybook-lite route: palette, gradients, the
+  type scale and every primitive in its states. `/_dev/svara` carries the
+  svara-rendering spike.
+- **Fonts** — the §7.3 faces (Mukta, Noto Sans Telugu, Tiro Telugu, Tiro
+  Devanagari Sanskrit) loaded at the root, splash held until they are ready so
+  no Telugu line ever flashes a fallback face.
+- **`tools/screens`** — the screenshot harness: a dependency-free CDP client
+  driving headless Chrome, and a tested manifest of screens × widths × type
+  scales. `pnpm screens:capture`.
+- **Tests** — 32 in `@epooja/ui` (tokens, type scale, font scaling), 24 under
+  jest-expo (component behaviour, accessibility roles, Dynamic Type), 6 on the
+  capture plan.
+
+### Gate
+
+`docs/screens/p1/` — 31 screenshots: nine screens at 360×640, 390×844 and
+430×932, and the four reference screens again at 130% Dynamic Type.
+`docs/screens/p1/README.md` records how to regenerate them.
+
+### Layout bugs the gate caught
+
+The 130% and 360 px passes were not a formality — five defects, all fixed:
+
+- `AngaBadge` did not shrink (RN defaults `flexShrink` to 0), so the nakshatram
+  and masam badges were clipped off the right edge at 360 px and badly at 130%.
+- Today pulled its first row up into `CurvedHeader`'s bottom bulge, which is
+  painted by an absolutely-positioned canvas and takes no part in layout. The
+  overhang is now exported as `CURVE_OVERHANG`.
+- The Chant Player's action prompt floats over the scroller, which reserved no
+  room for it — the transport controls could not be scrolled clear of it, so
+  Pause was unreachable. The prompt is measured and its height added to the
+  scroll padding.
+- The play coin cast a square shadow: a Skia disc in a square `Pressable`
+  carrying the elevation with no matching `borderRadius`.
+- The calendar's last week had four cells in a seven-column grid, so 27–30
+  spread evenly across the card instead of sitting under S–W.
+
+### Not met
+
+- **No side-by-side against `ui-reference.png`.** The mockup still has not been
+  supplied (Phase 0 raised this; `docs/reference/README.md` tracks it), so the
+  "same structure, palette, hierarchy" half of the §10 acceptance cannot be
+  judged. The screenshots are ready for the comparison whenever it arrives.
+- **60 fps on a mid-range Android is unverified** — no Android SDK or device on
+  this machine, and a browser frame rate proves nothing about one. Re-check in
+  Phase 3, when the app first runs on hardware.
+- The screenshots are react-native-web through CanvasKit, not a device. Layout
+  is Yoga either way, so overflow is real; rasterisation is not.
+
+### Deviations
+
+- Light theme only, as §10 Phase 1 specifies.
+- `mantraStyleFor` gained a sibling, `mantraVariantFor`, and `MantraText` now
+  asks for a style _name_ rather than passing a style object — a hand-passed
+  style silently overwrote the Dynamic Type metrics.
+
+### New `TODO_PANDIT` items
+
+None authored in this phase. Every ritual string on these screens is an
+existing `⟨TODO_PANDIT: …⟩` placeholder or a `PENDING_PANDIT_REVIEW` enum
+value, already itemised in `content/REVIEW_QUEUE.md`.
+
 ## [Phase 0] — Foundations — 2026-09-19
 
 ### Built

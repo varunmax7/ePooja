@@ -37,6 +37,11 @@ export default function PlayerScreen() {
   const [playing, setPlaying] = useState(false);
   const [mode, setMode] = useState<PlayerMode>(player.mode as PlayerMode);
   const [promptVisible, setPromptVisible] = useState(true);
+  // The prompt floats over the scroller, and it grows with the length of the
+  // instruction and with Dynamic Type. Measure it so the transport controls
+  // can always be scrolled clear of it — a devotee must never be unable to
+  // reach Pause because the app is telling them what to do with their hands.
+  const [promptHeight, setPromptHeight] = useState(0);
 
   const showPrompt = mode === 'guided' && promptVisible;
 
@@ -86,7 +91,7 @@ export default function PlayerScreen() {
         contentContainerStyle={{
           alignItems: 'center',
           paddingHorizontal: spacing[5],
-          paddingBottom: spacing[7],
+          paddingBottom: spacing[7] + (showPrompt ? promptHeight + spacing[4] : 0),
           gap: spacing[5],
         }}
       >
@@ -126,6 +131,9 @@ export default function PlayerScreen() {
             left: spacing[5],
             right: spacing[5],
             bottom: Math.max(insets.bottom, spacing[5]),
+          }}
+          onLayout={(event) => {
+            setPromptHeight(event.nativeEvent.layout.height);
           }}
         >
           <View

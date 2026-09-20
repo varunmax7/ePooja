@@ -1,6 +1,6 @@
 import { View } from 'react-native';
-import { colors, spacing } from '../tokens';
-import { mantraStyleFor, textStyles, type MantraScript } from '../typography';
+import { spacing } from '../tokens';
+import { mantraVariantFor, type MantraScript } from '../typography';
 import { Txt } from './Txt';
 
 export interface MantraLineView {
@@ -34,7 +34,7 @@ export function MantraText({
   showTransliteration = true,
   showMeaning = false,
 }: MantraTextProps) {
-  const mantraStyle = mantraStyleFor(script);
+  const mantraVariant = mantraVariantFor(script);
 
   return (
     <View style={{ gap: spacing[3], alignSelf: 'stretch' }}>
@@ -42,20 +42,12 @@ export function MantraText({
         const active = index === activeIndex;
         return (
           <View key={line.id} style={{ opacity: active ? 1 : 0.45, gap: spacing[1] }}>
-            <Txt
-              variant="mantraTelugu"
-              tone={active ? 'maroon' : 'inkMuted'}
-              align="center"
-              style={[
-                mantraStyle,
-                { color: active ? colors.maroon['800'] : colors.ink['500'] },
-              ]}
-            >
+            <Txt variant={mantraVariant} tone={active ? 'maroon' : 'inkMuted'} align="center">
               {line.text}
             </Txt>
 
             {showTransliteration && line.transliteration ? (
-              <Txt variant="transliteration" tone="inkMuted" align="center" style={textStyles.transliteration}>
+              <Txt variant="transliteration" tone="inkMuted" align="center">
                 {line.transliteration}
               </Txt>
             ) : null}

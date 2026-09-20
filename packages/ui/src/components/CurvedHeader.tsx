@@ -6,6 +6,16 @@ import { Txt } from './Txt';
 
 export type HeaderTone = 'maroon' | 'saffron';
 
+/**
+ * How far the convex bottom edge bulges past the header's layout box, at its
+ * deepest point in the middle.
+ *
+ * The band is painted by an absolutely-positioned canvas, so it does not take
+ * part in layout: a screen that wants its first row to clear the curve has to
+ * leave this much room for it. Exported so no screen has to guess.
+ */
+export const CURVE_OVERHANG = 34;
+
 export interface CurvedHeaderProps {
   title: string;
   subtitle?: string;
@@ -34,7 +44,7 @@ export function CurvedHeader({
   action,
 }: CurvedHeaderProps) {
   const { width } = useWindowDimensions();
-  const curve = 34;
+  const curve = CURVE_OVERHANG;
 
   // Band with a convex bottom edge: down both sides, then a quadratic bulge.
   const path = Skia.Path.Make();

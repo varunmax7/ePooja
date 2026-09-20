@@ -1,0 +1,21 @@
+{
+  "name": "@epooja/screens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Captures the Phase 1 acceptance screenshots of the design system (docs/screens/p1)",
+  "type": "module",
+  "scripts": {
+    "capture": "tsx src/capture.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@epooja/config": "workspace:*",
+    "@types/node": "^26.0.0",
+    "eslint": "^9.39.5",
+    "tsx": "^4.20.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.0"
+  }
+}

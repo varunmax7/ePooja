@@ -24,18 +24,32 @@ const ICONS: Record<AngaBadgeKind, keyof typeof MaterialCommunityIcons.glyphMap>
 /**
  * §7.4 `AngaBadge`: a gold circular icon with a two-line label, placed at the
  * four corners around the date dial (§8.2).
+ *
+ * Two of these share a row, and the values are pandit-supplied Telugu of
+ * unknown length that grows again under Dynamic Type — so the badge shrinks
+ * (RN defaults `flexShrink` to 0, which is what pushes the far badge off the
+ * screen at 360 px) and the text truncates rather than the row overflowing.
  */
 export function AngaBadge({ kind, label, value, align = 'left' }: AngaBadgeProps) {
   const rowDirection = align === 'right' ? 'row-reverse' : 'row';
 
   return (
-    <View style={{ flexDirection: rowDirection, alignItems: 'center', gap: spacing[2] }}>
+    <View
+      style={{
+        flexDirection: rowDirection,
+        alignItems: 'center',
+        gap: spacing[2],
+        flexShrink: 1,
+        minWidth: 0,
+      }}
+    >
       <View
         style={[
           {
             width: 36,
             height: 36,
             borderRadius: 18,
+            flexShrink: 0,
             backgroundColor: colors.gold['200'],
             borderWidth: 1,
             borderColor: colors.gold['400'],
@@ -52,8 +66,14 @@ export function AngaBadge({ kind, label, value, align = 'left' }: AngaBadgeProps
         />
       </View>
 
-      <View style={{ alignItems: align === 'right' ? 'flex-end' : 'flex-start' }}>
-        <Txt variant="fieldLabel" tone="inkMuted">
+      <View
+        style={{
+          alignItems: align === 'right' ? 'flex-end' : 'flex-start',
+          flexShrink: 1,
+          minWidth: 0,
+        }}
+      >
+        <Txt variant="fieldLabel" tone="inkMuted" numberOfLines={1}>
           {label}
         </Txt>
         <Txt variant="teluguLabel" tone="maroon" numberOfLines={1}>

@@ -49,7 +49,10 @@ export default function ComponentGallery() {
       <Section title="Palette (§7.2)">
         <View style={{ gap: spacing[2] }}>
           {(['maroon', 'saffron', 'gold', 'cream', 'ink'] as const).map((family) => (
-            <View key={family} style={{ flexDirection: 'row', gap: spacing[1], alignItems: 'center' }}>
+            <View
+              key={family}
+              style={{ flexDirection: 'row', gap: spacing[1], alignItems: 'center' }}
+            >
               <Txt variant="fieldLabel" tone="inkMuted" style={{ width: 64 }}>
                 {family}
               </Txt>
@@ -74,11 +77,22 @@ export default function ComponentGallery() {
       <Section title="Gradients">
         <View style={{ gap: spacing[2] }}>
           {Object.entries(gradients).map(([name, stops]) => (
-            <View key={name} style={{ flexDirection: 'row', alignItems: 'center', gap: spacing[3] }}>
+            <View
+              key={name}
+              style={{ flexDirection: 'row', alignItems: 'center', gap: spacing[3] }}
+            >
               <Txt variant="fieldLabel" tone="inkMuted" style={{ width: 100 }}>
                 {name}
               </Txt>
-              <View style={{ flex: 1, flexDirection: 'row', height: 28, borderRadius: radius.sm, overflow: 'hidden' }}>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  height: 28,
+                  borderRadius: radius.sm,
+                  overflow: 'hidden',
+                }}
+              >
                 {stops.map((stop) => (
                   <View key={stop} style={{ flex: 1, backgroundColor: stop }} />
                 ))}
@@ -91,7 +105,10 @@ export default function ComponentGallery() {
       <Section title="Type scale (§7.3)">
         <View style={{ gap: spacing[2] }}>
           {(Object.keys(textStyles) as TextStyleName[]).map((name) => (
-            <View key={name} style={{ flexDirection: 'row', alignItems: 'baseline', gap: spacing[3] }}>
+            <View
+              key={name}
+              style={{ flexDirection: 'row', alignItems: 'baseline', gap: spacing[3] }}
+            >
               <Txt variant="fieldLabel" tone="inkMuted" style={{ width: 130 }}>
                 {name}
               </Txt>
@@ -114,7 +131,12 @@ export default function ComponentGallery() {
 
       <Section title="FieldCard · AvatarRing · FamilyChip">
         <View style={{ gap: spacing[3] }}>
-          <FieldCard label="Birth Star" value={today.angas.nakshatra.value} valueScript="telugu" secondary="Mula · pada 2" />
+          <FieldCard
+            label="Birth Star"
+            value={today.angas.nakshatra.value}
+            valueScript="telugu"
+            secondary="Mula · pada 2"
+          />
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing[5] }}>
             <AvatarRing initials="RV" onEdit={() => undefined} />
             <FamilyChip name="Spouse" />
@@ -125,11 +147,27 @@ export default function ComponentGallery() {
 
       <Section title="DateDial + AngaBadge (§8.2)">
         <View style={{ alignItems: 'center', gap: spacing[4] }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}>
-            <AngaBadge kind="tithi" label={today.angas.tithi.label} value={today.angas.tithi.value} />
-            <AngaBadge kind="nakshatra" label={today.angas.nakshatra.label} value={today.angas.nakshatra.value} align="right" />
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}
+          >
+            <AngaBadge
+              kind="tithi"
+              label={today.angas.tithi.label}
+              value={today.angas.tithi.value}
+            />
+            <AngaBadge
+              kind="nakshatra"
+              label={today.angas.nakshatra.label}
+              value={today.angas.nakshatra.value}
+              align="right"
+            />
           </View>
-          <DateDial weekday={today.date.weekday} day={today.date.day} month={today.date.month} year={today.date.year} />
+          <DateDial
+            weekday={today.date.weekday}
+            day={today.date.day}
+            month={today.date.month}
+            year={today.date.year}
+          />
         </View>
       </Section>
 
@@ -137,7 +175,12 @@ export default function ComponentGallery() {
         <View style={{ gap: spacing[3] }}>
           <SunTimesCard {...today.sun} />
           <Card tone="cream" padding={4}>
-            <TimingRow label="Morning" range="06:04 – 08:30" reminderOn onToggleReminder={() => undefined} />
+            <TimingRow
+              label="Morning"
+              range="06:04 – 08:30"
+              reminderOn
+              onToggleReminder={() => undefined}
+            />
             <TimingRow label="Rahu kalam" range="09:07 – 10:38" caution last />
           </Card>
         </View>
@@ -154,18 +197,32 @@ export default function ComponentGallery() {
             }}
             icon="rice"
           />
-          <CheckRow label="Kalasham with water" checked={false} onToggle={() => undefined} icon="cup-water" />
+          <CheckRow
+            label="Kalasham with water"
+            checked={false}
+            onToggle={() => undefined}
+            icon="cup-water"
+          />
         </Card>
       </Section>
 
       <Section title="RecipePreviewCard">
-        <RecipePreviewCard eyebrow="Offerings Recipe Preview:" title="Pulihora" buttonLabel="View Recipe" />
+        <RecipePreviewCard
+          eyebrow="Offerings Recipe Preview:"
+          title="Pulihora"
+          buttonLabel="View Recipe"
+        />
       </Section>
 
       <Section title="ChantDisc · TransportControls · StepProgress · ModeToggle (§8.6)">
         <View style={{ alignItems: 'center', gap: spacing[4] }}>
           <ChantDisc playing={playing} size={180} />
-          <StepProgress caption="Step 4 of 14: Kalasha Puja" progress={0.42} elapsed="1:12" remaining="-1:38" />
+          <StepProgress
+            caption="Step 4 of 14: Kalasha Puja"
+            progress={0.42}
+            elapsed="1:12"
+            remaining="-1:38"
+          />
           <TransportControls
             playing={playing}
             onPlayPause={() => {
@@ -175,7 +232,12 @@ export default function ComponentGallery() {
             onNext={() => undefined}
             labels={player.transport}
           />
-          <ModeToggle mode={mode} chantLabel="Chant Mode" guidedLabel="Guided Narration" onChange={setMode} />
+          <ModeToggle
+            mode={mode}
+            chantLabel="Chant Mode"
+            guidedLabel="Guided Narration"
+            onChange={setMode}
+          />
         </View>
       </Section>
 

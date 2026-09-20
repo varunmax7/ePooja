@@ -63,9 +63,20 @@ export type TextStyleName = keyof typeof textStyles;
 /** Mantra script the devotee reads (§2, settings). */
 export type MantraScript = 'te' | 'dev' | 'iast';
 
+/**
+ * The named style a mantra line uses in a given script.
+ *
+ * Components ask for the *name*, not the token: `Txt` looks the token up and
+ * applies Dynamic Type to it, and a style passed in by hand would overwrite
+ * the scaled metrics with the unscaled ones.
+ */
+export function mantraVariantFor(script: MantraScript): TextStyleName {
+  if (script === 'dev') return 'mantraDevanagari';
+  if (script === 'iast') return 'transliteration';
+  return 'mantraTelugu';
+}
+
 /** The text style a mantra line uses in a given script. */
 export function mantraStyleFor(script: MantraScript): TextStyleToken {
-  if (script === 'dev') return textStyles.mantraDevanagari;
-  if (script === 'iast') return textStyles.transliteration;
-  return textStyles.mantraTelugu;
+  return textStyles[mantraVariantFor(script)];
 }

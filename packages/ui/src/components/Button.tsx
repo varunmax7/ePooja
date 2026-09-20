@@ -77,7 +77,10 @@ export function Button({
             color={(tone === 'maroon' ? colors.cream['100'] : colors.maroon['900']) as string}
           />
         ) : null}
-        <Txt variant={size === 'lg' ? 'cardTitle' : 'label'} tone={tone === 'maroon' ? 'cream' : 'maroon'}>
+        <Txt
+          variant={size === 'lg' ? 'cardTitle' : 'label'}
+          tone={tone === 'maroon' ? 'cream' : 'maroon'}
+        >
           {label}
         </Txt>
       </View>

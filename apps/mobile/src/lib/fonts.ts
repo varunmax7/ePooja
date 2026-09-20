@@ -1,8 +1,4 @@
-import {
-  Mukta_400Regular,
-  Mukta_500Medium,
-  Mukta_600SemiBold,
-} from '@expo-google-fonts/mukta';
+import { Mukta_400Regular, Mukta_500Medium, Mukta_600SemiBold } from '@expo-google-fonts/mukta';
 import {
   NotoSansTelugu_400Regular,
   NotoSansTelugu_500Medium,

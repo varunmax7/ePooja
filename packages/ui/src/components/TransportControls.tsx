@@ -46,7 +46,14 @@ export function TransportControls({
         accessibilityLabel={playing ? labels.pause : labels.play}
         onPress={onPlayPause}
         style={({ pressed }) => [
-          { width: COIN, height: COIN, opacity: pressed ? 0.9 : 1 },
+          {
+            width: COIN,
+            height: COIN,
+            // The coin is drawn by Skia inside this box; without the matching
+            // radius the shadow is cast by the square box instead of the disc.
+            borderRadius: COIN / 2,
+            opacity: pressed ? 0.9 : 1,
+          },
           elevation(shadow.raised),
         ]}
       >

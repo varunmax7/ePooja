@@ -46,8 +46,16 @@ export const radius: { readonly [k in 'sm' | 'md' | 'lg' | 'xl' | 'pill']: numbe
  * `noUncheckedIndexedAccess`.
  */
 export type SpacingScale = readonly [
-  number, number, number, number, number,
-  number, number, number, number, number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
 ];
 
 export const spacing = raw.spacing as unknown as SpacingScale;

@@ -11,9 +11,21 @@ import prepare from '@/mocks/prepare.json';
  * overview accordion, and Prepare / Start.
  */
 const SECTIONS = [
-  { id: 'poorvangam', title: 'Poorvangam', steps: ['Achamanam', 'Pranayamam', 'Sankalpam', 'Kalasha Puja'] },
-  { id: 'pradhana', title: 'Pradhana Puja', steps: ['Dhyanam', 'Avahanam', 'Shodashopachara', 'Ashtottaram'] },
-  { id: 'uttarangam', title: 'Uttarangam', steps: ['Naivedyam', 'Harathi', 'Pradakshina', 'Kshamapana'] },
+  {
+    id: 'poorvangam',
+    title: 'Poorvangam',
+    steps: ['Achamanam', 'Pranayamam', 'Sankalpam', 'Kalasha Puja'],
+  },
+  {
+    id: 'pradhana',
+    title: 'Pradhana Puja',
+    steps: ['Dhyanam', 'Avahanam', 'Shodashopachara', 'Ashtottaram'],
+  },
+  {
+    id: 'uttarangam',
+    title: 'Uttarangam',
+    steps: ['Naivedyam', 'Harathi', 'Pradakshina', 'Kshamapana'],
+  },
 ];
 
 export default function PoojaDetailScreen() {
@@ -53,7 +65,9 @@ export default function PoojaDetailScreen() {
               key={key}
               accessibilityRole="radio"
               accessibilityState={{ selected: variant === key }}
-              accessibilityLabel={key === 'short' ? 'Short, about 15 minutes' : 'Full, about 45 minutes'}
+              accessibilityLabel={
+                key === 'short' ? 'Short, about 15 minutes' : 'Full, about 45 minutes'
+              }
               onPress={() => {
                 setVariant(key);
               }}
@@ -93,7 +107,11 @@ export default function PoojaDetailScreen() {
               onPress={() => {
                 setOpen((current) => (current === section.id ? null : section.id));
               }}
-              style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
             >
               <Txt variant="cardTitle" tone="ink">
                 {section.title}

@@ -1,0 +1,8 @@
+{
+  "extends": "@epooja/config/tsconfig/library.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "lib": ["ES2023", "DOM"]
+  },
+  "include": ["src/**/*", "*.mjs"]
+}
