@@ -66,6 +66,16 @@ export default function RootLayout() {
                 name="player/[slug]"
                 options={{ headerShown: false, presentation: 'fullScreenModal' }}
               />
+              <Stack.Screen
+                name="panchangam/[date]"
+                options={{ headerShown: false, presentation: 'modal' }}
+              />
+              <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
+              <Stack.Screen
+                name="profile/edit"
+                options={{ headerShown: false, presentation: 'modal' }}
+              />
+              <Stack.Screen name="profile/family/index" options={{ title: 'Family Members' }} />
               <Stack.Screen name="_dev/components" options={{ title: 'Components' }} />
               <Stack.Screen name="_dev/svara" options={{ title: 'Svara spike' }} />
               <Stack.Screen name="_dev/audio-spike" options={{ title: 'Audio spike' }} />

@@ -2,7 +2,9 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import {
+  enumDisplay,
   enumFileSchema,
+  enumValue,
   isFullyAuthored,
   isTodoPandit,
   parseEnumFile,
@@ -202,5 +204,38 @@ describe('isTodoPandit', () => {
   it('does not match ordinary content', () => {
     expect(isTodoPandit('రోహిణి')).toBe(false);
     expect(isTodoPandit('TODO_PANDIT')).toBe(false);
+  });
+});
+
+describe('enumValue / enumDisplay', () => {
+  const file = parseEnumFile({
+    kind: 'nakshatra',
+    review: { status: 'PENDING_PANDIT_REVIEW', reviewer: null, date: null },
+    values: [
+      {
+        id: 'rohini',
+        index: 1,
+        te: 'రోహిణి',
+        iast: 'rohiṇī',
+        dev: 'रोहिणी',
+        locative: { te: 'రోహిణీ నక్షత్రే', iast: 'rohiṇī nakṣatre' },
+        audioTokenId: 'enum.nakshatra.rohini',
+      },
+    ],
+  });
+
+  it('finds a value by id', () => {
+    expect(enumValue(file, 'rohini').te).toBe('రోహిణి');
+  });
+
+  it('throws rather than returning undefined for an id the content forgot', () => {
+    expect(() => enumValue(file, 'ashvini')).toThrow(/No nakshatra value/);
+  });
+
+  it('reads the form for each script', () => {
+    const value = enumValue(file, 'rohini');
+    expect(enumDisplay(value, 'te')).toBe('రోహిణి');
+    expect(enumDisplay(value, 'dev')).toBe('रोहिणी');
+    expect(enumDisplay(value, 'iast')).toBe('rohiṇī');
   });
 });

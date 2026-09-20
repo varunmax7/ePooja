@@ -41,26 +41,47 @@ export function gulikaKalam(sunrise: Date, sunset: Date, weekday: Weekday): Kala
 }
 
 /**
- * Prayer timings for the reminder schedule (§9.4 `prayerTimings`).
+ * Which fifth of daylight each prayer window occupies.
  *
  * Daylight is split into the five traditional parts (pratah, sangava,
  * madhyahna, aparahna, sayahna); the app surfaces the three a household puja
- * uses. ADR 0002 records this choice — §9.1 does not pin it down.
+ * uses. §8.2 puts the authoritative windows in `content/timings.json`, which
+ * is where the app reads them from — this default is the same choice, kept
+ * here so the engine stays usable on its own and cannot depend on content
+ * (§15). ADR 0002 records it; §9.1 does not pin it down.
  */
-export function prayerTimings(sunrise: Date, sunset: Date): PrayerTiming[] {
-  const fifth = (sunset.getTime() - sunrise.getTime()) / 5;
-  const part = (n: number): [string, string] => [
-    new Date(sunrise.getTime() + n * fifth).toISOString(),
-    new Date(sunrise.getTime() + (n + 1) * fifth).toISOString(),
-  ];
+export const DEFAULT_PRAYER_PARTS: Readonly<Record<PrayerTiming['id'], number>> = {
+  morning: 0,
+  midday: 2,
+  evening: 4,
+};
 
-  const [morningStart, morningEnd] = part(0);
-  const [middayStart, middayEnd] = part(2);
-  const [eveningStart, eveningEnd] = part(4);
+/** Total parts daylight is divided into for the prayer windows. */
+export const PRAYER_DAY_PARTS = 5;
 
-  return [
-    { id: 'morning', start: morningStart, end: morningEnd },
-    { id: 'midday', start: middayStart, end: middayEnd },
-    { id: 'evening', start: eveningStart, end: eveningEnd },
-  ];
+/**
+ * Prayer timings for the reminder schedule (§9.4 `prayerTimings`).
+ *
+ * `parts` maps each window to the fifth of daylight it starts at; the app
+ * passes the values from `content/timings.json` so a pandit can move a window
+ * without a release.
+ */
+export function prayerTimings(
+  sunrise: Date,
+  sunset: Date,
+  parts: Readonly<Record<PrayerTiming['id'], number>> = DEFAULT_PRAYER_PARTS,
+): PrayerTiming[] {
+  const span = (sunset.getTime() - sunrise.getTime()) / PRAYER_DAY_PARTS;
+
+  return (['morning', 'midday', 'evening'] as const).map((id) => {
+    const part = parts[id];
+    if (!Number.isInteger(part) || part < 0 || part >= PRAYER_DAY_PARTS) {
+      throw new RangeError(`${id} prayer window must be part 0–${PRAYER_DAY_PARTS - 1}, got ${part}`);
+    }
+    return {
+      id,
+      start: new Date(sunrise.getTime() + part * span).toISOString(),
+      end: new Date(sunrise.getTime() + (part + 1) * span).toISOString(),
+    };
+  });
 }

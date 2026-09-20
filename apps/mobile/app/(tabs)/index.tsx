@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { ScrollView, View } from 'react-native';
+import { Pressable, ScrollView, View } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import {
   AngaBadge,
@@ -11,24 +12,34 @@ import {
   SunTimesCard,
   TimingRow,
   Txt,
+  colors,
   spacing,
 } from '@epooja/ui';
+import { useDevoteeStore } from '@/stores/devotee';
+import { useTodayView } from '@/services/panchangam';
+import { formatCalendarDate } from '@/lib/dateFormat';
+import { shiftDate } from '@/stores/settings';
 import today from '@/mocks/today.json';
 
 /**
  * Today — "Vedic Calendar – Today" (§8.2, mockup screen 2).
  *
- * Phase 1 renders it from `src/mocks/today.json`; Phase 3 swaps that for a live
- * `getDayPanchangam()` call against the devotee's location. The shape of the
- * mock deliberately matches what the engine already returns.
+ * The panchangam, sun times and prayer schedule are live, from
+ * `useTodayView` (@epooja/panchangam over the devotee's stored location).
+ * "Today's Puja" still comes from the Phase 1 mock: puja content doesn't
+ * exist until Phase 4, and defaulting it to Nitya Puja here would be a
+ * decision this screen has no business making silently.
  */
 export default function TodayScreen() {
   const router = useRouter();
-  const [reminders, setReminders] = useState(() =>
-    Object.fromEntries(today.prayerTimings.map((t) => [t.id, t.reminderOn])),
-  );
+  const location = useDevoteeStore((s) => s.devotee?.location);
+  const prefs = useDevoteeStore((s) => s.devotee?.prefs);
+  const script = prefs?.mantraScript ?? 'te';
+  const uiLang = prefs?.uiLang ?? 'en';
 
-  const { tithi, nakshatra, ritu, masa } = today.angas;
+  const { view, date, goToDate, isLoading, isError } = useTodayView(script, uiLang);
+  const [reminders, setReminders] = useState<Record<string, boolean>>({});
+  const { weekday, day, month, year } = formatCalendarDate(date);
 
   return (
     <ScrollView
@@ -38,7 +49,7 @@ export default function TodayScreen() {
     >
       <CurvedHeader
         title="Vedic Calendar – Today"
-        subtitle={today.place}
+        subtitle={location?.label ?? 'Location not set'}
         tone="maroon"
         height={150}
       />
@@ -46,75 +57,136 @@ export default function TodayScreen() {
       {/* The header's curve bulges CURVE_OVERHANG past its box; the anga labels
           sit right under it, so start below the deepest point. */}
       <View style={{ paddingHorizontal: spacing[5], marginTop: CURVE_OVERHANG, gap: spacing[5] }}>
-        {/* Dial with an anga badge at each corner (§8.2). */}
-        <View style={{ alignItems: 'center', gap: spacing[4] }}>
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}
-          >
-            <AngaBadge kind="tithi" label={tithi.label} value={tithi.value} />
-            <AngaBadge
-              kind="nakshatra"
-              label={nakshatra.label}
-              value={nakshatra.value}
-              align="right"
+        {!location ? (
+          <Card tone="outlined" padding={5}>
+            <Txt variant="body" tone="inkMuted">
+              Set your location in Profile to see today&apos;s Panchangam.
+            </Txt>
+          </Card>
+        ) : null}
+
+        {isError ? (
+          <Card tone="outlined" padding={5}>
+            <Txt variant="body" tone="danger">
+              Could not compute today&apos;s Panchangam for this location.
+            </Txt>
+          </Card>
+        ) : null}
+
+        {location && view ? (
+          <>
+            {/* Dial with an anga badge at each corner (§8.2). */}
+            <View style={{ alignItems: 'center', gap: spacing[4] }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignSelf: 'stretch',
+                }}
+              >
+                <AngaBadge kind="tithi" label={view.tithi.label} value={view.tithi.value} />
+                <AngaBadge
+                  kind="nakshatra"
+                  label={view.nakshatra.label}
+                  value={view.nakshatra.value}
+                  align="right"
+                />
+              </View>
+
+              {/* Date swipe (§8.2): chevrons are the accessible affordance; the
+                  gesture is layered on in a later pass once puja-runner audio
+                  focus rules (Phase 6) settle how a swipe should behave mid-puja. */}
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing[3] }}>
+                <DaySwipeButton
+                  direction="previous"
+                  onPress={() => {
+                    goToDate(shiftDate(date, -1));
+                  }}
+                />
+                <DateDial
+                  weekday={weekday}
+                  day={day}
+                  month={month}
+                  year={year}
+                  onPress={() => {
+                    router.push(`/panchangam/${date}`);
+                  }}
+                  accessibilityLabel={`${weekday} ${month} ${day} ${year}. Tap for the full panchangam.`}
+                />
+                <DaySwipeButton
+                  direction="next"
+                  onPress={() => {
+                    goToDate(shiftDate(date, 1));
+                  }}
+                />
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  alignSelf: 'stretch',
+                }}
+              >
+                <AngaBadge kind="ritu" label={view.ritu.label} value={view.ritu.value} />
+                <AngaBadge
+                  kind="masa"
+                  label={view.masa.label}
+                  value={view.masa.value}
+                  align="right"
+                />
+              </View>
+            </View>
+
+            <SunTimesCard
+              sunriseLabel="Sunrise"
+              sunrise={view.sunrise}
+              sunsetLabel="Sunset"
+              sunset={view.sunset}
             />
-          </View>
 
-          <DateDial
-            weekday={today.date.weekday}
-            day={today.date.day}
-            month={today.date.month}
-            year={today.date.year}
-            onPress={() => {
-              router.push('/_dev/components');
-            }}
-            accessibilityLabel={`${today.date.weekday} ${today.date.day} ${today.date.month} ${today.date.year}. Tap for the full panchangam.`}
-          />
+            <Card tone="cream" padding={5}>
+              <Txt variant="sectionTitle" tone="ink">
+                Daily Prayer Timings
+              </Txt>
+              <View style={{ height: spacing[2] }} />
+              {view.prayerTimings.map((timing, index) => (
+                <TimingRow
+                  key={timing.id}
+                  label={timing.label}
+                  range={timing.range}
+                  reminderOn={reminders[timing.id] ?? false}
+                  onToggleReminder={() => {
+                    setReminders((prev) => ({ ...prev, [timing.id]: !prev[timing.id] }));
+                  }}
+                  last={index === view.prayerTimings.length - 1}
+                />
+              ))}
+            </Card>
 
-          <View
-            style={{ flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'stretch' }}
-          >
-            <AngaBadge kind="ritu" label={ritu.label} value={ritu.value} />
-            <AngaBadge kind="masa" label={masa.label} value={masa.value} align="right" />
-          </View>
-        </View>
+            <Card tone="cream" padding={5}>
+              <Txt variant="sectionTitle" tone="ink">
+                Inauspicious Timings
+              </Txt>
+              <View style={{ height: spacing[2] }} />
+              {view.inauspicious.map((timing, index) => (
+                <TimingRow
+                  key={timing.id}
+                  label={timing.label}
+                  range={timing.range}
+                  caution
+                  last={index === view.inauspicious.length - 1}
+                />
+              ))}
+            </Card>
+          </>
+        ) : null}
 
-        <SunTimesCard {...today.sun} />
-
-        <Card tone="cream" padding={5}>
-          <Txt variant="sectionTitle" tone="ink">
-            Daily Prayer Timings
+        {location && isLoading && !view ? (
+          <Txt variant="body" tone="inkMuted">
+            Computing today&apos;s Panchangam…
           </Txt>
-          <View style={{ height: spacing[2] }} />
-          {today.prayerTimings.map((timing, index) => (
-            <TimingRow
-              key={timing.id}
-              label={timing.label}
-              range={timing.range}
-              reminderOn={reminders[timing.id] ?? false}
-              onToggleReminder={() => {
-                setReminders((prev) => ({ ...prev, [timing.id]: !prev[timing.id] }));
-              }}
-              last={index === today.prayerTimings.length - 1}
-            />
-          ))}
-        </Card>
-
-        <Card tone="cream" padding={5}>
-          <Txt variant="sectionTitle" tone="ink">
-            Inauspicious Timings
-          </Txt>
-          <View style={{ height: spacing[2] }} />
-          {today.inauspicious.map((timing, index) => (
-            <TimingRow
-              key={timing.id}
-              label={timing.label}
-              range={timing.range}
-              caution
-              last={index === today.inauspicious.length - 1}
-            />
-          ))}
-        </Card>
+        ) : null}
 
         <Card tone="outlined" padding={5}>
           <Txt variant="fieldLabel" tone="inkMuted">
@@ -138,5 +210,28 @@ export default function TodayScreen() {
         </Card>
       </View>
     </ScrollView>
+  );
+}
+
+function DaySwipeButton({
+  direction,
+  onPress,
+}: {
+  direction: 'previous' | 'next';
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={direction === 'previous' ? 'Previous day' : 'Next day'}
+      hitSlop={12}
+      onPress={onPress}
+    >
+      <MaterialCommunityIcons
+        name={direction === 'previous' ? 'chevron-left' : 'chevron-right'}
+        size={32}
+        color={colors.maroon['700'] as string}
+      />
+    </Pressable>
   );
 }

@@ -41,6 +41,59 @@ export function rasiOf(siderealLongitude: number): number {
   return Math.floor(norm360(siderealLongitude) / RASI_ARC);
 }
 
+/** Rasi ids, Mesha first, in the order `content/enums/rasi.json` lists them. */
+export const RASI_IDS = [
+  'mesha',
+  'vrishabha',
+  'mithuna',
+  'karkataka',
+  'simha',
+  'kanya',
+  'tula',
+  'vrischika',
+  'dhanassu',
+  'makara',
+  'kumbha',
+  'meena',
+] as const;
+
+export type RasiId = (typeof RASI_IDS)[number];
+
+/** Padas per nakshatra, and per rasi: 108 padas over 27 nakshatras and 12 rasis. */
+const PADAS_PER_NAKSHATRA = 4;
+const PADAS_PER_RASI = 9;
+
+/**
+ * Janma rasi from janma nakshatram and padam.
+ *
+ * A rasi is 30° and a nakshatra 13°20′, so a rasi spans exactly 2¼
+ * nakshatras — nine padas. This is what the onboarding rasi field is
+ * auto-suggested from (§8.1): a devotee usually knows their nakshatram and
+ * padam, and the moon sign follows from them without an ephemeris.
+ *
+ * Returns a 1-based index into `RASI_IDS`. Throws rather than guessing on
+ * out-of-range input: a wrong rasi would be spoken aloud in the Sankalpam.
+ */
+export function rasiFromNakshatraPada(nakshatra: number, pada: number): number {
+  if (!Number.isInteger(nakshatra) || nakshatra < 1 || nakshatra > 27) {
+    throw new RangeError(`nakshatra must be 1–27, got ${nakshatra}`);
+  }
+  if (!Number.isInteger(pada) || pada < 1 || pada > PADAS_PER_NAKSHATRA) {
+    throw new RangeError(`pada must be 1–4, got ${pada}`);
+  }
+
+  const padaIndex = (nakshatra - 1) * PADAS_PER_NAKSHATRA + (pada - 1);
+  return Math.floor(padaIndex / PADAS_PER_RASI) + 1;
+}
+
+/** The same, as an id. */
+export function rasiIdFromNakshatraPada(nakshatra: number, pada: number): RasiId {
+  const id = RASI_IDS[rasiFromNakshatraPada(nakshatra, pada) - 1];
+  /* c8 ignore next -- rasiFromNakshatraPada already range-checks its inputs */
+  if (!id) throw new RangeError(`no rasi for nakshatra ${nakshatra} pada ${pada}`);
+  return id;
+}
+
 /**
  * Karana ids in the order §9.1 lays out: the seven movable karanas repeat
  * through half-tithis 1–56, bracketed by the four fixed ones.

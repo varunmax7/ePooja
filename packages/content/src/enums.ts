@@ -118,3 +118,25 @@ export function pendingFields(value: EnumValue): string[] {
 export function isFullyAuthored(file: EnumFile): boolean {
   return file.values.every((value) => pendingFields(value).length === 0);
 }
+
+/**
+ * Looks up one value by id in a parsed enum file.
+ *
+ * Throws rather than returning `undefined`: every id an enum lookup is asked
+ * for comes from the engine (§9.1), and `enum-alignment.test.ts` in
+ * `@epooja/panchangam` already guarantees the engine and the content files
+ * agree — so a miss here means the two have drifted apart, which is a defect
+ * worth failing loudly on, not a value worth silently blanking on screen.
+ */
+export function enumValue(file: EnumFile, id: string): EnumValue {
+  const value = file.values.find((v) => v.id === id);
+  if (!value) throw new Error(`No ${file.kind} value with id "${id}"`);
+  return value;
+}
+
+/** The display form of an enum value in a given script (§7.3 `MantraScript`). */
+export function enumDisplay(value: EnumValue, script: 'te' | 'dev' | 'iast'): string {
+  if (script === 'dev') return value.dev;
+  if (script === 'iast') return value.iast;
+  return value.te;
+}

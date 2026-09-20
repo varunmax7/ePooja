@@ -1,0 +1,39 @@
+{
+  "$schema": "./schemas/timings.schema.json",
+  "kind": "timings",
+  "note": "Daily prayer windows for the Today screen and the reminder schedule (§8.2). Daylight between sunrise and sunset is divided into five equal parts — the traditional pratah, sangava, madhyahna, aparahna and sayahna — and each window names the part it occupies. Moving a window is a content change, not a release: the engine takes these parts as an argument (ADR 0002).",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "reviewNote": "Two things need a pandit's word: that the three windows sit on parts 1, 3 and 5 of five, and the Sanskrit sandhya name for each. The Telugu day-part labels are everyday words, not ritual text, but are listed here for confirmation alongside everything else.",
+  "basis": "daylight-fifths",
+  "parts": 5,
+  "timings": [
+    {
+      "id": "morning",
+      "part": 0,
+      "en": "Morning",
+      "te": "ప్రాతఃకాలం",
+      "sandhya": "⟨TODO_PANDIT: sandhya_pratah⟩",
+      "audioTokenId": "enum.timing.morning"
+    },
+    {
+      "id": "midday",
+      "part": 2,
+      "en": "Midday",
+      "te": "మధ్యాహ్నం",
+      "sandhya": "⟨TODO_PANDIT: sandhya_madhyahnika⟩",
+      "audioTokenId": "enum.timing.midday"
+    },
+    {
+      "id": "evening",
+      "part": 4,
+      "en": "Evening",
+      "te": "సాయంకాలం",
+      "sandhya": "⟨TODO_PANDIT: sandhya_sayam⟩",
+      "audioTokenId": "enum.timing.evening"
+    }
+  ]
+}

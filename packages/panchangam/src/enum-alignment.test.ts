@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { KARANA_IDS } from './angas';
+import { KARANA_IDS, RASI_IDS } from './angas';
 import { MASA_IDS, RITU_IDS, SAMVATSARA_IDS } from './masa';
 import { VASARA_IDS } from './panchangam';
 import { NAKSHATRA_IDS, YOGA_IDS, tithiId } from './transitions';
@@ -32,6 +32,7 @@ describe('engine ids match content/enums', () => {
     ['masa', MASA_IDS],
     ['ruthu', RITU_IDS],
     ['vasara', VASARA_IDS],
+    ['rasi', RASI_IDS],
   ])('%s ids line up in the same order', (file, ids) => {
     expect(enumIds(file)).toEqual([...ids]);
   });

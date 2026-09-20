@@ -28,8 +28,12 @@ export {
   karanaAt,
   karanaFromHalfIndex,
   rasiOf,
+  rasiFromNakshatraPada,
+  rasiIdFromNakshatraPada,
   KARANA_IDS,
   MOVABLE_KARANAS,
+  RASI_IDS,
+  type RasiId,
 } from './angas';
 
 export {
@@ -50,6 +54,8 @@ export {
   yamagandam,
   gulikaKalam,
   prayerTimings,
+  DEFAULT_PRAYER_PARTS,
+  PRAYER_DAY_PARTS,
   RAHU_SEGMENTS,
   YAMA_SEGMENTS,
   GULIKA_SEGMENTS,

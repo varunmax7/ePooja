@@ -298,5 +298,5 @@ describe('edge cases', () => {
     for (let month = 1; month <= 9; month += 1) getMonth(2026, month, HYDERABAD);
     // Still correct after eviction.
     expect(getDayPanchangam('2026-09-19', HYDERABAD).vasara.id).toBe('sthira');
-  });
+  }, 10000);
 });

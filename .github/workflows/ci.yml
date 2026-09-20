@@ -67,7 +67,7 @@ jobs:
         run: pnpm --filter @epooja/mobile exec expo config --type public
 
       - name: Expo doctor
-        run: pnpm --filter @epooja/mobile exec expo-doctor
+        run: pnpm --filter @epooja/mobile exec npx expo-doctor
 
       - name: Bundle check (Metro export)
         run: pnpm --filter @epooja/mobile exec expo export --platform ios --output-dir /tmp/epooja-export

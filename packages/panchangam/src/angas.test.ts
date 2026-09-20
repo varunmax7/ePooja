@@ -9,6 +9,8 @@ import {
   nakshatraIndex,
   nakshatraPada,
   pakshaOf,
+  rasiFromNakshatraPada,
+  rasiIdFromNakshatraPada,
   rasiOf,
   tithiIndex,
   yogaIndex,
@@ -151,5 +153,56 @@ describe('karanaAt', () => {
   it('derives the half-index from the elongation', () => {
     const instant = new Date('2026-09-19T06:00:00Z');
     expect(karanaHalfIndex(instant)).toBe(Math.floor(moonSunElongation(instant) / 6));
+  });
+});
+
+describe('rasiFromNakshatraPada', () => {
+  it('puts the first nine padas in Mesha and the next nine in Vrishabha', () => {
+    // Ashvini 1–4, Bharani 1–4, Krittika 1 -> Mesha.
+    expect(rasiFromNakshatraPada(1, 1)).toBe(1);
+    expect(rasiFromNakshatraPada(2, 4)).toBe(1);
+    expect(rasiFromNakshatraPada(3, 1)).toBe(1);
+    // Krittika 2 starts Vrishabha.
+    expect(rasiFromNakshatraPada(3, 2)).toBe(2);
+  });
+
+  it('gives the §9.2 worked example: Rohini pada 3 is Vrishabha', () => {
+    expect(rasiIdFromNakshatraPada(4, 3)).toBe('vrishabha');
+  });
+
+  it('covers all 108 padas with twelve rasis of nine padas each', () => {
+    const counts = new Map<number, number>();
+    for (let nakshatra = 1; nakshatra <= 27; nakshatra += 1) {
+      for (let pada = 1; pada <= 4; pada += 1) {
+        const rasi = rasiFromNakshatraPada(nakshatra, pada);
+        counts.set(rasi, (counts.get(rasi) ?? 0) + 1);
+      }
+    }
+
+    expect([...counts.keys()].sort((a, b) => a - b)).toEqual([
+      1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    ]);
+    expect([...counts.values()].every((n) => n === 9)).toBe(true);
+  });
+
+  it('agrees with rasiOf on the sidereal longitude each pada starts at', () => {
+    const NAKSHATRA_ARC = 360 / 27;
+    for (let nakshatra = 1; nakshatra <= 27; nakshatra += 1) {
+      for (let pada = 1; pada <= 4; pada += 1) {
+        // A hair inside the pada, so a boundary rounds the same way in both.
+        const longitude =
+          (nakshatra - 1) * NAKSHATRA_ARC + (pada - 1) * (NAKSHATRA_ARC / 4) + 0.001;
+        expect(rasiFromNakshatraPada(nakshatra, pada) - 1, `${nakshatra}/${pada}`).toBe(
+          rasiOf(longitude),
+        );
+      }
+    }
+  });
+
+  it('refuses input it cannot honestly map', () => {
+    expect(() => rasiFromNakshatraPada(0, 1)).toThrow(RangeError);
+    expect(() => rasiFromNakshatraPada(28, 1)).toThrow(RangeError);
+    expect(() => rasiFromNakshatraPada(1, 5)).toThrow(RangeError);
+    expect(() => rasiFromNakshatraPada(1.5, 1)).toThrow(RangeError);
   });
 });

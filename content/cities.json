@@ -1,0 +1,1263 @@
+{
+  "$schema": "./schemas/cities.schema.json",
+  "kind": "cities",
+  "note": "Offline city list for §8.1 location onboarding and the §8.5 nearest-city reverse lookup. Coordinates are city-centre, which is well inside the ±1 min sunrise tolerance §9.1 sets. The list is deliberately weighted to the Telugu districts and then to the places Telugu households actually live abroad; it is not a gazetteer. GPS still resolves its own timezone through tz-lookup — the tz here is the fallback for a manually chosen city.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "reviewNote": "Telugu names are given only for the Telugu-district cities, in standard orthography, and need a native speaker to confirm them — the same footing as the Telugu in content/enums. Cities outside those districts carry no Telugu name rather than an invented transliteration; search falls back to the Latin name (§0.4).",
+  "cities": [
+    {
+      "id": "hyderabad",
+      "name": "Hyderabad",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 17.385,
+      "lng": 78.4867,
+      "tz": "Asia/Kolkata",
+      "nameTe": "హైదరాబాద్"
+    },
+    {
+      "id": "secunderabad",
+      "name": "Secunderabad",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 17.4399,
+      "lng": 78.4983,
+      "tz": "Asia/Kolkata",
+      "nameTe": "సికింద్రాబాద్"
+    },
+    {
+      "id": "warangal",
+      "name": "Warangal",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 17.9689,
+      "lng": 79.5941,
+      "tz": "Asia/Kolkata",
+      "nameTe": "వరంగల్"
+    },
+    {
+      "id": "karimnagar",
+      "name": "Karimnagar",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 18.4386,
+      "lng": 79.1288,
+      "tz": "Asia/Kolkata",
+      "nameTe": "కరీంనగర్"
+    },
+    {
+      "id": "nizamabad",
+      "name": "Nizamabad",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 18.6725,
+      "lng": 78.0941,
+      "tz": "Asia/Kolkata",
+      "nameTe": "నిజామాబాద్"
+    },
+    {
+      "id": "khammam",
+      "name": "Khammam",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 17.2473,
+      "lng": 80.1514,
+      "tz": "Asia/Kolkata",
+      "nameTe": "ఖమ్మం"
+    },
+    {
+      "id": "mahbubnagar",
+      "name": "Mahbubnagar",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 16.7488,
+      "lng": 77.9854,
+      "tz": "Asia/Kolkata",
+      "nameTe": "మహబూబ్‌నగర్"
+    },
+    {
+      "id": "nalgonda",
+      "name": "Nalgonda",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 17.0575,
+      "lng": 79.2684,
+      "tz": "Asia/Kolkata",
+      "nameTe": "నల్గొండ"
+    },
+    {
+      "id": "adilabad",
+      "name": "Adilabad",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 19.664,
+      "lng": 78.532,
+      "tz": "Asia/Kolkata",
+      "nameTe": "ఆదిలాబాద్"
+    },
+    {
+      "id": "siddipet",
+      "name": "Siddipet",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 18.1018,
+      "lng": 78.852,
+      "tz": "Asia/Kolkata",
+      "nameTe": "సిద్దిపేట"
+    },
+    {
+      "id": "ramagundam",
+      "name": "Ramagundam",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 18.7594,
+      "lng": 79.474,
+      "tz": "Asia/Kolkata",
+      "nameTe": "రామగుండం"
+    },
+    {
+      "id": "suryapet",
+      "name": "Suryapet",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 17.1353,
+      "lng": 79.6237,
+      "tz": "Asia/Kolkata",
+      "nameTe": "సూర్యాపేట"
+    },
+    {
+      "id": "bhadrachalam",
+      "name": "Bhadrachalam",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 17.6688,
+      "lng": 80.8936,
+      "tz": "Asia/Kolkata",
+      "nameTe": "భద్రాచలం"
+    },
+    {
+      "id": "medak",
+      "name": "Medak",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 18.046,
+      "lng": 78.263,
+      "tz": "Asia/Kolkata",
+      "nameTe": "మెదక్"
+    },
+    {
+      "id": "nirmal",
+      "name": "Nirmal",
+      "region": "Telangana",
+      "country": "IN",
+      "lat": 19.0968,
+      "lng": 78.3428,
+      "tz": "Asia/Kolkata",
+      "nameTe": "నిర్మల్"
+    },
+    {
+      "id": "visakhapatnam",
+      "name": "Visakhapatnam",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 17.6868,
+      "lng": 83.2185,
+      "tz": "Asia/Kolkata",
+      "nameTe": "విశాఖపట్నం"
+    },
+    {
+      "id": "vijayawada",
+      "name": "Vijayawada",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.5062,
+      "lng": 80.648,
+      "tz": "Asia/Kolkata",
+      "nameTe": "విజయవాడ"
+    },
+    {
+      "id": "guntur",
+      "name": "Guntur",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.3067,
+      "lng": 80.4365,
+      "tz": "Asia/Kolkata",
+      "nameTe": "గుంటూరు"
+    },
+    {
+      "id": "nellore",
+      "name": "Nellore",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 14.4426,
+      "lng": 79.9865,
+      "tz": "Asia/Kolkata",
+      "nameTe": "నెల్లూరు"
+    },
+    {
+      "id": "tirupati",
+      "name": "Tirupati",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 13.6288,
+      "lng": 79.4192,
+      "tz": "Asia/Kolkata",
+      "nameTe": "తిరుపతి"
+    },
+    {
+      "id": "tirumala",
+      "name": "Tirumala",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 13.6833,
+      "lng": 79.35,
+      "tz": "Asia/Kolkata",
+      "nameTe": "తిరుమల"
+    },
+    {
+      "id": "kurnool",
+      "name": "Kurnool",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 15.8281,
+      "lng": 78.0373,
+      "tz": "Asia/Kolkata",
+      "nameTe": "కర్నూలు"
+    },
+    {
+      "id": "rajahmundry",
+      "name": "Rajahmundry",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 17.0005,
+      "lng": 81.804,
+      "tz": "Asia/Kolkata",
+      "nameTe": "రాజమహేంద్రవరం"
+    },
+    {
+      "id": "kakinada",
+      "name": "Kakinada",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.9891,
+      "lng": 82.2475,
+      "tz": "Asia/Kolkata",
+      "nameTe": "కాకినాడ"
+    },
+    {
+      "id": "anantapur",
+      "name": "Anantapur",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 14.6819,
+      "lng": 77.6006,
+      "tz": "Asia/Kolkata",
+      "nameTe": "అనంతపురం"
+    },
+    {
+      "id": "kadapa",
+      "name": "Kadapa",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 14.4673,
+      "lng": 78.8242,
+      "tz": "Asia/Kolkata",
+      "nameTe": "కడప"
+    },
+    {
+      "id": "ongole",
+      "name": "Ongole",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 15.5057,
+      "lng": 80.0499,
+      "tz": "Asia/Kolkata",
+      "nameTe": "ఒంగోలు"
+    },
+    {
+      "id": "eluru",
+      "name": "Eluru",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.7107,
+      "lng": 81.0952,
+      "tz": "Asia/Kolkata",
+      "nameTe": "ఏలూరు"
+    },
+    {
+      "id": "srikakulam",
+      "name": "Srikakulam",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 18.2949,
+      "lng": 83.8938,
+      "tz": "Asia/Kolkata",
+      "nameTe": "శ్రీకాకుళం"
+    },
+    {
+      "id": "vizianagaram",
+      "name": "Vizianagaram",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 18.1067,
+      "lng": 83.3956,
+      "tz": "Asia/Kolkata",
+      "nameTe": "విజయనగరం"
+    },
+    {
+      "id": "machilipatnam",
+      "name": "Machilipatnam",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.1875,
+      "lng": 81.1389,
+      "tz": "Asia/Kolkata",
+      "nameTe": "మచిలీపట్నం"
+    },
+    {
+      "id": "chittoor",
+      "name": "Chittoor",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 13.2172,
+      "lng": 79.1003,
+      "tz": "Asia/Kolkata",
+      "nameTe": "చిత్తూరు"
+    },
+    {
+      "id": "amaravati",
+      "name": "Amaravati",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.5131,
+      "lng": 80.5165,
+      "tz": "Asia/Kolkata",
+      "nameTe": "అమరావతి"
+    },
+    {
+      "id": "srisailam",
+      "name": "Srisailam",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.0833,
+      "lng": 78.8683,
+      "tz": "Asia/Kolkata",
+      "nameTe": "శ్రీశైలం"
+    },
+    {
+      "id": "bhimavaram",
+      "name": "Bhimavaram",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.5449,
+      "lng": 81.5212,
+      "tz": "Asia/Kolkata",
+      "nameTe": "భీమవరం"
+    },
+    {
+      "id": "narasaraopet",
+      "name": "Narasaraopet",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.235,
+      "lng": 80.049,
+      "tz": "Asia/Kolkata",
+      "nameTe": "నరసరావుపేట"
+    },
+    {
+      "id": "proddatur",
+      "name": "Proddatur",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 14.7502,
+      "lng": 78.5481,
+      "tz": "Asia/Kolkata",
+      "nameTe": "ప్రొద్దుటూరు"
+    },
+    {
+      "id": "tenali",
+      "name": "Tenali",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.243,
+      "lng": 80.64,
+      "tz": "Asia/Kolkata",
+      "nameTe": "తెనాలి"
+    },
+    {
+      "id": "nandyal",
+      "name": "Nandyal",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 15.4777,
+      "lng": 78.4873,
+      "tz": "Asia/Kolkata",
+      "nameTe": "నంద్యాల"
+    },
+    {
+      "id": "adoni",
+      "name": "Adoni",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 15.6281,
+      "lng": 77.275,
+      "tz": "Asia/Kolkata",
+      "nameTe": "ఆదోని"
+    },
+    {
+      "id": "madanapalle",
+      "name": "Madanapalle",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 13.5503,
+      "lng": 78.5029,
+      "tz": "Asia/Kolkata",
+      "nameTe": "మదనపల్లె"
+    },
+    {
+      "id": "gudivada",
+      "name": "Gudivada",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 16.4333,
+      "lng": 80.9833,
+      "tz": "Asia/Kolkata",
+      "nameTe": "గుడివాడ"
+    },
+    {
+      "id": "dharmavaram",
+      "name": "Dharmavaram",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 14.4142,
+      "lng": 77.72,
+      "tz": "Asia/Kolkata",
+      "nameTe": "ధర్మవరం"
+    },
+    {
+      "id": "puttaparthi",
+      "name": "Puttaparthi",
+      "region": "Andhra Pradesh",
+      "country": "IN",
+      "lat": 14.165,
+      "lng": 77.812,
+      "tz": "Asia/Kolkata",
+      "nameTe": "పుట్టపర్తి"
+    },
+    {
+      "id": "bengaluru",
+      "name": "Bengaluru",
+      "region": "Karnataka",
+      "country": "IN",
+      "lat": 12.9716,
+      "lng": 77.5946,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "mysuru",
+      "name": "Mysuru",
+      "region": "Karnataka",
+      "country": "IN",
+      "lat": 12.2958,
+      "lng": 76.6394,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "mangaluru",
+      "name": "Mangaluru",
+      "region": "Karnataka",
+      "country": "IN",
+      "lat": 12.9141,
+      "lng": 74.856,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "chennai",
+      "name": "Chennai",
+      "region": "Tamil Nadu",
+      "country": "IN",
+      "lat": 13.0827,
+      "lng": 80.2707,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "coimbatore",
+      "name": "Coimbatore",
+      "region": "Tamil Nadu",
+      "country": "IN",
+      "lat": 11.0168,
+      "lng": 76.9558,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "madurai",
+      "name": "Madurai",
+      "region": "Tamil Nadu",
+      "country": "IN",
+      "lat": 9.9252,
+      "lng": 78.1198,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "rameswaram",
+      "name": "Rameswaram",
+      "region": "Tamil Nadu",
+      "country": "IN",
+      "lat": 9.2876,
+      "lng": 79.3129,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "mumbai",
+      "name": "Mumbai",
+      "region": "Maharashtra",
+      "country": "IN",
+      "lat": 19.076,
+      "lng": 72.8777,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "pune",
+      "name": "Pune",
+      "region": "Maharashtra",
+      "country": "IN",
+      "lat": 18.5204,
+      "lng": 73.8567,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "nagpur",
+      "name": "Nagpur",
+      "region": "Maharashtra",
+      "country": "IN",
+      "lat": 21.1458,
+      "lng": 79.0882,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "nashik",
+      "name": "Nashik",
+      "region": "Maharashtra",
+      "country": "IN",
+      "lat": 19.9975,
+      "lng": 73.7898,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "delhi",
+      "name": "Delhi",
+      "region": "Delhi",
+      "country": "IN",
+      "lat": 28.6139,
+      "lng": 77.209,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "noida",
+      "name": "Noida",
+      "region": "Uttar Pradesh",
+      "country": "IN",
+      "lat": 28.5355,
+      "lng": 77.391,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "gurugram",
+      "name": "Gurugram",
+      "region": "Haryana",
+      "country": "IN",
+      "lat": 28.4595,
+      "lng": 77.0266,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "lucknow",
+      "name": "Lucknow",
+      "region": "Uttar Pradesh",
+      "country": "IN",
+      "lat": 26.8467,
+      "lng": 80.9462,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "varanasi",
+      "name": "Varanasi",
+      "region": "Uttar Pradesh",
+      "country": "IN",
+      "lat": 25.3176,
+      "lng": 82.9739,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "kolkata",
+      "name": "Kolkata",
+      "region": "West Bengal",
+      "country": "IN",
+      "lat": 22.5726,
+      "lng": 88.3639,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "bhubaneswar",
+      "name": "Bhubaneswar",
+      "region": "Odisha",
+      "country": "IN",
+      "lat": 20.2961,
+      "lng": 85.8245,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "puri",
+      "name": "Puri",
+      "region": "Odisha",
+      "country": "IN",
+      "lat": 19.8135,
+      "lng": 85.8312,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "ahmedabad",
+      "name": "Ahmedabad",
+      "region": "Gujarat",
+      "country": "IN",
+      "lat": 23.0225,
+      "lng": 72.5714,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "surat",
+      "name": "Surat",
+      "region": "Gujarat",
+      "country": "IN",
+      "lat": 21.1702,
+      "lng": 72.8311,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "vadodara",
+      "name": "Vadodara",
+      "region": "Gujarat",
+      "country": "IN",
+      "lat": 22.3072,
+      "lng": 73.1812,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "jaipur",
+      "name": "Jaipur",
+      "region": "Rajasthan",
+      "country": "IN",
+      "lat": 26.9124,
+      "lng": 75.7873,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "indore",
+      "name": "Indore",
+      "region": "Madhya Pradesh",
+      "country": "IN",
+      "lat": 22.7196,
+      "lng": 75.8577,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "bhopal",
+      "name": "Bhopal",
+      "region": "Madhya Pradesh",
+      "country": "IN",
+      "lat": 23.2599,
+      "lng": 77.4126,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "ujjain",
+      "name": "Ujjain",
+      "region": "Madhya Pradesh",
+      "country": "IN",
+      "lat": 23.1793,
+      "lng": 75.7849,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "chandigarh",
+      "name": "Chandigarh",
+      "region": "Chandigarh",
+      "country": "IN",
+      "lat": 30.7333,
+      "lng": 76.7794,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "haridwar",
+      "name": "Haridwar",
+      "region": "Uttarakhand",
+      "country": "IN",
+      "lat": 29.9457,
+      "lng": 78.1642,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "patna",
+      "name": "Patna",
+      "region": "Bihar",
+      "country": "IN",
+      "lat": 25.5941,
+      "lng": 85.1376,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "guwahati",
+      "name": "Guwahati",
+      "region": "Assam",
+      "country": "IN",
+      "lat": 26.1445,
+      "lng": 91.7362,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "kochi",
+      "name": "Kochi",
+      "region": "Kerala",
+      "country": "IN",
+      "lat": 9.9312,
+      "lng": 76.2673,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "thiruvananthapuram",
+      "name": "Thiruvananthapuram",
+      "region": "Kerala",
+      "country": "IN",
+      "lat": 8.5241,
+      "lng": 76.9366,
+      "tz": "Asia/Kolkata"
+    },
+    {
+      "id": "edison-nj",
+      "name": "Edison",
+      "region": "New Jersey",
+      "country": "US",
+      "lat": 40.5187,
+      "lng": -74.4121,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "jersey-city-nj",
+      "name": "Jersey City",
+      "region": "New Jersey",
+      "country": "US",
+      "lat": 40.7178,
+      "lng": -74.0431,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "new-york-ny",
+      "name": "New York",
+      "region": "New York",
+      "country": "US",
+      "lat": 40.7128,
+      "lng": -74.006,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "boston-ma",
+      "name": "Boston",
+      "region": "Massachusetts",
+      "country": "US",
+      "lat": 42.3601,
+      "lng": -71.0589,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "atlanta-ga",
+      "name": "Atlanta",
+      "region": "Georgia",
+      "country": "US",
+      "lat": 33.749,
+      "lng": -84.388,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "charlotte-nc",
+      "name": "Charlotte",
+      "region": "North Carolina",
+      "country": "US",
+      "lat": 35.2271,
+      "lng": -80.8431,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "raleigh-nc",
+      "name": "Raleigh",
+      "region": "North Carolina",
+      "country": "US",
+      "lat": 35.7796,
+      "lng": -78.6382,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "tampa-fl",
+      "name": "Tampa",
+      "region": "Florida",
+      "country": "US",
+      "lat": 27.9506,
+      "lng": -82.4572,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "detroit-mi",
+      "name": "Detroit",
+      "region": "Michigan",
+      "country": "US",
+      "lat": 42.3314,
+      "lng": -83.0458,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "columbus-oh",
+      "name": "Columbus",
+      "region": "Ohio",
+      "country": "US",
+      "lat": 39.9612,
+      "lng": -82.9988,
+      "tz": "America/New_York"
+    },
+    {
+      "id": "dallas-tx",
+      "name": "Dallas",
+      "region": "Texas",
+      "country": "US",
+      "lat": 32.7767,
+      "lng": -96.797,
+      "tz": "America/Chicago"
+    },
+    {
+      "id": "irving-tx",
+      "name": "Irving",
+      "region": "Texas",
+      "country": "US",
+      "lat": 32.814,
+      "lng": -96.9489,
+      "tz": "America/Chicago"
+    },
+    {
+      "id": "houston-tx",
+      "name": "Houston",
+      "region": "Texas",
+      "country": "US",
+      "lat": 29.7604,
+      "lng": -95.3698,
+      "tz": "America/Chicago"
+    },
+    {
+      "id": "austin-tx",
+      "name": "Austin",
+      "region": "Texas",
+      "country": "US",
+      "lat": 30.2672,
+      "lng": -97.7431,
+      "tz": "America/Chicago"
+    },
+    {
+      "id": "chicago-il",
+      "name": "Chicago",
+      "region": "Illinois",
+      "country": "US",
+      "lat": 41.8781,
+      "lng": -87.6298,
+      "tz": "America/Chicago"
+    },
+    {
+      "id": "minneapolis-mn",
+      "name": "Minneapolis",
+      "region": "Minnesota",
+      "country": "US",
+      "lat": 44.9778,
+      "lng": -93.265,
+      "tz": "America/Chicago"
+    },
+    {
+      "id": "denver-co",
+      "name": "Denver",
+      "region": "Colorado",
+      "country": "US",
+      "lat": 39.7392,
+      "lng": -104.9903,
+      "tz": "America/Denver"
+    },
+    {
+      "id": "phoenix-az",
+      "name": "Phoenix",
+      "region": "Arizona",
+      "country": "US",
+      "lat": 33.4484,
+      "lng": -112.074,
+      "tz": "America/Phoenix"
+    },
+    {
+      "id": "seattle-wa",
+      "name": "Seattle",
+      "region": "Washington",
+      "country": "US",
+      "lat": 47.6062,
+      "lng": -122.3321,
+      "tz": "America/Los_Angeles"
+    },
+    {
+      "id": "bellevue-wa",
+      "name": "Bellevue",
+      "region": "Washington",
+      "country": "US",
+      "lat": 47.6101,
+      "lng": -122.2015,
+      "tz": "America/Los_Angeles"
+    },
+    {
+      "id": "san-jose-ca",
+      "name": "San Jose",
+      "region": "California",
+      "country": "US",
+      "lat": 37.3382,
+      "lng": -121.8863,
+      "tz": "America/Los_Angeles"
+    },
+    {
+      "id": "fremont-ca",
+      "name": "Fremont",
+      "region": "California",
+      "country": "US",
+      "lat": 37.5485,
+      "lng": -121.9886,
+      "tz": "America/Los_Angeles"
+    },
+    {
+      "id": "san-francisco-ca",
+      "name": "San Francisco",
+      "region": "California",
+      "country": "US",
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "tz": "America/Los_Angeles"
+    },
+    {
+      "id": "toronto-on",
+      "name": "Toronto",
+      "region": "Ontario",
+      "country": "CA",
+      "lat": 43.6532,
+      "lng": -79.3832,
+      "tz": "America/Toronto"
+    },
+    {
+      "id": "mississauga-on",
+      "name": "Mississauga",
+      "region": "Ontario",
+      "country": "CA",
+      "lat": 43.589,
+      "lng": -79.6441,
+      "tz": "America/Toronto"
+    },
+    {
+      "id": "calgary-ab",
+      "name": "Calgary",
+      "region": "Alberta",
+      "country": "CA",
+      "lat": 51.0447,
+      "lng": -114.0719,
+      "tz": "America/Edmonton"
+    },
+    {
+      "id": "vancouver-bc",
+      "name": "Vancouver",
+      "region": "British Columbia",
+      "country": "CA",
+      "lat": 49.2827,
+      "lng": -123.1207,
+      "tz": "America/Vancouver"
+    },
+    {
+      "id": "london",
+      "name": "London",
+      "region": "England",
+      "country": "GB",
+      "lat": 51.5074,
+      "lng": -0.1278,
+      "tz": "Europe/London"
+    },
+    {
+      "id": "reading",
+      "name": "Reading",
+      "region": "England",
+      "country": "GB",
+      "lat": 51.4543,
+      "lng": -0.9781,
+      "tz": "Europe/London"
+    },
+    {
+      "id": "birmingham",
+      "name": "Birmingham",
+      "region": "England",
+      "country": "GB",
+      "lat": 52.4862,
+      "lng": -1.8904,
+      "tz": "Europe/London"
+    },
+    {
+      "id": "manchester",
+      "name": "Manchester",
+      "region": "England",
+      "country": "GB",
+      "lat": 53.4808,
+      "lng": -2.2426,
+      "tz": "Europe/London"
+    },
+    {
+      "id": "dublin",
+      "name": "Dublin",
+      "region": "Leinster",
+      "country": "IE",
+      "lat": 53.3498,
+      "lng": -6.2603,
+      "tz": "Europe/Dublin"
+    },
+    {
+      "id": "amsterdam",
+      "name": "Amsterdam",
+      "region": "North Holland",
+      "country": "NL",
+      "lat": 52.3676,
+      "lng": 4.9041,
+      "tz": "Europe/Amsterdam"
+    },
+    {
+      "id": "frankfurt",
+      "name": "Frankfurt",
+      "region": "Hesse",
+      "country": "DE",
+      "lat": 50.1109,
+      "lng": 8.6821,
+      "tz": "Europe/Berlin"
+    },
+    {
+      "id": "munich",
+      "name": "Munich",
+      "region": "Bavaria",
+      "country": "DE",
+      "lat": 48.1351,
+      "lng": 11.582,
+      "tz": "Europe/Berlin"
+    },
+    {
+      "id": "zurich",
+      "name": "Zurich",
+      "region": "Zurich",
+      "country": "CH",
+      "lat": 47.3769,
+      "lng": 8.5417,
+      "tz": "Europe/Zurich"
+    },
+    {
+      "id": "paris",
+      "name": "Paris",
+      "region": "Ile-de-France",
+      "country": "FR",
+      "lat": 48.8566,
+      "lng": 2.3522,
+      "tz": "Europe/Paris"
+    },
+    {
+      "id": "stockholm",
+      "name": "Stockholm",
+      "region": "Stockholm",
+      "country": "SE",
+      "lat": 59.3293,
+      "lng": 18.0686,
+      "tz": "Europe/Stockholm"
+    },
+    {
+      "id": "dubai",
+      "name": "Dubai",
+      "region": "Dubai",
+      "country": "AE",
+      "lat": 25.2048,
+      "lng": 55.2708,
+      "tz": "Asia/Dubai"
+    },
+    {
+      "id": "abu-dhabi",
+      "name": "Abu Dhabi",
+      "region": "Abu Dhabi",
+      "country": "AE",
+      "lat": 24.4539,
+      "lng": 54.3773,
+      "tz": "Asia/Dubai"
+    },
+    {
+      "id": "sharjah",
+      "name": "Sharjah",
+      "region": "Sharjah",
+      "country": "AE",
+      "lat": 25.3463,
+      "lng": 55.4209,
+      "tz": "Asia/Dubai"
+    },
+    {
+      "id": "doha",
+      "name": "Doha",
+      "region": "Doha",
+      "country": "QA",
+      "lat": 25.2854,
+      "lng": 51.531,
+      "tz": "Asia/Qatar"
+    },
+    {
+      "id": "muscat",
+      "name": "Muscat",
+      "region": "Muscat",
+      "country": "OM",
+      "lat": 23.588,
+      "lng": 58.3829,
+      "tz": "Asia/Muscat"
+    },
+    {
+      "id": "riyadh",
+      "name": "Riyadh",
+      "region": "Riyadh",
+      "country": "SA",
+      "lat": 24.7136,
+      "lng": 46.6753,
+      "tz": "Asia/Riyadh"
+    },
+    {
+      "id": "kuwait-city",
+      "name": "Kuwait City",
+      "region": "Al Asimah",
+      "country": "KW",
+      "lat": 29.3759,
+      "lng": 47.9774,
+      "tz": "Asia/Kuwait"
+    },
+    {
+      "id": "manama",
+      "name": "Manama",
+      "region": "Capital",
+      "country": "BH",
+      "lat": 26.2285,
+      "lng": 50.586,
+      "tz": "Asia/Bahrain"
+    },
+    {
+      "id": "singapore",
+      "name": "Singapore",
+      "region": "Singapore",
+      "country": "SG",
+      "lat": 1.3521,
+      "lng": 103.8198,
+      "tz": "Asia/Singapore"
+    },
+    {
+      "id": "kuala-lumpur",
+      "name": "Kuala Lumpur",
+      "region": "Kuala Lumpur",
+      "country": "MY",
+      "lat": 3.139,
+      "lng": 101.6869,
+      "tz": "Asia/Kuala_Lumpur"
+    },
+    {
+      "id": "hong-kong",
+      "name": "Hong Kong",
+      "region": "Hong Kong",
+      "country": "HK",
+      "lat": 22.3193,
+      "lng": 114.1694,
+      "tz": "Asia/Hong_Kong"
+    },
+    {
+      "id": "tokyo",
+      "name": "Tokyo",
+      "region": "Tokyo",
+      "country": "JP",
+      "lat": 35.6762,
+      "lng": 139.6503,
+      "tz": "Asia/Tokyo"
+    },
+    {
+      "id": "sydney",
+      "name": "Sydney",
+      "region": "New South Wales",
+      "country": "AU",
+      "lat": -33.8688,
+      "lng": 151.2093,
+      "tz": "Australia/Sydney"
+    },
+    {
+      "id": "melbourne",
+      "name": "Melbourne",
+      "region": "Victoria",
+      "country": "AU",
+      "lat": -37.8136,
+      "lng": 144.9631,
+      "tz": "Australia/Melbourne"
+    },
+    {
+      "id": "brisbane",
+      "name": "Brisbane",
+      "region": "Queensland",
+      "country": "AU",
+      "lat": -27.4698,
+      "lng": 153.0251,
+      "tz": "Australia/Brisbane"
+    },
+    {
+      "id": "perth",
+      "name": "Perth",
+      "region": "Western Australia",
+      "country": "AU",
+      "lat": -31.9505,
+      "lng": 115.8605,
+      "tz": "Australia/Perth"
+    },
+    {
+      "id": "auckland",
+      "name": "Auckland",
+      "region": "Auckland",
+      "country": "NZ",
+      "lat": -36.8485,
+      "lng": 174.7633,
+      "tz": "Pacific/Auckland"
+    },
+    {
+      "id": "wellington",
+      "name": "Wellington",
+      "region": "Wellington",
+      "country": "NZ",
+      "lat": -41.2865,
+      "lng": 174.7762,
+      "tz": "Pacific/Auckland"
+    },
+    {
+      "id": "nairobi",
+      "name": "Nairobi",
+      "region": "Nairobi",
+      "country": "KE",
+      "lat": -1.2864,
+      "lng": 36.8172,
+      "tz": "Africa/Nairobi"
+    },
+    {
+      "id": "johannesburg",
+      "name": "Johannesburg",
+      "region": "Gauteng",
+      "country": "ZA",
+      "lat": -26.2041,
+      "lng": 28.0473,
+      "tz": "Africa/Johannesburg"
+    }
+  ]
+}

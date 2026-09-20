@@ -38,6 +38,7 @@ export {
 } from './components/FontScaleProvider';
 
 export { Txt, type TxtProps, type TxtTone } from './components/Txt';
+export { TextField, type TextFieldProps } from './components/TextField';
 export { Card, type CardProps, type CardTone } from './components/Card';
 export { Button, type ButtonProps, type ButtonTone } from './components/Button';
 export { FieldCard, type FieldCardProps } from './components/FieldCard';
