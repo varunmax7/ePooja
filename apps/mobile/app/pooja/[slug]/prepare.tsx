@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
@@ -14,10 +13,18 @@ import {
   colors,
   spacing,
 } from '@epooja/ui';
-import prepare from '@/mocks/prepare.json';
+import { pujaBySlug, recipesForPuja, samagriForPuja } from '@/services/content';
+import { useChecklistStore } from '@/stores/checklist';
+import { useTodayDate } from '@/services/panchangam';
+import { durationLabel, pujaTitle } from '@/lib/pujaDisplay';
 
 /**
  * Pooja Preparation (§8.4, mockup screen 3).
+ *
+ * The checklist is the puja's own samagri, and the ticks persist per puja per
+ * day (§10 Phase 4) through `useChecklistStore` — keyed on the same date the
+ * Today screen is showing, so a devotee preparing for a specific day ticks
+ * that day's list.
  *
  * "Start Pooja" is never blocked — an unchecked item gets a gentle warning, not
  * a locked button. A devotee mid-ritual must never be stopped by the app.
@@ -26,25 +33,46 @@ export default function PrepareScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { slug } = useLocalSearchParams<{ slug: string }>();
-  const [checked, setChecked] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries(prepare.items.map((item) => [item.id, item.checked])),
-  );
+  const { date } = useTodayDate();
 
-  const doneCount = Object.values(checked).filter(Boolean).length;
-  const total = prepare.items.length;
+  const puja = pujaBySlug(slug);
+  const entries = useChecklistStore((s) => s.entries);
+  const toggleItem = useChecklistStore((s) => s.toggle);
+
+  if (!puja) {
+    return (
+      <View style={{ flex: 1, padding: spacing[5] }} className="bg-cream-50">
+        <Card tone="outlined" padding={5}>
+          <Txt variant="body" tone="inkMuted">
+            That pooja isn&apos;t in this app yet.
+          </Txt>
+        </Card>
+      </View>
+    );
+  }
+
+  const items = samagriForPuja(puja);
+  const recipe = recipesForPuja(puja)[0];
+  // Read from `entries` rather than the store's selector so the component
+  // re-renders when a tick changes — a selector call inside render would not
+  // subscribe to the slice it reads.
+  const checkedIds = entries[`${puja.id}:${date}`] ?? [];
+
+  const doneCount = items.filter((item) => checkedIds.includes(item.id)).length;
+  const total = items.length;
   const pending = total - doneCount;
 
   const toggle = (id: string) => {
     void Haptics.selectionAsync();
-    setChecked((prev) => ({ ...prev, [id]: !prev[id] }));
+    toggleItem(puja.id, date, id);
   };
 
   return (
     <View style={{ flex: 1 }} className="bg-cream-50">
       <ScrollView contentContainerStyle={{ paddingBottom: spacing[9] * 2 }}>
         <CurvedHeader
-          title={prepare.title}
-          subtitle={prepare.subtitle}
+          title="Pooja Preparation"
+          subtitle={`${pujaTitle(puja)} · ${durationLabel(puja)}`}
           tone="maroon"
           height={150}
         />
@@ -60,24 +88,24 @@ export default function PrepareScreen() {
               }}
             >
               <Txt variant="sectionTitle" tone="ink" style={{ flex: 1 }}>
-                {prepare.checklistTitle}
+                Essentials for Today&apos;s Ritual
               </Txt>
               <ProgressPill label={`${doneCount}/${total} ready`} done={doneCount} total={total} />
             </View>
 
             <View style={{ height: spacing[2] }} />
 
-            {prepare.items.map((item, index) => (
+            {items.map((item, index) => (
               <View
                 key={item.id}
                 style={{
-                  borderBottomWidth: index === prepare.items.length - 1 ? 0 : 1,
+                  borderBottomWidth: index === items.length - 1 ? 0 : 1,
                   borderBottomColor: colors.cream['300'],
                 }}
               >
                 <CheckRow
-                  label={item.label}
-                  checked={checked[item.id] ?? false}
+                  label={item.name.en ?? item.name.te}
+                  checked={checkedIds.includes(item.id)}
                   onToggle={() => {
                     toggle(item.id);
                   }}
@@ -87,14 +115,16 @@ export default function PrepareScreen() {
             ))}
           </Card>
 
-          <RecipePreviewCard
-            eyebrow={prepare.recipe.eyebrow}
-            title={prepare.recipe.title}
-            buttonLabel={prepare.recipe.buttonLabel}
-            onPress={() => {
-              router.push(`/pooja/${slug}/recipe/${prepare.recipe.id}`);
-            }}
-          />
+          {recipe ? (
+            <RecipePreviewCard
+              eyebrow="Offerings Recipe Preview:"
+              title={recipe.name.en ?? recipe.name.te}
+              buttonLabel="View Recipe"
+              onPress={() => {
+                router.push(`/pooja/${puja.slug}/recipe/${recipe.id}`);
+              }}
+            />
+          ) : null}
         </View>
       </ScrollView>
 
@@ -119,13 +149,13 @@ export default function PrepareScreen() {
           </Txt>
         ) : null}
         <Button
-          label={prepare.startLabel}
+          label="Start Pooja"
           tone="maroon"
           size="lg"
           icon="play"
           fullWidth
           onPress={() => {
-            router.push(`/player/${slug}`);
+            router.push(`/player/${puja.slug}`);
           }}
         />
       </View>

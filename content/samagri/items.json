@@ -1,0 +1,72 @@
+{
+  "$schema": "../schemas/samagri.schema.json",
+  "kind": "samagri",
+  "note": "§9.4 SamagriItem: the ritual items a Preparation checklist offers. `icon` is a MaterialCommunityIcons glyph name — an asset key the app already ships, not a fetched image (§9.4 leaves item photography for a later phase). Items referenced by content/pujas/*.json's `samagri` arrays must exist here; tools/content-build checks that.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "items": [
+    {
+      "id": "deepam",
+      "name": { "te": "దీపం", "en": "Lamp and wicks" },
+      "icon": "candle"
+    },
+    {
+      "id": "akshatalu",
+      "name": { "te": "అక్షతలు", "en": "Akshatalu (turmeric rice)" },
+      "icon": "rice"
+    },
+    {
+      "id": "pushpalu",
+      "name": { "te": "పుష్పాలు", "en": "Fresh flowers" },
+      "icon": "flower"
+    },
+    {
+      "id": "agarbatti",
+      "name": { "te": "అగరవత్తులు", "en": "Incense" },
+      "icon": "smoke"
+    },
+    {
+      "id": "kalasham",
+      "name": { "te": "కలశం", "en": "Kalasham with water" },
+      "icon": "cup-water"
+    },
+    {
+      "id": "karpuram",
+      "name": { "te": "కర్పూరం", "en": "Camphor" },
+      "icon": "fire"
+    },
+    {
+      "id": "pasupu",
+      "name": { "te": "పసుపు", "en": "Turmeric" },
+      "icon": "circle-slice-8",
+      "optional": true
+    },
+    {
+      "id": "kumkuma",
+      "name": { "te": "కుంకుమ", "en": "Kumkuma" },
+      "icon": "circle",
+      "optional": true
+    },
+    {
+      "id": "chandanam",
+      "name": { "te": "చందనం", "en": "Sandalwood paste" },
+      "icon": "gesture-tap",
+      "optional": true
+    },
+    {
+      "id": "yagnopavitam",
+      "name": { "te": "⟨TODO_PANDIT: yagnopavitam_te⟩", "en": "Sacred thread" },
+      "icon": "infinity",
+      "optional": true,
+      "notes": { "te": "⟨TODO_PANDIT: yagnopavitam_notes_te⟩", "en": "Only where the puja calls for it" }
+    },
+    {
+      "id": "panchapatram",
+      "name": { "te": "పంచపాత్ర", "en": "Panchapatram and uddharani" },
+      "icon": "cup"
+    }
+  ]
+}

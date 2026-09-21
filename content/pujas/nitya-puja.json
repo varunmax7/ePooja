@@ -1,0 +1,216 @@
+{
+  "$schema": "../schemas/puja.schema.json",
+  "id": "nitya-puja-short",
+  "slug": "nitya-puja",
+  "deity": "generic",
+  "category": "nitya",
+  "title": { "te": "నిత్య పూజ", "en": "Daily Nitya Puja" },
+  "description": {
+    "te": "⟨TODO_PANDIT: nitya_puja_description_te⟩",
+    "en": "A short daily Smartha puja with Ganapathi prarthana, sankalpam and panchopachara."
+  },
+  "image": "pujas/nitya.webp",
+  "durations": { "short": 15, "full": 35 },
+  "samagri": ["pasupu", "kumkuma", "akshatalu", "deepam", "pushpalu", "kalasham", "agarbatti", "karpuram"],
+  "naivedyam": ["panchamrutham"],
+  "review": { "status": "PENDING_PANDIT_REVIEW", "reviewer": null, "date": null },
+  "pack": { "version": "0.1.0", "sizeBytes": 0, "audioIds": [] },
+  "steps": [
+    {
+      "id": "deeparadhana",
+      "order": 1,
+      "section": "poorvangam",
+      "title": { "te": "దీపారాధన", "en": "Lighting the lamp" },
+      "instruction": {
+        "text": { "te": "ఇప్పుడు దీపం వెలిగించండి.", "en": "Light the lamp now." },
+        "audioId": "instr.deeparadhana",
+        "action": { "kind": "confirm", "icon": "candle" }
+      },
+      "chant": {
+        "audioId": "chant.deeparadhana",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: deeparadhana_shloka_line_1⟩" } }]
+      },
+      "samagriUsed": ["deepam"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "achamanam",
+      "order": 2,
+      "section": "poorvangam",
+      "title": { "te": "ఆచమనం", "en": "Achamanam" },
+      "instruction": {
+        "text": {
+          "te": "కుడి అరచేతిలో కొద్దిగా నీరు తీసుకొని ప్రతి నామానికి ఒకసారి స్వీకరించండి.",
+          "en": "Take a little water in the right palm and sip once for each name."
+        },
+        "audioId": "instr.achamanam",
+        "action": { "kind": "confirm", "icon": "cup-water" }
+      },
+      "chant": {
+        "audioId": "chant.achamanam",
+        "lines": [
+          { "id": "l1", "text": { "te": "ఓం కేశవాయ స్వాహా" } },
+          { "id": "l2", "text": { "te": "ఓం నారాయణాయ స్వాహా" } },
+          { "id": "l3", "text": { "te": "ఓం మాధవాయ స్వాహా" } },
+          { "id": "l4", "text": { "te": "⟨TODO_PANDIT: remaining_keshavadi_namas⟩" } }
+        ]
+      },
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "ganapathi-dhyanam",
+      "order": 3,
+      "section": "poorvangam",
+      "title": { "te": "విఘ్నేశ్వర ప్రార్థన", "en": "Prayer to Ganapathi" },
+      "instruction": {
+        "text": { "te": "చేతులు జోడించి నమస్కరించండి.", "en": "Join your palms in namaskaram." },
+        "audioId": "instr.namaskaram"
+      },
+      "chant": {
+        "audioId": "chant.shuklambaradharam",
+        "lines": [
+          { "id": "l1", "text": { "te": "శుక్లాంబరధరం విష్ణుం శశివర్ణం చతుర్భుజమ్ ।" } },
+          { "id": "l2", "text": { "te": "ప్రసన్నవదనం ధ్యాయేత్ సర్వవిఘ్నోపశాంతయే ॥" } }
+        ]
+      },
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "pranayamam",
+      "order": 4,
+      "section": "poorvangam",
+      "title": { "te": "ప్రాణాయామం", "en": "Pranayamam" },
+      "chant": {
+        "audioId": "chant.pranayamam",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: pranayamam_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "sankalpam",
+      "order": 5,
+      "section": "poorvangam",
+      "title": { "te": "సంకల్పం", "en": "Sankalpam" },
+      "instruction": {
+        "text": {
+          "te": "కుడి చేతిలో అక్షతలు, నీరు తీసుకొని సంకల్పం చెప్పండి.",
+          "en": "Hold akshatalu and water in the right hand for the Sankalpam."
+        },
+        "audioId": "instr.sankalpam",
+        "action": { "kind": "confirm", "icon": "rice" }
+      },
+      "dynamic": "sankalpam",
+      "samagriUsed": ["akshatalu"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "kalasharadhanam",
+      "order": 6,
+      "section": "poorvangam",
+      "title": { "te": "కలశారాధన", "en": "Kalasha worship" },
+      "instruction": {
+        "text": {
+          "te": "ఇప్పుడు అక్షతలు తీసుకొని కలశంపై చల్లండి.",
+          "en": "Sprinkle akshatalu on the kalasham."
+        },
+        "audioId": "instr.kalasham",
+        "action": { "kind": "confirm", "icon": "cup-water" }
+      },
+      "chant": {
+        "audioId": "chant.kalasharadhanam",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: kalasharadhanam_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "ashtottaram",
+      "order": 7,
+      "section": "pradhana",
+      "upachara": "pushpa",
+      "title": { "te": "అష్టోత్తర శతనామావళి", "en": "108 Names" },
+      "namavali": {
+        "count": 108,
+        "offering": "pushpa",
+        "names": [{ "id": "n1", "text": { "te": "⟨TODO_PANDIT: ashtottaram_name_1⟩" } }]
+      },
+      "chant": { "audioId": "chant.ashtottaram.generic", "lines": [] },
+      "variants": ["full"]
+    },
+    {
+      "id": "naivedyam",
+      "order": 8,
+      "section": "uttarangam",
+      "upachara": "naivedya",
+      "title": { "te": "నైవేద్యం", "en": "Naivedyam" },
+      "instruction": {
+        "text": {
+          "te": "నైవేద్యాన్ని దేవుని ముందు ఉంచండి.",
+          "en": "Place the naivedyam before the deity."
+        },
+        "audioId": "instr.naivedyam",
+        "action": { "kind": "confirm", "icon": "bowl-mix" }
+      },
+      "chant": {
+        "audioId": "chant.naivedyam",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: naivedyam_line_1⟩" } }]
+      },
+      "samagriUsed": ["deepam"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "harathi",
+      "order": 9,
+      "section": "uttarangam",
+      "upachara": "nirajana",
+      "title": { "te": "మంగళ హారతి", "en": "Mangala Harathi" },
+      "instruction": {
+        "text": {
+          "te": "కర్పూరం వెలిగించి హారతి ఇవ్వండి.",
+          "en": "Light camphor and offer harathi."
+        },
+        "audioId": "instr.harathi",
+        "action": { "kind": "confirm", "icon": "fire" }
+      },
+      "chant": {
+        "audioId": "chant.harathi",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: harathi_line_1⟩" } }]
+      },
+      "samagriUsed": ["karpuram"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "mantrapushpam",
+      "order": 10,
+      "section": "uttarangam",
+      "title": { "te": "మంత్రపుష్పం", "en": "Mantra Pushpam" },
+      "chant": {
+        "audioId": "chant.mantrapushpam",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: mantrapushpam_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "kshamapana",
+      "order": 11,
+      "section": "uttarangam",
+      "title": { "te": "ఆత్మ ప్రదక్షిణ మరియు క్షమాపణ", "en": "Pradakshina and Kshamapana" },
+      "chant": {
+        "audioId": "chant.kshamapana",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: kshamapana_line_1⟩" } }]
+      },
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "prasada-sweekaram",
+      "order": 12,
+      "section": "uttarangam",
+      "title": { "te": "తీర్థ ప్రసాద స్వీకరణ", "en": "Receiving teertham & prasadam" },
+      "instruction": {
+        "text": { "te": "తీర్థం, ప్రసాదం స్వీకరించండి.", "en": "Receive teertham and prasadam." },
+        "audioId": "instr.prasadam",
+        "action": { "kind": "confirm", "icon": "bowl-mix" }
+      },
+      "variants": ["short", "full"]
+    }
+  ]
+}

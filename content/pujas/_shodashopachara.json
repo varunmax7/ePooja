@@ -1,0 +1,320 @@
+{
+  "$schema": "../schemas/puja-step-template.schema.json",
+  "kind": "puja-step-template",
+  "note": "The full Shodashopachara — 16 upacharas plus the closing mantrapushpam, pradakshina and kshamapana (§9.5) — that every deity puja's Pradhana section draws from. Deity-specific suktams (Purusha, Sri, …) are not here; each deity puja adds its own. Composing this into a deity puja mechanically is Phase 6 puja-runner work; for now the deity skeletons note where it attaches.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "steps": [
+    {
+      "id": "dhyana",
+      "order": 1,
+      "section": "pradhana",
+      "upachara": "dhyana",
+      "title": { "te": "ధ్యానం", "en": "Dhyanam" },
+      "chant": {
+        "audioId": "chant.dhyana.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: dhyana_line_1⟩" } }]
+      },
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "avahana",
+      "order": 2,
+      "section": "pradhana",
+      "upachara": "avahana",
+      "title": { "te": "ఆవాహనం", "en": "Avahanam" },
+      "instruction": {
+        "text": { "te": "దేవుని ఆహ్వానిస్తూ నమస్కరించండి.", "en": "Invite the deity with folded hands." },
+        "audioId": "instr.avahana"
+      },
+      "chant": {
+        "audioId": "chant.avahana.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: avahana_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "asana",
+      "order": 3,
+      "section": "pradhana",
+      "upachara": "asana",
+      "title": { "te": "ఆసనం", "en": "Asanam" },
+      "instruction": {
+        "text": { "te": "ఆసనం సమర్పించండి.", "en": "Offer a seat to the deity." },
+        "audioId": "instr.asana",
+        "action": { "kind": "confirm", "icon": "seat" }
+      },
+      "chant": {
+        "audioId": "chant.asana.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: asana_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "padya",
+      "order": 4,
+      "section": "pradhana",
+      "upachara": "padya",
+      "title": { "te": "పాద్యం", "en": "Padyam" },
+      "instruction": {
+        "text": { "te": "పాదాలు కడగడానికి నీరు సమర్పించండి.", "en": "Offer water for washing the feet." },
+        "audioId": "instr.padya",
+        "action": { "kind": "confirm", "icon": "water" }
+      },
+      "chant": {
+        "audioId": "chant.padya.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: padya_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "arghya",
+      "order": 5,
+      "section": "pradhana",
+      "upachara": "arghya",
+      "title": { "te": "అర్ఘ్యం", "en": "Arghyam" },
+      "instruction": {
+        "text": { "te": "చేతులు కడగడానికి నీరు సమర్పించండి.", "en": "Offer water for washing the hands." },
+        "audioId": "instr.arghya",
+        "action": { "kind": "confirm", "icon": "water" }
+      },
+      "chant": {
+        "audioId": "chant.arghya.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: arghya_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "achamaniya",
+      "order": 6,
+      "section": "pradhana",
+      "upachara": "achamaniya",
+      "title": { "te": "ఆచమనీయం", "en": "Achamaniyam" },
+      "instruction": {
+        "text": { "te": "ఆచమనం కొరకు నీరు సమర్పించండి.", "en": "Offer water for sipping." },
+        "audioId": "instr.achamaniya",
+        "action": { "kind": "confirm", "icon": "cup-water" }
+      },
+      "chant": {
+        "audioId": "chant.achamaniya.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: achamaniya_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "snana",
+      "order": 7,
+      "section": "pradhana",
+      "upachara": "snana",
+      "title": { "te": "స్నానం", "en": "Snanam (with Panchamrutham)" },
+      "instruction": {
+        "text": { "te": "పంచామృత స్నానం సమర్పించండి.", "en": "Offer the Panchamrutham bath." },
+        "audioId": "instr.snana",
+        "action": { "kind": "confirm", "icon": "water" }
+      },
+      "chant": {
+        "audioId": "chant.snana.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: snana_line_1⟩" } }]
+      },
+      "samagriUsed": ["kalasham"],
+      "variants": ["full"]
+    },
+    {
+      "id": "vastra",
+      "order": 8,
+      "section": "pradhana",
+      "upachara": "vastra",
+      "title": { "te": "వస్త్రం", "en": "Vastram" },
+      "instruction": {
+        "text": { "te": "వస్త్రం సమర్పించండి.", "en": "Offer a garment." },
+        "audioId": "instr.vastra",
+        "action": { "kind": "confirm", "icon": "tshirt-crew" }
+      },
+      "chant": {
+        "audioId": "chant.vastra.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: vastra_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "yajnopavita",
+      "order": 9,
+      "section": "pradhana",
+      "upachara": "yajnopavita",
+      "title": { "te": "యజ్ఞోపవీతం", "en": "Yajnopavitam" },
+      "instruction": {
+        "text": { "te": "యజ్ఞోపవీతం సమర్పించండి.", "en": "Offer the sacred thread." },
+        "audioId": "instr.yajnopavita",
+        "action": { "kind": "confirm", "icon": "infinity" }
+      },
+      "chant": {
+        "audioId": "chant.yajnopavita.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: yajnopavita_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "gandha",
+      "order": 10,
+      "section": "pradhana",
+      "upachara": "gandha",
+      "title": { "te": "గంధం", "en": "Gandham" },
+      "instruction": {
+        "text": { "te": "చందనం సమర్పించండి.", "en": "Offer sandalwood paste." },
+        "audioId": "instr.gandha",
+        "action": { "kind": "confirm", "icon": "gesture-tap" }
+      },
+      "chant": {
+        "audioId": "chant.gandha.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: gandha_line_1⟩" } }]
+      },
+      "samagriUsed": ["chandanam"],
+      "variants": ["full"]
+    },
+    {
+      "id": "pushpa",
+      "order": 11,
+      "section": "pradhana",
+      "upachara": "pushpa",
+      "title": { "te": "పుష్పం", "en": "Pushpam (Anga Puja & Ashtottaram)" },
+      "instruction": {
+        "text": { "te": "పుష్పాలతో అంగ పూజ చేయండి.", "en": "Offer flowers through the anga puja." },
+        "audioId": "instr.pushpa",
+        "action": { "kind": "confirm", "icon": "flower" }
+      },
+      "namavali": {
+        "count": 108,
+        "offering": "pushpa",
+        "names": [{ "id": "n1", "text": { "te": "⟨TODO_PANDIT: pushpa_ashtottaram_name_1⟩" } }]
+      },
+      "chant": { "audioId": "chant.ashtottaram.generic", "lines": [] },
+      "samagriUsed": ["pushpalu"],
+      "variants": ["full"]
+    },
+    {
+      "id": "dhupa",
+      "order": 12,
+      "section": "pradhana",
+      "upachara": "dhupa",
+      "title": { "te": "ధూపం", "en": "Dhupam" },
+      "instruction": {
+        "text": { "te": "అగరవత్తులు వెలిగించి ధూపం చూపించండి.", "en": "Light incense and offer the fragrance." },
+        "audioId": "instr.dhupa",
+        "action": { "kind": "confirm", "icon": "smoke" }
+      },
+      "chant": {
+        "audioId": "chant.dhupa.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: dhupa_line_1⟩" } }]
+      },
+      "samagriUsed": ["agarbatti"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "deepa",
+      "order": 13,
+      "section": "pradhana",
+      "upachara": "deepa",
+      "title": { "te": "దీపం", "en": "Deepam" },
+      "instruction": {
+        "text": { "te": "దీపం చూపించండి.", "en": "Offer the lamp." },
+        "audioId": "instr.deepa",
+        "action": { "kind": "confirm", "icon": "candle" }
+      },
+      "chant": {
+        "audioId": "chant.deepa.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: deepa_line_1⟩" } }]
+      },
+      "samagriUsed": ["deepam"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "naivedya",
+      "order": 14,
+      "section": "pradhana",
+      "upachara": "naivedya",
+      "title": { "te": "నైవేద్యం", "en": "Naivedyam" },
+      "instruction": {
+        "text": { "te": "నైవేద్యాన్ని దేవుని ముందు ఉంచండి.", "en": "Place the naivedyam before the deity." },
+        "audioId": "instr.naivedya",
+        "action": { "kind": "confirm", "icon": "bowl-mix" }
+      },
+      "chant": {
+        "audioId": "chant.naivedya.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: naivedya_line_1⟩" } }]
+      },
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "tambula",
+      "order": 15,
+      "section": "pradhana",
+      "upachara": "tambula",
+      "title": { "te": "తాంబూలం", "en": "Tambulam" },
+      "instruction": {
+        "text": { "te": "తాంబూలం సమర్పించండి.", "en": "Offer betel leaf and areca nut." },
+        "audioId": "instr.tambula",
+        "action": { "kind": "confirm", "icon": "leaf" }
+      },
+      "chant": {
+        "audioId": "chant.tambula.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: tambula_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "nirajana",
+      "order": 16,
+      "section": "pradhana",
+      "upachara": "nirajana",
+      "title": { "te": "నీరాజనం", "en": "Nirajanam (Harathi)" },
+      "instruction": {
+        "text": { "te": "కర్పూరం వెలిగించి హారతి ఇవ్వండి.", "en": "Light camphor and offer harathi." },
+        "audioId": "instr.nirajana",
+        "action": { "kind": "confirm", "icon": "fire" }
+      },
+      "chant": {
+        "audioId": "chant.nirajana.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: nirajana_line_1⟩" } }]
+      },
+      "samagriUsed": ["karpuram"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "mantrapushpam-shared",
+      "order": 17,
+      "section": "uttarangam",
+      "title": { "te": "మంత్రపుష్పం", "en": "Mantra Pushpam" },
+      "chant": {
+        "audioId": "chant.mantrapushpam.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: mantrapushpam_shared_line_1⟩" } }]
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "pradakshina-shared",
+      "order": 18,
+      "section": "uttarangam",
+      "title": { "te": "ప్రదక్షిణ", "en": "Pradakshina" },
+      "instruction": {
+        "text": { "te": "దేవునికి ప్రదక్షిణ చేయండి.", "en": "Circumambulate the deity." },
+        "audioId": "instr.pradakshina",
+        "action": { "kind": "confirm", "icon": "rotate-3d-variant" }
+      },
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "kshamapana-shared",
+      "order": 19,
+      "section": "uttarangam",
+      "title": { "te": "క్షమాపణ", "en": "Kshamapana" },
+      "chant": {
+        "audioId": "chant.kshamapana.generic",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: kshamapana_shared_line_1⟩" } }]
+      },
+      "variants": ["short", "full"]
+    }
+  ]
+}

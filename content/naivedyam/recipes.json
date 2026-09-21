@@ -1,0 +1,458 @@
+{
+  "$schema": "../schemas/naivedyam.schema.json",
+  "kind": "naivedyam",
+  "note": "§9.4 NaivedyamRecipe. Dish and ingredient names are everyday Telugu, written directly rather than as ⟨TODO_PANDIT: …⟩ placeholders (§0.4's ban is on inventing Sanskrit/ritual text, not on common nouns). `steps` are practical cooking instructions, not ritual text, and are authored in English only for now — a pandit's review is still needed for the Telugu translation before they ship, so `ritualNotes`, which prescribe ritual conduct rather than technique, are marked pending. `image` is an asset key; no photography exists yet.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "recipes": [
+    {
+      "id": "panchamrutham",
+      "name": {
+        "te": "పంచామృతం",
+        "en": "Panchamrutham"
+      },
+      "image": "naivedyam/panchamrutham.webp",
+      "timeMinutes": 10,
+      "baseServings": 4,
+      "ingredients": [
+        {
+          "id": "milk",
+          "name": {
+            "te": "పాలు",
+            "en": "Milk"
+          },
+          "amount": 0.25,
+          "unit": "cup"
+        },
+        {
+          "id": "curd",
+          "name": {
+            "te": "పెరుగు",
+            "en": "Curd"
+          },
+          "amount": 0.25,
+          "unit": "cup"
+        },
+        {
+          "id": "ghee",
+          "name": {
+            "te": "నెయ్యి",
+            "en": "Ghee"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        },
+        {
+          "id": "honey",
+          "name": {
+            "te": "తేనె",
+            "en": "Honey"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        },
+        {
+          "id": "jaggery",
+          "name": {
+            "te": "బెల్లం",
+            "en": "Jaggery, grated"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        },
+        {
+          "id": "banana",
+          "name": {
+            "te": "అరటిపండు",
+            "en": "Ripe banana, mashed"
+          },
+          "amount": 1,
+          "unit": "whole"
+        }
+      ],
+      "steps": [
+        {
+          "te": "⟨TODO_PANDIT: panchamrutham_step_1_te⟩",
+          "en": "Mash the banana until smooth."
+        },
+        {
+          "te": "⟨TODO_PANDIT: panchamrutham_step_2_te⟩",
+          "en": "Stir the milk, curd, ghee, honey and jaggery into the banana, one at a time."
+        },
+        {
+          "te": "⟨TODO_PANDIT: panchamrutham_step_3_te⟩",
+          "en": "Mix gently until the jaggery dissolves — do not whisk vigorously or the curd will split."
+        }
+      ],
+      "ritualNotes": [
+        {
+          "te": "⟨TODO_PANDIT: panchamrutham_note_1_te⟩",
+          "en": "Offer before tasting."
+        },
+        {
+          "te": "⟨TODO_PANDIT: panchamrutham_note_2_te⟩",
+          "en": "Prepare fresh the same day; do not refrigerate overnight."
+        }
+      ]
+    },
+    {
+      "id": "pulihora",
+      "name": {
+        "te": "పులిహోర",
+        "en": "Pulihora"
+      },
+      "image": "naivedyam/pulihora.webp",
+      "timeMinutes": 25,
+      "baseServings": 4,
+      "ingredients": [
+        {
+          "id": "rice",
+          "name": {
+            "te": "అన్నం",
+            "en": "Cooked rice"
+          },
+          "amount": 2,
+          "unit": "cups"
+        },
+        {
+          "id": "tamarind",
+          "name": {
+            "te": "చింతపండు గుజ్జు",
+            "en": "Tamarind pulp"
+          },
+          "amount": 3,
+          "unit": "tbsp"
+        },
+        {
+          "id": "peanuts",
+          "name": {
+            "te": "వేరుశనగలు",
+            "en": "Peanuts"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        },
+        {
+          "id": "curryleaves",
+          "name": {
+            "te": "కరివేపాకు",
+            "en": "Curry leaves"
+          },
+          "amount": 1,
+          "unit": "sprig"
+        },
+        {
+          "id": "turmeric",
+          "name": {
+            "te": "పసుపు",
+            "en": "Turmeric"
+          },
+          "amount": 0.5,
+          "unit": "tsp"
+        },
+        {
+          "id": "sesameoil",
+          "name": {
+            "te": "నువ్వుల నూనె",
+            "en": "Sesame oil"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        }
+      ],
+      "steps": [
+        {
+          "te": "⟨TODO_PANDIT: pulihora_step_1_te⟩",
+          "en": "Cool the cooked rice completely and separate the grains."
+        },
+        {
+          "te": "⟨TODO_PANDIT: pulihora_step_2_te⟩",
+          "en": "Temper mustard seeds, peanuts and curry leaves in sesame oil."
+        },
+        {
+          "te": "⟨TODO_PANDIT: pulihora_step_3_te⟩",
+          "en": "Add tamarind pulp and turmeric; simmer until it thickens."
+        },
+        {
+          "te": "⟨TODO_PANDIT: pulihora_step_4_te⟩",
+          "en": "Fold the tempering through the rice and rest for ten minutes."
+        }
+      ],
+      "ritualNotes": [
+        {
+          "te": "⟨TODO_PANDIT: pulihora_note_1_te⟩",
+          "en": "No onion or garlic in naivedyam."
+        },
+        {
+          "te": "⟨TODO_PANDIT: pulihora_note_2_te⟩",
+          "en": "Offer to the deity before anyone tastes it."
+        },
+        {
+          "te": "⟨TODO_PANDIT: pulihora_note_3_te⟩",
+          "en": "Use a clean vessel kept for puja use only."
+        }
+      ]
+    },
+    {
+      "id": "chalividi",
+      "name": {
+        "te": "చలివిడి",
+        "en": "Chalividi"
+      },
+      "image": "naivedyam/chalividi.webp",
+      "timeMinutes": 15,
+      "baseServings": 4,
+      "ingredients": [
+        {
+          "id": "ricflour",
+          "name": {
+            "te": "బియ్యప్పిండి",
+            "en": "Rice flour"
+          },
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "id": "jaggery",
+          "name": {
+            "te": "బెల్లం",
+            "en": "Jaggery"
+          },
+          "amount": 1,
+          "unit": "cup"
+        },
+        {
+          "id": "water",
+          "name": {
+            "te": "నీరు",
+            "en": "Water"
+          },
+          "amount": 1.5,
+          "unit": "cups"
+        },
+        {
+          "id": "cardamom",
+          "name": {
+            "te": "ఏలకులు",
+            "en": "Cardamom powder"
+          },
+          "amount": 0.25,
+          "unit": "tsp"
+        },
+        {
+          "id": "ghee",
+          "name": {
+            "te": "నెయ్యి",
+            "en": "Ghee, for the plate"
+          },
+          "amount": 1,
+          "unit": "tsp"
+        }
+      ],
+      "steps": [
+        {
+          "te": "⟨TODO_PANDIT: chalividi_step_1_te⟩",
+          "en": "Dissolve the jaggery in water and strain out any grit."
+        },
+        {
+          "te": "⟨TODO_PANDIT: chalividi_step_2_te⟩",
+          "en": "Bring the jaggery water to a boil, then lower the heat."
+        },
+        {
+          "te": "⟨TODO_PANDIT: chalividi_step_3_te⟩",
+          "en": "Stir in the rice flour steadily, breaking up lumps, until it forms a thick, glossy mass."
+        },
+        {
+          "te": "⟨TODO_PANDIT: chalividi_step_4_te⟩",
+          "en": "Stir in the cardamom, then spread on a ghee-greased plate to cool before cutting."
+        }
+      ],
+      "ritualNotes": [
+        {
+          "te": "⟨TODO_PANDIT: chalividi_note_1_te⟩",
+          "en": "A no-cook naivedyam alternative in warm weather: mix raw rice flour and jaggery syrup without boiling."
+        }
+      ]
+    },
+    {
+      "id": "vadapappu",
+      "name": {
+        "te": "వడపప్పు",
+        "en": "Vadapappu"
+      },
+      "image": "naivedyam/vadapappu.webp",
+      "timeMinutes": 5,
+      "baseServings": 4,
+      "ingredients": [
+        {
+          "id": "moongdal",
+          "name": {
+            "te": "పెసర పప్పు",
+            "en": "Split moong dal"
+          },
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "id": "greenchili",
+          "name": {
+            "te": "పచ్చిమిర్చి",
+            "en": "Green chili, minced"
+          },
+          "amount": 1,
+          "unit": "whole"
+        },
+        {
+          "id": "ginger",
+          "name": {
+            "te": "అల్లం",
+            "en": "Ginger, grated"
+          },
+          "amount": 1,
+          "unit": "tsp"
+        },
+        {
+          "id": "salt",
+          "name": {
+            "te": "ఉప్పు",
+            "en": "Salt"
+          },
+          "amount": 0.25,
+          "unit": "tsp"
+        },
+        {
+          "id": "raw-mango",
+          "name": {
+            "te": "మామిడికాయ",
+            "en": "Raw mango, diced (seasonal)"
+          },
+          "amount": 0.25,
+          "unit": "cup",
+          "optional": false
+        }
+      ],
+      "steps": [
+        {
+          "te": "⟨TODO_PANDIT: vadapappu_step_1_te⟩",
+          "en": "Soak the moong dal in water for two hours, then drain well."
+        },
+        {
+          "te": "⟨TODO_PANDIT: vadapappu_step_2_te⟩",
+          "en": "Toss the soaked dal with green chili, ginger, salt and raw mango."
+        },
+        {
+          "te": "⟨TODO_PANDIT: vadapappu_step_3_te⟩",
+          "en": "Chill briefly before offering — this naivedyam is served uncooked and cool."
+        }
+      ],
+      "ritualNotes": [
+        {
+          "te": "⟨TODO_PANDIT: vadapappu_note_1_te⟩",
+          "en": "The traditional Ugadi-season pairing with panakam; the raw mango is optional the rest of the year."
+        }
+      ]
+    },
+    {
+      "id": "payasam",
+      "name": {
+        "te": "పాయసం",
+        "en": "Payasam"
+      },
+      "image": "naivedyam/payasam.webp",
+      "timeMinutes": 30,
+      "baseServings": 4,
+      "ingredients": [
+        {
+          "id": "milk",
+          "name": {
+            "te": "పాలు",
+            "en": "Milk"
+          },
+          "amount": 4,
+          "unit": "cups"
+        },
+        {
+          "id": "vermicelli",
+          "name": {
+            "te": "సేమియా",
+            "en": "Vermicelli"
+          },
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "id": "sugar",
+          "name": {
+            "te": "చక్కెర",
+            "en": "Sugar"
+          },
+          "amount": 0.5,
+          "unit": "cup"
+        },
+        {
+          "id": "ghee",
+          "name": {
+            "te": "నెయ్యి",
+            "en": "Ghee"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        },
+        {
+          "id": "cashews",
+          "name": {
+            "te": "జీడిపప్పు",
+            "en": "Cashews"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        },
+        {
+          "id": "raisins",
+          "name": {
+            "te": "కిస్మిస్",
+            "en": "Raisins"
+          },
+          "amount": 2,
+          "unit": "tbsp"
+        },
+        {
+          "id": "cardamom",
+          "name": {
+            "te": "ఏలకులు",
+            "en": "Cardamom powder"
+          },
+          "amount": 0.25,
+          "unit": "tsp"
+        }
+      ],
+      "steps": [
+        {
+          "te": "⟨TODO_PANDIT: payasam_step_1_te⟩",
+          "en": "Roast the vermicelli in a teaspoon of ghee until lightly golden."
+        },
+        {
+          "te": "⟨TODO_PANDIT: payasam_step_2_te⟩",
+          "en": "Bring the milk to a gentle boil, then add the roasted vermicelli."
+        },
+        {
+          "te": "⟨TODO_PANDIT: payasam_step_3_te⟩",
+          "en": "Simmer, stirring often, until the vermicelli is soft and the milk has thickened."
+        },
+        {
+          "te": "⟨TODO_PANDIT: payasam_step_4_te⟩",
+          "en": "Stir in the sugar and cardamom; fry the cashews and raisins in the remaining ghee and stir through."
+        }
+      ],
+      "ritualNotes": [
+        {
+          "te": "⟨TODO_PANDIT: payasam_note_1_te⟩",
+          "en": "Offer warm, not hot — naivedyam is never offered scalding."
+        }
+      ]
+    }
+  ]
+}

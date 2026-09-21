@@ -2,14 +2,22 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Card, CurvedHeader, Txt, colors, radius, spacing } from '@epooja/ui';
-import poojas from '@/mocks/poojas.json';
+import { catalogSections } from '@/services/content';
+import { durationLabel, pujaIcon, pujaTitle, shortStepCount } from '@/lib/pujaDisplay';
 
 /**
  * Poojas catalog (§8.3): sections for Nitya, deity pujas and festivals, each
- * card showing the name, duration variants and whether the pack is downloaded.
+ * card showing the name, duration variants and step count — now from the
+ * bundled seed pack rather than the Phase 1 mock.
+ *
+ * Every puja here ships inside the binary (§10 Phase 4), so all of them read
+ * as available offline. The per-pack Download control §8.3 describes belongs
+ * to Phase 8, where downloadable packs actually exist; showing a download
+ * affordance now would promise something the app cannot do.
  */
 export default function PoojasScreen() {
   const router = useRouter();
+  const sections = catalogSections();
 
   return (
     <ScrollView
@@ -20,27 +28,19 @@ export default function PoojasScreen() {
       <CurvedHeader title="Poojas" tone="maroon" height={130} />
 
       <View style={{ paddingHorizontal: spacing[5], gap: spacing[6], marginTop: spacing[4] }}>
-        {poojas.sections.map((section) => (
-          <View key={section.id} style={{ gap: spacing[3] }}>
+        {sections.map((section) => (
+          <View key={section.category} style={{ gap: spacing[3] }}>
             <Txt variant="sectionTitle" tone="ink">
               {section.title}
             </Txt>
 
-            {section.items.length === 0 ? (
-              <Card tone="outlined" padding={4}>
-                <Txt variant="label" tone="inkMuted">
-                  {section.note ?? ''}
-                </Txt>
-              </Card>
-            ) : null}
-
-            {section.items.map((item) => (
+            {section.pujas.map((puja) => (
               <Pressable
-                key={item.slug}
+                key={puja.slug}
                 accessibilityRole="button"
-                accessibilityLabel={item.title}
+                accessibilityLabel={pujaTitle(puja)}
                 onPress={() => {
-                  router.push(`/pooja/${item.slug}`);
+                  router.push(`/pooja/${puja.slug}`);
                 }}
               >
                 <Card tone="cream" padding={4}>
@@ -56,7 +56,7 @@ export default function PoojasScreen() {
                       }}
                     >
                       <MaterialCommunityIcons
-                        name={item.icon as never}
+                        name={pujaIcon(puja)}
                         size={28}
                         color={colors.maroon['700'] as string}
                       />
@@ -64,41 +64,21 @@ export default function PoojasScreen() {
 
                     <View style={{ flex: 1, gap: spacing[1] }}>
                       <Txt variant="cardTitle" tone="ink">
-                        {item.title}
+                        {pujaTitle(puja)}
+                      </Txt>
+                      <Txt variant="telugu" tone="inkMuted">
+                        {puja.title.te}
                       </Txt>
                       <Txt variant="label" tone="inkMuted">
-                        {item.duration} · {item.steps} steps
+                        {durationLabel(puja)} · {shortStepCount(puja)} steps
                       </Txt>
                     </View>
 
-                    {item.downloaded ? (
-                      <View
-                        style={{
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          gap: spacing[1],
-                          backgroundColor: colors.cream['300'],
-                          borderRadius: radius.pill,
-                          paddingHorizontal: spacing[3],
-                          paddingVertical: spacing[1],
-                        }}
-                      >
-                        <MaterialCommunityIcons
-                          name="check-circle"
-                          size={14}
-                          color={colors.success}
-                        />
-                        <Txt variant="fieldLabel" tone="success">
-                          Downloaded
-                        </Txt>
-                      </View>
-                    ) : (
-                      <MaterialCommunityIcons
-                        name="tray-arrow-down"
-                        size={22}
-                        color={colors.ink['400'] as string}
-                      />
-                    )}
+                    <MaterialCommunityIcons
+                      name="chevron-right"
+                      size={22}
+                      color={colors.ink['400'] as string}
+                    />
                   </View>
                 </Card>
               </Pressable>

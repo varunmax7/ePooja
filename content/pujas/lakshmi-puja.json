@@ -1,0 +1,81 @@
+{
+  "$schema": "../schemas/puja.schema.json",
+  "id": "lakshmi-puja",
+  "slug": "lakshmi-puja",
+  "deity": "lakshmi",
+  "category": "deity",
+  "title": { "te": "లక్ష్మీ పూజ", "en": "Lakshmi Puja" },
+  "description": {
+    "te": "⟨TODO_PANDIT: lakshmi_puja_description_te⟩",
+    "en": "A skeleton for now (§10 Phase 4): the deity-specific dhyana and sankalpam, with the full Shodashopachara sequence from _shodashopachara.json attaching at the Pradhana section, plus the Sri Suktam. Phase 6 composes the two into a runnable puja."
+  },
+  "image": "pujas/lakshmi.webp",
+  "durations": { "short": 25, "full": 45 },
+  "samagri": ["pasupu", "kumkuma", "akshatalu", "deepam", "pushpalu", "kalasham", "agarbatti", "karpuram"],
+  "naivedyam": ["panchamrutham", "payasam"],
+  "review": { "status": "PENDING_PANDIT_REVIEW", "reviewer": null, "date": null },
+  "pack": { "version": "0.1.0", "sizeBytes": 0, "audioIds": [] },
+  "steps": [
+    {
+      "id": "lakshmi-dhyana",
+      "order": 1,
+      "section": "poorvangam",
+      "upachara": "dhyana",
+      "title": { "te": "లక్ష్మీ ధ్యానం", "en": "Dhyanam to Lakshmi" },
+      "chant": {
+        "audioId": "chant.lakshmi-dhyana",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: lakshmi_dhyana_line_1⟩" } }]
+      },
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "lakshmi-sankalpam",
+      "order": 2,
+      "section": "poorvangam",
+      "title": { "te": "సంకల్పం", "en": "Sankalpam" },
+      "instruction": {
+        "text": {
+          "te": "కుడి చేతిలో అక్షతలు, నీరు తీసుకొని సంకల్పం చెప్పండి.",
+          "en": "Hold akshatalu and water in the right hand for the Sankalpam."
+        },
+        "audioId": "instr.sankalpam",
+        "action": { "kind": "confirm", "icon": "rice" }
+      },
+      "dynamic": "sankalpam",
+      "samagriUsed": ["akshatalu"],
+      "variants": ["short", "full"]
+    },
+    {
+      "id": "lakshmi-pradhana-note",
+      "order": 3,
+      "section": "pradhana",
+      "title": { "te": "షోడశోపచార పూజ", "en": "The full Shodashopachara" },
+      "instruction": {
+        "text": {
+          "te": "⟨TODO_PANDIT: lakshmi_pradhana_note_te⟩",
+          "en": "The 16-upachara sequence from _shodashopachara.json runs here, with the Sri Suktam and a Lakshmi ashtottaram — not expanded per deity until Phase 6 composes it."
+        },
+        "audioId": "instr.pradhana-note"
+      },
+      "variants": ["full"]
+    },
+    {
+      "id": "lakshmi-harathi",
+      "order": 4,
+      "section": "uttarangam",
+      "upachara": "nirajana",
+      "title": { "te": "మంగళ హారతి", "en": "Mangala Harathi" },
+      "instruction": {
+        "text": { "te": "కర్పూరం వెలిగించి హారతి ఇవ్వండి.", "en": "Light camphor and offer harathi." },
+        "audioId": "instr.harathi",
+        "action": { "kind": "confirm", "icon": "fire" }
+      },
+      "chant": {
+        "audioId": "chant.harathi",
+        "lines": [{ "id": "l1", "text": { "te": "⟨TODO_PANDIT: lakshmi_harathi_line_1⟩" } }]
+      },
+      "samagriUsed": ["karpuram"],
+      "variants": ["short", "full"]
+    }
+  ]
+}

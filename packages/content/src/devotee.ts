@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { teluguOrTodo } from './enums';
+import { localizedTextSchema, scriptSchema, genderSchema } from './localizedText';
 
 /**
  * The devotee-side models from §9.4, with the zod schemas that guard them.
@@ -9,48 +9,21 @@ import { teluguOrTodo } from './enums';
  * devotee back in onboarding rather than produce a Devotee whose Sankalpam
  * would name the wrong gotra.
  *
- * The puja, samagri and naivedyam halves of §9.4 land in Phase 4.
+ * `Script`, `Gender` and `LocalizedText` live in `localizedText.ts`, shared
+ * with the puja/samagri/naivedyam content this file used to say waited for
+ * Phase 4 — it has arrived.
  */
 
-export type Script = 'te' | 'dev' | 'iast';
-export type Gender = 'male' | 'female';
-
-export const scriptSchema = z.enum(['te', 'dev', 'iast']);
-export const genderSchema = z.enum(['male', 'female']);
-
-/**
- * §9.4 makes `te` the primary form. A devotee who never types Telugu leaves it
- * empty and the app displays `en`, so the field is present but may be blank —
- * what is not allowed is a name that is blank in every script.
- */
-export const localizedTextSchema = z
-  .object({
-    te: z.union([z.literal(''), teluguOrTodo]),
-    dev: z.string().optional(),
-    iast: z.string().optional(),
-    en: z.string().optional(),
-  })
-  .refine((value) => value.te.trim().length > 0 || (value.en?.trim().length ?? 0) > 0, {
-    message: 'a name must be readable in at least one script',
-  });
-
-export type LocalizedText = z.infer<typeof localizedTextSchema>;
-
-/** The form a name is displayed in, preferring the devotee's own script. */
-export function displayName(name: LocalizedText, script: 'te' | 'en' = 'en'): string {
-  if (script === 'te' && name.te.trim().length > 0) return name.te;
-  return name.en?.trim() || name.te;
-}
-
-/** Up to two initials for the avatar ring (§7.4), from whichever form exists. */
-export function initialsOf(name: LocalizedText): string {
-  const source = (name.en?.trim() || name.te.trim()).split(/\s+/).filter(Boolean);
-  return source
-    .slice(0, 2)
-    .map((word) => [...word][0] ?? '')
-    .join('')
-    .toLocaleUpperCase();
-}
+export {
+  scriptSchema,
+  genderSchema,
+  localizedTextSchema,
+  displayName,
+  initialsOf,
+  type Script,
+  type Gender,
+  type LocalizedText,
+} from './localizedText';
 
 export const RELATIONS = ['spouse', 'son', 'daughter', 'father', 'mother', 'other'] as const;
 export type Relation = (typeof RELATIONS)[number];

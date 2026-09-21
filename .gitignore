@@ -36,3 +36,4 @@ content/audio/clips/
 .idea/
 .vscode/*
 !.vscode/extensions.json
+.tmp-artifact-gallery/

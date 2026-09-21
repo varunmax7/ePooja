@@ -1,12 +1,23 @@
 /**
  * @epooja/content — schemas, types and loaders for ritual content (§9.4).
  *
- * Framework-free: no React Native, no Expo (§15). Phase 2 ships the review
- * contract and the enum schema; the puja, samagri and naivedyam schemas land
- * in Phase 4.
+ * Framework-free: no React Native, no Expo (§15).
  */
 
 export { reviewSchema, isApproved, type Review } from './review';
+
+export {
+  scriptSchema,
+  genderSchema,
+  localizedTextSchema,
+  contentTextSchema,
+  displayName,
+  initialsOf,
+  type Script,
+  type Gender,
+  type LocalizedText,
+  type ContentText,
+} from './localizedText';
 
 export {
   enumFileSchema,
@@ -49,26 +60,72 @@ export {
 } from './timings';
 
 export {
-  scriptSchema,
-  genderSchema,
-  localizedTextSchema,
   familyMemberSchema,
   devoteeSchema,
   devoteeLocationSchema,
   devoteePrefsSchema,
-  displayName,
-  initialsOf,
   missingSankalpamFields,
   RELATIONS,
-  type Script,
-  type Gender,
-  type LocalizedText,
   type Relation,
   type FamilyMember,
   type Devotee,
   type DevoteeLocation,
   type DevoteePrefs,
 } from './devotee';
+
+export {
+  samagriItemSchema,
+  samagriFileSchema,
+  parseSamagriFile,
+  type SamagriItem,
+  type SamagriFile,
+} from './samagri';
+
+export {
+  naivedyamIngredientSchema,
+  naivedyamRecipeSchema,
+  naivedyamFileSchema,
+  parseNaivedyamFile,
+  scaledAmount,
+  formatScaledAmount,
+  type NaivedyamIngredient,
+  type NaivedyamRecipe,
+  type NaivedyamFile,
+} from './naivedyam';
+
+export {
+  mantraLineSchema,
+  pujaStepSchema,
+  pujaCatalogItemSchema,
+  pujaPackMetaSchema,
+  pujaStepTemplateFileSchema,
+  parsePujaFile,
+  parsePujaStepTemplateFile,
+  stepsForVariant,
+  stepsBySection,
+  STEP_SECTIONS,
+  UPACHARAS,
+  PUJA_VARIANTS,
+  PUJA_CATEGORIES,
+  type MantraLine,
+  type PujaStep,
+  type PujaCatalogItem,
+  type PujaStepTemplateFile,
+  type StepSection,
+  type Upachara,
+  type PujaVariant,
+  type PujaCategory,
+} from './pujas';
+
+export {
+  audioClipSchema,
+  isProductionSafe,
+  AUDIO_CLIP_KINDS,
+  AUDIO_VOICES,
+  type AudioClip,
+  type AudioClipKind,
+  type AudioVoice,
+} from './audio';
 
 export const CONTENT_PACKAGE = {
   name: '@epooja/content',

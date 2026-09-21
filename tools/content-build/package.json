@@ -1,0 +1,25 @@
+{
+  "name": "@epooja/content-build",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Validates content, transliterates Telugu, and emits pack manifests (§9)",
+  "type": "module",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@epooja/content": "workspace:*",
+    "@indic-transliteration/sanscript": "^1.3.3"
+  },
+  "devDependencies": {
+    "@epooja/config": "workspace:*",
+    "@types/node": "^26.0.0",
+    "eslint": "^9.39.5",
+    "tsx": "^4.20.0",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.0"
+  }
+}

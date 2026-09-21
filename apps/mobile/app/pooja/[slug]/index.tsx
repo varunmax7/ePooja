@@ -3,39 +3,49 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Button, Card, Txt, colors, spacing } from '@epooja/ui';
-import poojas from '@/mocks/poojas.json';
-import prepare from '@/mocks/prepare.json';
+import {
+  stepsBySection,
+  stepsForVariant,
+  type PujaVariant,
+  type StepSection,
+} from '@epooja/content';
+import { pujaBySlug } from '@/services/content';
+import { pujaTitle } from '@/lib/pujaDisplay';
+
+const SECTION_TITLES: Record<StepSection, string> = {
+  poorvangam: 'Poorvangam',
+  pradhana: 'Pradhana Puja',
+  uttarangam: 'Uttarangam',
+};
 
 /**
  * Pooja detail (§8.4): description, the short/full duration variants, a steps
- * overview accordion, and Prepare / Start.
+ * overview accordion, and Prepare / Start — all read from the bundled puja
+ * rather than the Phase 1 mock, so the accordion lists this puja's real
+ * steps and follows the duration variant the devotee picks.
  */
-const SECTIONS = [
-  {
-    id: 'poorvangam',
-    title: 'Poorvangam',
-    steps: ['Achamanam', 'Pranayamam', 'Sankalpam', 'Kalasha Puja'],
-  },
-  {
-    id: 'pradhana',
-    title: 'Pradhana Puja',
-    steps: ['Dhyanam', 'Avahanam', 'Shodashopachara', 'Ashtottaram'],
-  },
-  {
-    id: 'uttarangam',
-    title: 'Uttarangam',
-    steps: ['Naivedyam', 'Harathi', 'Pradakshina', 'Kshamapana'],
-  },
-];
-
 export default function PoojaDetailScreen() {
   const router = useRouter();
   const { slug } = useLocalSearchParams<{ slug: string }>();
-  const [open, setOpen] = useState<string | null>('poorvangam');
-  const [variant, setVariant] = useState<'short' | 'full'>('short');
+  const puja = pujaBySlug(slug);
 
-  const item = poojas.sections.flatMap((s) => s.items).find((p) => p.slug === slug);
-  const title = item?.title ?? prepare.subtitle;
+  const [variant, setVariant] = useState<PujaVariant>('short');
+  const [open, setOpen] = useState<StepSection | null>('poorvangam');
+
+  if (!puja) {
+    return (
+      <View style={{ flex: 1, padding: spacing[5] }} className="bg-cream-50">
+        <Card tone="outlined" padding={5}>
+          <Txt variant="body" tone="inkMuted">
+            That pooja isn&apos;t in this app yet.
+          </Txt>
+        </Card>
+      </View>
+    );
+  }
+
+  const hasShort = puja.durations.short !== undefined;
+  const sections = stepsBySection(stepsForVariant(puja, variant));
 
   return (
     <ScrollView
@@ -45,67 +55,72 @@ export default function PoojaDetailScreen() {
     >
       <Card tone="cream" padding={5}>
         <Txt variant="screenTitle" tone="ink">
-          {title}
+          {pujaTitle(puja)}
+        </Txt>
+        <Txt variant="telugu" tone="maroon">
+          {puja.title.te}
         </Txt>
         <View style={{ height: spacing[2] }} />
         <Txt variant="body" tone="inkMuted">
-          The daily household puja, from Achamanam through Harathi. Guided mode speaks each
-          instruction in Telugu before the mantra; Chant mode plays the mantras alone.
+          {puja.description.en ?? puja.description.te}
         </Txt>
       </Card>
 
-      <Card tone="cream" padding={5}>
-        <Txt variant="sectionTitle" tone="ink">
-          Duration
-        </Txt>
-        <View style={{ height: spacing[3] }} />
-        <View style={{ flexDirection: 'row', gap: spacing[3] }}>
-          {(['short', 'full'] as const).map((key) => (
-            <Pressable
-              key={key}
-              accessibilityRole="radio"
-              accessibilityState={{ selected: variant === key }}
-              accessibilityLabel={
-                key === 'short' ? 'Short, about 15 minutes' : 'Full, about 45 minutes'
-              }
-              onPress={() => {
-                setVariant(key);
-              }}
-              style={{ flex: 1 }}
-            >
-              <Card tone={variant === key ? 'outlined' : 'cream'} padding={4}>
-                <Txt variant="cardTitle" tone={variant === key ? 'maroon' : 'ink'}>
-                  {key === 'short' ? 'Short' : 'Full'}
-                </Txt>
-                <Txt variant="label" tone="inkMuted">
-                  {key === 'short' ? '≈ 15 min' : '≈ 45 min'}
-                </Txt>
-              </Card>
-            </Pressable>
-          ))}
-        </View>
-      </Card>
+      {hasShort ? (
+        <Card tone="cream" padding={5}>
+          <Txt variant="sectionTitle" tone="ink">
+            Duration
+          </Txt>
+          <View style={{ height: spacing[3] }} />
+          <View style={{ flexDirection: 'row', gap: spacing[3] }}>
+            {(['short', 'full'] as const).map((key) => {
+              const minutes = key === 'short' ? puja.durations.short : puja.durations.full;
+              return (
+                <Pressable
+                  key={key}
+                  accessibilityRole="radio"
+                  accessibilityState={{ selected: variant === key }}
+                  accessibilityLabel={`${key === 'short' ? 'Short' : 'Full'}, about ${minutes} minutes`}
+                  onPress={() => {
+                    setVariant(key);
+                  }}
+                  style={{ flex: 1 }}
+                >
+                  <Card tone={variant === key ? 'outlined' : 'cream'} padding={4}>
+                    <Txt variant="cardTitle" tone={variant === key ? 'maroon' : 'ink'}>
+                      {key === 'short' ? 'Short' : 'Full'}
+                    </Txt>
+                    <Txt variant="label" tone="inkMuted">
+                      ≈ {minutes} min · {stepsForVariant(puja, key).length} steps
+                    </Txt>
+                  </Card>
+                </Pressable>
+              );
+            })}
+          </View>
+        </Card>
+      ) : null}
 
       <Card tone="cream" padding={5}>
         <Txt variant="sectionTitle" tone="ink">
           Steps
         </Txt>
         <View style={{ height: spacing[2] }} />
-        {SECTIONS.map((section, index) => (
+        {sections.map((section, index) => (
           <View
-            key={section.id}
+            key={section.section}
             style={{
-              borderBottomWidth: index === SECTIONS.length - 1 ? 0 : 1,
+              borderBottomWidth: index === sections.length - 1 ? 0 : 1,
               borderBottomColor: colors.cream['300'],
               paddingVertical: spacing[3],
             }}
           >
             <Pressable
               accessibilityRole="button"
-              accessibilityState={{ expanded: open === section.id }}
-              accessibilityLabel={section.title}
+              accessibilityState={{ expanded: open === section.section }}
+              accessibilityLabel={SECTION_TITLES[section.section]}
               onPress={() => {
-                setOpen((current) => (current === section.id ? null : section.id));
+                setOpen((current) => (current === section.section ? null : section.section));
               }}
               style={{
                 flexDirection: 'row',
@@ -114,20 +129,25 @@ export default function PoojaDetailScreen() {
               }}
             >
               <Txt variant="cardTitle" tone="ink">
-                {section.title}
+                {SECTION_TITLES[section.section]}
               </Txt>
-              <MaterialCommunityIcons
-                name={open === section.id ? 'chevron-up' : 'chevron-down'}
-                size={22}
-                color={colors.ink['400'] as string}
-              />
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing[2] }}>
+                <Txt variant="label" tone="inkMuted">
+                  {section.steps.length}
+                </Txt>
+                <MaterialCommunityIcons
+                  name={open === section.section ? 'chevron-up' : 'chevron-down'}
+                  size={22}
+                  color={colors.ink['400'] as string}
+                />
+              </View>
             </Pressable>
 
-            {open === section.id ? (
+            {open === section.section ? (
               <View style={{ paddingTop: spacing[2], gap: spacing[1] }}>
                 {section.steps.map((step) => (
-                  <Txt key={step} variant="body" tone="inkMuted">
-                    · {step}
+                  <Txt key={step.id} variant="body" tone="inkMuted">
+                    · {step.title.en ?? step.title.te}
                   </Txt>
                 ))}
               </View>
@@ -144,7 +164,7 @@ export default function PoojaDetailScreen() {
           icon="clipboard-check-outline"
           style={{ flex: 1 }}
           onPress={() => {
-            router.push(`/pooja/${slug}/prepare`);
+            router.push(`/pooja/${puja.slug}/prepare`);
           }}
         />
         <Button
@@ -154,7 +174,7 @@ export default function PoojaDetailScreen() {
           icon="play"
           style={{ flex: 1 }}
           onPress={() => {
-            router.push(`/player/${slug}`);
+            router.push(`/player/${puja.slug}`);
           }}
         />
       </View>

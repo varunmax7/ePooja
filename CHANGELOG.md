@@ -3,6 +3,114 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 4] — Content schema, catalog, preparation, recipes — 2026-09-21
+
+### Built
+
+- **§9.4 content models in `@epooja/content`** — `pujas.ts` (`PujaCatalogItem`,
+  `PujaStep`, `MantraLine`, the step-template schema for the shared
+  Shodashopachara), `samagri.ts`, `naivedyam.ts` (plus `scaledAmount`/
+  `formatScaledAmount`, the servings-scaling math §8.5 needs), `audio.ts`
+  (`AudioClip`, and `isProductionSafe` — §9.6.1's "no `dev_placeholder` in
+  production" as a function, not just a policy). `LocalizedText`/`Script`/
+  `Gender` moved out of `devotee.ts` into their own module now that puja
+  content needs them too.
+- **`tools/content-build`** (`pnpm content:build`) — validates every puja,
+  samagri and naivedyam file against its schema; cross-checks every
+  `samagri`/`naivedyam`/`samagriUsed` reference a puja makes against the ids
+  that actually exist; **transliterates Telugu → Devanagari/IAST via
+  `@indic-transliteration/sanscript`**, mechanically and only where a pandit's
+  own `te` already exists — never inventing a script the way it would invent
+  content (§0.4); emits `dist/packs/{id}@{version}/pack.json` + an audio
+  manifest (empty — §9.6 recording hasn't started); regenerates
+  `content/REVIEW_QUEUE.md` from a scan of every content file, replacing the
+  hand-maintained placeholder table that had drifted out of date since Phase 2.
+- **Content authored**: `content/pujas/nitya-puja.json` (12 steps, from §9.5),
+  `content/pujas/_shodashopachara.json` (the shared 16-upachara sequence +
+  mantrapushpam/pradakshina/kshamapana), three deity skeletons (Ganapathi,
+  Lakshmi, Shiva — dhyana + sankalpam + a note for where the shared sequence
+  attaches, honestly scoped as skeletons rather than fully expanded),
+  `content/samagri/items.json` (11 items), `content/naivedyam/recipes.json`
+  (Panchamrutham, Pulihora, Chalividi, Vadapappu, Payasam).
+- **The seed pack, bundled** — `apps/mobile/src/services/content` parses and
+  validates the puja/samagri/naivedyam JSON at import time, the same pattern
+  `services/panchangam` already used for enums. Every puja in this phase ships
+  inside the binary, so the first puja works offline with nothing to download
+  (§5, §10 Phase 4).
+- **Poojas catalog, Pooja detail, Preparation and Recipe, all live** — the
+  catalog groups by category and reads real durations/step counts; the detail
+  screen's accordion follows the short/full variant the devotee picks;
+  Preparation's checklist is the puja's own samagri; Recipe's servings
+  scaling calls `formatScaledAmount` rather than reimplementing the arithmetic.
+- **`stores/checklist.ts`** — the Preparation checklist, keyed `${pujaId}:${date}`
+  and persisted through the same MMKV adapter as the devotee record. Nothing
+  runs at midnight: a new day is simply a key nothing has written to yet, and
+  a devotee prepping at 23:55 for a 00:05 puja keeps that day's ticks intact.
+- **Tests** — 292 in `@epooja/panchangam` (unchanged), 114 in `@epooja/content`
+  (+35 for the new schemas), 20 in the new `@epooja/content-build`
+  (transliteration + the review-queue scanner), 104 in `@epooja/mobile` (+20:
+  the content service, the checklist store's persist/reset acceptance test).
+
+### Acceptance (§10)
+
+- **`pnpm content:build` passes with 0 schema errors** — 4 packs built (Nitya,
+  Ganapathi, Lakshmi, Shiva), verified by running it, not just by inspection.
+- **`REVIEW_QUEUE.md` auto-generated** — confirmed by running the build twice
+  and diffing: stable output, and the hand-written "Non-code dependencies"
+  section survives the regeneration untouched. 922 `TODO_PANDIT` placeholders
+  across 21 files is the honest current count — nearly all of them Phase 2's
+  enum backlog, now finally visible in this file instead of a stale "none
+  yet" that had been wrong since Phase 2 shipped.
+- **Checklist state survives restart and resets next day** — both proven live,
+  not only in Jest: a browser walkthrough checked two samagri items, forced a
+  full page reload (real MMKV/localStorage round-trip, real store rehydration),
+  and both ticks were still there; a unit test confirms a different date reads
+  a clean key.
+- **Recipe scaling correct** — unit-tested (`scaledAmount`/`formatScaledAmount`
+  in `@epooja/content`) and confirmed live: scaling Panchamrutham from 4 to 7
+  servings in a real browser turned 0.25 cup of milk into 0.44 (7/4 × 0.25,
+  rounded to two decimals) across every ingredient at once.
+
+### Found and fixed during verification
+
+- `pnpm content:build`'s regenerated `REVIEW_QUEUE.md` and Prettier disagreed
+  on markdown table column padding — cosmetic, but `pnpm format:check` would
+  have failed on a freshly built queue. The build's own summary now says to
+  run `pnpm format` before committing it.
+
+### Not met
+
+- **The three deity pujas are skeletons, not full pujas** — a deity-specific
+  dhyana and sankalpam, with a note for where `_shodashopachara.json`
+  attaches, rather than the full 16-upachara sequence expanded per deity.
+  Composing the two mechanically is Phase 6 puja-runner work, once there is a
+  runner to prove the composition against; expanding them by hand now would
+  be content Phase 6 immediately restructures.
+- **No item or dish photography** — `image` fields are asset keys with nothing
+  behind them yet; the Recipe screen still shows "PHOTO PENDING".
+- **`pnpm content:build` reads `content/*.json` directly, not its own
+  `dist/packs` output** — the app doesn't yet consume built packs (that's
+  Phase 8's download path); pointing it at `dist/` before Phase 8 exists would
+  be premature plumbing for a pack format nothing distributes yet.
+
+### Deviations
+
+- `image`, `icon` and pack-audio fields exist in the schema per §9.4 but are
+  not wired to any asset pipeline — there is no art yet to wire them to.
+- Recipe and samagri Telugu names for common nouns (dish names, ingredient
+  names) are authored directly rather than as `⟨TODO_PANDIT: …⟩` — §0.4's ban
+  is on inventing Sanskrit/ritual text, not on everyday words a search for
+  "పులిహోర" would confirm in seconds. Instructional text (cooking steps,
+  ritual notes) is still placeholder-gated pending a pandit's Telugu.
+
+### New `TODO_PANDIT` items
+
+All of Phase 4's own new content needs review: puja titles/descriptions,
+every mantra line in `_shodashopachara.json` and the three deity skeletons,
+naivedyam cooking steps and ritual notes, and two samagri fields (the
+yajnopavitam name and note). All itemised — for the first time accurately —
+in the regenerated `content/REVIEW_QUEUE.md`.
+
 ## [Phase 3] — Onboarding, profile, location, live Today screen — 2026-09-21
 
 ### Built

@@ -20,7 +20,8 @@
     "clean": "git clean -xdf node_modules dist .turbo",
     "fixtures:audit": "pnpm --filter @epooja/panchangam-fixtures run audit",
     "fixtures:generate": "pnpm --filter @epooja/panchangam-fixtures run generate",
-    "screens:capture": "pnpm --filter @epooja/screens run capture"
+    "screens:capture": "pnpm --filter @epooja/screens run capture",
+    "content:build": "pnpm --filter @epooja/content-build run build"
   },
   "devDependencies": {
     "@epooja/config": "workspace:*",

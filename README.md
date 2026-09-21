@@ -19,7 +19,8 @@ of rules you must not break while working in this repo.
 | 1     | Design system & static screens                         | **built — awaiting `ui-reference.png`**    |
 | 2     | Panchangam engine                                      | **built — 17/60 fixtures verified**        |
 | 3     | Onboarding, profile, location, live Today screen       | **built — Maestro flow awaiting a device** |
-| 4–10  | see `implementation.md` §10                            | not started                                |
+| 4     | Content schema, catalog, preparation, recipes          | **built — deity pujas are skeletons**      |
+| 5–10  | see `implementation.md` §10                            | not started                                |
 
 ## Repository layout
 
@@ -28,12 +29,12 @@ apps/mobile/      Expo app (Expo Router, NativeWind, Skia, RNTP)
 packages/
   panchangam/     pure TS — Panchangam engine
   sankalpam/      pure TS — Sankalpam text + audio plan (Phases 5, 7)
-  content/        zod schemas, types, loaders for content packs (Phase 4)
+  content/        zod schemas, types, loaders for content packs
   ui/             design tokens + primitive components (Phase 1)
   config/         shared tsconfig / ESLint / Prettier presets
-content/          ritual content as data (enums, pujas, samagri, audio manifest)
+content/          ritual content as data (enums, pujas, samagri, naivedyam)
 supabase/         migrations, edge functions (Phase 8)
-tools/            content build, cue tapper, panchangam fixtures, screenshots
+tools/            content-build, cue tapper, panchangam fixtures, screenshots
 docs/adr/         architecture decision records
 ```
 
@@ -63,6 +64,14 @@ shipping target (§2) — it exists for this:
 ```bash
 pnpm --filter @epooja/mobile exec expo start --web   # in one shell
 pnpm screens:capture                                 # in another
+```
+
+Content (`content/`) is validated, transliterated (Telugu → Devanagari/IAST)
+and packed by its own build, which also regenerates `content/REVIEW_QUEUE.md`:
+
+```bash
+pnpm content:build
+pnpm format   # the regenerated queue needs a Prettier pass before committing
 ```
 
 EAS builds (`development`, `preview`, `production` profiles are in
