@@ -3,6 +3,143 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 3] — Onboarding, profile, location, live Today screen — 2026-09-21
+
+### Built
+
+- **§8.1 onboarding** — five steps (Welcome, Language, Devotee, Family,
+  Location), each its own route under `app/onboarding/`, sharing one
+  in-memory draft (`stores/onboardingDraft.ts`) until Location's "Finish"
+  writes it all to the devotee store in one commit:
+  - Devotee step: name in English and Telugu, gender, gothram (searchable,
+    "I don't know", or free text while the gotra list is empty),
+    janma nakshatram + padam (searchable), and **rasi auto-suggested from
+    nakshatra + padam** — `rasiFromNakshatraPada`/`rasiIdFromNakshatraPada`,
+    new in `@epooja/panchangam` (a rasi is exactly 2¼ nakshatras, i.e. nine
+    padas; the suggestion never overwrites a rasi the devotee picked by hand).
+  - Family step: add spouse/children/parents with an optional
+    nakshatram/rasi and an "include in Sankalpam" toggle — `FamilyMemberForm`,
+    shared with Profile's family CRUD so neither drifts from the other.
+  - Location step: GPS via `expo-location`, or offline city search;
+    `services/location` resolves either into a `DevoteeLocation` with its own
+    `tz-lookup` timezone (never the nearest city's — an NRI near a state line
+    must get their own zone) and a `content/cities.json` label.
+  - Every ritual field is skippable ("I don't know"), per §8.1 — a devotee
+    can finish onboarding with nothing but a name and a location.
+- **`stores/devotee.ts`, `stores/settings.ts`** — Zustand + MMKV, backed by
+  `lib/storage.ts` (MMKV on native, `localStorage` on web via MMKV's own web
+  build — same code path either way, which is what makes the Phase 1
+  screenshot harness usable here too). A stored record that no longer
+  matches the §9.4 schema is dropped rather than half-loaded, so a shape
+  change lands a devotee back in onboarding, never on a crash screen.
+  `settings.ts` carries the dev-only debug-date override the fixture-date
+  acceptance check uses, and is ignored outright in a release build.
+- **`services/location`** — `resolveFromCoords`/`resolveFromCity` (pure,
+  tested against `content/cities.json`), and `requestDeviceLocation`, which
+  turns every failure (denied, services off, no fix) into a typed result
+  instead of a thrown error — §8.1 asks the flow to _handle_ denial, not
+  crash on it.
+- **`services/panchangam`** — wraps `@epooja/panchangam` with the stored
+  location and the debug-date override; `toTodayView`/`toFullPanchangamView`
+  turn `PanchangamData` into what the Today screen and the new full-Panchangam
+  sheet (`app/panchangam/[date].tsx`, a modal route) actually render, in the
+  devotee's chosen script.
+- **Today, live** — the dial, the four anga badges, sun times and the prayer
+  schedule now come from the engine and the devotee's location, not the
+  Phase 1 mock; day swipe (chevrons either side of the dial); tapping the
+  dial opens the full-Panchangam sheet.
+- **Profile, editable** — `/profile/edit` (name, gender, gotra, nakshatra +
+  padam, rasi) and `/profile/family` (add/edit/remove, `FamilyMemberForm`
+  again) replace the Phase 1 mock; the Today CTA card is the one piece of
+  Phase 1 mock data left, deliberately — puja content doesn't exist until
+  Phase 4, and defaulting it to Nitya Puja here would be a decision this
+  screen has no business making silently.
+- **`content/cities.json`** — 134 cities: the Telugu districts in depth, then
+  the places Telugu households actually live abroad (the exact NRI regions
+  §9.1 fixtures name: New Jersey, Dallas, London, Sydney, Dubai, and more).
+  `content/timings.json` — the three prayer-window labels §8.2 shows,
+  parts-of-daylight checked against the engine's own `DEFAULT_PRAYER_PARTS`
+  in `packages/panchangam/src/prayer-timing-alignment.test.ts` so the two can
+  never quietly disagree.
+- **`@epooja/content` additions** — `devotee.ts` (the §9.4 `Devotee`/
+  `FamilyMember`/`LocalizedText` models, as zod schemas), `cities.ts`
+  (schema, haversine `distanceKm`, `nearestCity`, `searchCities`),
+  `timings.ts`, and `enumValue`/`enumDisplay` for looking a Panchangam id up
+  in its content file.
+- **`@epooja/ui` additions** — `TextField`, the one primitive the four Phase 1
+  mockup screens had no need for but every onboarding/profile form does.
+- **Tests** — 292 in `@epooja/panchangam` (+2 for the rasi mapping and the
+  prayer-timing cross-check), 79 in `@epooja/content` (+27 for devotee/cities/
+  timings), 84 in `@epooja/mobile` (+58: stores, location, the view model, the
+  three-fixture-date acceptance check, and render tests for Profile/Family).
+
+### Acceptance (§10)
+
+- **Today shows correct values for Hyderabad on 3 fixture dates**, via the
+  debug-date override — `src/services/panchangam/__tests__/acceptance.test.ts`
+  checks an ordinary day, Ugadi 2024 (a masa/samvatsara boundary) and a day
+  inside Adhika Shravana 2023, each against
+  `packages/panchangam/test/fixtures/verified.json` directly — Phase 2's own
+  source of truth, not a second hand-derived set of expectations that could
+  drift from it.
+- **Airplane mode works** — nothing in Phase 3 makes a network call. Location
+  resolution is on-device GPS + a bundled `tz-lookup` table; cities, enums and
+  timings are bundled JSON parsed at import time; the devotee record never
+  leaves MMKV until a devotee opts into sign-in (not built yet). Confirmed by
+  inspection (`grep` for `fetch`/`NetInfo` across `src/` and `app/` returns
+  nothing outside the query client's own offline-first config) and by the
+  browser walkthrough below, which never requested a domain besides
+  `localhost`.
+- **Kill/relaunch preserves the profile** — `stores/__tests__/devotee.test.ts`
+  round-trips a devotee through MMKV; confirmed live with a browser
+  walkthrough (see below) that seeds a devotee, reloads, and lands on Today
+  rather than back in onboarding.
+- **`.maestro/onboarding.yaml`** — written and ready, matched against the
+  actual screen text. **Not run here** — no Xcode, Android SDK or Maestro CLI
+  on this machine (the same limitation Phase 0's audio spike recorded).
+  Substituted with a full manual walkthrough over headless Chrome
+  (`tools/screens`'s CDP client, reused rather than duplicated): every
+  onboarding step, live Today, live Profile, live family CRUD and the
+  full-Panchangam sheet, seeding a devotee into `localStorage` the way MMKV's
+  web build itself does, checking for uncaught `window` errors throughout.
+  Zero. This is proof of the same rendering path Maestro would drive
+  (react-native-web + real store code, not a mock), not proof of the native
+  path.
+
+### Found and fixed during that walkthrough
+
+- The full-Panchangam sheet's rows had no `flexShrink` on their value text —
+  harmless for short values, but a `⟨TODO_PANDIT: …⟩` placeholder (much
+  longer than the real word it stands in for) ran off the right edge of the
+  screen. Rows now wrap.
+- `/profile/family` rendered "Family Members" twice — once from the screen
+  itself, once from the Stack header already carrying that title.
+
+### Not met
+
+- **Maestro itself did not run** — see above. The flow file is ready for
+  whoever next has a device or simulator.
+- **60 fps and native GPS behaviour are unverified** — carried over from
+  Phase 0/1's device gap. `expo-location` is exercised structurally
+  (permission → fix → resolve, all typed, all tested) but never against a
+  real GPS radio.
+
+### Deviations
+
+- The full-Panchangam sheet is an expo-router modal, not `@gorhom/bottom-sheet`
+  — the exact presentation `player/[slug]` already uses, and adding a bottom
+  sheet dependency for one screen wasn't worth the native surface.
+- Rasi, nakshatra and gotra pickers are a full-screen searchable modal
+  (`EnumSearchPicker`) rather than an inline dropdown — §8.1 asks for
+  "searchable list," and a inline list large enough to search comfortably
+  would have pushed the rest of the step off-screen.
+
+### New `TODO_PANDIT` items
+
+None authored in this phase. `content/cities.json` carries a
+`PENDING_PANDIT_REVIEW` status of its own — the Telugu city names are
+standard-orthography but unconfirmed, the same footing as the enum content.
+
 ## [Phase 2] — Panchangam engine — 2026-09-19
 
 ### Built

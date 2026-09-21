@@ -64,8 +64,8 @@ export default function LocationScreen() {
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[4] }}>
         <Txt variant="body" tone="inkMuted">
-          Your location is used to compute your local Panchangam and to say your Sankalpam with
-          the correct place.
+          Your location is used to compute your local Panchangam and to say your Sankalpam with the
+          correct place.
         </Txt>
 
         <Button

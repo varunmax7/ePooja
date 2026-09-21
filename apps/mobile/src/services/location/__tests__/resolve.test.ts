@@ -10,7 +10,7 @@ describe('resolveFromCoords', () => {
     expect(location.tz).toBe('Asia/Kolkata');
   });
 
-  it('gives an NRI location its own timezone, not the nearest city\'s', () => {
+  it("gives an NRI location its own timezone, not the nearest city's", () => {
     // Way off the coast, closest by list to San Francisco but not tz-adjacent.
     const location = resolveFromCoords(CITIES, { lat: 37.7749, lng: -122.4194 });
     expect(location.tz).toBe('America/Los_Angeles');

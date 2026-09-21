@@ -31,9 +31,15 @@ function OptionRow({
   onPress: () => void;
 }) {
   return (
-    <Pressable accessibilityRole="radio" accessibilityState={{ checked: selected }} onPress={onPress}>
+    <Pressable
+      accessibilityRole="radio"
+      accessibilityState={{ checked: selected }}
+      onPress={onPress}
+    >
       <Card tone={selected ? 'cream' : 'outlined'} padding={4}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <View
+          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+        >
           <View>
             <Txt variant="cardTitle" tone="ink">
               {label}

@@ -23,14 +23,18 @@ export default function FamilyScreen() {
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[4] }}>
         <Txt variant="body" tone="inkMuted">
-          Add the family members you&apos;d like named in your Sankalpam. You can skip this and
-          add them later from Profile.
+          Add the family members you&apos;d like named in your Sankalpam. You can skip this and add
+          them later from Profile.
         </Txt>
 
         {draft.family.map((member) => (
           <Card key={member.draftId} tone="cream" padding={4}>
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
             >
               <View>
                 <Txt variant="cardTitle" tone="ink">

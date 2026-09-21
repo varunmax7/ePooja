@@ -17,7 +17,15 @@ const GENDERS: { id: Gender; label: string }[] = [
 
 const PADAS = [1, 2, 3, 4] as const;
 
-function PickerField({ label, value, onPress }: { label: string; value: string; onPress: () => void }) {
+function PickerField({
+  label,
+  value,
+  onPress,
+}: {
+  label: string;
+  value: string;
+  onPress: () => void;
+}) {
   return (
     <Pressable accessibilityRole="button" onPress={onPress}>
       <View>
@@ -26,11 +34,17 @@ function PickerField({ label, value, onPress }: { label: string; value: string; 
         </Txt>
         <View style={{ height: spacing[1] }} />
         <Card tone="outlined" padding={3}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+          >
             <Txt variant="fieldValue" tone={value ? 'ink' : 'inkMuted'}>
               {value || 'Tap to choose'}
             </Txt>
-            <MaterialCommunityIcons name="chevron-right" size={20} color={colors.ink['500'] as string} />
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={20}
+              color={colors.ink['500'] as string}
+            />
           </View>
         </Card>
       </View>
@@ -102,13 +116,22 @@ export default function EditProfileScreen() {
         <Txt variant="screenTitle" tone="maroon">
           Edit Profile
         </Txt>
-        <Pressable accessibilityRole="button" accessibilityLabel="Close" onPress={() => router.back()}>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Close"
+          onPress={() => router.back()}
+        >
           <MaterialCommunityIcons name="close" size={24} color={colors.maroon['800'] as string} />
         </Pressable>
       </View>
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[5], paddingTop: 0 }}>
-        <TextField label="Name (English)" value={nameEn} onChangeText={setNameEn} placeholder="Your name" />
+        <TextField
+          label="Name (English)"
+          value={nameEn}
+          onChangeText={setNameEn}
+          placeholder="Your name"
+        />
         <TextField
           label="Name (Telugu)"
           script="telugu"

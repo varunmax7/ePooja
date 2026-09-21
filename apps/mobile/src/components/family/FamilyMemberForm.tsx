@@ -1,7 +1,14 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import { Button, Card, CheckRow, TextField, Txt, colors, spacing } from '@epooja/ui';
-import { enumDisplay, enumValue, isTodoPandit, type FamilyMember, type Gender, type Relation } from '@epooja/content';
+import {
+  enumDisplay,
+  enumValue,
+  isTodoPandit,
+  type FamilyMember,
+  type Gender,
+  type Relation,
+} from '@epooja/content';
 import { EnumSearchPicker } from '@/components/onboarding/EnumSearchPicker';
 import { ENUM_FILES } from '@/services/panchangam';
 
@@ -38,7 +45,12 @@ export interface FamilyMemberFormProps {
  * Shared between onboarding and Profile so both write the same shape and
  * neither drifts from the other.
  */
-export function FamilyMemberForm({ initial, submitLabel, onSubmit, onCancel }: FamilyMemberFormProps) {
+export function FamilyMemberForm({
+  initial,
+  submitLabel,
+  onSubmit,
+  onCancel,
+}: FamilyMemberFormProps) {
   const base = initial ?? EMPTY;
   const [name, setName] = useState(base.name.en ?? '');
   const [relation, setRelation] = useState<Relation>(base.relation);

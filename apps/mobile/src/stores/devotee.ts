@@ -49,10 +49,7 @@ interface DevoteeState {
   markHydrated: () => void;
 }
 
-export type NewDevotee = Omit<
-  Devotee,
-  'id' | 'family' | 'createdAt' | 'updatedAt' | 'prefs'
-> & {
+export type NewDevotee = Omit<Devotee, 'id' | 'family' | 'createdAt' | 'updatedAt' | 'prefs'> & {
   prefs?: Partial<DevoteePrefs>;
 };
 

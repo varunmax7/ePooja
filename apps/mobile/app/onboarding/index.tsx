@@ -22,7 +22,12 @@ export default function WelcomeScreen() {
         <Txt variant="screenTitle" tone="maroon">
           ePooja
         </Txt>
-        <Txt variant="body" tone="inkMuted" align="center" style={{ paddingHorizontal: spacing[7] }}>
+        <Txt
+          variant="body"
+          tone="inkMuted"
+          align="center"
+          style={{ paddingHorizontal: spacing[7] }}
+        >
           A digital Telugu Smartha purohit for your home.
         </Txt>
       </View>

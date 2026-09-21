@@ -81,14 +81,19 @@ export function toTodayView(
     sunset: clock(data.sunset, data.tz),
     prayerTimings: data.prayerTimings.map((timing) => ({
       id: timing.id,
-      label: (uiLang === 'te' ? PRAYER_LABELS[timing.id]?.te : PRAYER_LABELS[timing.id]?.en) ??
+      label:
+        (uiLang === 'te' ? PRAYER_LABELS[timing.id]?.te : PRAYER_LABELS[timing.id]?.en) ??
         timing.id,
       range: range(timing.start, timing.end, data.tz),
       start: timing.start,
       end: timing.end,
     })),
     inauspicious: [
-      { id: 'rahu', label: 'Rahu Kalam', range: range(data.rahuKalam[0], data.rahuKalam[1], data.tz) },
+      {
+        id: 'rahu',
+        label: 'Rahu Kalam',
+        range: range(data.rahuKalam[0], data.rahuKalam[1], data.tz),
+      },
       {
         id: 'yamagandam',
         label: 'Yamagandam',
@@ -128,7 +133,10 @@ const AYANA_LABEL: Record<PanchangamData['ayana'], string> = {
  * end times, samvatsaram, ayanam, paksham, yogam, karanam" plus the three
  * inauspicious windows already in `TodayView`).
  */
-export function toFullPanchangamView(data: PanchangamData, script: DisplayScript): FullPanchangamView {
+export function toFullPanchangamView(
+  data: PanchangamData,
+  script: DisplayScript,
+): FullPanchangamView {
   return {
     ...toTodayView(data, script),
     samvatsara: label('samvatsara', data.samvatsara.id, script),

@@ -70,7 +70,10 @@ export default function RootLayout() {
                 name="panchangam/[date]"
                 options={{ headerShown: false, presentation: 'modal' }}
               />
-              <Stack.Screen name="onboarding" options={{ headerShown: false, gestureEnabled: false }} />
+              <Stack.Screen
+                name="onboarding"
+                options={{ headerShown: false, gestureEnabled: false }}
+              />
               <Stack.Screen
                 name="profile/edit"
                 options={{ headerShown: false, presentation: 'modal' }}

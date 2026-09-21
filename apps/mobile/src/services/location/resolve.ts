@@ -55,7 +55,12 @@ export function resolveFromCoords(cities: readonly City[], point: Coordinates): 
   // No city within any useful distance: still a valid location, just an
   // unlabelled one. tz-lookup covers the whole globe, so sunrise is exact
   // even here.
-  return { lat: point.lat, lng: point.lng, tz, label: `${point.lat.toFixed(2)}, ${point.lng.toFixed(2)}` };
+  return {
+    lat: point.lat,
+    lng: point.lng,
+    tz,
+    label: `${point.lat.toFixed(2)}, ${point.lng.toFixed(2)}`,
+  };
 }
 
 /** A devotee's manual choice from `searchCities` → the same `DevoteeLocation` shape. */

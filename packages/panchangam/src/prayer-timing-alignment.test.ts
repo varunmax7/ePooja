@@ -16,7 +16,7 @@ interface TimingFile {
   timings: { id: 'morning' | 'midday' | 'evening'; part: number }[];
 }
 
-describe('content/timings.json matches the engine\'s prayer windows', () => {
+describe("content/timings.json matches the engine's prayer windows", () => {
   const file = JSON.parse(readFileSync(TIMINGS_PATH, 'utf8')) as TimingFile;
 
   it('divides daylight into the same number of parts', () => {

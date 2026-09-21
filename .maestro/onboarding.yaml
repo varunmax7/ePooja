@@ -1,0 +1,60 @@
+# §10 Phase 3 acceptance: a fresh install walks the §8.1 flow end to end and
+# lands on a live Today screen.
+#
+# Not run in this environment — there is no Xcode, Android SDK or Maestro CLI
+# here (same limitation as the Phase 0 audio spike; see the README). It is
+# authored against the actual screens so it is ready to run against a real
+# development build: `maestro test .maestro/onboarding.yaml`.
+#
+# Selectors are the visible text the devotee sees, matching what
+# `apps/mobile/app/onboarding/*.tsx` renders — not testIDs, so this flow
+# breaks the same way a devotee's own path through the screen would.
+appId: com.epooja.app
+---
+- launchApp:
+    clearState: true
+
+# Step 1 — Welcome (§8.1 step 1).
+- assertVisible: 'ePooja'
+- tapOn: 'Begin'
+
+# Step 2 — Language (§8.1 step 2). English + Telugu script are the defaults;
+# the flow accepts them rather than exercising every combination here.
+- assertVisible: 'Choose your language'
+- tapOn: 'Continue'
+
+# Step 3 — Devotee (§8.1 step 3). Only the name is required to proceed;
+# gothram, nakshatram and rasi are left at "I don't know" — an onboarding a
+# devotee is allowed to complete with nothing else filled in.
+- assertVisible: 'Tell us about yourself'
+- tapOn: 'Your name'
+- inputText: 'Maestro Devotee'
+- tapOn: 'Continue'
+
+# Step 4 — Family (§8.1 step 4), skipped — also an allowed path.
+- assertVisible: 'Your family'
+- tapOn: 'Continue'
+
+# Step 5 — Location (§8.1 step 5): city search rather than the device GPS
+# button, so this flow does not depend on simulator location services.
+- assertVisible: 'Where are you?'
+- tapOn: 'Hyderabad, Dallas, London…'
+- inputText: 'Hyderabad'
+- tapOn: 'Hyderabad, Telangana'
+- assertVisible: 'Asia/Kolkata'
+- tapOn: 'Finish'
+
+# Lands on a live Today screen (§8.2) — the panchangam badges and the sun
+# times card that only render once a devotee and a location exist.
+- assertVisible: 'Vedic Calendar – Today'
+- assertVisible: 'Hyderabad, Telangana'
+- assertVisible: 'SUNRISE'
+- assertVisible: 'SUNSET'
+
+# Kill and relaunch: the profile survives (§10 acceptance), so the app must
+# land straight back on Today, never back in onboarding.
+- stopApp
+- launchApp:
+    clearState: false
+- assertVisible: 'Vedic Calendar – Today'
+- assertNotVisible: 'ePooja'

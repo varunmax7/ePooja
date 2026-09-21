@@ -35,7 +35,9 @@ function PickerField({
         </Txt>
         <View style={{ height: spacing[1] }} />
         <Card tone="outlined" padding={3}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+          >
             <Txt variant="fieldValue" tone={value ? 'ink' : 'inkMuted'}>
               {value || 'Tap to choose'}
             </Txt>
@@ -113,7 +115,12 @@ export default function DevoteeScreen() {
       <StepHeader step={2} title="Tell us about yourself" />
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[5] }}>
-        <TextField label="Name (English)" value={nameEn} onChangeText={setNameEn} placeholder="Your name" />
+        <TextField
+          label="Name (English)"
+          value={nameEn}
+          onChangeText={setNameEn}
+          placeholder="Your name"
+        />
         <TextField
           label="Name (Telugu)"
           script="telugu"

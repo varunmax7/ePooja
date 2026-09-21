@@ -6,19 +6,18 @@ import { scaleTextStyle } from '../fontScale';
 import { Txt } from './Txt';
 import { useFontScale } from './FontScaleProvider';
 
-export interface TextFieldProps
-  extends Pick<
-    ComponentProps<typeof TextInput>,
-    | 'value'
-    | 'onChangeText'
-    | 'placeholder'
-    | 'autoCapitalize'
-    | 'autoFocus'
-    | 'keyboardType'
-    | 'multiline'
-    | 'onSubmitEditing'
-    | 'returnKeyType'
-  > {
+export interface TextFieldProps extends Pick<
+  ComponentProps<typeof TextInput>,
+  | 'value'
+  | 'onChangeText'
+  | 'placeholder'
+  | 'autoCapitalize'
+  | 'autoFocus'
+  | 'keyboardType'
+  | 'multiline'
+  | 'onSubmitEditing'
+  | 'returnKeyType'
+> {
   label: string;
   /** Telugu/Devanagari input wants the matching script face, not Mukta. */
   script?: 'latin' | 'telugu' | 'devanagari';
@@ -36,13 +35,7 @@ export interface TextFieldProps
  * does it: RN scales `fontSize` without `lineHeight`, which would clip a
  * Telugu descender under Dynamic Type.
  */
-export function TextField({
-  label,
-  script = 'latin',
-  error,
-  hint,
-  ...inputProps
-}: TextFieldProps) {
+export function TextField({ label, script = 'latin', error, hint, ...inputProps }: TextFieldProps) {
   const [focused, setFocused] = useState(false);
   const fontScale = useFontScale();
 

@@ -14,7 +14,7 @@ describe('toTodayView', () => {
     expect(view.masa.label).toBe('Masa');
   });
 
-  it('formats sun times in the Panchangam\'s own zone as HH:mm', () => {
+  it("formats sun times in the Panchangam's own zone as HH:mm", () => {
     expect(view.sunrise).toMatch(/^\d{2}:\d{2}$/);
     expect(view.sunset).toMatch(/^\d{2}:\d{2}$/);
   });

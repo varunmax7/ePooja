@@ -13,12 +13,13 @@ of rules you must not break while working in this repo.
 
 ## Status
 
-| Phase | Scope                                                  | State                                   |
-| ----- | ------------------------------------------------------ | --------------------------------------- |
-| 0     | Foundations: monorepo, Expo app shell, CI, audio spike | **built — spike awaiting a device run** |
-| 1     | Design system & static screens                         | **built — awaiting `ui-reference.png`** |
-| 2     | Panchangam engine                                      | **built — 17/60 fixtures verified**     |
-| 3–10  | see `implementation.md` §10                            | not started                             |
+| Phase | Scope                                                  | State                                      |
+| ----- | ------------------------------------------------------ | ------------------------------------------ |
+| 0     | Foundations: monorepo, Expo app shell, CI, audio spike | **built — spike awaiting a device run**    |
+| 1     | Design system & static screens                         | **built — awaiting `ui-reference.png`**    |
+| 2     | Panchangam engine                                      | **built — 17/60 fixtures verified**        |
+| 3     | Onboarding, profile, location, live Today screen       | **built — Maestro flow awaiting a device** |
+| 4–10  | see `implementation.md` §10                            | not started                                |
 
 ## Repository layout
 

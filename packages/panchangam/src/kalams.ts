@@ -76,7 +76,9 @@ export function prayerTimings(
   return (['morning', 'midday', 'evening'] as const).map((id) => {
     const part = parts[id];
     if (!Number.isInteger(part) || part < 0 || part >= PRAYER_DAY_PARTS) {
-      throw new RangeError(`${id} prayer window must be part 0–${PRAYER_DAY_PARTS - 1}, got ${part}`);
+      throw new RangeError(
+        `${id} prayer window must be part 0–${PRAYER_DAY_PARTS - 1}, got ${part}`,
+      );
     }
     return {
       id,

@@ -144,7 +144,11 @@ export default function ProfileScreen() {
           </ScrollView>
         </Card>
 
-        <FieldCard label="Location" value={devotee.location.label} secondary={devotee.location.tz} />
+        <FieldCard
+          label="Location"
+          value={devotee.location.label}
+          secondary={devotee.location.tz}
+        />
       </View>
     </ScrollView>
   );

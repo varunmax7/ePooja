@@ -1,13 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import {
-  distanceKm,
-  nearestCity,
-  parseCityFile,
-  searchCities,
-  type City,
-} from './cities';
+import { distanceKm, nearestCity, parseCityFile, searchCities, type City } from './cities';
 
 const CONTENT_DIR = join(import.meta.dirname, '../../../content');
 

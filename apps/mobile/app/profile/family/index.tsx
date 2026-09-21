@@ -24,10 +24,6 @@ export default function FamilyListScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}
     >
-      <Txt variant="screenTitle" tone="maroon">
-        Family Members
-      </Txt>
-
       {family.map((member) =>
         editingId === member.id ? (
           <FamilyMemberForm
@@ -45,7 +41,11 @@ export default function FamilyListScreen() {
         ) : (
           <Card key={member.id} tone="cream" padding={4}>
             <View
-              style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
             >
               <View>
                 <Txt variant="cardTitle" tone="ink">

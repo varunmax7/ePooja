@@ -3,7 +3,7 @@ import { ISO_DATE, localDateIn, resolveToday, shiftDate } from '@/stores/setting
 describe('resolveToday', () => {
   const now = new Date('2026-09-21T02:30:00Z');
 
-  it('uses the device clock in the devotee\'s own timezone', () => {
+  it("uses the device clock in the devotee's own timezone", () => {
     // 02:30 UTC is already the 21st in Hyderabad and still the 20th in Dallas.
     expect(resolveToday(null, now, 'Asia/Kolkata', true)).toBe('2026-09-21');
     expect(resolveToday(null, now, 'America/Chicago', true)).toBe('2026-09-20');

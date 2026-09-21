@@ -50,11 +50,11 @@ export default function FullPanchangamSheet() {
         </Pressable>
       </View>
 
-      <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}>
+      <ScrollView
+        contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}
+      >
         {isLoading ? <Txt tone="inkMuted">Computing…</Txt> : null}
-        {isError ? (
-          <Txt tone="danger">Could not compute the Panchangam for this date.</Txt>
-        ) : null}
+        {isError ? <Txt tone="danger">Could not compute the Panchangam for this date.</Txt> : null}
 
         {view ? (
           <>
@@ -125,21 +125,34 @@ function Row({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        gap: spacing[3],
         paddingVertical: spacing[2],
         borderBottomWidth: last ? 0 : 1,
         borderBottomColor: colors.cream['300'] as string,
       }}
     >
-      <Txt variant="body" tone="inkMuted">
+      <Txt variant="body" tone="inkMuted" style={{ flexShrink: 0 }}>
         {label}
       </Txt>
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing[2] }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: spacing[2],
+          flexShrink: 1,
+          minWidth: 0,
+          justifyContent: 'flex-end',
+        }}
+      >
         {secondary ? (
           <Txt variant="label" tone="gold">
             {secondary}
           </Txt>
         ) : null}
-        <Txt variant="fieldValue" tone="ink">
+        {/* §0.4 placeholders (⟨TODO_PANDIT: …⟩) run far longer than the real
+            values they stand in for, so this wraps rather than overflowing —
+            the real content will never be this wide. */}
+        <Txt variant="fieldValue" tone="ink" align="right" style={{ flexShrink: 1 }}>
           {value}
         </Txt>
       </View>

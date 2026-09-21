@@ -95,8 +95,7 @@ export function distanceKm(
   const lat1 = toRadians(a.lat);
   const lat2 = toRadians(b.lat);
 
-  const h =
-    Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
   return 2 * EARTH_RADIUS_KM * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
@@ -143,11 +142,7 @@ function fold(value: string): string {
  * and a whole-name match beats a word-prefix one — a devotee typing
  * "hyderabad" should not have to scroll past every city in Telangana.
  */
-export function searchCities(
-  cities: readonly City[],
-  query: string,
-  limit = 20,
-): City[] {
+export function searchCities(cities: readonly City[], query: string, limit = 20): City[] {
   const needle = fold(query);
   if (needle.length === 0) return [];
 

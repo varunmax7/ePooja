@@ -111,7 +111,10 @@ describe('toNewDevotee', () => {
   it('never sends both a listed and a custom gotra, even if the draft somehow has both', () => {
     // Defence in depth: the screens keep these mutually exclusive, but the
     // §9.4 schema's refine would reject a devotee carrying both.
-    const devotee = toNewDevotee({ ...base, gotraId: 'vasishtha', gotraCustom: 'Kashyapa' }, LOCATION);
+    const devotee = toNewDevotee(
+      { ...base, gotraId: 'vasishtha', gotraCustom: 'Kashyapa' },
+      LOCATION,
+    );
     expect(devotee.gotraId).toBe('vasishtha');
     expect(devotee.gotraCustom).toBeUndefined();
   });
