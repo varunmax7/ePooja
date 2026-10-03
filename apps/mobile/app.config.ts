@@ -84,10 +84,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     eas: {
       // Filled in by `eas init`; kept out of source control history until then.
-      projectId: process.env.EAS_PROJECT_ID ?? undefined,
+      projectId: process.env.EAS_PROJECT_ID ?? '0911809f-55f6-48fb-9ea3-f5dd0d21a976',
     },
   },
   updates: {
+    url: 'https://u.expo.dev/0911809f-55f6-48fb-9ea3-f5dd0d21a976',
     fallbackToCacheTimeout: 0,
   },
   runtimeVersion: {

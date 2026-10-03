@@ -1,0 +1,13 @@
+diff --git a/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt b/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt
+index b2409a09939164c49c0f7a16bb6d3284e8eab8fb..f07090ff1d2d9c869f45e85cbdcfc3218c1ab537 100644
+--- a/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt
++++ b/android/src/main/java/com/doublesymmetry/trackplayer/module/MusicModule.kt
+@@ -340,7 +340,7 @@ class MusicModule(reactContext: ReactApplicationContext) : ReactContextBaseJavaM
+             } else {
+                 val context: ReactContext = context
+                 val track = musicService.tracks[index]
+-                track.setMetadata(context, Arguments.toBundle(map), musicService.ratingType)
++                track.setMetadata(context, Arguments.toBundle(map) ?: android.os.Bundle(), musicService.ratingType)
+                 musicService.updateMetadataForTrack(index, track)
+ 
+                 callback.resolve(null)
