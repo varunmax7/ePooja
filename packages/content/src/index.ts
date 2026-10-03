@@ -103,6 +103,7 @@ export {
   parsePujaStepTemplateFile,
   stepsForVariant,
   stepsBySection,
+  composePujaSteps,
   STEP_SECTIONS,
   UPACHARAS,
   PUJA_VARIANTS,

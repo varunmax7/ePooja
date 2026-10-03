@@ -3,6 +3,168 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 6] — Audio engine & Puja Runner — 2026-10-04
+
+### Built
+
+- **`machines/pujaRunner.machine.ts`** (§9.7, XState v5) — the full state
+  diagram: `idle → preparing → step.{entry,instruction,awaitingAction,
+  chanting,done} → completed`, `PAUSE`/`RESUME` through a deep history state
+  so resuming lands back in the exact substate a devotee left (mid-action-
+  prompt included, not just "somewhere in this step"), `PREV`/`NEXT` at any
+  point, `EXIT` to an `exited` final state, and a namavali tap counter
+  clamped to the step's own count. Auto-advance and manual `NEXT` share one
+  code path — `done` simply re-raises `NEXT` when `autoAdvance` is on, so
+  "last step" only has to be decided in one place.
+- **§10 Phase 4's deferred composition, done** — `composePujaSteps` (new in
+  `@epooja/content`) splices `_shodashopachara.json`'s shared 16-upachara
+  sequence into a deity puja's own `*-pradhana-note` placeholder step
+  (detected structurally, by id suffix, not by name), re-ids the inserted
+  steps per deity so two pujas sharing the template can't collide, and
+  renumbers `order` sequentially. `services/content`'s new `runnableSteps`
+  composes-then-filters-by-variant in one call — the Nitya Puja (no
+  placeholder) passes through unchanged. Ganapathi/Lakshmi/Shiva are
+  runnable end to end for the first time.
+- **`services/audio` extended** — `queue.ts`'s `buildStepQueue(step, mode,
+  phase, sankalpamPlan?)` builds one Puja-Runner *phase*'s clip queue at a
+  time (`'instruction'` or `'chant'`), never both together — see its own
+  note on why that split matters once real audio exists. `useQueuePlayback`
+  loads a phase's queue into RNTP, reports `playing`/`position`/`duration`,
+  and calls back when the queue ends. `manifest.ts`'s `resolveClipUrl`
+  against the (currently empty) bundled clip list.
+- **The Chant Player, live** (§8.6) — `apps/mobile/app/player/[slug].tsx`
+  replaces the Phase 1 mock entirely: real `runnableSteps`, the machine
+  above, `MantraText` in the devotee's script, the action-prompt overlay in
+  Guided mode, a namavali tap target with haptics and a counter, Chant/
+  Guided mode toggle, a settings sheet (auto-advance, show meaning, 0.75/1/
+  1.25× rate) and a samagri checklist sheet reusing Phase 4's
+  `useChecklistStore`. The `dynamic: 'sankalpam'` step's chant comes from
+  `buildDevoteeSankalpamAudioPlan` (new alongside Phase 5's text builder,
+  sharing its input-mapping) and its displayed line is the full Sankalpam
+  text in the devotee's script.
+- **Session persistence** — `stores/session.ts`: a resume point per puja
+  (`EXIT` → `saveResumePoint`, read back on the next visit via
+  `resumeAtStepIndex`, cleared on completion) and a local log of finished
+  sessions (`user_puja_sessions`, capped at 200 entries) — the on-device
+  record every devotee gets regardless of sign-in, independent of Phase 8's
+  Supabase table of the same name.
+- **`expo-keep-awake`** wired to the machine's own state — active through
+  `preparing`/`step`/`paused`, released on `completed`/`exited`/unmount.
+- **`stores/downloads.ts`** — the shape §10 Phase 6 asks for
+  (`downloading`/`downloaded`/`failed`), with every bundled puja starting
+  `'bundled'`. Nothing downloads yet — there is no pack manifest or CDN
+  until Phase 8 — so this is honestly a shape, not a working pipeline; see
+  Not met.
+- **`tools/cue-tapper`** — a dependency-free static HTML page: play a clip,
+  tap (or press Space) once per line, export each line's `{startMs, endMs}`
+  to paste into the puja JSON by hand.
+- **`.maestro/run-nitya.yaml`** — written, matching the actual Chant Player
+  screen's text; not run here (see Not met).
+- **Tests** — 25 for the machine (every arrow in the §9.7 diagram gets its
+  own assertion — XState v5's `setup()` API has no model-based test runner
+  yet, the same kind of substitution Phase 2 made for Vitest 5's removed
+  `bench`), 20 for `services/audio` (queue building, the playback hook
+  against the RNTP jest mock), 4 for `composePujaSteps` plus 3 for
+  `runnableSteps`, 8 for the session store, 4 for the downloads store, 2
+  more for `buildDevoteeSankalpamAudioPlan`, and 5 for the Chant Player
+  screen itself — including one that drives the *entire* Nitya Puja from
+  `START` to the completion screen, step by step, inside Jest.
+  `@epooja/content` 135 (+4), `@epooja/mobile` 171 (+64).
+
+### Acceptance (§10)
+
+- **"Complete Nitya Puja end-to-end... with placeholder audio"** — proven in
+  Jest (`player.test.tsx`'s "completes the whole Nitya Puja end-to-end" test
+  walks all 8 short-variant steps, confirming every action prompt and
+  advancing, and lands on the completion screen with one session logged)
+  and authored for a real device in `.maestro/run-nitya.yaml`. "Both modes"
+  is covered by the Chant/Guided toggle test plus the machine's own 25
+  transition tests, which exercise both modes' routing directly.
+- **Lock-screen controls, incoming-call pause/resume, airplane mode, Maestro
+  itself** — not verified; see Not met. These need a device, same gap every
+  phase since Phase 0's audio spike has recorded.
+- **Highlight drift < 150 ms against cues** — not measurable: no chant clip
+  has cues (§9.6 recording has not started), so there is nothing to drift
+  against yet. The Chant Player shows one line (or the full Sankalpam text)
+  per step rather than faking a cue timeline against silence.
+
+### Found and fixed during verification
+
+- **A real design bug, caught before it shipped**: the first version of
+  `buildStepQueue` built a guided step's instruction *and* chant clips as
+  one combined RNTP queue, matching §9.6's prose literally
+  (`[instructionClip, (await action), chantClip]`) but not its intent —
+  with real audio, RNTP's single `PlaybackQueueEnded` event could only ever
+  fire once for the pair, leaving the machine with no way to tell "the
+  instruction ended" from "the chant ended," so `chanting → done` would
+  never fire on its own. It worked in every test anyway, because no clip
+  ever resolves yet — exactly the kind of bug "no real audio exists" lets
+  slip past tests undetected. Rebuilt `buildStepQueue` to take an explicit
+  `phase` and build one phase's queue at a time; the Chant Player now
+  reloads the queue itself when the machine's own substate changes between
+  `instruction` and `chanting`.
+- **`SafeAreaProvider` silently renders no children at all under Jest** —
+  no error, no warning, just an empty tree — because it waits for a native
+  `onLayout` measurement the test renderer never fires. Cost real time to
+  find (several trivial-component trials to isolate it from the Chant
+  Player's own complexity) before landing on the fix: the library ships
+  exactly this fix as `react-native-safe-area-context/jest/mock`, wired
+  into `jest.setup.js` for every test, not just this phase's — unwrapping
+  its ESM `export default` by hand, since the mock itself has no CJS build
+  Jest's `require` resolves to directly.
+- A test-mock bug of my own, same symptom class: `useRouter()` mocked with
+  a fresh `{ ..., replace: jest.fn() }` object on every call made the exit
+  effect's `router` dependency "change" every render, looping
+  `saveResumePoint` until React's update-depth guard tripped. The real
+  `expo-router` returns a stable object; the mock now does too.
+
+### Not met
+
+- **No device verification of anything RNTP-specific** — lock-screen
+  controls, audio-focus ducking, incoming-call pause/resume, background
+  playback. Phase 0's audio spike already recorded this machine has no
+  Xcode, Android SDK or simulator; nothing in this phase changes that.
+- **`.maestro/run-nitya.yaml` was not run**, for the same reason — no
+  Maestro CLI, no device. Written against the actual screen text and ready
+  to run (`maestro test .maestro/run-nitya.yaml`) on a real development
+  build.
+- **`tools/cue-tapper` was not exercised against a real recording** — none
+  exists yet (§9.6 has not started). Checked by hand against a synthetic
+  audio file only; see its own README.
+- **`services/content` downloads is a shape, not a pipeline** — there is no
+  pack manifest or CDN to download from (`pack-manifest` Edge Function,
+  `content_packs` table) until Phase 8. `useDownloadsStore` has the states
+  Phase 8 will need and nothing to drive them yet.
+- **No inter-clip-gap measurement, no server-render fallback** — both
+  depend on real stitched audio existing, which it does not (§9.6, §9.3's
+  own stub).
+
+### Deviations
+
+- "Model-based tests" (§10's own phrase for the machine) are an exhaustive
+  set of explicit transition tests, not `@xstate/test`/`@xstate/graph` —
+  neither has shipped a `setup()`-API-compatible release for XState v5 yet.
+  Same kind of substitution as Phase 2's benchmark harness, for the same
+  reason: the tool named in the plan does not exist for this version of the
+  library being used.
+- `buildStepQueue` takes an explicit `phase` argument instead of building a
+  whole step's queue at once — see "Found and fixed" above; this is the
+  corrected design, not the one §9.6's prose describes literally.
+- The Chant Player's settings sheet has no "text size" control: Dynamic
+  Type (§7.3, built in Phase 1) already covers that at the OS level, and a
+  second, player-local text-size setting would just be two controls
+  fighting over the same thing.
+- "Full Telugu UI" is explicitly Phase 9's (§10). The one place this phase
+  needed a devotee-facing phrase with no content-JSON home yet (the
+  completion screen's headline) uses English rather than hardcoding Telugu
+  in a `.tsx` file ahead of Phase 9's own i18n pass — §15's own rule, which
+  the lint rule itself only catches for string literals, not JSX text
+  children; this one had to be caught by hand.
+
+### New `TODO_PANDIT` items
+
+None — no content files touched this phase.
+
 ## [Phase 5] — Sankalpam text engine — 2026-10-03
 
 ### Built

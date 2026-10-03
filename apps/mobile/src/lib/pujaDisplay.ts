@@ -1,5 +1,6 @@
 import type { MaterialCommunityIcons } from '@expo/vector-icons';
-import { stepsForVariant, type PujaCatalogItem } from '@epooja/content';
+import { stepsForVariant, type ContentText, type PujaCatalogItem } from '@epooja/content';
+import type { MantraScript } from '@epooja/ui';
 
 /**
  * Presentation helpers shared by the catalog, detail and preparation screens.
@@ -36,4 +37,15 @@ export function shortStepCount(puja: PujaCatalogItem): number {
 /** The English title, falling back to Telugu for content that has no `en`. */
 export function pujaTitle(puja: PujaCatalogItem): string {
   return puja.title.en?.trim() || puja.title.te;
+}
+
+/**
+ * A `ContentText` in the devotee's chosen mantra script (§7.3), falling back
+ * to Telugu for a script a piece of content has no form in yet — content is
+ * never silently blank just because `dev`/`iast` have not been authored.
+ */
+export function contentTextFor(text: ContentText, script: MantraScript): string {
+  if (script === 'dev') return text.dev ?? text.te;
+  if (script === 'iast') return text.iast ?? text.te;
+  return text.te;
 }

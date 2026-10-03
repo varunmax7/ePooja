@@ -1,2 +1,2 @@
 export { SANKALPAM_CONTENT } from './content';
-export { buildDevoteeSankalpam } from './build';
+export { buildDevoteeSankalpam, buildDevoteeSankalpamAudioPlan } from './build';

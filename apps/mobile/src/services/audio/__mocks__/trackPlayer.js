@@ -16,6 +16,7 @@ module.exports = {
     skipToNext: jest.fn().mockResolvedValue(undefined),
     skipToPrevious: jest.fn().mockResolvedValue(undefined),
     getPosition: jest.fn().mockResolvedValue(0),
+    setRate: jest.fn().mockResolvedValue(undefined),
     registerPlaybackService: jest.fn(),
     addEventListener: jest.fn((event, handler) => {
       listeners.set(event, handler);
@@ -41,6 +42,8 @@ module.exports = {
     RemoteJumpForward: 'remote-jump-forward',
     RemoteJumpBackward: 'remote-jump-backward',
     PlaybackState: 'playback-state',
+    PlaybackQueueEnded: 'playback-queue-ended',
+    PlaybackActiveTrackChanged: 'playback-active-track-changed',
   },
   State: { None: 'none', Ready: 'ready', Playing: 'playing', Paused: 'paused' },
   RepeatMode: { Off: 0, Track: 1, Queue: 2 },

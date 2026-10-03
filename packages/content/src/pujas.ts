@@ -240,3 +240,50 @@ export function stepsBySection(
     steps: steps.filter((step) => step.section === section),
   })).filter((group) => group.steps.length > 0);
 }
+
+/**
+ * The id suffix Phase 4's deity skeletons use for their placeholder Pradhana
+ * step (`ganapathi-pradhana-note`, `lakshmi-pradhana-note`, …) — the one spot
+ * each skeleton names as "where the shared sequence attaches" rather than
+ * expanding by hand (§10 Phase 4: "Composing the two mechanically is Phase 6
+ * puja-runner work").
+ */
+const PRADHANA_NOTE_SUFFIX = '-pradhana-note';
+
+/**
+ * Splices `_shodashopachara.json`'s shared 16-upachara sequence into a deity
+ * puja's own Pradhana placeholder step, so the Puja Runner (Phase 6) has a
+ * single, fully-ordered step list to walk — instead of the skeleton's own
+ * note telling a devotee to imagine the rest.
+ *
+ * A puja with no `*-pradhana-note` step (the Nitya Puja, already fully
+ * authored by hand in Phase 4) passes through unchanged: composition is
+ * additive, never required.
+ *
+ * The inserted steps are re-ided `${puja.deity}-${templateStep.id}` so two
+ * different deity pujas sharing the same template can never collide, and
+ * every step's `order` is renumbered sequentially — the placeholder step it
+ * replaces only ever appears in the `full` variant, so an inserted step keeps
+ * that restriction unless the template step already narrows it further.
+ */
+export function composePujaSteps(
+  puja: PujaCatalogItem,
+  shodashopachara: PujaStepTemplateFile,
+): PujaStep[] {
+  const sorted = [...puja.steps].sort((a, b) => a.order - b.order);
+  const noteIndex = sorted.findIndex((step) => step.id.endsWith(PRADHANA_NOTE_SUFFIX));
+  if (noteIndex === -1) return sorted;
+
+  const before = sorted.slice(0, noteIndex);
+  const after = sorted.slice(noteIndex + 1);
+  const inserted = shodashopachara.steps.map((step) => ({
+    ...step,
+    id: `${puja.deity}-${step.id}`,
+    variants: step.variants ?? (['full'] satisfies PujaVariant[]),
+  }));
+
+  return [...before, ...inserted, ...after].map((step, index) => ({
+    ...step,
+    order: index + 1,
+  }));
+}

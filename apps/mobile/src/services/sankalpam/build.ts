@@ -1,23 +1,21 @@
 import type { Devotee } from '@epooja/content';
-import { buildSankalpamText, type SankalpamInput, type SankalpamText } from '@epooja/sankalpam';
+import {
+  buildSankalpamAudioPlan,
+  buildSankalpamText,
+  type AudioPlanItem,
+  type SankalpamInput,
+  type SankalpamText,
+} from '@epooja/sankalpam';
 import type { PanchangamData } from '@epooja/panchangam';
 import { SANKALPAM_CONTENT } from './content';
 
-/**
- * Turns the devotee's own record plus a computed `PanchangamData` into the
- * §9.3 Sankalpam, for the "Preview Sankalpam" card on Profile (§10 Phase 5).
- *
- * Returns `null` only when the devotee has no location yet (onboarding
- * incomplete) — everything else a devotee can leave blank (gotra,
- * nakshatra…) is the engine's own `⟨MISSING:slot⟩` business, not this
- * wrapper's.
- */
-export function buildDevoteeSankalpam(
+/** The `@epooja/sankalpam` input for one devotee, on one day, for one puja's deity. */
+function sankalpamInputFor(
   devotee: Devotee,
   panchangam: PanchangamData,
   deity: string,
-): SankalpamText {
-  const input: SankalpamInput = {
+): SankalpamInput {
+  return {
     devotee: {
       name: devotee.name,
       gender: devotee.gender,
@@ -48,6 +46,34 @@ export function buildDevoteeSankalpam(
     },
     deity,
   };
+}
 
-  return buildSankalpamText(input, SANKALPAM_CONTENT);
+/**
+ * Turns the devotee's own record plus a computed `PanchangamData` into the
+ * §9.3 Sankalpam, for the "Preview Sankalpam" card on Profile (§10 Phase 5).
+ *
+ * Returns `null` only when the devotee has no location yet (onboarding
+ * incomplete) — everything else a devotee can leave blank (gotra,
+ * nakshatra…) is the engine's own `⟨MISSING:slot⟩` business, not this
+ * wrapper's.
+ */
+export function buildDevoteeSankalpam(
+  devotee: Devotee,
+  panchangam: PanchangamData,
+  deity: string,
+): SankalpamText {
+  return buildSankalpamText(sankalpamInputFor(devotee, panchangam, deity), SANKALPAM_CONTENT);
+}
+
+/**
+ * The same Sankalpam's audio queue (§9.3's `buildSankalpamAudioPlan`, §10
+ * Phase 5's stub durations) — what the Puja Runner's `dynamic: 'sankalpam'`
+ * step (§10 Phase 6) loads into `services/audio`'s queue builder.
+ */
+export function buildDevoteeSankalpamAudioPlan(
+  devotee: Devotee,
+  panchangam: PanchangamData,
+  deity: string,
+): AudioPlanItem[] {
+  return buildSankalpamAudioPlan(sankalpamInputFor(devotee, panchangam, deity), SANKALPAM_CONTENT);
 }

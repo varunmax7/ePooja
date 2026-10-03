@@ -1,16 +1,22 @@
 import {
+  composePujaSteps,
   parseNaivedyamFile,
   parsePujaFile,
+  parsePujaStepTemplateFile,
   parseSamagriFile,
+  stepsForVariant,
   type NaivedyamRecipe,
   type PujaCatalogItem,
   type PujaCategory,
+  type PujaStep,
+  type PujaVariant,
   type SamagriItem,
 } from '@epooja/content';
 import nityaPuja from '@/../../../content/pujas/nitya-puja.json';
 import ganapathiPuja from '@/../../../content/pujas/ganapathi-puja.json';
 import lakshmiPuja from '@/../../../content/pujas/lakshmi-puja.json';
 import shivaPuja from '@/../../../content/pujas/shiva-puja.json';
+import shodashopacharaFile from '@/../../../content/pujas/_shodashopachara.json';
 import samagriFile from '@/../../../content/samagri/items.json';
 import naivedyamFile from '@/../../../content/naivedyam/recipes.json';
 
@@ -37,6 +43,8 @@ export const PUJAS: readonly PujaCatalogItem[] = [
   parsePujaFile(lakshmiPuja),
   parsePujaFile(shivaPuja),
 ];
+
+const SHODASHOPACHARA = parsePujaStepTemplateFile(shodashopacharaFile);
 
 export const SAMAGRI: readonly SamagriItem[] = parseSamagriFile(samagriFile).items;
 export const RECIPES: readonly NaivedyamRecipe[] = parseNaivedyamFile(naivedyamFile).recipes;
@@ -67,6 +75,18 @@ export function samagriForPuja(puja: PujaCatalogItem): SamagriItem[] {
   return puja.samagri
     .map((id) => SAMAGRI_BY_ID.get(id))
     .filter((item): item is SamagriItem => item !== undefined);
+}
+
+/**
+ * The steps the Puja Runner (§10 Phase 6) actually walks for a given
+ * duration variant: a deity puja's own steps with `_shodashopachara.json`
+ * spliced in at its Pradhana placeholder (§9.5/Phase 4's deferred
+ * composition), filtered to the requested variant. A no-op splice for the
+ * Nitya Puja, which has no placeholder to begin with.
+ */
+export function runnableSteps(puja: PujaCatalogItem, variant: PujaVariant): PujaStep[] {
+  const composed = composePujaSteps(puja, SHODASHOPACHARA);
+  return stepsForVariant({ ...puja, steps: composed }, variant);
 }
 
 /** The naivedyam recipes a puja calls for, in the order the puja lists them. */

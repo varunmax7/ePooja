@@ -6,6 +6,7 @@ import {
   catalogSections,
   pujaBySlug,
   recipesForPuja,
+  runnableSteps,
   samagriForPuja,
 } from '@/services/content';
 
@@ -90,5 +91,34 @@ describe('duration variants', () => {
 
     expect(short.length).toBeLessThan(full.length);
     expect(short.every((id) => full.includes(id))).toBe(true);
+  });
+});
+
+describe('runnableSteps (§10 Phase 6 composition)', () => {
+  it("passes the Nitya Puja through unchanged — it has no pradhana-note placeholder", () => {
+    const nitya = pujaBySlug('nitya-puja');
+    if (!nitya) throw new Error('seed puja missing');
+
+    expect(runnableSteps(nitya, 'full').map((s) => s.id)).toEqual(
+      stepsForVariant(nitya, 'full').map((s) => s.id),
+    );
+  });
+
+  it('splices the shared Shodashopachara sequence into a deity puja for the full variant', () => {
+    const ganapathi = pujaBySlug('ganapathi-puja');
+    if (!ganapathi) throw new Error('seed puja missing');
+
+    const full = runnableSteps(ganapathi, 'full');
+    expect(full.some((s) => s.id === 'ganapathi-pradhana-note')).toBe(false);
+    expect(full.some((s) => s.id.startsWith('ganapathi-') && s.upachara === 'avahana')).toBe(true);
+    expect(full.length).toBeGreaterThan(stepsForVariant(ganapathi, 'full').length);
+  });
+
+  it("the short variant never sees the placeholder or the composed sequence", () => {
+    const ganapathi = pujaBySlug('ganapathi-puja');
+    if (!ganapathi) throw new Error('seed puja missing');
+
+    const short = runnableSteps(ganapathi, 'short');
+    expect(short.some((s) => s.id.includes('pradhana'))).toBe(false);
   });
 });

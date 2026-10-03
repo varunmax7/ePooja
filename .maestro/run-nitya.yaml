@@ -1,0 +1,59 @@
+# §10 Phase 6 acceptance: "complete Nitya Puja end-to-end in both modes with
+# placeholder audio... Maestro `run-nitya.yaml` passes."
+#
+# Not run in this environment — no Xcode, Android SDK or Maestro CLI here
+# (the same limitation `.maestro/onboarding.yaml` already recorded). Authored
+# against the actual screens, ready for a real development build:
+# `maestro test .maestro/run-nitya.yaml`.
+#
+# §9.6 recording has not started, so every clip is unresolved and
+# `useQueuePlayback` treats a step's audio as finished the instant it would
+# start (see that hook's own note) — this flow still exercises the real
+# thing Phase 6 built: every Puja Runner state transition, in order, driven
+# by taps a devotee would actually make. The equivalent Jest proof — the
+# same walkthrough, minus the device — is
+# `apps/mobile/src/screens/__tests__/player.test.tsx`'s "completes the whole
+# Nitya Puja end-to-end" test, which does run in this environment.
+appId: com.epooja.app
+---
+- launchApp:
+    clearState: true
+
+# Quick onboarding (abridged from `.maestro/onboarding.yaml`) — this flow is
+# about the runner, not the onboarding steps already covered there.
+- tapOn: 'Begin'
+- tapOn: 'Continue'
+- tapOn: 'Your name'
+- inputText: 'Maestro Devotee'
+- tapOn: 'Continue'
+- tapOn: 'Continue'
+- tapOn: 'Hyderabad, Dallas, London…'
+- inputText: 'Hyderabad'
+- tapOn: 'Hyderabad, Telangana'
+- tapOn: 'Finish'
+- assertVisible: 'Vedic Calendar – Today'
+
+# Into the catalog, open the daily Nitya Puja, and start the short variant.
+- tapOn: 'Poojas'
+- tapOn: 'Daily Nitya Puja'
+- tapOn: 'Start'
+- assertVisible: 'Step 1 of 8:'
+
+# Walk every step of the short variant (§10 Phase 6 composition — the Nitya
+# Puja needs none of it, it is already fully authored by hand): confirm the
+# action prompt where one exists, then advance. `optional: true` on the
+# "Done" tap is what makes one flow cover both kinds of step without
+# branching per id.
+- repeat:
+    times: 8
+    commands:
+      - tapOn:
+          text: 'Done'
+          optional: true
+      - tapOn:
+          text: 'Next step'
+          optional: true
+
+- assertVisible: 'Pooja Sampoornam'
+- tapOn: 'Done'
+- assertVisible: 'Vedic Calendar – Today'

@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { parsePujaFile, stepsBySection, stepsForVariant } from './pujas';
+import {
+  composePujaSteps,
+  parsePujaFile,
+  parsePujaStepTemplateFile,
+  stepsBySection,
+  stepsForVariant,
+} from './pujas';
 
 const base = {
   id: 'nitya-puja-short',
@@ -111,6 +117,73 @@ describe('stepsForVariant', () => {
       steps: [{ ...base.steps[0], variants: undefined }],
     });
     expect(stepsForVariant(puja2, 'short').map((s) => s.id)).toEqual(['deeparadhana']);
+  });
+});
+
+describe('composePujaSteps', () => {
+  const template = parsePujaStepTemplateFile({
+    kind: 'puja-step-template',
+    review: { status: 'PENDING_PANDIT_REVIEW', reviewer: null, date: null },
+    steps: [
+      { id: 'avahana', order: 1, section: 'pradhana', title: { te: 'ఆవాహనం' }, chant: { audioId: 'chant.avahana', lines: [] } },
+      { id: 'naivedya', order: 2, section: 'pradhana', title: { te: 'నైవేద్యం' }, chant: { audioId: 'chant.naivedya', lines: [] } },
+    ],
+  });
+
+  const skeleton = parsePujaFile({
+    ...base,
+    id: 'ganapathi-puja',
+    slug: 'ganapathi-puja',
+    deity: 'ganapathi',
+    category: 'deity' as const,
+    steps: [
+      base.steps[0],
+      {
+        id: 'ganapathi-pradhana-note',
+        order: 2,
+        section: 'pradhana' as const,
+        title: { te: 'షోడశోపచార పూజ' },
+        instruction: { text: { te: '⟨TODO_PANDIT: pradhana_note_te⟩' }, audioId: 'instr.pradhana-note' },
+        variants: ['full'] as const,
+      },
+      base.steps[3],
+    ],
+  });
+
+  it('splices the shared template in at the placeholder step, renumbering order', () => {
+    const composed = composePujaSteps(skeleton, template);
+    expect(composed.map((s) => s.id)).toEqual([
+      'deeparadhana',
+      'ganapathi-avahana',
+      'ganapathi-naivedya',
+      'harathi',
+    ]);
+    expect(composed.map((s) => s.order)).toEqual([1, 2, 3, 4]);
+  });
+
+  it('restricts the inserted steps to the full variant, same as the placeholder they replace', () => {
+    const composed = composePujaSteps(skeleton, template);
+    const short = stepsForVariant({ ...skeleton, steps: composed }, 'short');
+    expect(short.map((s) => s.id)).toEqual(['deeparadhana', 'harathi']);
+
+    const full = stepsForVariant({ ...skeleton, steps: composed }, 'full');
+    expect(full.map((s) => s.id)).toEqual([
+      'deeparadhana',
+      'ganapathi-avahana',
+      'ganapathi-naivedya',
+      'harathi',
+    ]);
+  });
+
+  it('prefixes inserted ids by deity so two deity pujas sharing the template never collide', () => {
+    const shivaComposed = composePujaSteps({ ...skeleton, deity: 'shiva' }, template);
+    expect(shivaComposed.map((s) => s.id)).toContain('shiva-avahana');
+  });
+
+  it('passes a puja through unchanged when it has no pradhana-note placeholder', () => {
+    const puja = parsePujaFile(base);
+    const composed = composePujaSteps(puja, template);
+    expect(composed.map((s) => s.id)).toEqual(puja.steps.map((s) => s.id));
   });
 });
 

@@ -1,6 +1,6 @@
 import type { Devotee } from '@epooja/content';
 import type { PanchangamData } from '@epooja/panchangam';
-import { buildDevoteeSankalpam } from '@/services/sankalpam';
+import { buildDevoteeSankalpam, buildDevoteeSankalpamAudioPlan } from '@/services/sankalpam';
 
 /**
  * §10 Phase 5: the "Preview Sankalpam" card renders live, so the wrapper
@@ -99,5 +99,19 @@ describe('buildDevoteeSankalpam', () => {
     const devotee: Devotee = { ...DEVOTEE, gotraId: undefined, gotraCustom: undefined };
     const text = buildDevoteeSankalpam(devotee, PANCHANGAM, 'ganapathi');
     expect(text.te).toContain('⟨MISSING:GOTRA⟩');
+  });
+});
+
+describe('buildDevoteeSankalpamAudioPlan', () => {
+  it('builds an ordered audio plan from the same devotee + Panchangam mapping', () => {
+    const plan = buildDevoteeSankalpamAudioPlan(DEVOTEE, PANCHANGAM, 'ganapathi');
+    expect(plan.length).toBeGreaterThan(0);
+    expect(plan[0]).toMatchObject({ kind: 'clip', segmentId: 'purpose' });
+  });
+
+  it('self-recites the custom gotra, matching the text builder’s own choice', () => {
+    const plan = buildDevoteeSankalpamAudioPlan(DEVOTEE, PANCHANGAM, 'ganapathi');
+    const gotra = plan.find((item) => item.segmentId === 'gotra');
+    expect(gotra).toMatchObject({ kind: 'self_recite', slot: 'GOTRA' });
   });
 });
