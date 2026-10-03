@@ -20,55 +20,64 @@ the running list of everything still waiting on that review.
 
 <!-- BEGIN GENERATED: placeholders -->
 
-**922 placeholders** across 19 files.
+**961 placeholders** across 23 files.
 
-| File                          | Count | Placeholder ids                                                                                                                                                                             |
-| ----------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enums/ayana.json`            | 10    | `ayana_uttarayana_te`, `ayana_uttarayana_iast`, `ayana_uttarayana_dev`, `ayana_uttarayana_locative_te`, `ayana_uttarayana_locative_iast`, `ayana_dakshinayana_te`, … +4 more                |
-| `enums/dik.json`              | 32    | `dik_purva_te`, `dik_purva_dev`, `dik_purva_locative_te`, `dik_purva_locative_iast`, `dik_agneya_te`, `dik_agneya_dev`, … +26 more                                                          |
-| `enums/karana.json`           | 44    | `karana_kimstughna_te`, `karana_kimstughna_dev`, `karana_kimstughna_locative_te`, `karana_kimstughna_locative_iast`, `karana_bava_te`, `karana_bava_dev`, … +38 more                        |
-| `enums/masa.json`             | 48    | `masa_chaitra_iast`, `masa_chaitra_dev`, `masa_chaitra_locative_te`, `masa_chaitra_locative_iast`, `masa_vaishakha_iast`, `masa_vaishakha_dev`, … +42 more                                  |
-| `enums/nakshatra.json`        | 108   | `nakshatra_ashvini_iast`, `nakshatra_ashvini_dev`, `nakshatra_ashvini_locative_te`, `nakshatra_ashvini_locative_iast`, `nakshatra_bharani_iast`, `nakshatra_bharani_dev`, … +102 more       |
-| `enums/rasi.json`             | 60    | `rasi_mesha_te`, `rasi_mesha_iast`, `rasi_mesha_dev`, `rasi_mesha_locative_te`, `rasi_mesha_locative_iast`, `rasi_vrishabha_te`, … +54 more                                                 |
-| `enums/ruthu.json`            | 24    | `ruthu_vasanta_te`, `ruthu_vasanta_dev`, `ruthu_vasanta_locative_te`, `ruthu_vasanta_locative_iast`, `ruthu_grishma_te`, `ruthu_grishma_dev`, … +18 more                                    |
-| `enums/samvatsara.json`       | 240   | `samvatsara_prabhava_te`, `samvatsara_prabhava_dev`, `samvatsara_prabhava_locative_te`, `samvatsara_prabhava_locative_iast`, `samvatsara_vibhava_te`, `samvatsara_vibhava_dev`, … +234 more |
-| `enums/tithi.json`            | 150   | `tithi_shukla_1_te`, `tithi_shukla_1_iast`, `tithi_shukla_1_dev`, `tithi_shukla_1_locative_te`, `tithi_shukla_1_locative_iast`, `tithi_shukla_2_te`, … +144 more                            |
-| `enums/vasara.json`           | 28    | `vasara_bhanu_iast`, `vasara_bhanu_dev`, `vasara_bhanu_locative_te`, `vasara_bhanu_locative_iast`, `vasara_indu_iast`, `vasara_indu_dev`, … +22 more                                        |
-| `enums/yoga.json`             | 108   | `yoga_vishkambha_te`, `yoga_vishkambha_dev`, `yoga_vishkambha_locative_te`, `yoga_vishkambha_locative_iast`, `yoga_priti_te`, `yoga_priti_dev`, … +102 more                                 |
-| `naivedyam/recipes.json`      | 26    | `panchamrutham_step_1_te`, `panchamrutham_step_2_te`, `panchamrutham_step_3_te`, `panchamrutham_note_1_te`, `panchamrutham_note_2_te`, `pulihora_step_1_te`, … +20 more                     |
-| `pujas/_shodashopachara.json` | 18    | `dhyana_line_1`, `avahana_line_1`, `asana_line_1`, `padya_line_1`, `arghya_line_1`, `achamaniya_line_1`, … +12 more                                                                         |
-| `pujas/ganapathi-puja.json`   | 3     | `ganapathi_puja_description_te`, `ganapathi_pradhana_note_te`, `ganapathi_harathi_line_1`                                                                                                   |
-| `pujas/lakshmi-puja.json`     | 4     | `lakshmi_puja_description_te`, `lakshmi_dhyana_line_1`, `lakshmi_pradhana_note_te`, `lakshmi_harathi_line_1`                                                                                |
-| `pujas/nitya-puja.json`       | 10    | `nitya_puja_description_te`, `deeparadhana_shloka_line_1`, `remaining_keshavadi_namas`, `pranayamam_line_1`, `kalasharadhanam_line_1`, `ashtottaram_name_1`, … +4 more                      |
-| `pujas/shiva-puja.json`       | 4     | `shiva_puja_description_te`, `shiva_dhyana_line_1`, `shiva_pradhana_note_te`, `shiva_harathi_line_1`                                                                                        |
-| `samagri/items.json`          | 2     | `yagnopavitam_te`, `yagnopavitam_notes_te`                                                                                                                                                  |
-| `timings.json`                | 3     | `sandhya_pratah`, `sandhya_madhyahnika`, `sandhya_sayam`                                                                                                                                    |
+| File                           | Count | Placeholder ids                                                                                                                                                                             |
+| ------------------------------ | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enums/ayana.json`             | 10    | `ayana_uttarayana_te`, `ayana_uttarayana_iast`, `ayana_uttarayana_dev`, `ayana_uttarayana_locative_te`, `ayana_uttarayana_locative_iast`, `ayana_dakshinayana_te`, … +4 more                |
+| `enums/dik.json`               | 32    | `dik_purva_te`, `dik_purva_dev`, `dik_purva_locative_te`, `dik_purva_locative_iast`, `dik_agneya_te`, `dik_agneya_dev`, … +26 more                                                          |
+| `enums/karana.json`            | 44    | `karana_kimstughna_te`, `karana_kimstughna_dev`, `karana_kimstughna_locative_te`, `karana_kimstughna_locative_iast`, `karana_bava_te`, `karana_bava_dev`, … +38 more                        |
+| `enums/masa.json`              | 48    | `masa_chaitra_iast`, `masa_chaitra_dev`, `masa_chaitra_locative_te`, `masa_chaitra_locative_iast`, `masa_vaishakha_iast`, `masa_vaishakha_dev`, … +42 more                                  |
+| `enums/nakshatra.json`         | 108   | `nakshatra_ashvini_iast`, `nakshatra_ashvini_dev`, `nakshatra_ashvini_locative_te`, `nakshatra_ashvini_locative_iast`, `nakshatra_bharani_iast`, `nakshatra_bharani_dev`, … +102 more       |
+| `enums/paksha.json`            | 4     | `paksha_shukla_locative_te`, `paksha_shukla_locative_iast`, `paksha_krishna_locative_te`, `paksha_krishna_locative_iast`                                                                    |
+| `enums/rasi.json`              | 60    | `rasi_mesha_te`, `rasi_mesha_iast`, `rasi_mesha_dev`, `rasi_mesha_locative_te`, `rasi_mesha_locative_iast`, `rasi_vrishabha_te`, … +54 more                                                 |
+| `enums/ruthu.json`             | 24    | `ruthu_vasanta_te`, `ruthu_vasanta_dev`, `ruthu_vasanta_locative_te`, `ruthu_vasanta_locative_iast`, `ruthu_grishma_te`, `ruthu_grishma_dev`, … +18 more                                    |
+| `enums/samvatsara.json`        | 240   | `samvatsara_prabhava_te`, `samvatsara_prabhava_dev`, `samvatsara_prabhava_locative_te`, `samvatsara_prabhava_locative_iast`, `samvatsara_vibhava_te`, `samvatsara_vibhava_dev`, … +234 more |
+| `enums/tithi.json`             | 150   | `tithi_shukla_1_te`, `tithi_shukla_1_iast`, `tithi_shukla_1_dev`, `tithi_shukla_1_locative_te`, `tithi_shukla_1_locative_iast`, `tithi_shukla_2_te`, … +144 more                            |
+| `enums/vasara.json`            | 28    | `vasara_bhanu_iast`, `vasara_bhanu_dev`, `vasara_bhanu_locative_te`, `vasara_bhanu_locative_iast`, `vasara_indu_iast`, `vasara_indu_dev`, … +22 more                                        |
+| `enums/yoga.json`              | 108   | `yoga_vishkambha_te`, `yoga_vishkambha_dev`, `yoga_vishkambha_locative_te`, `yoga_vishkambha_locative_iast`, `yoga_priti_te`, `yoga_priti_dev`, … +102 more                                 |
+| `naivedyam/recipes.json`       | 26    | `panchamrutham_step_1_te`, `panchamrutham_step_2_te`, `panchamrutham_step_3_te`, `panchamrutham_note_1_te`, `panchamrutham_note_2_te`, `pulihora_step_1_te`, … +20 more                     |
+| `pujas/_shodashopachara.json`  | 18    | `dhyana_line_1`, `avahana_line_1`, `asana_line_1`, `padya_line_1`, `arghya_line_1`, `achamaniya_line_1`, … +12 more                                                                         |
+| `pujas/ganapathi-puja.json`    | 3     | `ganapathi_puja_description_te`, `ganapathi_pradhana_note_te`, `ganapathi_harathi_line_1`                                                                                                   |
+| `pujas/lakshmi-puja.json`      | 4     | `lakshmi_puja_description_te`, `lakshmi_dhyana_line_1`, `lakshmi_pradhana_note_te`, `lakshmi_harathi_line_1`                                                                                |
+| `pujas/nitya-puja.json`        | 10    | `nitya_puja_description_te`, `deeparadhana_shloka_line_1`, `remaining_keshavadi_namas`, `pranayamam_line_1`, `kalasharadhanam_line_1`, `ashtottaram_name_1`, … +4 more                      |
+| `pujas/shiva-puja.json`        | 4     | `shiva_puja_description_te`, `shiva_dhyana_line_1`, `shiva_pradhana_note_te`, `shiva_harathi_line_1`                                                                                        |
+| `samagri/items.json`           | 2     | `yagnopavitam_te`, `yagnopavitam_notes_te`                                                                                                                                                  |
+| `sankalpam/deity-names.json`   | 1     | `deity_generic_te`                                                                                                                                                                          |
+| `sankalpam/geo-regions.json`   | 25    | `geo_usa_dvipa_te`, `geo_usa_varsha_te`, `geo_usa_khanda_te`, `geo_usa_meru_te`, `geo_canada_dvipa_te`, `geo_canada_varsha_te`, … +19 more                                                  |
+| `sankalpam/suffix-tables.json` | 9     | `spouse_clause_female_te`, `family_term_spouse_te`, `family_term_son_te`, `family_term_daughter_te`, `family_term_father_te`, `family_term_mother_te`, … +3 more                            |
+| `timings.json`                 | 3     | `sandhya_pratah`, `sandhya_madhyahnika`, `sandhya_sayam`                                                                                                                                    |
 
 ### File review status
 
-| File                          | Status     |
-| ----------------------------- | ---------- |
-| `cities.json`                 | ⬜ pending |
-| `enums/ayana.json`            | ⬜ pending |
-| `enums/dik.json`              | ⬜ pending |
-| `enums/gotra.json`            | ⬜ pending |
-| `enums/karana.json`           | ⬜ pending |
-| `enums/masa.json`             | ⬜ pending |
-| `enums/nakshatra.json`        | ⬜ pending |
-| `enums/rasi.json`             | ⬜ pending |
-| `enums/ruthu.json`            | ⬜ pending |
-| `enums/samvatsara.json`       | ⬜ pending |
-| `enums/tithi.json`            | ⬜ pending |
-| `enums/vasara.json`           | ⬜ pending |
-| `enums/yoga.json`             | ⬜ pending |
-| `naivedyam/recipes.json`      | ⬜ pending |
-| `pujas/_shodashopachara.json` | ⬜ pending |
-| `pujas/ganapathi-puja.json`   | ⬜ pending |
-| `pujas/lakshmi-puja.json`     | ⬜ pending |
-| `pujas/nitya-puja.json`       | ⬜ pending |
-| `pujas/shiva-puja.json`       | ⬜ pending |
-| `samagri/items.json`          | ⬜ pending |
-| `timings.json`                | ⬜ pending |
+| File                           | Status     |
+| ------------------------------ | ---------- |
+| `cities.json`                  | ⬜ pending |
+| `enums/ayana.json`             | ⬜ pending |
+| `enums/dik.json`               | ⬜ pending |
+| `enums/gotra.json`             | ⬜ pending |
+| `enums/karana.json`            | ⬜ pending |
+| `enums/masa.json`              | ⬜ pending |
+| `enums/nakshatra.json`         | ⬜ pending |
+| `enums/paksha.json`            | ⬜ pending |
+| `enums/rasi.json`              | ⬜ pending |
+| `enums/ruthu.json`             | ⬜ pending |
+| `enums/samvatsara.json`        | ⬜ pending |
+| `enums/tithi.json`             | ⬜ pending |
+| `enums/vasara.json`            | ⬜ pending |
+| `enums/yoga.json`              | ⬜ pending |
+| `naivedyam/recipes.json`       | ⬜ pending |
+| `pujas/_shodashopachara.json`  | ⬜ pending |
+| `pujas/ganapathi-puja.json`    | ⬜ pending |
+| `pujas/lakshmi-puja.json`      | ⬜ pending |
+| `pujas/nitya-puja.json`        | ⬜ pending |
+| `pujas/shiva-puja.json`        | ⬜ pending |
+| `samagri/items.json`           | ⬜ pending |
+| `sankalpam/deity-names.json`   | ⬜ pending |
+| `sankalpam/geo-regions.json`   | ⬜ pending |
+| `sankalpam/suffix-tables.json` | ⬜ pending |
+| `sankalpam/template.json`      | ⬜ pending |
+| `timings.json`                 | ⬜ pending |
 
 <!-- END GENERATED -->
 

@@ -1,0 +1,185 @@
+{
+  "$schema": "../schemas/sankalpam-template.schema.json",
+  "kind": "sankalpam-template",
+  "note": "The §9.3 structure reference, segmented into fixed clauses and slots. Every `fixed` segment's `iast` is the client's own literal spec text (traditional Smartha Sankalpam wording); `te` and `dev` are mechanically transliterated from it via @indic-transliteration/sanscript — the same script-conversion tools/content-build already does for puja content, never inventing wording (§0.4). `gotrodbhava-male`/`-female` transliterate to గోత్రోద్భవస్య/గోత్రోద్భవాయాః, an exact match to §3.6's own worked example — a check this content passed. §3.3's typo correction (ఏవం గుణ విశేషణ విశిష్టాయాం, not the Sinhala-glyph version in the client's original) is used verbatim for that segment.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "segments": [
+    {
+      "type": "fixed",
+      "id": "purpose",
+      "text": {
+        "iast": "mamopātta samasta durita kṣayadvārā śrī parameśvara prītyartham",
+        "te": "మమోపాత్త సమస్త దురిత క్షయద్వారా శ్రీ పరమేశ్వర ప్రీత్యర్థమ్",
+        "dev": "ममोपात्त समस्त दुरित क्षयद्वारा श्री परमेश्वर प्रीत्यर्थम्"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "auspicious-moment",
+      "text": {
+        "iast": "śubhe śobhane muhūrte",
+        "te": "శుభే శోభనే ముహూర్తే",
+        "dev": "शुभे शोभने मुहूर्ते"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "vishnu-ajna",
+      "text": {
+        "iast": "śrī mahāviṣṇor ājñayā pravartamānasya",
+        "te": "శ్రీ మహావిష్ణోర్ ఆజ్ఞయా ప్రవర్తమానస్య",
+        "dev": "श्री महाविष्णोर् आज्ञया प्रवर्तमानस्य"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "brahma-parardha",
+      "text": {
+        "iast": "adya brahmaṇaḥ dvitīya parārdhe",
+        "te": "అద్య బ్రహ్మణః ద్వితీయ పరార్ధే",
+        "dev": "अद्य ब्रह्मणः द्वितीय परार्धे"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "kalpa",
+      "text": {
+        "iast": "śvetavarāha kalpe",
+        "te": "శ్వేతవరాహ కల్పే",
+        "dev": "श्वेतवराह कल्पे"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "manvantara",
+      "text": {
+        "iast": "vaivasvata manvantare",
+        "te": "వైవస్వత మన్వన్తరే",
+        "dev": "वैवस्वत मन्वन्तरे"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "yuga-pada",
+      "text": {
+        "iast": "kaliyuge prathama pāde",
+        "te": "కలియుగే ప్రథమ పాదే",
+        "dev": "कलियुगे प्रथम पादे"
+      }
+    },
+    { "type": "slot", "id": "geo-dvipa", "slot": "GEO.dvipa", "optional": false },
+    { "type": "slot", "id": "geo-varsha", "slot": "GEO.varsha", "optional": false },
+    { "type": "slot", "id": "geo-khanda", "slot": "GEO.khanda", "optional": false },
+    { "type": "slot", "id": "geo-meru", "slot": "GEO.meru", "optional": false },
+    {
+      "type": "slot",
+      "id": "geo-srisaila-dik",
+      "slot": "GEO.srisaila_dik",
+      "optional": true
+    },
+    {
+      "type": "slot",
+      "id": "geo-river-region",
+      "slot": "GEO.river_region",
+      "optional": true
+    },
+    {
+      "type": "fixed",
+      "id": "shobhana-grihe",
+      "text": {
+        "iast": "śobhana gṛhe",
+        "te": "శోభన గృహే",
+        "dev": "शोभन गृहे"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "devata-sannidhau",
+      "text": {
+        "iast": "samasta devatā brāhmaṇa harihara guru caraṇa sannidhau",
+        "te": "సమస్త దేవతా బ్రాహ్మణ హరిహర గురు చరణ సన్నిధౌ",
+        "dev": "समस्त देवता ब्राह्मण हरिहर गुरु चरण सन्निधौ"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "vyavaharika-chandramanena",
+      "text": {
+        "iast": "asmin vartamāna vyāvahārika cāndramānena",
+        "te": "అస్మిన్ వర్తమాన వ్యావహారిక చాన్ద్రమానేన",
+        "dev": "अस्मिन् वर्तमान व्यावहारिक चान्द्रमानेन"
+      }
+    },
+    { "type": "slot", "id": "samvatsara", "slot": "SAMVATSARA", "optional": false },
+    {
+      "type": "fixed",
+      "id": "nama-samvatsare",
+      "text": {
+        "iast": "nāma saṃvatsare",
+        "te": "నామ సంవత్సరే",
+        "dev": "नाम संवत्सरे"
+      }
+    },
+    { "type": "slot", "id": "ayana", "slot": "AYANA", "optional": false },
+    { "type": "slot", "id": "ritu", "slot": "RITU", "optional": false },
+    { "type": "slot", "id": "masa", "slot": "MASA", "optional": false },
+    { "type": "slot", "id": "paksha", "slot": "PAKSHA", "optional": false },
+    { "type": "slot", "id": "tithi", "slot": "TITHI", "optional": false },
+    { "type": "slot", "id": "vasara", "slot": "VASARA", "optional": false },
+    { "type": "slot", "id": "nakshatra", "slot": "NAKSHATRA", "optional": false },
+    { "type": "slot", "id": "yoga", "slot": "YOGA", "optional": false },
+    { "type": "slot", "id": "karana", "slot": "KARANA", "optional": false },
+    {
+      "type": "fixed",
+      "id": "evam-guna-visheshana",
+      "text": {
+        "iast": "evaṃ guṇa viśeṣaṇa viśiṣṭāyāṃ śubha tithau",
+        "te": "ఏవం గుణ విశేషణ విశిష్టాయాం శుభ తిథౌ",
+        "dev": "एवं गुण विशेषण विशिष्टायां शुभ तिथौ"
+      }
+    },
+    { "type": "slot", "id": "gotra", "slot": "GOTRA", "optional": false },
+    {
+      "type": "slot",
+      "id": "self-gotrodbhava",
+      "slot": "SELF.gotrodbhava",
+      "optional": false
+    },
+    { "type": "slot", "id": "name", "slot": "NAME", "optional": false },
+    { "type": "slot", "id": "self-namadheya", "slot": "SELF.namadheya", "optional": false },
+    { "type": "slot", "id": "spouse-clause", "slot": "SPOUSE_CLAUSE", "optional": true },
+    { "type": "slot", "id": "family-clause", "slot": "FAMILY_CLAUSE", "optional": true },
+    {
+      "type": "fixed",
+      "id": "kutumba-kshema",
+      "text": {
+        "iast": "asmākaṃ saha kuṭumbānāṃ kṣema sthairya vijaya abhaya āyur ārogya aiśvarya abhivṛddhyartham",
+        "te": "అస్మాకం సహ కుటుమ్బానాం క్షేమ స్థైర్య విజయ అభయ ఆయుర్ ఆరోగ్య ఐశ్వర్య అభివృద్ధ్యర్థమ్",
+        "dev": "अस्माकं सह कुटुम्बानां क्षेम स्थैर्य विजय अभय आयुर् आरोग्य ऐश्वर्य अभिवृद्ध्यर्थम्"
+      }
+    },
+    {
+      "type": "fixed",
+      "id": "purushartha-siddhyartham",
+      "text": {
+        "iast": "dharma artha kāma mokṣa caturvidha phala puruṣārtha siddhyartham",
+        "te": "ధర్మ అర్థ కామ మోక్ష చతుర్విధ ఫల పురుషార్థ సిద్ధ్యర్థమ్",
+        "dev": "धर्म अर्थ काम मोक्ष चतुर्विध फल पुरुषार्थ सिद्ध्यर्थम्"
+      }
+    },
+    { "type": "slot", "id": "deity", "slot": "DEITY", "optional": false },
+    {
+      "type": "fixed",
+      "id": "sankalpa-closing",
+      "text": {
+        "iast": "prītyartham, yāvacchakti dhyāna āvāhanādi ṣoḍaśopacāra pūjāṃ kariṣye",
+        "te": "ప్రీత్యర్థమ్, యావచ్ఛక్తి ధ్యాన ఆవాహనాది షోడశోపచార పూజాం కరిష్యే",
+        "dev": "प्रीत्यर्थम्, यावच्छक्ति ध्यान आवाहनादि षोडशोपचार पूजां करिष्ये"
+      }
+    }
+  ]
+}

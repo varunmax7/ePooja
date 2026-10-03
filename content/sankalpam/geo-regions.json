@@ -1,0 +1,122 @@
+{
+  "$schema": "../schemas/sankalpam-geo-regions.schema.json",
+  "kind": "sankalpam-geo-regions",
+  "note": "§9.3 GEO block. India's dvipa/varsha/khanda/meru are the client's own literal spec text (Jambūdvīpe, Bhāratavarṣe, Bharatakhaṇḍe, Meroḥ dakṣiṇa digbhāge — mechanically transliterated). Every other region is a pandit-approved-variant placeholder: §9.3 says outside India 'the region table supplies the pandit-approved variant… the builder never guesses' — these NRI rows exist so the mechanism (country → region → geo clause) is real and tested, not so the wording ships. River regions are coarse polygons (§10 Phase 5: 'start: Telangana + AP coarse polygons') — rectangular bounding boxes, not administrative boundaries; a manual override in Settings (Phase 9) is the correct fix for anyone the polygon gets wrong. krishna-godavari's text is the spec's own example ('Kṛṣṇā-Godāvaryoḥ madhya pradeśe').",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "srisailam": [16.0733, 78.8683],
+  "regions": [
+    {
+      "id": "india",
+      "label": "India",
+      "countryCodes": ["IN"],
+      "dvipa": { "iast": "jambūdvīpe", "te": "జమ్బూద్వీపే", "dev": "जम्बूद्वीपे" },
+      "varsha": { "iast": "bhāratavarṣe", "te": "భారతవర్షే", "dev": "भारतवर्षे" },
+      "khanda": { "iast": "bharatakhaṇḍe", "te": "భరతఖణ్డే", "dev": "भरतखण्डे" },
+      "meru": {
+        "iast": "meroḥ dakṣiṇa digbhāge",
+        "te": "మేరోః దక్షిణ దిగ్భాగే",
+        "dev": "मेरोः दक्षिण दिग्भागे"
+      },
+      "computeSrisailaDik": true,
+      "computeRiverRegion": true
+    },
+    {
+      "id": "usa",
+      "label": "United States (generic Telugu-temple convention)",
+      "countryCodes": ["US"],
+      "dvipa": { "te": "⟨TODO_PANDIT: geo_usa_dvipa_te⟩" },
+      "varsha": { "te": "⟨TODO_PANDIT: geo_usa_varsha_te⟩" },
+      "khanda": { "te": "⟨TODO_PANDIT: geo_usa_khanda_te⟩" },
+      "meru": { "te": "⟨TODO_PANDIT: geo_usa_meru_te⟩" },
+      "computeSrisailaDik": false,
+      "computeRiverRegion": false
+    },
+    {
+      "id": "canada",
+      "label": "Canada",
+      "countryCodes": ["CA"],
+      "dvipa": { "te": "⟨TODO_PANDIT: geo_canada_dvipa_te⟩" },
+      "varsha": { "te": "⟨TODO_PANDIT: geo_canada_varsha_te⟩" },
+      "khanda": { "te": "⟨TODO_PANDIT: geo_canada_khanda_te⟩" },
+      "meru": { "te": "⟨TODO_PANDIT: geo_canada_meru_te⟩" },
+      "computeSrisailaDik": false,
+      "computeRiverRegion": false
+    },
+    {
+      "id": "uk",
+      "label": "United Kingdom",
+      "countryCodes": ["GB"],
+      "dvipa": { "te": "⟨TODO_PANDIT: geo_uk_dvipa_te⟩" },
+      "varsha": { "te": "⟨TODO_PANDIT: geo_uk_varsha_te⟩" },
+      "khanda": { "te": "⟨TODO_PANDIT: geo_uk_khanda_te⟩" },
+      "meru": { "te": "⟨TODO_PANDIT: geo_uk_meru_te⟩" },
+      "computeSrisailaDik": false,
+      "computeRiverRegion": false
+    },
+    {
+      "id": "australia",
+      "label": "Australia",
+      "countryCodes": ["AU"],
+      "dvipa": { "te": "⟨TODO_PANDIT: geo_australia_dvipa_te⟩" },
+      "varsha": { "te": "⟨TODO_PANDIT: geo_australia_varsha_te⟩" },
+      "khanda": { "te": "⟨TODO_PANDIT: geo_australia_khanda_te⟩" },
+      "meru": { "te": "⟨TODO_PANDIT: geo_australia_meru_te⟩" },
+      "computeSrisailaDik": false,
+      "computeRiverRegion": false
+    },
+    {
+      "id": "uae",
+      "label": "United Arab Emirates",
+      "countryCodes": ["AE"],
+      "dvipa": { "te": "⟨TODO_PANDIT: geo_uae_dvipa_te⟩" },
+      "varsha": { "te": "⟨TODO_PANDIT: geo_uae_varsha_te⟩" },
+      "khanda": { "te": "⟨TODO_PANDIT: geo_uae_khanda_te⟩" },
+      "meru": { "te": "⟨TODO_PANDIT: geo_uae_meru_te⟩" },
+      "computeSrisailaDik": false,
+      "computeRiverRegion": false
+    },
+    {
+      "id": "generic-nri",
+      "label": "Other countries (generic, pending a pandit-approved regional variant)",
+      "countryCodes": [],
+      "dvipa": { "te": "⟨TODO_PANDIT: geo_generic_nri_dvipa_te⟩" },
+      "varsha": { "te": "⟨TODO_PANDIT: geo_generic_nri_varsha_te⟩" },
+      "khanda": { "te": "⟨TODO_PANDIT: geo_generic_nri_khanda_te⟩" },
+      "meru": { "te": "⟨TODO_PANDIT: geo_generic_nri_meru_te⟩" },
+      "computeSrisailaDik": false,
+      "computeRiverRegion": false
+    }
+  ],
+  "riverRegions": [
+    {
+      "id": "krishna-godavari",
+      "label": "Krishna–Godavari delta (coastal Andhra Pradesh)",
+      "text": {
+        "iast": "kṛṣṇā-godāvaryoḥ madhya pradeśe",
+        "te": "కృష్ణా-గోదావర్యోః మధ్య ప్రదేశే",
+        "dev": "कृष्णा-गोदावर्योः मध्य प्रदेशे"
+      },
+      "polygon": [
+        [17.5, 80.0],
+        [17.5, 82.5],
+        [15.5, 82.5],
+        [15.5, 80.0]
+      ]
+    },
+    {
+      "id": "telangana",
+      "label": "Telangana (coarse bounding box)",
+      "text": { "te": "⟨TODO_PANDIT: river_region_telangana_te⟩" },
+      "polygon": [
+        [19.9, 77.2],
+        [19.9, 81.3],
+        [15.8, 81.3],
+        [15.8, 77.2]
+      ]
+    }
+  ]
+}

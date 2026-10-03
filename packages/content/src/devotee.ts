@@ -48,7 +48,22 @@ export const devoteeLocationSchema = z.object({
   cityId: z.string().optional(),
   /** What the location row shows, e.g. "Hyderabad, Telangana". */
   label: z.string().min(1),
-  /** Sankalpam river/region id; resolved in Phase 5. */
+  /**
+   * ISO 3166-1 alpha-2, from the matched city (§9.3's GEO block needs it to
+   * pick a region — `content/sankalpam/geo-regions.json`). Absent only for
+   * an unmatched GPS fix with no nearby listed city; the Sankalpam resolver
+   * treats that the same as any other unlisted country (§9.3's fallback
+   * region), rather than guessing.
+   */
+  countryCode: z
+    .string()
+    .regex(/^[A-Z]{2}$/)
+    .optional(),
+  /**
+   * A devotee's manual river-region override from Settings (§9.3: "manual
+   * override in settings"), e.g. `"telangana"` — takes precedence over the
+   * polygon lookup `@epooja/sankalpam`'s GEO resolver otherwise runs.
+   */
   geoRegionId: z.string().optional(),
 });
 

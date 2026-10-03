@@ -8,6 +8,7 @@ describe('resolveFromCoords', () => {
     expect(location.cityId).toBe('hyderabad');
     expect(location.label).toBe('Hyderabad, Telangana');
     expect(location.tz).toBe('Asia/Kolkata');
+    expect(location.countryCode).toBe('IN');
   });
 
   it("gives an NRI location its own timezone, not the nearest city's", () => {
@@ -52,6 +53,7 @@ describe('resolveFromCity', () => {
       tz: 'America/Chicago',
       cityId: 'dallas-tx',
       label: 'Dallas, Texas',
+      countryCode: 'US',
     });
   });
 });

@@ -40,15 +40,21 @@ export function resolveFromCoords(cities: readonly City[], point: Coordinates): 
       tz,
       cityId: match.city.id,
       label: `${match.city.name}, ${match.city.region}`,
+      countryCode: match.city.country,
     };
   }
 
   if (match !== null) {
+    // Still the nearest listed city's country, even past the "same city"
+    // radius — a coarse but reasonable country guess (§9.3's GEO block only
+    // needs the country to pick a region, not a precise place), and far
+    // better than treating every unmatched fix as the fallback region.
     return {
       lat: point.lat,
       lng: point.lng,
       tz,
       label: `Near ${match.city.name}, ${match.city.region}`,
+      countryCode: match.city.country,
     };
   }
 
@@ -71,5 +77,6 @@ export function resolveFromCity(city: City): DevoteeLocation {
     tz: city.tz,
     cityId: city.id,
     label: `${city.name}, ${city.region}`,
+    countryCode: city.country,
   };
 }

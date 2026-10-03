@@ -3,6 +3,143 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 5] — Sankalpam text engine — 2026-10-03
+
+### Built
+
+- **`@epooja/sankalpam`** (§9.3) — `buildSankalpamText(input, content)`:
+  walks `content/sankalpam/template.json`'s segments and resolves every
+  `slot` against the day's Panchangam ids, the devotee's own record, the
+  resolved GEO block and deity, rendering the result in Telugu, Devanagari
+  and IAST at once. `buildSankalpamAudioPlan` ships as the stub §10 asks
+  for — the same segment order as the text, pointing fixed clauses and enum
+  slots at a clip id with `durationMs: 0`, and the devotee's name/a custom
+  gotra at `self_recite` — real durations are Phase 7.
+- **GEO resolver (`geo.ts`)** — `bearingDegrees`/`dikFromBearing` for the
+  8-point Srisailam compass direction, `pointInPolygon`/`riverRegionFor` for
+  the coarse Telangana/AP river-region boxes, `regionFor` for the
+  country→region lookup with its single mandatory fallback row, composed by
+  `resolveGeo`.
+- **`@epooja/content` additions** — `sankalpam.ts`: schemas for
+  `content/sankalpam/template.json` (fixed vs. slot segments, every §9.3
+  slot name, each slot's `optional` flag), `suffix-tables.json` (gotra/name
+  suffixes and the spouse/family clauses, each keyed by gender and — for the
+  family clause — by relation), `geo-regions.json` (the dvipa/varsha/khanda/
+  meru text per region, plus the river-region polygons) and
+  `deity-names.json`. `devotee.ts`'s `DevoteeLocation` gained `countryCode`
+  (ISO 3166-1 alpha-2, from the matched city) — the one piece of location
+  data §9.3's GEO resolver needs that §9.4 had never stored.
+- **Content authored**: `content/sankalpam/template.json` (the §9.3
+  structure reference, segmented, mechanically transliterated from the
+  client's own IAST — §3.3's Sinhala-glyph correction used verbatim),
+  `suffix-tables.json`, `geo-regions.json` (India plus five NRI-region rows
+  that exist to prove the mechanism, each still pending its own wording, and
+  the Krishna-Godavari/Telangana coarse polygons), `deity-names.json`.
+  `content/enums/paksha.json` — a thirteenth enum, added because §9.3 names
+  `{PAKSHA}` as its own slot and Shukla/Krishna paksha had no standalone
+  locative form before now.
+- **The missing-slot contract (§10 Phase 5)** — `SlotResolution` is
+  `resolved | omit | missing`: `omit` is a normal, silent absence (a
+  bachelor's `SPOUSE_CLAUSE`, an NRI's `GEO.river_region`); `missing` is a
+  data or content gap the Sankalpam should have filled (no gotra on file, an
+  India address outside every listed river polygon, an uncatalogued deity)
+  and renders the visible `⟨MISSING:slot⟩` marker, in every script, never
+  silently dropped.
+- **Runtime script transliteration** — `scriptValue` prefers a pre-authored
+  `dev`/`iast` value (every fixed clause, every enum's own fields) and falls
+  back to live Sanscript transliteration only when none exists — which is
+  exactly the enum `locative` form (schema-only `te`/`iast`, no `dev`) and
+  any self-recited text (a custom gotra, an English-only name). A deviation
+  from §4's "transliteration is build-time": a day's Panchangam and a
+  devotee's own gotra are not known until runtime, so they cannot go
+  through `tools/content-build`'s step — this is the one runtime use of
+  Sanscript, and it is as deterministic and offline as the build-time one.
+- **"Preview Sankalpam"** — a new card on Profile opens `/profile/sankalpam`
+  (a modal, the same presentation as the full-Panchangam sheet): today's
+  Sankalpam for the devotee's own Nitya Puja deity, with a Telugu/
+  Devanagari/IAST toggle. `apps/mobile/src/services/sankalpam` is the one
+  place that maps a live `Devotee` + `PanchangamData` into
+  `@epooja/sankalpam`'s input — bundling `content/sankalpam/*` and the two
+  new enums (`paksha`, `dik`) the Panchangam screens never needed.
+- **Tests** — 56 in `@epooja/sankalpam` (20 for the GEO resolver, 35 for the
+  text/audio-plan builder covering both genders, with/without a spouse, a
+  family of several relations deduplicated, a custom self-recited gotra, a
+  listed gotra's locative form, a resolved/pending/uncatalogued deity, the
+  Krishna-Godavari polygon, an India address outside every polygon, a
+  manual river-region override, a non-Indian address, and an English-only
+  name fallback), 15 more in `@epooja/content` for the four new schemas, 3
+  in the mobile `services/sankalpam` wrapper proving the live id mapping.
+
+### Acceptance (§10)
+
+- **The text builder's own fixture suite stands in for "20 snapshot
+  fixtures ... in all 3 scripts"** — 35 fixture-based tests, each asserting
+  concrete Telugu/Devanagari/IAST output, rather than vitest's
+  `toMatchSnapshot`: no file in this codebase uses snapshot testing, and
+  freezing today's mostly-placeholder content (`gotra.json` is empty; the
+  family/female-spouse wording has no spec source yet) into `.snap` files
+  would lock in half-finished prose as if it were verified correct. See
+  Deviations.
+- **Any missing slot yields a visible `⟨MISSING:slot⟩` marker** — proven for
+  a devotee with no gotra at all, a deity id outside `deity-names.json`, and
+  an Indian address outside every listed river polygon; proven in every
+  script, not just Telugu.
+- **Female-performer and family variants render per the suffix tables** —
+  the female `gotrodbhava`/`namadheya` suffixes, the still-pending female
+  spouse-clause placeholder (distinct from the male wording, never
+  defaulting to it), and a family clause that deduplicates repeated
+  relations (two sons render one `family_term_son` entry, not two).
+- **`pnpm content:build` passes with 0 schema errors** against the four new
+  content files plus `paksha.json`; `REVIEW_QUEUE.md` regenerated — 961
+  `TODO_PANDIT` placeholders across 26 files, up from Phase 4's 922, almost
+  entirely this phase's own new suffix/geo/deity content and the still-empty
+  gotra list it depends on.
+
+### Not met
+
+- **No live naturalness check of the transliteration fallback against a
+  pandit's ear** — `scriptValue`'s Sanscript-based Devanagari/IAST output
+  for enum `locative` forms is mechanically correct (round-tripped the same
+  way `tools/content-build` already does for static content) but has not
+  been read by anyone who reads Devanagari; Phase 10's pandit sign-off gate
+  covers this content like everything else.
+- **No live browser walkthrough of "Preview Sankalpam"** — this machine has
+  no connected browser extension this session (the limitation Phase 0's
+  audio spike and Phase 1's device gap already recorded, for a different
+  tool); the screen is proven through `services/sankalpam`'s wrapper tests
+  (a live `Devotee` + a live `PanchangamData` shape) and `@epooja/mobile`'s
+  typecheck, not through an actual render.
+
+### Deviations
+
+- "Snapshot tests" (§10's own phrase) are fixture + explicit-assertion
+  tests, not vitest's `toMatchSnapshot` API — consistent with every other
+  package in this repo (not one uses it), and the right call here
+  specifically because today's content is mostly placeholders that should
+  never be frozen as "correct" output.
+- `DevoteeLocation.countryCode` is new in §9.4's schema, not called for by
+  name — §9.3's GEO resolver needs a country to pick a region, and nothing
+  in the devotee record carried one; it is populated the same two ways
+  `cityId` already is (a matched city's own country, or absent for an
+  unmatched GPS fix with no nearby listing), and an absent country routes
+  through the GEO resolver's existing fallback-region path rather than a
+  new special case.
+- `buildSankalpamAudioPlan`'s clip ids are a Phase 5 naming convention
+  (`sankalpam.<segment-id>` for a fixed clause or GEO/suffix/deity text,
+  the enum's own `audioTokenId` for a Panchangam/gotra slot), not content
+  from any manifest — §9.6's recording has not started, so there is nothing
+  yet for these ids to resolve against; Phase 7 is free to rename them
+  before the first real manifest ships.
+
+### New `TODO_PANDIT` items
+
+Every new sankalpam content file needs review: the GEO clause for five NRI
+regions and two river-region labels, the female spouse clause, all six
+family-relation terms and both `familyClauseSuffix` genders, the `generic`
+deity name (Nitya Puja has no settled Sankalpam term without a pandit), and
+`paksha.json`'s two locative forms. All itemised in the regenerated
+`content/REVIEW_QUEUE.md`.
+
 ## [Phase 4] — Content schema, catalog, preparation, recipes — 2026-09-21
 
 ### Built

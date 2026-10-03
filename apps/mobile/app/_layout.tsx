@@ -78,6 +78,10 @@ export default function RootLayout() {
                 name="profile/edit"
                 options={{ headerShown: false, presentation: 'modal' }}
               />
+              <Stack.Screen
+                name="profile/sankalpam"
+                options={{ headerShown: false, presentation: 'modal' }}
+              />
               <Stack.Screen name="profile/family/index" options={{ title: 'Family Members' }} />
               <Stack.Screen name="_dev/components" options={{ title: 'Components' }} />
               <Stack.Screen name="_dev/svara" options={{ title: 'Svara spike' }} />

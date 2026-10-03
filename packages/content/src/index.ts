@@ -127,6 +127,29 @@ export {
   type AudioVoice,
 } from './audio';
 
+export {
+  sankalpamSegmentSchema,
+  sankalpamTemplateFileSchema,
+  parseSankalpamTemplateFile,
+  suffixTableFileSchema,
+  parseSuffixTableFile,
+  geoRegionsFileSchema,
+  parseGeoRegionsFile,
+  deityNamesFileSchema,
+  parseDeityNamesFile,
+  SANKALPAM_SLOTS,
+  RELATION_KINDS,
+  type SankalpamSlot,
+  type SankalpamSegment,
+  type SankalpamTemplateFile,
+  type SuffixTableFile,
+  type GeoRegion,
+  type RiverRegion,
+  type GeoRegionsFile,
+  type DeityNamesFile,
+  type RelationKind,
+} from './sankalpam';
+
 export const CONTENT_PACKAGE = {
   name: '@epooja/content',
   schemaImplementedInPhase: 4,

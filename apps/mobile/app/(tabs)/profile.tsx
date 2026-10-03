@@ -149,6 +149,30 @@ export default function ProfileScreen() {
           value={devotee.location.label}
           secondary={devotee.location.tz}
         />
+
+        <Card tone="cream" padding={5}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Preview today's Sankalpam"
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              router.push('/profile/sankalpam');
+            }}
+          >
+            <Txt variant="sectionTitle" tone="ink">
+              Preview Sankalpam
+            </Txt>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={20}
+              color={colors.maroon['800'] as string}
+            />
+          </Pressable>
+        </Card>
       </View>
     </ScrollView>
   );

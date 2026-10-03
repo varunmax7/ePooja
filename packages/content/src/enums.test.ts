@@ -20,7 +20,7 @@ const enumFiles = readdirSync(ENUM_DIR)
 const load = (file: string): unknown => JSON.parse(readFileSync(join(ENUM_DIR, file), 'utf8'));
 
 describe('content/enums', () => {
-  it('ships every enumeration §9.2 calls for', () => {
+  it("ships every enumeration §9.2 calls for, plus §9.3's own Phase 5 addition", () => {
     expect(enumFiles).toEqual([
       'ayana.json',
       'dik.json',
@@ -28,6 +28,9 @@ describe('content/enums', () => {
       'karana.json',
       'masa.json',
       'nakshatra.json',
+      // paksha.json: not one of §9.2's original twelve — added in Phase 5
+      // because the Sankalpam template names {PAKSHA} as its own slot.
+      'paksha.json',
       'rasi.json',
       'ruthu.json',
       'samvatsara.json',

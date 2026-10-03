@@ -1,0 +1,34 @@
+{
+  "$schema": "../schemas/sankalpam-suffix-tables.schema.json",
+  "kind": "sankalpam-suffix-tables",
+  "note": "§3.6/§9.3: the only place @epooja/sankalpam is allowed to pick text by gender — it never declines a word itself, only selects the pandit-approved row here. gotrodbhava/namadheya/spouseClause.male are the client's own literal spec text (mechanically transliterated, per template.json's note); spouseClause.female, familyTerms and familyClauseSuffix have no source in the spec and are pending a pandit's exact traditional wording.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "gotrodbhava": {
+    "male": { "iast": "gotrodbhavasya", "te": "గోత్రోద్భవస్య", "dev": "गोत्रोद्भवस्य" },
+    "female": { "iast": "gotrodbhavāyāḥ", "te": "గోత్రోద్భవాయాః", "dev": "गोत्रोद्भवायाः" }
+  },
+  "namadheya": {
+    "male": { "iast": "nāmadheyasya", "te": "నామధేయస్య", "dev": "नामधेयस्य" },
+    "female": { "iast": "nāmadheyāyāḥ", "te": "నామధేయాయాః", "dev": "नामधेयायाः" }
+  },
+  "spouseClause": {
+    "male": { "iast": "dharmapatnī sametasya", "te": "ధర్మపత్నీ సమేతస్య", "dev": "धर्मपत्नी समेतस्य" },
+    "female": { "te": "⟨TODO_PANDIT: spouse_clause_female_te⟩" }
+  },
+  "familyTerms": {
+    "spouse": { "te": "⟨TODO_PANDIT: family_term_spouse_te⟩" },
+    "son": { "te": "⟨TODO_PANDIT: family_term_son_te⟩" },
+    "daughter": { "te": "⟨TODO_PANDIT: family_term_daughter_te⟩" },
+    "father": { "te": "⟨TODO_PANDIT: family_term_father_te⟩" },
+    "mother": { "te": "⟨TODO_PANDIT: family_term_mother_te⟩" },
+    "other": { "te": "⟨TODO_PANDIT: family_term_other_te⟩" }
+  },
+  "familyClauseSuffix": {
+    "male": { "te": "⟨TODO_PANDIT: family_clause_suffix_male_te⟩" },
+    "female": { "te": "⟨TODO_PANDIT: family_clause_suffix_female_te⟩" }
+  }
+}

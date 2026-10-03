@@ -1,0 +1,16 @@
+{
+  "$schema": "../schemas/sankalpam-deity-names.schema.json",
+  "kind": "sankalpam-deity-names",
+  "note": "The §9.3 {DEITY} slot, keyed by content/pujas/*.json's `deity` field. Gaṇapati/Lakṣmī/Śiva are common, unambiguous proper nouns — the same footing Phase 4's puja content already treats them on (used directly in dhyana chants and step titles without a placeholder). The daily Nitya Puja's 'generic' deity has no single settled Sankalpam term without a pandit's guidance, so it is pending.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "names": {
+    "generic": { "te": "⟨TODO_PANDIT: deity_generic_te⟩" },
+    "ganapathi": { "iast": "gaṇapati", "te": "గణపతి", "dev": "गणपति" },
+    "lakshmi": { "iast": "lakṣmī", "te": "లక్ష్మీ", "dev": "लक्ष्मी" },
+    "shiva": { "iast": "śiva", "te": "శివ", "dev": "शिव" }
+  }
+}

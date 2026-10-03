@@ -1,0 +1,36 @@
+{
+  "$schema": "../schemas/enum.schema.json",
+  "kind": "paksha",
+  "note": "Not part of Phase 2's original twelve — added in Phase 5 because the §9.3 Sankalpam template names {PAKSHA} as its own slot, and Shukla/Krishna paksha (already carried as an optional tag on each tithi.json value) had no standalone locative form to speak. Same shape and review status as every other Phase 2 enum.",
+  "review": {
+    "status": "PENDING_PANDIT_REVIEW",
+    "reviewer": null,
+    "date": null
+  },
+  "values": [
+    {
+      "id": "shukla",
+      "index": 1,
+      "te": "శుక్ల",
+      "iast": "śukla",
+      "dev": "शुक्ल",
+      "locative": {
+        "te": "⟨TODO_PANDIT: paksha_shukla_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: paksha_shukla_locative_iast⟩"
+      },
+      "audioTokenId": "enum.paksha.shukla"
+    },
+    {
+      "id": "krishna",
+      "index": 2,
+      "te": "కృష్ణ",
+      "iast": "kṛṣṇa",
+      "dev": "कृष्ण",
+      "locative": {
+        "te": "⟨TODO_PANDIT: paksha_krishna_locative_te⟩",
+        "iast": "⟨TODO_PANDIT: paksha_krishna_locative_iast⟩"
+      },
+      "audioTokenId": "enum.paksha.krishna"
+    }
+  ]
+}
