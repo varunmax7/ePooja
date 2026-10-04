@@ -3,6 +3,121 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 7] — Sankalpam audio stitching & natural name voice — 2026-10-04
+
+### Built
+
+- **`buildSankalpamAudioPlan` carries real durations and cue offsets** —
+  every item now has `startMs`/`endMs`/`durationMs`, a running cumulative
+  offset down the whole plan computed from an (optional, still-empty in
+  practice — §9.6 recording has not started) `manifest: AudioClip[]`
+  parameter. A `self_recite` or `missing` item gets a *nominal* span
+  (`SELF_RECITE_NOMINAL_MS` = 3 s, or zero) purely so later clips' offsets
+  still line up — never mistaken for a real duration anywhere it matters.
+- **`activeSegmentAt(plan, positionMs)`** — §10's "text highlight tracks
+  segments," as a pure, tested lookup: which plan item a given playback
+  position falls inside, skipping zero-duration items, clamping to the
+  last item past the end. Available and exercised now; not yet wired into
+  a live highlight, since nothing produces a moving `positionMs` to track
+  until real audio exists (see Not met).
+- **`resolveNameAudioMode`** (§9.6.1) — the devotee's name is self-recited
+  unless they *both* opted into a pandit-voice clone (`prefs.nameAudio`)
+  *and* one is already cached on-device (`devotee.nameAudio`); requested-
+  but-not-yet-rendered and a failed render are indistinguishable from
+  never having opted in — both resolve to `self_recite`, automatically,
+  with no error path to wire up. Recorded as a real decision in
+  `docs/adr/0003-name-voice.md`, not left implicit.
+- **`groupPlanIntoRuns`** — splits a plan into the units a player actually
+  steps through: consecutive recorded clips batch into one gapless-queue
+  run; a `self_recite`, `pandit_clone` or `missing` item is always its own
+  run, because each needs handling a shared RNTP queue cannot express.
+- **The self-recite prompt, live** — `apps/mobile/src/services/sankalpam/
+  useSankalpamRunner.ts` steps through a Sankalpam step's runs: clip runs
+  load into RNTP and advance on their own; a self-recited run shows the
+  Chant Player's new large-text prompt (the devotee's own name, or a
+  hand-typed gotra) and advances on a tap or after the nominal pause
+  (§9.6.1: "auto-continue or tap") — offline, no clip, no network call.
+  `buildStepQueue`'s old combined instruction+chant-batch approach for a
+  sankalpam step is now fully superseded for the chant phase by this
+  runner; the Chant Player routes to it only while in that phase, and the
+  generic per-phase queue goes inert for exactly that long so the two
+  never both try to drive the machine's `AUDIO_ENDED` at once.
+- **`docs/adr/0003-name-voice.md`** — records what §9.6.1's clone path
+  needs (pandit consent, a naturalness panel, the `name-voice` Edge
+  Function) and why none of the three exist yet, same root cause as every
+  other audio gap this phase and the two before it.
+- **Tests** — 29 more in `@epooja/sankalpam` (85 total): real-duration
+  lookup, cumulative-offset math, `resolveNameAudioMode`'s four branches,
+  `activeSegmentAt`'s edge cases, `groupPlanIntoRuns`'s batching/breaking,
+  and the §10 acceptance line itself — 10 fixture profiles (both genders,
+  with/without spouse, multiple family relations, a missing gotra, three
+  deities, an NRI address, a river-polygon address) each assembling a
+  gapless, non-overlapping plan. One more in `@epooja/mobile` (172 total):
+  the Chant Player's self-recite prompt appearing for both the Sankalpam's
+  gotra and name, showing the devotee's own text, dismissed by a tap on
+  either — the one existing end-to-end walkthrough test does not exercise
+  this path at all, because `NEXT` is always available as a global escape
+  hatch in the machine (§9.7) and the walkthrough uses exactly that; this
+  new test is what actually proves the prompt itself works.
+
+### Acceptance (§10)
+
+- **"The Sankalpam plays as a continuous recitation for 10 fixture
+  profiles"** — proven at the plan level (no gaps, no overlaps in the
+  computed timeline) rather than audibly, because nothing audible exists
+  yet; see Not met.
+- **"The self-recite path works offline"** — true by construction (no
+  network call anywhere in `useSankalpamRunner` or `resolveNameAudioMode`)
+  and proven live by the new Chant Player test.
+- **"Clone failure or rejection falls back to self-recite automatically"**
+  — `resolveNameAudioMode`'s own tests cover opted-out, opted-in-but-
+  uncached, and opted-in-and-cached; there is no fourth state to fall into
+  that isn't one of these three.
+- **"No generic TTS voice exists anywhere in the production audio path"**
+  — `resolveNameAudioMode`'s return type has exactly two members; a test
+  asserts every call returns one of them, for both preference values.
+- **"Text highlight tracks segments"** — the mechanism (`activeSegmentAt`)
+  is built and tested, not wired into a moving highlight; see Not met.
+
+### Not met
+
+- **No real token manifest to import** — §9.6 recording has not started
+  (unchanged since Phase 4 first noted it). `buildSankalpamAudioPlan`'s
+  `manifest` parameter is real and tested against fixture durations, but
+  every call from the app still passes the actually-empty
+  `BUNDLED_AUDIO_MANIFEST`.
+- **No pandit voice-clone Edge Function, no consent, no naturalness
+  panel** — all three need a real pandit recording to exist first;
+  `docs/adr/0003-name-voice.md` records exactly what is missing and why.
+- **No inter-clip-gap measurement on iOS/Android, no Cloud Run render
+  fallback** — both depend on real stitched audio existing on a real
+  device, neither of which this environment has (the same gap every phase
+  since Phase 0's audio spike).
+- **Live text highlighting during playback** — `activeSegmentAt` exists
+  and is tested, but nothing yet produces a real, moving `positionMs` to
+  feed it; wiring it to a static/instant plan (everything resolves in 0 ms
+  without real clips) would look like nothing moving at all, which is an
+  honest reflection of the current audio, not a bug to paper over with a
+  fake animation.
+
+### Deviations
+
+- `AudioPlanItem`'s `self_recite`/`missing` spans are a *nominal* estimate
+  (§9.6.1's own "~3 s"), not a measured duration — documented on the type
+  itself so a future reader never mistakes it for real timing data the
+  way a `clip` item's `durationMs` is once one is recorded.
+- The Chant Player's sankalpam chant phase no longer goes through the
+  generic `buildStepQueue`/`useQueuePlayback` pair every other step phase
+  uses — `useSankalpamRunner` replaces it for that one phase only, because
+  a self-recite pause cannot be expressed as a queue item. This is a
+  correction of Phase 6's own design, not a new one invented here (Phase
+  6 already found and fixed the parallel bug of batching instruction and
+  chant together for the same reason).
+
+### New `TODO_PANDIT` items
+
+None — no content files touched this phase.
+
 ## [Phase 6] — Audio engine & Puja Runner — 2026-10-04
 
 ### Built

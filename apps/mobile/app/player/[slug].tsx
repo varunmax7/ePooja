@@ -30,8 +30,12 @@ import type { PujaCatalogItem, PujaStep, PujaVariant } from '@epooja/content';
 import { pujaBySlug, runnableSteps, samagriForPuja } from '@/services/content';
 import { contentTextFor, pujaTitle } from '@/lib/pujaDisplay';
 import { pujaRunnerMachine, type PujaRunnerMode } from '@/machines/pujaRunner.machine';
-import { buildStepQueue, useQueuePlayback } from '@/services/audio';
-import { buildDevoteeSankalpam, buildDevoteeSankalpamAudioPlan } from '@/services/sankalpam';
+import { BUNDLED_AUDIO_MANIFEST, buildStepQueue, useQueuePlayback } from '@/services/audio';
+import {
+  buildDevoteeSankalpam,
+  buildDevoteeSankalpamAudioPlan,
+  useSankalpamRunner,
+} from '@/services/sankalpam';
 import { useDevoteeStore } from '@/stores/devotee';
 import { usePanchangam, useTodayDate } from '@/services/panchangam';
 import { useChecklistStore } from '@/stores/checklist';
@@ -82,7 +86,7 @@ export default function PlayerScreen() {
   const sankalpamPlan = useMemo(
     () =>
       devotee && panchangam && puja && needsSankalpam
-        ? buildDevoteeSankalpamAudioPlan(devotee, panchangam, puja.deity)
+        ? buildDevoteeSankalpamAudioPlan(devotee, panchangam, puja.deity, BUNDLED_AUDIO_MANIFEST)
         : undefined,
     [devotee, panchangam, puja, needsSankalpam],
   );
@@ -161,19 +165,40 @@ export default function PlayerScreen() {
   // nothing at all while awaiting a confirm or sitting on `done`.
   const phase = stepSubstate === 'instruction' ? 'instruction' : stepSubstate === 'chanting' ? 'chant' : null;
 
+  // A `dynamic: 'sankalpam'` step's chant phase steps through its own audio
+  // plan (§10 Phase 7) — self-recited segments need a real pause, which the
+  // generic one-queue-per-phase path below has no way to express. `isSankalpamChant`
+  // routes the chant phase to `useSankalpamRunner` instead, and the generic
+  // path's own queue/callback go inert for exactly that long so the two
+  // never both try to drive `AUDIO_ENDED` at once.
+  const isSankalpamChant = phase === 'chant' && currentStep?.dynamic === 'sankalpam';
+
   const queue = useMemo(
     () =>
-      currentStep && phase
-        ? buildStepQueue(currentStep, snapshot.context.mode, phase, sankalpamPlan)
+      currentStep && phase && !isSankalpamChant
+        ? buildStepQueue(currentStep, snapshot.context.mode, phase)
         : [],
-    [currentStep, phase, snapshot.context.mode, sankalpamPlan],
+    [currentStep, phase, isSankalpamChant, snapshot.context.mode],
   );
 
   const onAudioEnded = useCallback(() => {
+    if (!isSankalpamChant) send({ type: 'AUDIO_ENDED' });
+  }, [isSankalpamChant, send]);
+
+  const genericAudio = useQueuePlayback(queue, onAudioEnded);
+
+  const onSankalpamComplete = useCallback(() => {
     send({ type: 'AUDIO_ENDED' });
   }, [send]);
 
-  const audio = useQueuePlayback(queue, onAudioEnded);
+  const sankalpamRunner = useSankalpamRunner(
+    sankalpamPlan ?? [],
+    BUNDLED_AUDIO_MANIFEST,
+    isSankalpamChant,
+    onSankalpamComplete,
+  );
+
+  const audio = genericAudio;
 
   const [showSettings, setShowSettings] = useState(false);
   const [showSamagri, setShowSamagri] = useState(false);
@@ -217,6 +242,22 @@ export default function PlayerScreen() {
 
   const progress = audio.duration > 0 ? audio.position / audio.duration : 0;
   const namavali = currentStep?.namavali;
+
+  // §9.6.1's self-recite prompt text — whichever segment `useSankalpamRunner`
+  // is currently pausing on, read back from the same `buildSankalpamText`
+  // output the backdrop below already renders in full.
+  const selfReciteSegment =
+    sankalpamRunner.awaitingSelfRecite && sankalpamText
+      ? sankalpamText.segments.find((segment) => segment.id === sankalpamRunner.activeItem?.segmentId)
+      : undefined;
+  const selfReciteText =
+    selfReciteSegment?.resolution.status === 'resolved'
+      ? contentTextFor(selfReciteSegment.resolution.text, script)
+      : undefined;
+  const selfReciteLabel =
+    sankalpamRunner.activeItem?.kind === 'self_recite' && sankalpamRunner.activeItem.slot === 'GOTRA'
+      ? 'Say your gotra aloud'
+      : 'Say your name aloud';
 
   return (
     <LinearGradient
@@ -352,6 +393,14 @@ export default function PlayerScreen() {
               }}
             />
           ) : null}
+
+          {sankalpamRunner.awaitingSelfRecite ? (
+            <SelfRecitePrompt
+              label={selfReciteLabel}
+              text={selfReciteText}
+              onContinue={sankalpamRunner.continueSelfRecite}
+            />
+          ) : null}
         </>
       )}
 
@@ -454,6 +503,56 @@ function ActionPrompt({ text, onDone }: { text: string; onDone: () => void }) {
         </Txt>
         <Button label="Done" tone="gold" onPress={onDone} />
       </View>
+    </View>
+  );
+}
+
+/**
+ * §9.6.1's self-recite prompt: no clip exists for the devotee's own name (or
+ * a gotra the pandit has not recorded) — the devotee says it aloud instead.
+ * Large text, a tap to move on sooner, or `SELF_RECITE_NOMINAL_MS` passing
+ * on its own (`useSankalpamRunner`'s own timer, not this component's).
+ */
+function SelfRecitePrompt({
+  label,
+  text,
+  onContinue,
+}: {
+  label: string;
+  text: string | undefined;
+  onContinue: () => void;
+}) {
+  const insets = useSafeAreaInsets();
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        left: spacing[5],
+        right: spacing[5],
+        bottom: Math.max(insets.bottom, spacing[5]),
+      }}
+    >
+      <Pressable onPress={onContinue} accessibilityRole="button" accessibilityLabel="Continue">
+        <View
+          style={[
+            {
+              backgroundColor: colors.maroon['800'],
+              borderRadius: radius.xl,
+              padding: spacing[6],
+              gap: spacing[3],
+              alignItems: 'center',
+            },
+            elevation(shadow.raised),
+          ]}
+        >
+          <Txt variant="label" tone="gold">
+            {label}
+          </Txt>
+          <Txt variant="screenTitle" tone="cream" align="center">
+            {text ?? ''}
+          </Txt>
+        </View>
+      </Pressable>
     </View>
   );
 }

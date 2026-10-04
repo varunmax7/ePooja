@@ -7,11 +7,20 @@ import {
   parseGeoRegionsFile,
   parseSankalpamTemplateFile,
   parseSuffixTableFile,
+  type AudioClip,
   type Devotee,
   type EnumFile,
 } from '@epooja/content';
-import { buildSankalpamAudioPlan, buildSankalpamText, scriptValue } from './build';
-import type { SankalpamContent, SankalpamInput, SankalpamPanchangamInput } from './types';
+import {
+  activeSegmentAt,
+  buildSankalpamAudioPlan,
+  buildSankalpamText,
+  groupPlanIntoRuns,
+  resolveNameAudioMode,
+  scriptValue,
+} from './build';
+import { SELF_RECITE_NOMINAL_MS } from './types';
+import type { AudioPlanItem, SankalpamContent, SankalpamInput, SankalpamPanchangamInput } from './types';
 
 /**
  * §10 Phase 5 acceptance: "20 snapshot fixtures pass [...] in all 3 scripts;
@@ -100,6 +109,12 @@ function devotee(overrides: Partial<SankalpamInput['devotee']> = {}): SankalpamI
     gender: 'male',
     gotraCustom: 'భరద్వాజ',
     family: [],
+    prefs: {
+      uiLang: 'en',
+      mantraScript: 'te',
+      showTransliteration: true,
+      nameAudio: 'self_recite',
+    },
     ...overrides,
   };
 }
@@ -399,4 +414,220 @@ describe('buildSankalpamAudioPlan — Phase 5 stub', () => {
     const plan = buildSankalpamAudioPlan(input({ devotee: devotee({ family: [] }) }), CONTENT);
     expect(plan.find((item) => item.segmentId === 'spouse-clause')).toBeUndefined();
   });
+});
+
+describe('buildSankalpamAudioPlan — §10 Phase 7: real durations and cue offsets', () => {
+  const MANIFEST: AudioClip[] = [
+    { id: 'sankalpam.purpose', path: 'x', durationMs: 5000, lufs: -16, sha256: 'a'.repeat(64), kind: 'sankalpam_fixed', voice: 'pandit_primary', humanRecorded: true },
+    { id: 'enum.tithi.shukla_10', path: 'x', durationMs: 1200, lufs: -16, sha256: 'a'.repeat(64), kind: 'sankalpam_token', voice: 'pandit_primary', humanRecorded: true },
+  ];
+
+  it('looks up each clip’s real duration from the manifest, defaulting to 0 when unrecorded', () => {
+    const plan = buildSankalpamAudioPlan(input(), CONTENT, MANIFEST);
+    const purpose = plan.find((item) => item.segmentId === 'purpose');
+    const tithi = plan.find((item) => item.segmentId === 'tithi');
+    const unrecorded = plan.find((item) => item.segmentId === 'auspicious-moment');
+    expect(purpose?.durationMs).toBe(5000);
+    expect(tithi?.durationMs).toBe(1200);
+    expect(unrecorded?.durationMs).toBe(0);
+  });
+
+  it('gives every item a cumulative startMs/endMs with no gaps and no overlaps', () => {
+    const plan = buildSankalpamAudioPlan(input(), CONTENT, MANIFEST);
+    expect(plan[0]?.startMs).toBe(0);
+    for (let i = 1; i < plan.length; i += 1) {
+      expect(plan[i]?.startMs).toBe(plan[i - 1]?.endMs);
+    }
+    for (const item of plan) {
+      expect(item.endMs).toBe(item.startMs + item.durationMs);
+    }
+  });
+
+  it('gives a self-recited item the §9.6.1 nominal pause span, not a real duration', () => {
+    const plan = buildSankalpamAudioPlan(input(), CONTENT, MANIFEST);
+    const name = plan.find((item) => item.segmentId === 'name');
+    expect(name?.durationMs).toBe(SELF_RECITE_NOMINAL_MS);
+  });
+
+  it('gives a missing or omitted item an empty span, never widening the timeline', () => {
+    const plan = buildSankalpamAudioPlan(
+      input({ devotee: devotee({ gotraId: undefined, gotraCustom: undefined }) }),
+      CONTENT,
+      MANIFEST,
+    );
+    const gotra = plan.find((item) => item.segmentId === 'gotra');
+    expect(gotra).toMatchObject({ kind: 'missing', startMs: gotra?.endMs, durationMs: 0 });
+  });
+});
+
+describe('resolveNameAudioMode — §9.6.1', () => {
+  it('self-recites by default, when the devotee never opted into a clone', () => {
+    expect(resolveNameAudioMode(input())).toEqual({ kind: 'self_recite' });
+  });
+
+  it('self-recites even when opted in, if no clone has been cached yet (not yet rendered)', () => {
+    const opted = input({
+      devotee: devotee({ prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: 'pandit_clone' } }),
+    });
+    expect(resolveNameAudioMode(opted)).toEqual({ kind: 'self_recite' });
+  });
+
+  it('uses the cached clone only once opted in *and* cached, preferring the local file over the remote URL', () => {
+    const withClone = input({
+      devotee: devotee({
+        prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: 'pandit_clone' },
+        nameAudio: { url: 'https://cdn.example/name.m4a', localPath: 'file:///cache/name.m4a', hash: 'x' },
+      }),
+    });
+    expect(resolveNameAudioMode(withClone)).toEqual({
+      kind: 'pandit_clone',
+      url: 'file:///cache/name.m4a',
+    });
+  });
+
+  it('falls back to the remote URL when nothing has been cached locally yet', () => {
+    const withClone = input({
+      devotee: devotee({
+        prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: 'pandit_clone' },
+        nameAudio: { url: 'https://cdn.example/name.m4a', hash: 'x' },
+      }),
+    });
+    expect(resolveNameAudioMode(withClone)).toEqual({
+      kind: 'pandit_clone',
+      url: 'https://cdn.example/name.m4a',
+    });
+  });
+
+  it('never returns anything but self_recite or pandit_clone — no generic TTS path exists to return', () => {
+    for (const nameAudioPref of ['self_recite', 'pandit_clone'] as const) {
+      const result = resolveNameAudioMode(
+        input({ devotee: devotee({ prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: nameAudioPref } }) }),
+      );
+      expect(['self_recite', 'pandit_clone']).toContain(result.kind);
+    }
+  });
+});
+
+describe('activeSegmentAt — §10 Phase 7 text-highlight tracking', () => {
+  const plan = buildSankalpamAudioPlan(input(), CONTENT, [
+    { id: 'sankalpam.purpose', path: 'x', durationMs: 5000, lufs: -16, sha256: 'a'.repeat(64), kind: 'sankalpam_fixed', voice: 'pandit_primary', humanRecorded: true },
+  ]);
+
+  it('finds the item whose span contains the position', () => {
+    const active = activeSegmentAt(plan, 1000);
+    expect(active?.segmentId).toBe('purpose');
+  });
+
+  it('moves to the next item once its own span ends', () => {
+    const purpose = plan.find((item) => item.segmentId === 'purpose')!;
+    const active = activeSegmentAt(plan, purpose.endMs);
+    expect(active?.segmentId).not.toBe('purpose');
+  });
+
+  it('skips a zero-duration item — nothing is ever "active" for an empty span', () => {
+    const zeroDuration = plan.find((item) => item.durationMs === 0);
+    expect(zeroDuration).toBeDefined();
+    const active = activeSegmentAt(plan, zeroDuration!.startMs);
+    expect(active?.segmentId).not.toBe(zeroDuration!.segmentId);
+  });
+
+  it('stays on the last item once the position runs past the end of the whole plan', () => {
+    const active = activeSegmentAt(plan, 10_000_000);
+    expect(active?.segmentId).toBe(plan[plan.length - 1]?.segmentId);
+  });
+
+  it('returns undefined for an empty plan rather than throwing', () => {
+    expect(activeSegmentAt([], 0)).toBeUndefined();
+  });
+});
+
+describe('groupPlanIntoRuns — §10 Phase 7 Chant Player sequencing', () => {
+  it('batches every consecutive clip into one run', () => {
+    const plan = buildSankalpamAudioPlan(input(), CONTENT);
+    // male, no family, a real deity and a custom gotra: everything up to
+    // GOTRA is pure enum/fixed clips — one long run before the first break.
+    const runs = groupPlanIntoRuns(plan);
+    const firstBreak = runs.findIndex((run) => run.kind !== 'clips');
+    expect(firstBreak).toBeGreaterThan(0);
+    expect(runs[0]?.kind).toBe('clips');
+    expect((runs[0] as { kind: 'clips'; items: unknown[] }).items.length).toBeGreaterThan(1);
+  });
+
+  it('breaks the run at a self-recited GOTRA, then resumes clips, then breaks again at NAME', () => {
+    const plan = buildSankalpamAudioPlan(input(), CONTENT); // male, gotraCustom set — both GOTRA and NAME self-recite
+    const runs = groupPlanIntoRuns(plan);
+    const kinds = runs.map((run) => run.kind);
+    expect(kinds).toContain('self_recite');
+    expect(kinds.filter((k) => k === 'self_recite')).toHaveLength(2); // GOTRA, NAME
+    // Never two self_recite runs back to back with nothing real in between —
+    // SELF.gotrodbhava sits between them as a real suffix-table clip.
+    const firstSelfRecite = kinds.indexOf('self_recite');
+    expect(kinds[firstSelfRecite + 1]).toBe('clips');
+  });
+
+  it('every item in the original plan appears in exactly one run, same order', () => {
+    const plan = buildSankalpamAudioPlan(input(), CONTENT);
+    const runs = groupPlanIntoRuns(plan);
+    const flattened = runs.flatMap((run): AudioPlanItem[] => (run.kind === 'clips' ? run.items : [run.item]));
+    expect(flattened.map((item) => item.segmentId)).toEqual(plan.map((item) => item.segmentId));
+  });
+
+  it('a missing slot is its own run, never merged into a clips run', () => {
+    const plan = buildSankalpamAudioPlan(
+      input({ devotee: devotee({ gotraId: undefined, gotraCustom: undefined }) }),
+      CONTENT,
+    );
+    const runs = groupPlanIntoRuns(plan);
+    const missingRun = runs.find((run) => run.kind === 'missing');
+    expect(missingRun).toBeDefined();
+    expect(missingRun?.kind === 'missing' && missingRun.item.segmentId).toBe('gotra');
+  });
+
+  it('returns no runs for an empty plan', () => {
+    expect(groupPlanIntoRuns([])).toEqual([]);
+  });
+});
+
+describe('§10 Phase 7 acceptance: 10 fixture profiles assemble a continuous recitation', () => {
+  const profiles: SankalpamInput[] = [
+    input({ devotee: devotee({ gender: 'male' }) }),
+    input({ devotee: devotee({ gender: 'female' }) }),
+    input({
+      devotee: devotee({
+        gender: 'male',
+        family: [familyMember({ relation: 'spouse', includeInSankalpam: true })],
+      }),
+    }),
+    input({
+      devotee: devotee({
+        gender: 'female',
+        family: [familyMember({ relation: 'spouse', includeInSankalpam: true, gender: 'male' })],
+      }),
+    }),
+    input({
+      devotee: devotee({
+        family: [
+          familyMember({ id: 'c1', relation: 'son' }),
+          familyMember({ id: 'c2', relation: 'daughter' }),
+        ],
+      }),
+    }),
+    input({ devotee: devotee({ gotraId: undefined, gotraCustom: undefined }) }),
+    input({ deity: 'generic' }),
+    input({ deity: 'shiva' }),
+    input({ location: NEW_JERSEY }),
+    input({ location: VIJAYAWADA }),
+  ];
+
+  it.each(profiles.map((profile, index) => [index, profile] as const))(
+    'profile %i assembles a gapless, non-overlapping plan',
+    (_index, profile) => {
+      const plan = buildSankalpamAudioPlan(profile, CONTENT);
+      expect(plan.length).toBeGreaterThan(0);
+      expect(plan[0]?.startMs).toBe(0);
+      for (let i = 1; i < plan.length; i += 1) {
+        expect(plan[i]?.startMs).toBe(plan[i - 1]?.endMs);
+      }
+    },
+  );
 });

@@ -1,9 +1,9 @@
 /**
  * @epooja/sankalpam — Sankalpam text and audio-plan builder (implementation.md §9.3).
  *
- * The text builder landed in Phase 5; `buildSankalpamAudioPlan` ships a
- * stub (real clip durations arrive in Phase 7). No ritual text is ever
- * hardcoded here — every fragment comes from `content/sankalpam/*` and
+ * The text builder landed in Phase 5; `buildSankalpamAudioPlan` carries real
+ * clip durations and cumulative cue offsets as of Phase 7. No ritual text is
+ * ever hardcoded here — every fragment comes from `content/sankalpam/*` and
  * `content/enums/*` (§0.3).
  */
 
@@ -15,7 +15,15 @@ export const SANKALPAM_PACKAGE = {
   audioPlanImplementedInPhase: 7,
 } as const;
 
-export { buildSankalpamText, buildSankalpamAudioPlan, scriptValue } from './build';
+export {
+  activeSegmentAt,
+  buildSankalpamAudioPlan,
+  buildSankalpamText,
+  groupPlanIntoRuns,
+  resolveNameAudioMode,
+  scriptValue,
+  type PlanRun,
+} from './build';
 
 export {
   bearingDegrees,
@@ -31,8 +39,11 @@ export {
   type ResolvedGeo,
 } from './geo';
 
+export { SELF_RECITE_NOMINAL_MS } from './types';
+
 export type {
   AudioPlanItem,
+  AudioPlanItemBase,
   RenderedSegment,
   SankalpamContent,
   SankalpamInput,

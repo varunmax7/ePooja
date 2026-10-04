@@ -1,13 +1,14 @@
 import Sanscript from '@indic-transliteration/sanscript';
-import { enumValue, isTodoPandit, type ContentText } from '@epooja/content';
+import { enumValue, isTodoPandit, type AudioClip, type ContentText } from '@epooja/content';
 import { resolveGeo, type ResolvedGeo } from './geo';
-import type {
-  AudioPlanItem,
-  RenderedSegment,
-  SankalpamContent,
-  SankalpamInput,
-  SankalpamText,
-  SlotResolution,
+import {
+  SELF_RECITE_NOMINAL_MS,
+  type AudioPlanItem,
+  type RenderedSegment,
+  type SankalpamContent,
+  type SankalpamInput,
+  type SankalpamText,
+  type SlotResolution,
 } from './types';
 import type { SankalpamSlot } from '@epooja/content';
 
@@ -29,6 +30,15 @@ import type { SankalpamSlot } from '@epooja/content';
  */
 
 type ScriptKey = 'te' | 'dev' | 'iast';
+
+/**
+ * TypeScript's built-in `Omit` collapses a union to its *common* keys before
+ * omitting, which would erase `AudioPlanItem`'s own discriminant fields
+ * (`clipId`, `slot`, `url`). This distributes `Omit` over each union member
+ * first, so the result is still the same discriminated union, just without
+ * `K`.
+ */
+type DistributiveOmit<T, K extends keyof never> = T extends unknown ? Omit<T, K> : never;
 
 type TextLike = Pick<ContentText, 'te' | 'dev' | 'iast'>;
 
@@ -239,36 +249,80 @@ export function buildSankalpamText(
 }
 
 /**
+ * §9.6.1's name-slot decision: self-recite by default, the pandit's voice
+ * clone only when the devotee has *both* opted in (`prefs.nameAudio`) *and*
+ * a clone is already cached on-device (`devotee.nameAudio`) — requested but
+ * not yet rendered, or rendering failed, falls back to self-recite
+ * automatically (§10 Phase 7 acceptance), the same silent, safe default a
+ * devotee who never opted in gets. There is no third path: a generic TTS
+ * voice is never a possible return value here (§9.6.1, non-negotiable).
+ */
+export function resolveNameAudioMode(
+  input: SankalpamInput,
+): { kind: 'self_recite' } | { kind: 'pandit_clone'; url: string } {
+  const cached = input.devotee.nameAudio;
+  if (input.devotee.prefs.nameAudio === 'pandit_clone' && cached) {
+    return { kind: 'pandit_clone', url: cached.localPath ?? cached.url };
+  }
+  return { kind: 'self_recite' };
+}
+
+/**
  * The ordered audio queue for a built Sankalpam (§9.3's
  * `buildSankalpamAudioPlan`), in the same segment order `buildSankalpamText`
  * renders.
  *
- * Phase 5 stub (§10): every fixed clause and every enum slot becomes a
- * `clip` item naming the clip id the pandit will eventually record under
- * (`sankalpam.<segment-id>` for a fixed clause, the enum's own
- * `audioTokenId` for a slot) with `durationMs: 0` — Phase 7 imports the real
- * manifest and fills in durations, LUFS-matched gaps and text-cue offsets
- * without needing to touch this ordering. `GOTRA`/`NAME` resolve to
- * `self_recite` whenever the text builder used a self-recited value (a
- * custom gotra, or the devotee's own name — §9.6.1's default, no clip
- * exists to point at). An `omit`ted segment contributes nothing, matching
+ * Every fixed clause and enum slot becomes a `clip` item naming the clip id
+ * the pandit records under (`sankalpam.<segment-id>` for a fixed clause, the
+ * enum's own `audioTokenId` for a slot); `durationMs` is looked up from
+ * `manifest` by that id, `0` for anything not yet recorded (§9.6 — nothing
+ * is, today). `GOTRA`/`NAME` resolve to `self_recite` (or `NAME` to
+ * `pandit_clone`, per `resolveNameAudioMode`) whenever the text builder used
+ * a self-recited value. An `omit`ted segment contributes nothing, matching
  * the text it produces no words for; a `missing` one surfaces as its own
  * item so a caller can flag the same gap in the audio queue, not just the
  * transcript.
+ *
+ * Every item also carries a cumulative `startMs`/`endMs` (§10 Phase 7: "text
+ * cue offsets") — see `AudioPlanItem`'s own note on how a `self_recite` or
+ * `missing` item's span is only a nominal estimate, never a real duration.
  */
 export function buildSankalpamAudioPlan(
   input: SankalpamInput,
   content: SankalpamContent,
+  manifest: readonly AudioClip[] = [],
 ): AudioPlanItem[] {
   const text = buildSankalpamText(input, content);
+  const nameAudio = resolveNameAudioMode(input);
   const items: AudioPlanItem[] = [];
+  let cursorMs = 0;
+
+  const push = (item: DistributiveOmit<AudioPlanItem, 'startMs' | 'endMs'>): void => {
+    const startMs = cursorMs;
+    const endMs = startMs + item.durationMs;
+    items.push({ ...item, startMs, endMs });
+    cursorMs = endMs;
+  };
 
   for (const segment of text.segments) {
     if (segment.resolution.status === 'omit') continue;
 
     if (segment.resolution.status === 'missing') {
       /* c8 ignore next -- every 'missing' slot segment carries its slot */
-      items.push({ kind: 'missing', segmentId: segment.id, slot: segment.slot! });
+      push({ kind: 'missing', segmentId: segment.id, slot: segment.slot!, durationMs: 0 });
+      continue;
+    }
+
+    if (segment.slot === 'NAME' && nameAudio.kind === 'pandit_clone') {
+      push({
+        kind: 'pandit_clone',
+        segmentId: segment.id,
+        slot: segment.slot,
+        url: nameAudio.url,
+        // No duration metadata is cached alongside a clone clip yet — the
+        // Edge Function response §9.6 describes returns a URL, not a length.
+        durationMs: 0,
+      });
       continue;
     }
 
@@ -277,15 +331,92 @@ export function buildSankalpamAudioPlan(
 
     if (selfRecited) {
       /* c8 ignore next -- GOTRA/NAME are always slot segments */
-      items.push({ kind: 'self_recite', segmentId: segment.id, slot: segment.slot! });
+      push({
+        kind: 'self_recite',
+        segmentId: segment.id,
+        slot: segment.slot!,
+        durationMs: SELF_RECITE_NOMINAL_MS,
+      });
       continue;
     }
 
     const clipId = clipIdFor(segment, input, content);
-    items.push({ kind: 'clip', segmentId: segment.id, clipId, durationMs: 0 });
+    const durationMs = manifest.find((clip) => clip.id === clipId)?.durationMs ?? 0;
+    push({ kind: 'clip', segmentId: segment.id, clipId, durationMs });
   }
 
   return items;
+}
+
+/**
+ * Which plan item is playing at a given position in the overall timeline
+ * (§10 Phase 7: "text highlight tracks segments") — the Chant Player's
+ * sankalpam step asks this on every progress tick to know which segment of
+ * `buildSankalpamText`'s output to highlight.
+ *
+ * A zero-duration item (an `omit`ted slot never reaches the plan at all; a
+ * `missing` one has an empty span) is never itself "active" — `startMs` and
+ * `endMs` being equal means no position falls inside it, so playback moves
+ * straight through to the next real item, same as a devotee hears nothing
+ * said for it. Past the end of the whole plan, the last item stays active
+ * rather than returning nothing to highlight.
+ */
+export function activeSegmentAt(
+  plan: readonly AudioPlanItem[],
+  positionMs: number,
+): AudioPlanItem | undefined {
+  const match = plan.find((item) => positionMs >= item.startMs && positionMs < item.endMs);
+  return match ?? plan[plan.length - 1];
+}
+
+/**
+ * A run of consecutive `clip` items a player can load into one gapless
+ * queue, or a single item that needs to interrupt playback for something
+ * only a human (or, once §9.6.1's clone path is live, a one-off remote
+ * clip) can do.
+ */
+export type PlanRun =
+  | { kind: 'clips'; items: Extract<AudioPlanItem, { kind: 'clip' }>[] }
+  | { kind: 'self_recite'; item: Extract<AudioPlanItem, { kind: 'self_recite' }> }
+  | { kind: 'pandit_clone'; item: Extract<AudioPlanItem, { kind: 'pandit_clone' }> }
+  | { kind: 'missing'; item: Extract<AudioPlanItem, { kind: 'missing' }> };
+
+/**
+ * Groups an audio plan into the runs a Chant Player actually steps through
+ * (§10 Phase 7's self-recite UI: "large on-screen name, a natural pause,
+ * auto-continue or tap"). Consecutive `clip` items batch into one run — the
+ * gapless queue loading they are recorded for (§9.6) — while a
+ * `self_recite`/`pandit_clone`/`missing` item always breaks the run: each
+ * needs its own handling (a human pause, a one-off remote clip, or nothing
+ * at all) that a shared RNTP queue cannot express.
+ */
+export function groupPlanIntoRuns(plan: readonly AudioPlanItem[]): PlanRun[] {
+  const runs: PlanRun[] = [];
+
+  for (const item of plan) {
+    switch (item.kind) {
+      case 'clip': {
+        const last = runs[runs.length - 1];
+        if (last?.kind === 'clips') {
+          last.items.push(item);
+        } else {
+          runs.push({ kind: 'clips', items: [item] });
+        }
+        break;
+      }
+      case 'self_recite':
+        runs.push({ kind: 'self_recite', item });
+        break;
+      case 'pandit_clone':
+        runs.push({ kind: 'pandit_clone', item });
+        break;
+      case 'missing':
+        runs.push({ kind: 'missing', item });
+        break;
+    }
+  }
+
+  return runs;
 }
 
 function clipIdFor(

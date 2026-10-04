@@ -1,4 +1,4 @@
-import type { Devotee } from '@epooja/content';
+import type { AudioClip, Devotee } from '@epooja/content';
 import {
   buildSankalpamAudioPlan,
   buildSankalpamText,
@@ -22,6 +22,8 @@ function sankalpamInputFor(
       gotraId: devotee.gotraId,
       gotraCustom: devotee.gotraCustom,
       family: devotee.family,
+      prefs: devotee.prefs,
+      nameAudio: devotee.nameAudio,
     },
     panchangam: {
       samvatsaraId: panchangam.samvatsara.id,
@@ -66,14 +68,23 @@ export function buildDevoteeSankalpam(
 }
 
 /**
- * The same Sankalpam's audio queue (§9.3's `buildSankalpamAudioPlan`, §10
- * Phase 5's stub durations) — what the Puja Runner's `dynamic: 'sankalpam'`
- * step (§10 Phase 6) loads into `services/audio`'s queue builder.
+ * The same Sankalpam's audio queue (§9.3's `buildSankalpamAudioPlan`) — what
+ * the Puja Runner's `dynamic: 'sankalpam'` step (§10 Phase 6) loads into
+ * `services/audio`'s queue builder. `manifest` is the same `AudioClip[]`
+ * shape `services/audio/manifest.ts`'s `BUNDLED_AUDIO_MANIFEST` already
+ * uses for puja chant/instruction clips — a Sankalpam token is recorded
+ * under the same schema (§9.4), so one manifest serves both once either has
+ * real entries (§10 Phase 7).
  */
 export function buildDevoteeSankalpamAudioPlan(
   devotee: Devotee,
   panchangam: PanchangamData,
   deity: string,
+  manifest: readonly AudioClip[] = [],
 ): AudioPlanItem[] {
-  return buildSankalpamAudioPlan(sankalpamInputFor(devotee, panchangam, deity), SANKALPAM_CONTENT);
+  return buildSankalpamAudioPlan(
+    sankalpamInputFor(devotee, panchangam, deity),
+    SANKALPAM_CONTENT,
+    manifest,
+  );
 }

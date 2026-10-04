@@ -41,7 +41,10 @@ export interface SankalpamLocationInput {
 }
 
 export interface SankalpamInput {
-  devotee: Pick<Devotee, 'name' | 'gender' | 'gotraId' | 'gotraCustom' | 'family'>;
+  devotee: Pick<
+    Devotee,
+    'name' | 'gender' | 'gotraId' | 'gotraCustom' | 'family' | 'prefs' | 'nameAudio'
+  >;
   panchangam: SankalpamPanchangamInput;
   location: SankalpamLocationInput;
   /** The puja's `PujaCatalogItem.deity` id, e.g. "ganapathi". */
@@ -106,34 +109,60 @@ export interface SankalpamText {
 /**
  * One item in the audio queue §9.3's `buildSankalpamAudioPlan` returns.
  *
- * Phase 5 ships this as a stub (§10: "stub durations until P7") — the real
- * clip durations, LUFS-matched gaps and text-cue offsets arrive once Phase 7
- * imports the recorded token manifest. What Phase 5 fixes now is the
- * *ordering and shape* of the plan: which clip (or self-recite pause) plays
- * for each segment, in the same order `buildSankalpamText` renders them, so
- * Phase 7 only has to fill in numbers, never restructure this.
+ * Phase 5 shipped this as a stub (§10: "stub durations until P7") — every
+ * `startMs`/`endMs`/`durationMs` here is Phase 7's own addition, computed as
+ * a running cumulative offset down the plan so a caller can answer "what is
+ * playing right now" from a playback position alone (§10 Phase 7: "text
+ * highlight tracks segments"). `self_recite` and `missing` items have no
+ * real audio, so their span is a *nominal* estimate (`SELF_RECITE_NOMINAL_MS`
+ * for the pause a devotee is expected to take; zero for a gap nothing fills)
+ * — good enough to keep the timeline continuous for highlighting, never used
+ * to gate real playback the way a `clip`'s duration is.
  */
+export interface AudioPlanItemBase {
+  segmentId: string;
+  /** Cumulative offset from the start of the whole Sankalpam. */
+  startMs: number;
+  endMs: number;
+  durationMs: number;
+}
+
 export type AudioPlanItem =
-  | {
+  | (AudioPlanItemBase & {
       /** A pre-recorded clip: a fixed template clause or an enum token. */
       kind: 'clip';
-      segmentId: string;
       clipId: string;
-      /** 0 until Phase 7 imports the real manifest. */
-      durationMs: number;
-    }
-  | {
+    })
+  | (AudioPlanItemBase & {
       /**
        * The devotee's own name, or a hand-typed gotra the pandit has not
        * recorded yet (§9.6.1 default: self-recite, no audio token exists).
        */
       kind: 'self_recite';
-      segmentId: string;
       slot: SankalpamSlot;
-    }
-  | {
+    })
+  | (AudioPlanItemBase & {
+      /**
+       * §9.6.1's optional path: the devotee opted into a pandit-voice clone
+       * for their name *and* one is already cached on-device. Never chosen
+       * for anything but `NAME` — a custom gotra has no clone pathway in the
+       * plan, only self-recite.
+       */
+      kind: 'pandit_clone';
+      slot: SankalpamSlot;
+      url: string;
+    })
+  | (AudioPlanItemBase & {
       /** A segment the text renderer also could not resolve (§10 Phase 5). */
       kind: 'missing';
-      segmentId: string;
       slot: SankalpamSlot;
-    };
+    });
+
+/**
+ * §9.6.1: "auto-continues after ~3 s or on tap." Used only to give a
+ * self-recited segment a span on the audio-plan timeline (so later clips'
+ * `startMs` still line up with where a real recitation would reach them);
+ * the Chant Player's actual self-recite prompt (Phase 7) paces itself off a
+ * real timer and a tap, never off this estimate.
+ */
+export const SELF_RECITE_NOMINAL_MS = 3000;

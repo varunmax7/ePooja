@@ -126,6 +126,43 @@ describe('PlayerScreen', () => {
     expect(resume?.stepIndex).toBe(0);
   });
 
+  it('§10 Phase 7: shows the self-recite prompt for the Sankalpam’s gotra and name, dismissible by tap', async () => {
+    await render(<PlayerScreen />, { wrapper });
+    await stepCaption();
+
+    // deeparadhana, achamanam, ganapathi-dhyanam — three steps before the
+    // Sankalpam (content/pujas/nitya-puja.json's own order for the short variant).
+    await advanceOneStep();
+    await advanceOneStep();
+    await advanceOneStep();
+    await waitFor(() => {
+      expect(screen.getByText(/^Step 4 of \d+:/)).toBeTruthy();
+    });
+
+    // The Sankalpam step's own guided instruction has an action prompt —
+    // confirming it is what enters the chanting phase that runs the plan.
+    fireEvent.press(screen.getByText('Done'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Say your gotra aloud')).toBeTruthy();
+    });
+    expect(screen.getByText('భరద్వాజ')).toBeTruthy(); // the devotee's own custom gotra, self-recited verbatim
+    fireEvent.press(screen.getByLabelText('Continue'));
+
+    await waitFor(() => {
+      expect(screen.getByText('Say your name aloud')).toBeTruthy();
+    });
+    expect(screen.getByText('రాముడు')).toBeTruthy();
+    fireEvent.press(screen.getByLabelText('Continue'));
+
+    // Finishing the Sankalpam's own audio plan reaches `done`, not the next
+    // step — autoAdvance is off, so "Next step" still has to be pressed.
+    await waitFor(() => {
+      expect(screen.queryByText('Say your name aloud')).toBeNull();
+    });
+    expect(screen.getByText(/^Step 4 of \d+:/)).toBeTruthy();
+  });
+
   it('switches between Chant and Guided mode via the toggle', async () => {
     await render(<PlayerScreen />, { wrapper });
     await stepCaption();
