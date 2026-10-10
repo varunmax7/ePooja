@@ -40,6 +40,8 @@ import { useDevoteeStore } from '@/stores/devotee';
 import { usePanchangam, useTodayDate } from '@/services/panchangam';
 import { useChecklistStore } from '@/stores/checklist';
 import { useSessionStore } from '@/stores/session';
+import { useAuthStore } from '@/stores/auth';
+import { pushCompletedSession } from '@/services/sync';
 
 const KEEP_AWAKE_TAG = 'puja-runner';
 
@@ -119,7 +121,8 @@ export default function PlayerScreen() {
   }, [snapshot, readyToStart, send]);
 
   useEffect(() => {
-    const awake = snapshot.matches('preparing') || snapshot.matches('step') || snapshot.matches('paused');
+    const awake =
+      snapshot.matches('preparing') || snapshot.matches('step') || snapshot.matches('paused');
     if (awake) void activateKeepAwakeAsync(KEEP_AWAKE_TAG);
     return () => {
       void deactivateKeepAwake(KEEP_AWAKE_TAG);
@@ -141,20 +144,26 @@ export default function PlayerScreen() {
     }
   }, [snapshot, puja, variant, router, saveResumePoint]);
 
+  const authUserId = useAuthStore((s) => (s.status === 'signed_in' ? s.userId : null));
+
   useEffect(() => {
     if (!puja) return;
     if (snapshot.matches('completed')) {
       clearResumePoint(puja.id);
-      logCompletedSession({
+      const entry = {
         pujaId: puja.id,
         variant,
         mode: snapshot.context.mode,
         startedAt: snapshot.context.startedAt ?? new Date().toISOString(),
         completedAt: new Date().toISOString(),
         completedSteps: steps.length,
-      });
+      };
+      logCompletedSession(entry);
+      // Best-effort (§17 offline-first): the local log above is already the
+      // durable record regardless of whether this reaches the server.
+      if (authUserId) void pushCompletedSession(authUserId, entry);
     }
-  }, [snapshot, puja, variant, steps.length, clearResumePoint, logCompletedSession]);
+  }, [snapshot, puja, variant, steps.length, clearResumePoint, logCompletedSession, authUserId]);
 
   const currentStep: PujaStep | undefined = steps[snapshot.context.stepIndex];
   const stepSubstate = snapshot.matches('step')
@@ -163,7 +172,8 @@ export default function PlayerScreen() {
   // Instruction and chant are loaded as *separate* queues, one phase at a
   // time (see `queue.ts`'s own note on why) — never both together, and
   // nothing at all while awaiting a confirm or sitting on `done`.
-  const phase = stepSubstate === 'instruction' ? 'instruction' : stepSubstate === 'chanting' ? 'chant' : null;
+  const phase =
+    stepSubstate === 'instruction' ? 'instruction' : stepSubstate === 'chanting' ? 'chant' : null;
 
   // A `dynamic: 'sankalpam'` step's chant phase steps through its own audio
   // plan (§10 Phase 7) — self-recited segments need a real pause, which the
@@ -232,7 +242,15 @@ export default function PlayerScreen() {
 
   const lines: MantraLineView[] = currentStep
     ? currentStep.dynamic === 'sankalpam' && sankalpamText
-      ? [{ id: 'sankalpam', text: contentTextFor({ te: sankalpamText.te, dev: sankalpamText.dev, iast: sankalpamText.iast }, script) }]
+      ? [
+          {
+            id: 'sankalpam',
+            text: contentTextFor(
+              { te: sankalpamText.te, dev: sankalpamText.dev, iast: sankalpamText.iast },
+              script,
+            ),
+          },
+        ]
       : (currentStep.namavali?.names ?? currentStep.chant?.lines ?? []).map((line) => ({
           id: line.id,
           text: contentTextFor(line.text, script),
@@ -248,14 +266,17 @@ export default function PlayerScreen() {
   // output the backdrop below already renders in full.
   const selfReciteSegment =
     sankalpamRunner.awaitingSelfRecite && sankalpamText
-      ? sankalpamText.segments.find((segment) => segment.id === sankalpamRunner.activeItem?.segmentId)
+      ? sankalpamText.segments.find(
+          (segment) => segment.id === sankalpamRunner.activeItem?.segmentId,
+        )
       : undefined;
   const selfReciteText =
     selfReciteSegment?.resolution.status === 'resolved'
       ? contentTextFor(selfReciteSegment.resolution.text, script)
       : undefined;
   const selfReciteLabel =
-    sankalpamRunner.activeItem?.kind === 'self_recite' && sankalpamRunner.activeItem.slot === 'GOTRA'
+    sankalpamRunner.activeItem?.kind === 'self_recite' &&
+    sankalpamRunner.activeItem.slot === 'GOTRA'
       ? 'Say your gotra aloud'
       : 'Say your name aloud';
 
@@ -361,7 +382,12 @@ export default function PlayerScreen() {
               onNext={() => {
                 send({ type: 'NEXT' });
               }}
-              labels={{ play: 'Play', pause: 'Pause', previous: 'Previous step', next: 'Next step' }}
+              labels={{
+                play: 'Play',
+                pause: 'Pause',
+                previous: 'Previous step',
+                next: 'Next step',
+              }}
             />
 
             <ModeToggle
@@ -438,7 +464,13 @@ function CompletedScreen({ title, onDone }: { title: string; onDone: () => void 
   return (
     <LinearGradient
       colors={[...gradients.saffronHeader] as [string, string, string]}
-      style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing[5], padding: spacing[6] }}
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: spacing[5],
+        padding: spacing[6],
+      }}
     >
       <MaterialCommunityIcons name="flower" size={56} color={colors.maroon['800'] as string} />
       <Txt variant="screenTitle" tone="maroon" align="center">
@@ -452,15 +484,7 @@ function CompletedScreen({ title, onDone }: { title: string; onDone: () => void 
   );
 }
 
-function NamavaliTap({
-  count,
-  total,
-  onTap,
-}: {
-  count: number;
-  total: number;
-  onTap: () => void;
-}) {
+function NamavaliTap({ count, total, onTap }: { count: number; total: number; onTap: () => void }) {
   return (
     <Pressable
       accessibilityRole="button"
@@ -468,7 +492,11 @@ function NamavaliTap({
       onPress={onTap}
       style={{ alignItems: 'center', gap: spacing[2] }}
     >
-      <MaterialCommunityIcons name="flower-tulip" size={48} color={colors.saffron['600'] as string} />
+      <MaterialCommunityIcons
+        name="flower-tulip"
+        size={48}
+        color={colors.saffron['600'] as string}
+      />
       <Txt variant="label" tone="maroon">
         {count} / {total}
       </Txt>

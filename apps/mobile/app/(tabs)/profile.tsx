@@ -173,6 +173,54 @@ export default function ProfileScreen() {
             />
           </Pressable>
         </Card>
+
+        <Card tone="cream" padding={5}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Account and sync settings"
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              router.push('/profile/account');
+            }}
+          >
+            <Txt variant="sectionTitle" tone="ink">
+              Account & Sync
+            </Txt>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={20}
+              color={colors.maroon['800'] as string}
+            />
+          </Pressable>
+        </Card>
+
+        <Card tone="cream" padding={5}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Storage and offline packs"
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+            onPress={() => {
+              router.push('/profile/storage');
+            }}
+          >
+            <Txt variant="sectionTitle" tone="ink">
+              Storage & Offline Packs
+            </Txt>
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={20}
+              color={colors.maroon['800'] as string}
+            />
+          </Pressable>
+        </Card>
       </View>
     </ScrollView>
   );

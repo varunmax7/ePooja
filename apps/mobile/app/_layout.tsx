@@ -11,6 +11,7 @@ import { appFonts } from '@/lib/fonts';
 import { readFontScaleOverride } from '@/lib/fontScale';
 import { initAnalytics } from '@/lib/analytics';
 import { initSentry } from '@/lib/sentry';
+import { useAuthSync } from '@/services/sync';
 import '../global.css';
 
 initSentry();
@@ -35,6 +36,8 @@ export default function RootLayout() {
   useEffect(() => {
     initAnalytics();
   }, []);
+
+  useAuthSync();
 
   useEffect(() => {
     // Hide the splash once the §7.3 faces are ready — the app should never
@@ -83,6 +86,9 @@ export default function RootLayout() {
                 options={{ headerShown: false, presentation: 'modal' }}
               />
               <Stack.Screen name="profile/family/index" options={{ title: 'Family Members' }} />
+              <Stack.Screen name="profile/account" options={{ title: 'Account & Sync' }} />
+              <Stack.Screen name="profile/privacy" options={{ title: 'Privacy Policy' }} />
+              <Stack.Screen name="profile/storage" options={{ title: 'Storage & Offline Packs' }} />
               <Stack.Screen name="_dev/components" options={{ title: 'Components' }} />
               <Stack.Screen name="_dev/svara" options={{ title: 'Svara spike' }} />
               <Stack.Screen name="_dev/audio-spike" options={{ title: 'Audio spike' }} />

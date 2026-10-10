@@ -92,9 +92,11 @@ export function useSankalpamRunner(
   const { tracks, trackManifest } = useMemo(() => {
     if (currentRun?.kind === 'clips') {
       return {
-        tracks: currentRun.items.map(
-          (item): AudioQueueTrack => ({ id: item.segmentId, kind: 'sankalpam', clipId: item.clipId }),
-        ),
+        tracks: currentRun.items.map((item): AudioQueueTrack => ({
+          id: item.segmentId,
+          kind: 'sankalpam',
+          clipId: item.clipId,
+        })),
         trackManifest: manifest,
       };
     }

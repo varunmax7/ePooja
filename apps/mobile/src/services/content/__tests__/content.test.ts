@@ -95,7 +95,7 @@ describe('duration variants', () => {
 });
 
 describe('runnableSteps (§10 Phase 6 composition)', () => {
-  it("passes the Nitya Puja through unchanged — it has no pradhana-note placeholder", () => {
+  it('passes the Nitya Puja through unchanged — it has no pradhana-note placeholder', () => {
     const nitya = pujaBySlug('nitya-puja');
     if (!nitya) throw new Error('seed puja missing');
 
@@ -114,7 +114,7 @@ describe('runnableSteps (§10 Phase 6 composition)', () => {
     expect(full.length).toBeGreaterThan(stepsForVariant(ganapathi, 'full').length);
   });
 
-  it("the short variant never sees the placeholder or the composed sequence", () => {
+  it('the short variant never sees the placeholder or the composed sequence', () => {
     const ganapathi = pujaBySlug('ganapathi-puja');
     if (!ganapathi) throw new Error('seed puja missing');
 

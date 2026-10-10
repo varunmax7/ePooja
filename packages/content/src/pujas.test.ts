@@ -125,8 +125,20 @@ describe('composePujaSteps', () => {
     kind: 'puja-step-template',
     review: { status: 'PENDING_PANDIT_REVIEW', reviewer: null, date: null },
     steps: [
-      { id: 'avahana', order: 1, section: 'pradhana', title: { te: 'ఆవాహనం' }, chant: { audioId: 'chant.avahana', lines: [] } },
-      { id: 'naivedya', order: 2, section: 'pradhana', title: { te: 'నైవేద్యం' }, chant: { audioId: 'chant.naivedya', lines: [] } },
+      {
+        id: 'avahana',
+        order: 1,
+        section: 'pradhana',
+        title: { te: 'ఆవాహనం' },
+        chant: { audioId: 'chant.avahana', lines: [] },
+      },
+      {
+        id: 'naivedya',
+        order: 2,
+        section: 'pradhana',
+        title: { te: 'నైవేద్యం' },
+        chant: { audioId: 'chant.naivedya', lines: [] },
+      },
     ],
   });
 
@@ -143,7 +155,10 @@ describe('composePujaSteps', () => {
         order: 2,
         section: 'pradhana' as const,
         title: { te: 'షోడశోపచార పూజ' },
-        instruction: { text: { te: '⟨TODO_PANDIT: pradhana_note_te⟩' }, audioId: 'instr.pradhana-note' },
+        instruction: {
+          text: { te: '⟨TODO_PANDIT: pradhana_note_te⟩' },
+          audioId: 'instr.pradhana-note',
+        },
         variants: ['full'] as const,
       },
       base.steps[3],

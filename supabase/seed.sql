@@ -1,0 +1,5 @@
+-- No rows are seeded here. `content_packs` is populated by
+-- `pnpm content:build -- --upload --channel preview`, not raw SQL — that
+-- path is what computes `sha256`/`size_bytes` honestly and uploads the pack
+-- files the row points at. Seeding a row here without the files behind it in
+-- Storage would make `pack-manifest` lie to a devotee's app.

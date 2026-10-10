@@ -37,9 +37,30 @@ const SANKALPAM_STEP: PujaStep = {
 };
 
 const SANKALPAM_PLAN: AudioPlanItem[] = [
-  { kind: 'clip', segmentId: 'purpose', clipId: 'sankalpam.purpose', durationMs: 0, startMs: 0, endMs: 0 },
-  { kind: 'clip', segmentId: 'tithi', clipId: 'enum.tithi.shukla_10', durationMs: 0, startMs: 0, endMs: 0 },
-  { kind: 'self_recite', segmentId: 'name', slot: 'NAME', durationMs: 3000, startMs: 0, endMs: 3000 },
+  {
+    kind: 'clip',
+    segmentId: 'purpose',
+    clipId: 'sankalpam.purpose',
+    durationMs: 0,
+    startMs: 0,
+    endMs: 0,
+  },
+  {
+    kind: 'clip',
+    segmentId: 'tithi',
+    clipId: 'enum.tithi.shukla_10',
+    durationMs: 0,
+    startMs: 0,
+    endMs: 0,
+  },
+  {
+    kind: 'self_recite',
+    segmentId: 'name',
+    slot: 'NAME',
+    durationMs: 3000,
+    startMs: 0,
+    endMs: 3000,
+  },
   { kind: 'missing', segmentId: 'gotra', slot: 'GOTRA', durationMs: 0, startMs: 3000, endMs: 3000 },
 ];
 

@@ -1,6 +1,6 @@
 # ADR 0003 — Devotee name voice: self-recite default, clone path mechanism only
 
-- **Status:** Proposed — the self-recite path and the clone *fallback policy*
+- **Status:** Proposed — the self-recite path and the clone _fallback policy_
   are built and tested; the clone path itself has no Edge Function, no
   pandit consent, and no naturalness panel result to accept or reject it on
 - **Date:** 2026-10-04

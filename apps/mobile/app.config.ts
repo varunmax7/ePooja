@@ -21,6 +21,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     bundleIdentifier: BUNDLE_ID,
     supportsTablet: false,
+    // Required alongside the `expo-apple-authentication` plugin (§10 Phase 8)
+    // — Apple expects this capability whenever another third-party sign-in
+    // (Google) is offered. See `docs/adr/0004-oauth-flow.md`.
+    usesAppleSignIn: true,
     infoPlist: {
       // Background audio keeps the chant playing with the screen locked (§9.6).
       UIBackgroundModes: ['audio'],
@@ -77,6 +81,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       },
     ],
     'expo-font',
+    'expo-apple-authentication',
+    'expo-background-task',
   ],
   experiments: {
     typedRoutes: true,

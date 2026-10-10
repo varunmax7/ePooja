@@ -20,7 +20,12 @@ import {
   scriptValue,
 } from './build';
 import { SELF_RECITE_NOMINAL_MS } from './types';
-import type { AudioPlanItem, SankalpamContent, SankalpamInput, SankalpamPanchangamInput } from './types';
+import type {
+  AudioPlanItem,
+  SankalpamContent,
+  SankalpamInput,
+  SankalpamPanchangamInput,
+} from './types';
 
 /**
  * §10 Phase 5 acceptance: "20 snapshot fixtures pass [...] in all 3 scripts;
@@ -418,8 +423,26 @@ describe('buildSankalpamAudioPlan — Phase 5 stub', () => {
 
 describe('buildSankalpamAudioPlan — §10 Phase 7: real durations and cue offsets', () => {
   const MANIFEST: AudioClip[] = [
-    { id: 'sankalpam.purpose', path: 'x', durationMs: 5000, lufs: -16, sha256: 'a'.repeat(64), kind: 'sankalpam_fixed', voice: 'pandit_primary', humanRecorded: true },
-    { id: 'enum.tithi.shukla_10', path: 'x', durationMs: 1200, lufs: -16, sha256: 'a'.repeat(64), kind: 'sankalpam_token', voice: 'pandit_primary', humanRecorded: true },
+    {
+      id: 'sankalpam.purpose',
+      path: 'x',
+      durationMs: 5000,
+      lufs: -16,
+      sha256: 'a'.repeat(64),
+      kind: 'sankalpam_fixed',
+      voice: 'pandit_primary',
+      humanRecorded: true,
+    },
+    {
+      id: 'enum.tithi.shukla_10',
+      path: 'x',
+      durationMs: 1200,
+      lufs: -16,
+      sha256: 'a'.repeat(64),
+      kind: 'sankalpam_token',
+      voice: 'pandit_primary',
+      humanRecorded: true,
+    },
   ];
 
   it('looks up each clip’s real duration from the manifest, defaulting to 0 when unrecorded', () => {
@@ -467,7 +490,14 @@ describe('resolveNameAudioMode — §9.6.1', () => {
 
   it('self-recites even when opted in, if no clone has been cached yet (not yet rendered)', () => {
     const opted = input({
-      devotee: devotee({ prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: 'pandit_clone' } }),
+      devotee: devotee({
+        prefs: {
+          uiLang: 'en',
+          mantraScript: 'te',
+          showTransliteration: true,
+          nameAudio: 'pandit_clone',
+        },
+      }),
     });
     expect(resolveNameAudioMode(opted)).toEqual({ kind: 'self_recite' });
   });
@@ -475,8 +505,17 @@ describe('resolveNameAudioMode — §9.6.1', () => {
   it('uses the cached clone only once opted in *and* cached, preferring the local file over the remote URL', () => {
     const withClone = input({
       devotee: devotee({
-        prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: 'pandit_clone' },
-        nameAudio: { url: 'https://cdn.example/name.m4a', localPath: 'file:///cache/name.m4a', hash: 'x' },
+        prefs: {
+          uiLang: 'en',
+          mantraScript: 'te',
+          showTransliteration: true,
+          nameAudio: 'pandit_clone',
+        },
+        nameAudio: {
+          url: 'https://cdn.example/name.m4a',
+          localPath: 'file:///cache/name.m4a',
+          hash: 'x',
+        },
       }),
     });
     expect(resolveNameAudioMode(withClone)).toEqual({
@@ -488,7 +527,12 @@ describe('resolveNameAudioMode — §9.6.1', () => {
   it('falls back to the remote URL when nothing has been cached locally yet', () => {
     const withClone = input({
       devotee: devotee({
-        prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: 'pandit_clone' },
+        prefs: {
+          uiLang: 'en',
+          mantraScript: 'te',
+          showTransliteration: true,
+          nameAudio: 'pandit_clone',
+        },
         nameAudio: { url: 'https://cdn.example/name.m4a', hash: 'x' },
       }),
     });
@@ -501,7 +545,16 @@ describe('resolveNameAudioMode — §9.6.1', () => {
   it('never returns anything but self_recite or pandit_clone — no generic TTS path exists to return', () => {
     for (const nameAudioPref of ['self_recite', 'pandit_clone'] as const) {
       const result = resolveNameAudioMode(
-        input({ devotee: devotee({ prefs: { uiLang: 'en', mantraScript: 'te', showTransliteration: true, nameAudio: nameAudioPref } }) }),
+        input({
+          devotee: devotee({
+            prefs: {
+              uiLang: 'en',
+              mantraScript: 'te',
+              showTransliteration: true,
+              nameAudio: nameAudioPref,
+            },
+          }),
+        }),
       );
       expect(['self_recite', 'pandit_clone']).toContain(result.kind);
     }
@@ -510,7 +563,16 @@ describe('resolveNameAudioMode — §9.6.1', () => {
 
 describe('activeSegmentAt — §10 Phase 7 text-highlight tracking', () => {
   const plan = buildSankalpamAudioPlan(input(), CONTENT, [
-    { id: 'sankalpam.purpose', path: 'x', durationMs: 5000, lufs: -16, sha256: 'a'.repeat(64), kind: 'sankalpam_fixed', voice: 'pandit_primary', humanRecorded: true },
+    {
+      id: 'sankalpam.purpose',
+      path: 'x',
+      durationMs: 5000,
+      lufs: -16,
+      sha256: 'a'.repeat(64),
+      kind: 'sankalpam_fixed',
+      voice: 'pandit_primary',
+      humanRecorded: true,
+    },
   ]);
 
   it('finds the item whose span contains the position', () => {
@@ -568,7 +630,9 @@ describe('groupPlanIntoRuns — §10 Phase 7 Chant Player sequencing', () => {
   it('every item in the original plan appears in exactly one run, same order', () => {
     const plan = buildSankalpamAudioPlan(input(), CONTENT);
     const runs = groupPlanIntoRuns(plan);
-    const flattened = runs.flatMap((run): AudioPlanItem[] => (run.kind === 'clips' ? run.items : [run.item]));
+    const flattened = runs.flatMap((run): AudioPlanItem[] =>
+      run.kind === 'clips' ? run.items : [run.item],
+    );
     expect(flattened.map((item) => item.segmentId)).toEqual(plan.map((item) => item.segmentId));
   });
 

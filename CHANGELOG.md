@@ -3,6 +3,150 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 8] — Backend, auth, sync, content pipeline — 2026-10-07
+
+Scoped with the client before starting (§14 Q6 was open): full Google +
+Apple sign-in (not guest-only), phone OTP deferred (DLT registration lead
+time), no live Supabase project yet — everything below is built to spec
+against `.env.example`'s empty values, the same "runs fully as guest" stance
+the app has had since Phase 0.
+
+### Built
+
+- **`supabase/migrations/20261007000000_init_schema.sql`** — `profiles`,
+  `content_packs`, `puja_sessions`, `favorites`, exactly as §10 specifies,
+  with RLS on every user-owned table (`auth.uid() = id`/`user_id`, one
+  policy per operation rather than a single `for all`) and public-read-only
+  on `content_packs` (writes are service-role-only, by omission — RLS
+  default-denies what it isn't given a policy for). `favorites` has no UI
+  writing to it yet (§10 lists the table, not a screen); it exists now so a
+  later favoriting feature has somewhere real to sync to from day one.
+- **`supabase/functions/{pack-manifest,delete-account}/index.ts`** — Deno
+  Edge Functions. `pack-manifest` collapses `content_packs` rows to the
+  latest version per `(id, channel)`. `delete-account` reads the caller's
+  own JWT (never a user id in the body), removes the pandit-voice-clone file
+  by its hash (read off `profiles.devotee` before the row is deleted — the
+  only place that hash lives), then `puja_sessions` → `favorites` →
+  `profiles` → the auth user itself, in that order, so a Storage hiccup
+  never leaves a deleted login with orphaned rows.
+- **`lib/supabase.ts`** — the one client, `null` when `env.hasSupabase` is
+  false (every call site already treats that as "sync unavailable," not an
+  error — guest-first, §5). Auth tokens persist through the same MMKV
+  instance (`lib/storage.ts`) wrapped to the async shape `supabase-js`
+  expects.
+- **`services/auth`** — `signInWithGoogle` (Supabase's hosted OAuth, opened
+  with `expo-web-browser`, tokens read off the `epooja://auth-callback`
+  redirect fragment) and `signInWithApple` (native
+  `expo-apple-authentication`, nonce-verified). Why Google went the
+  hosted-OAuth route instead of the native SDK is recorded in
+  `docs/adr/0004-oauth-flow.md`. Every function returns `{ok:false, reason}`
+  rather than throwing — cancelling a sign-in sheet is routine, not an error.
+- **`services/sync`** — `resolveDevoteeMerge` (pure last-write-wins,
+  comparing the `updatedAt` field already inside the devotee JSON, not
+  either side's notion of server-receive time — §10's own wording) plus the
+  Supabase-calling half: `mergeDevoteeOnSignIn` (guest→account merge, run
+  once per `SIGNED_IN` event), `syncDevoteeIfSignedIn` (debounced push on
+  every local edit while signed in), `pushCompletedSession` (best-effort;
+  `useSessionStore`'s local log is already the durable record regardless).
+  Wired into the app once, in `app/_layout.tsx`'s `useAuthSync()`.
+- **`services/content/packManifest.ts` + `downloadManager.ts`** — the
+  backend `useDownloadsStore` was built for in Phase 6 now exists:
+  `fetchPackManifest` (zod-parsed, `null` on any failure — offline, no
+  backend, bad response, all one outcome), `packsNeedingUpdate` (pure
+  version diffing), `downloadPack` (downloads `pack.json`, verifies it
+  against the manifest's `sha256` with `expo-crypto`, deletes-and-fails
+  rather than marking a checksum-mismatched pack installed).
+  `useDownloadsStore` gained persisted `installedVersions` — the four
+  bundled pujas still force to `'bundled'` on every load, only a
+  genuinely-downloaded pack needs to survive a relaunch.
+- **`tools/content-build -- --upload --channel preview|production`** —
+  uploads a built pack's files to the `content-packs` Storage bucket and
+  upserts its `content_packs` row (`sha256`/`size_bytes` of `pack.json`
+  itself, the one file the app parses before trusting anything else about a
+  pack). Needs `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` as process env,
+  never committed, never in the app bundle (§13).
+- **Account & Sync** (`/profile/account`) — guest/signed-in state, Google +
+  Apple buttons, sign out, and an in-app "Delete my account" (two-step
+  inline confirm, no native `Alert` — nothing in this codebase uses one)
+  that calls `delete-account` and signs out locally. **Privacy Policy**
+  (`/profile/privacy`) and **Storage & Offline Packs** (`/profile/storage`)
+  are new Profile-tab entries too; `stores/consent.ts` records DPDP consent
+  the moment a devotee first attempts sign-in (not during onboarding —
+  guest mode needs no consent screen, since nothing leaves the device until
+  then).
+- **`docs/adr/0004-oauth-flow.md`** — why Google is hosted-OAuth and Apple is
+  native, and what changes (only `authService.ts`) if that's ever revisited.
+- **Tests** — 57 new across `@epooja/mobile` (209 total) and 4 in
+  `@epooja/content-build` (24 total): the merge decision table, OAuth
+  redirect parsing, the Apple nonce hex encoding, both sign-in flows'
+  cancel/error/success branches (mocking `@/lib/supabase` and the native
+  modules), the pack-manifest fetch, `packsNeedingUpdate`'s diffing, the
+  consent and auth stores, and `--upload`'s argument parsing.
+
+### Acceptance (§10)
+
+- **"RLS tests pass"** — not run; there is no live Postgres to run them
+  against (see Not met). The SQL itself gives every user-owned table one
+  policy per operation rather than a broad `for all`, specifically so a
+  reviewer can check each one against §10's wording directly.
+- **"Content published to the `preview` channel appears only on preview
+  builds"** — true by construction (`pack-manifest`'s `channel` query param
+  filters server-side, and the client's `currentChannel()` derives it from
+  `env.APP_ENV`), not yet observed against real rows.
+- **"Account deletion removes all user rows"** — the function deletes all
+  four in explicit order (see Built); not run against a live project.
+- **"Sign-in on device A, edit profile, sign-in on device B shows it"** —
+  `resolveDevoteeMerge`'s table is fully unit-tested; the Supabase round
+  trip around it has no backend to round-trip against yet.
+
+### Not met
+
+- **Nothing here has touched a live Supabase project.** No migration has
+  been applied, no Edge Function deployed, no RLS policy exercised against
+  real rows, no OAuth provider configured — the client chose "no project
+  yet, build against env vars" when this phase was scoped (same shape of
+  gap as every "no Xcode/Android SDK here" note since Phase 0, just for a
+  backend instead of a device). `supabase/README.md` is the checklist for
+  whoever creates one.
+- **No native build to sign in on.** Apple sign-in (`expo-apple-authentication`)
+  and the `usesAppleSignIn` capability need a real iOS build; this
+  environment has never had one (ADR 0001 raised the same gap in Phase 0).
+- **No Maestro flow for sign-in/sync** — unlike `onboarding.yaml` and
+  `run-nitya.yaml`, a sign-in flow can't be authored meaningfully against a
+  backend that doesn't exist yet; adding one is cheap once a project does.
+- **Phone OTP** — scoped out for this phase (DLT registration lead time);
+  §14 Q6 is otherwise now resolved (full Google + Apple, not guest-only).
+- **The Privacy Policy is a first draft**, not legal-reviewed — flagged
+  inline on the screen itself (`tone="danger"`) the same way ritual content
+  flags a `TODO_PANDIT`, because it has the same shape of gap: real content
+  a specialist (legal counsel, here, instead of the pandit) has not yet
+  signed off on.
+
+### Deviations
+
+- `favorites` ships with no UI — §10 lists the table but no screen; adding
+  one wasn't part of "backend, auth, sync, content pipeline."
+- Google sign-in uses Supabase's hosted OAuth flow rather than the native
+  Google Sign-In SDK (`docs/adr/0004-oauth-flow.md`) — no
+  `google-services.json`/reversed-client-id config needed, and nothing
+  about it depends on a Google Cloud project existing yet either.
+- `useDownloadsStore` is now persisted (it wasn't through Phase 6) — a
+  genuinely downloaded pack needs to survive a relaunch; the four bundled
+  pujas are re-forced to `'bundled'` on every load regardless of what a
+  stale persisted blob says.
+- Bumped `expo-constants`, `expo-linking`, `expo-background-task`,
+  `expo-location`, `expo-notifications`, `expo-router`, `expo-task-manager`,
+  `expo-updates` and `expo` itself to the patch versions `expo-auth-session`
+  actually depends on (`expo-doctor` flagged the mismatch as a duplicate-
+  native-module warning after adding it) — all within SDK 57, `expo-doctor`
+  clean afterward. Also registered `expo-background-task` as a config
+  plugin in `app.config.ts`, which the dependency bump surfaced as missing
+  (pre-existing gap, unrelated to this phase's own work).
+
+### New `TODO_PANDIT` items
+
+None — no ritual content touched this phase.
+
 ## [Phase 7] — Sankalpam audio stitching & natural name voice — 2026-10-04
 
 ### Built
@@ -11,7 +155,7 @@ entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
   every item now has `startMs`/`endMs`/`durationMs`, a running cumulative
   offset down the whole plan computed from an (optional, still-empty in
   practice — §9.6 recording has not started) `manifest: AudioClip[]`
-  parameter. A `self_recite` or `missing` item gets a *nominal* span
+  parameter. A `self_recite` or `missing` item gets a _nominal_ span
   (`SELF_RECITE_NOMINAL_MS` = 3 s, or zero) purely so later clips' offsets
   still line up — never mistaken for a real duration anywhere it matters.
 - **`activeSegmentAt(plan, positionMs)`** — §10's "text highlight tracks
@@ -21,8 +165,8 @@ entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
   a live highlight, since nothing produces a moving `positionMs` to track
   until real audio exists (see Not met).
 - **`resolveNameAudioMode`** (§9.6.1) — the devotee's name is self-recited
-  unless they *both* opted into a pandit-voice clone (`prefs.nameAudio`)
-  *and* one is already cached on-device (`devotee.nameAudio`); requested-
+  unless they _both_ opted into a pandit-voice clone (`prefs.nameAudio`)
+  _and_ one is already cached on-device (`devotee.nameAudio`); requested-
   but-not-yet-rendered and a failed render are indistinguishable from
   never having opted in — both resolve to `self_recite`, automatically,
   with no error path to wire up. Recorded as a real decision in
@@ -32,7 +176,7 @@ entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
   run; a `self_recite`, `pandit_clone` or `missing` item is always its own
   run, because each needs handling a shared RNTP queue cannot express.
 - **The self-recite prompt, live** — `apps/mobile/src/services/sankalpam/
-  useSankalpamRunner.ts` steps through a Sankalpam step's runs: clip runs
+useSankalpamRunner.ts` steps through a Sankalpam step's runs: clip runs
   load into RNTP and advance on their own; a self-recited run shows the
   Chant Player's new large-text prompt (the devotee's own name, or a
   hand-typed gotra) and advances on a tap or after the nominal pause
@@ -102,7 +246,7 @@ entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
 ### Deviations
 
-- `AudioPlanItem`'s `self_recite`/`missing` spans are a *nominal* estimate
+- `AudioPlanItem`'s `self_recite`/`missing` spans are a _nominal_ estimate
   (§9.6.1's own "~3 s"), not a measured duration — documented on the type
   itself so a future reader never mistakes it for real timing data the
   way a `clip` item's `durationMs` is once one is recorded.
@@ -124,7 +268,7 @@ None — no content files touched this phase.
 
 - **`machines/pujaRunner.machine.ts`** (§9.7, XState v5) — the full state
   diagram: `idle → preparing → step.{entry,instruction,awaitingAction,
-  chanting,done} → completed`, `PAUSE`/`RESUME` through a deep history state
+chanting,done} → completed`, `PAUSE`/`RESUME` through a deep history state
   so resuming lands back in the exact substate a devotee left (mid-action-
   prompt included, not just "somewhere in this step"), `PREV`/`NEXT` at any
   point, `EXIT` to an `exited` final state, and a namavali tap counter
@@ -141,7 +285,7 @@ None — no content files touched this phase.
   placeholder) passes through unchanged. Ganapathi/Lakshmi/Shiva are
   runnable end to end for the first time.
 - **`services/audio` extended** — `queue.ts`'s `buildStepQueue(step, mode,
-  phase, sankalpamPlan?)` builds one Puja-Runner *phase*'s clip queue at a
+phase, sankalpamPlan?)` builds one Puja-Runner _phase_'s clip queue at a
   time (`'instruction'` or `'chant'`), never both together — see its own
   note on why that split matters once real audio exists. `useQueuePlayback`
   loads a phase's queue into RNTP, reports `playing`/`position`/`duration`,
@@ -182,7 +326,7 @@ None — no content files touched this phase.
   against the RNTP jest mock), 4 for `composePujaSteps` plus 3 for
   `runnableSteps`, 8 for the session store, 4 for the downloads store, 2
   more for `buildDevoteeSankalpamAudioPlan`, and 5 for the Chant Player
-  screen itself — including one that drives the *entire* Nitya Puja from
+  screen itself — including one that drives the _entire_ Nitya Puja from
   `START` to the completion screen, step by step, inside Jest.
   `@epooja/content` 135 (+4), `@epooja/mobile` 171 (+64).
 
@@ -206,7 +350,7 @@ None — no content files touched this phase.
 ### Found and fixed during verification
 
 - **A real design bug, caught before it shipped**: the first version of
-  `buildStepQueue` built a guided step's instruction *and* chant clips as
+  `buildStepQueue` built a guided step's instruction _and_ chant clips as
   one combined RNTP queue, matching §9.6's prose literally
   (`[instructionClip, (await action), chantClip]`) but not its intent —
   with real audio, RNTP's single `PlaybackQueueEnded` event could only ever

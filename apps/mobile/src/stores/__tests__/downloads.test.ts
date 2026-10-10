@@ -4,7 +4,7 @@ import { useDownloadsStore } from '@/stores/downloads';
 const INITIAL_STATUSES = { ...useDownloadsStore.getState().statuses };
 
 beforeEach(() => {
-  useDownloadsStore.setState({ statuses: { ...INITIAL_STATUSES } });
+  useDownloadsStore.setState({ statuses: { ...INITIAL_STATUSES }, installedVersions: {} });
 });
 
 describe('useDownloadsStore', () => {
@@ -26,9 +26,10 @@ describe('useDownloadsStore', () => {
     expect(useDownloadsStore.getState().statusFor(id)).toBe('downloading');
     expect(useDownloadsStore.getState().isAvailableOffline(id)).toBe(false);
 
-    useDownloadsStore.getState().markDownloaded(id);
+    useDownloadsStore.getState().markDownloaded(id, '0.2.0');
     expect(useDownloadsStore.getState().statusFor(id)).toBe('downloaded');
     expect(useDownloadsStore.getState().isAvailableOffline(id)).toBe(true);
+    expect(useDownloadsStore.getState().installedVersions[id]).toBe('0.2.0');
   });
 
   it('marks a failed download, distinct from never having tried', () => {

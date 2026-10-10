@@ -12,6 +12,7 @@ import {
 import { enrichDeep } from './transliterate';
 import { scanContent } from './scan';
 import { renderReviewQueue } from './reviewQueue';
+import { parseUploadArgs, resolveUploadOptions, uploadPack } from './upload';
 
 /**
  * `pnpm content:build` (§10 Phase 4).
@@ -141,6 +142,8 @@ async function main(): Promise<void> {
   //    download path (Phase 8) have something stable to target.
   await rm(DIST_DIR, { recursive: true, force: true });
 
+  const builtPacks: { id: string; version: string; dir: string }[] = [];
+
   for (const puja of built) {
     const enriched = enrichDeep(puja);
     const packDir = join(DIST_DIR, 'packs', `${puja.id}@${puja.pack.version}`);
@@ -162,6 +165,7 @@ async function main(): Promise<void> {
     );
 
     console.log(`  → dist/packs/${puja.id}@${puja.pack.version}/`);
+    builtPacks.push({ id: puja.id, version: puja.pack.version, dir: packDir });
   }
 
   // 5. Regenerate the review queue.
@@ -176,6 +180,21 @@ async function main(): Promise<void> {
   );
   console.log(`  ${report.filesPendingReview} file(s) still PENDING_PANDIT_REVIEW`);
   console.log('  content/REVIEW_QUEUE.md regenerated — run `pnpm format` before committing it');
+
+  // 6. §10 Phase 8: `--upload --channel preview|production` ships the just-
+  //    built packs to Supabase Storage and records them in `content_packs`.
+  //    Omitted entirely by default — every other step above must keep
+  //    working with no backend configured at all (§5, guest-first).
+  const { upload, channel } = parseUploadArgs(process.argv.slice(2));
+  if (upload) {
+    console.log(`\nUploading ${builtPacks.length} pack(s) to the "${channel}" channel…`);
+    const options = resolveUploadOptions(channel);
+    for (const pack of builtPacks) {
+      await uploadPack(pack, options);
+      console.log(`  ✓ ${pack.id}@${pack.version} → ${channel}`);
+    }
+    console.log('✓ upload complete');
+  }
 }
 
 await main();

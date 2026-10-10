@@ -1,5 +1,10 @@
 import { useEffect, useRef } from 'react';
-import TrackPlayer, { Event, State, usePlaybackState, useProgress } from 'react-native-track-player';
+import TrackPlayer, {
+  Event,
+  State,
+  usePlaybackState,
+  useProgress,
+} from 'react-native-track-player';
 import type { AudioClip } from '@epooja/content';
 import { setupTrackPlayer } from './trackPlayer';
 import { BUNDLED_AUDIO_MANIFEST, resolveClipUrl } from './manifest';
@@ -52,7 +57,9 @@ export function useQueuePlayback(
 
       const resolved = tracks
         .map((track) => ({ track, url: resolveClipUrl(track.clipId, manifest) }))
-        .filter((entry): entry is { track: AudioQueueTrack; url: string } => entry.url !== undefined);
+        .filter(
+          (entry): entry is { track: AudioQueueTrack; url: string } => entry.url !== undefined,
+        );
 
       if (resolved.length === 0) {
         if (!cancelled) onEndedRef.current();

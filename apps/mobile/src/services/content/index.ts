@@ -12,3 +12,11 @@ export {
   catalogSections,
   type CatalogSection,
 } from './content';
+export {
+  fetchPackManifest,
+  currentChannel,
+  packManifestEntrySchema,
+  type PackManifestEntry,
+  type PackManifestResponse,
+} from './packManifest';
+export { checkForUpdates, downloadPack, packsNeedingUpdate } from './downloadManager';

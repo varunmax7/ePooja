@@ -24,9 +24,7 @@ describe('resolveClipUrl', () => {
   });
 
   it('returns the path once a manifest carries the clip', () => {
-    expect(resolveClipUrl('chant.deeparadhana', [CLIP])).toBe(
-      'audio/chant/nitya/deeparadhana.m4a',
-    );
+    expect(resolveClipUrl('chant.deeparadhana', [CLIP])).toBe('audio/chant/nitya/deeparadhana.m4a');
   });
 
   it('returns undefined for an id absent from a non-empty manifest', () => {
