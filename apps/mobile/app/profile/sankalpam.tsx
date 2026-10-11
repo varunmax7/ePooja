@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Card, Txt, colors, mantraVariantFor, spacing, type MantraScript } from '@epooja/ui';
 import { useDevoteeStore } from '@/stores/devotee';
@@ -23,6 +24,8 @@ export default function SankalpamPreviewScreen() {
   const { date } = useTodayDate();
   const { data: panchangam, isLoading, isError } = usePanchangam(date, devotee?.location);
   const [script, setScript] = useState<MantraScript>(devotee?.prefs.mantraScript ?? 'te');
+  const { t } = useTranslation('profile');
+  const { t: tCommon } = useTranslation('common');
 
   // The daily Nitya Puja's own deity (§9.5) — the Sankalpam this screen
   // previews is the one a devotee would actually recite today, not a
@@ -44,11 +47,11 @@ export default function SankalpamPreviewScreen() {
         }}
       >
         <Txt variant="screenTitle" tone="maroon">
-          Preview Sankalpam
+          {t('sankalpam.title')}
         </Txt>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Close"
+          accessibilityLabel={tCommon('close')}
           hitSlop={10}
           onPress={() => {
             router.back();
@@ -62,7 +65,13 @@ export default function SankalpamPreviewScreen() {
         {(['te', 'dev', 'iast'] as const).map((option) => (
           <ScriptChip
             key={option}
-            label={option === 'te' ? 'Telugu' : option === 'dev' ? 'Devanagari' : 'IAST'}
+            label={
+              option === 'te'
+                ? t('sankalpam.scriptTelugu')
+                : option === 'dev'
+                  ? t('sankalpam.scriptDevanagari')
+                  : t('sankalpam.scriptIast')
+            }
             active={script === option}
             onPress={() => {
               setScript(option);
@@ -74,9 +83,9 @@ export default function SankalpamPreviewScreen() {
       <ScrollView
         contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}
       >
-        {!devotee ? <Txt tone="inkMuted">Finish onboarding to preview the Sankalpam.</Txt> : null}
-        {isLoading ? <Txt tone="inkMuted">Computing today&rsquo;s Panchangam…</Txt> : null}
-        {isError ? <Txt tone="danger">Could not compute today&rsquo;s Panchangam.</Txt> : null}
+        {!devotee ? <Txt tone="inkMuted">{t('sankalpam.needsOnboarding')}</Txt> : null}
+        {isLoading ? <Txt tone="inkMuted">{t('sankalpam.computing')}</Txt> : null}
+        {isError ? <Txt tone="danger">{t('sankalpam.computeError')}</Txt> : null}
 
         {text ? (
           <Card tone="cream" padding={5}>

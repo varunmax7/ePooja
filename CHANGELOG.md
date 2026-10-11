@@ -3,6 +3,196 @@
 All notable changes per phase. Format loosely follows Keep a Changelog; each
 entry lists what was built, what was skipped, and any new `TODO_PANDIT` items.
 
+## [Phase 10] — QA, content sign-off, release — 2026-10-11
+
+Scoped honestly up front: §10 Phase 10 is overwhelmingly non-code —
+a pandit's content/voice sign-off, physical devices, a published reference
+panchangam, developer accounts, and real beta families. None of those exist
+in this environment, same constraint every phase since Phase 0's ADR 0001
+has flagged for anything device- or human-dependent. What follows is the
+part of this phase that _is_ code: the gate that enforces the content/voice
+requirement automatically, the release configuration that's ready the
+moment real credentials exist, and draft documents derived from what the
+app actually does — not a claim that §16's Definition of Done is met.
+
+### Built
+
+- **Production content gate** (`tools/content-build/src/productionGate.ts`,
+  tested in `productionGate.test.ts`) — §10's own acceptance line: "build
+  fails if any `TODO_PANDIT` or `PENDING` remains in the production
+  channel." Wired into `build.ts`'s existing `--upload --channel
+preview|production` step: a `--channel production` upload now refuses
+  (exit 1, nothing touched) while any content file carries a placeholder or
+  a `review.status` short of `APPROVED`; `--channel preview` and the plain
+  `pnpm content:build` are unaffected, since placeholders are the expected
+  state everywhere else until Phase 10 (§0.4). Verified for real, not just
+  by the unit tests: ran `pnpm content:build -- --upload --channel
+production` against this repo's actual content tree and confirmed it
+  fails with the exact 26-file, 961-placeholder report before ever reaching
+  `resolveUploadOptions` (no credentials needed to prove the gate works).
+- **`eas.json` submit profiles** — `submit.preview` (Play internal testing)
+  and `submit.production` (Play production track) `android` configs,
+  pointing at a gitignored `apps/mobile/google-play-service-account.json`
+  (added to `.gitignore` alongside the existing
+  `google-services.json`/`GoogleService-Info.plist` entries). No `ios`
+  block in either — `eas submit -p ios` reads Apple credentials from the
+  environment or prompts interactively, the same "never commit a secret"
+  posture `tools/content-build`'s `SUPABASE_SERVICE_ROLE_KEY` already uses.
+- **`docs/release.md`** — the release checklist: how to run the content
+  gate, what the voice gate still needs (no automated check exists for it —
+  there is no clip to check against until Phase 6/7's recording work
+  produces one), how to run the 14-day/3-city Panchangam field test, how to
+  get a device-matrix build via `eas build --profile preview`, the exact
+  `eas submit` invocations, and what blocks closed beta → production
+  (crash-free measurement needs real users; there's nothing further to
+  configure in Sentry itself).
+- **`docs/store/listing.md`** and **`docs/store/data-safety.md`** — first
+  drafts of the store listing copy (English + Telugu, name/category/
+  description/keywords) and the Data Safety (Play) / Privacy Nutrition
+  Label (App Store) answers. The data-safety draft is a table sourced
+  directly from the Phase 8 schema and the Phase 0/9 analytics/crash-
+  reporting setup (what `profiles`/`puja_sessions`/`favorites` actually
+  store, what `analytics.ts`'s event list and `sentry.ts`'s
+  `sendDefaultPii: false` actually send) — not a generic template filled in
+  by guessing, but still unreviewed, same standing as the in-app Privacy
+  Policy draft from Phase 8.
+- **`content/REVIEW_QUEUE.md`**'s non-code dependencies table gained six
+  Phase 10 rows: pandit sign-off on every content file, the pandit voice
+  recording itself, a reference panchangam for the field test, the two
+  developer accounts, the 20–50 beta families, and the device matrix —
+  named individually rather than left as one vague "Phase 10 blockers" line,
+  the same granularity the table already uses for Phase 0's items.
+
+### Not met
+
+Everything in §16 that isn't the content gate above. Specifically, as of
+this entry: **zero** content files are `APPROVED` (26 pending, 961
+placeholders — unchanged since Phase 4, confirmed by running the gate for
+real); **zero** production audio clips exist (every pack's
+`audio-manifest.json` ships `clips: []` by design); the 14-day/3-city field
+test has not been run and, per `pnpm fixtures:audit`, is really the same
+open item as Phase 2's own "Not met" note — 17 of 94 fixtures `verified`
+against a real reference, 43 short of §9.1's ≥60 bar, unchanged since Phase
+2; the five-device matrix, cold-start/runner-memory measurement, and the
+`eas submit` calls themselves have not been run — none of the devices,
+accounts, reference panchangam, or beta users they need exist yet; and the
+store listing/data-safety text is a draft, not client-approved, submitted
+copy. §16's checklist is the accurate status; nothing here should be read
+as moving any of its unchecked boxes to checked.
+
+### New `TODO_PANDIT` items
+
+None. This phase touched release tooling and draft marketing/legal-adjacent
+copy, not ritual content.
+
+## [Phase 9] — Notifications, calendar, localization, accessibility — 2026-10-11
+
+### Built
+
+- **`services/notifications`** — local prayer-timing reminders (§10): a pure
+  `buildReminderPlan` (next 7 days, from the same `@epooja/panchangam` engine
+  the Today screen reads, so a reminder fires at exactly the instant its bell
+  row shows — never a separately-maintained approximation; skips a sunless
+  extreme-latitude day via `NoSunriseError` rather than losing the week) and
+  `notificationService.rescheduleReminders`, the `expo-notifications` half
+  (cancel-and-reschedule, notification text baked in `i18next.language` at
+  schedule time). `useNotificationsSync` keeps the OS's scheduled set in step
+  with location, per-timing toggles and `uiLang`, mounted once at the root
+  alongside `useAuthSync`/`useSyncLanguage`. `useToggleReminder` requests
+  permission only the first time a devotee turns a bell on — never on app
+  open. `registerBackgroundRefresh` (`backgroundTask.ts`) re-runs the same
+  plan daily via `expo-background-task` so the rolling window advances on a
+  day the app is never opened, per §10's "rescheduled on app open and daily."
+  Wired into the Today screen's existing `TimingRow` bells.
+- **`i18n/`** — i18next + `react-i18next`, English and Telugu resources for
+  every screen chrome namespace (`common`, `onboarding`, `forms`, `profile`,
+  `notifications`, `poojas`, `pooja`, `player`, `account`, `today`,
+  `calendar`). `useSyncLanguage` keeps `i18next.language` in step with the
+  devotee's `prefs.uiLang` (the same preference the script switcher already
+  used), including inside a scheduled notification's baked-in text. `uiLang`
+  is deliberately kept separate from mantra `script` (§9.3): a devotee can
+  run an English interface while reading Telugu nakshatra names. Every
+  screen touched for i18n is lint-clean against §15's "no Telugu literal in
+  `.tsx`" rule — translations live in `i18n/locales/`, which that rule
+  exempts. The onboarding Location step (§8.1 step 5) had its `location.*`
+  keys already written in both locales but never wired in; connected it this
+  phase so every onboarding screen, not just four of five, is localized. The
+  bottom tab bar's four labels were the one piece of chrome visible on every
+  screen that was still a hardcoded English literal in `(tabs)/_layout.tsx`
+  (`Tabs.Screen`'s `options.title` feeds `TabBar` directly) — moved to
+  `common.tabToday`/`tabPoojas`/`tabCalendar`/`tabProfile`, kept short and
+  separate from each screen's own (longer) header title.
+- **Calendar screen, live** — `services/panchangam`'s `toMonthView` /
+  `useMonthView` wrap the engine's `getMonth`, replacing Phase 1's static
+  September-2026 placeholder with the real tithi number and
+  ekadashi/pournami/amavasya marker for every day, month paging (chevrons,
+  `dateFormat.ts`'s `shiftMonth`), and the existing no-location/
+  loading/error cards the Today screen already had. Tapping a day opens the
+  same full-Panchangam sheet the Today screen's dial does.
+- **`@epooja/content` `festivals.ts`** — schema + `festivalsInMonth` for
+  `content/festivals/{samvatsara}.json` (§10: festival markers are a
+  pandit-authored table, not algorithmic, for v1 — a festival's _observed_
+  Gregorian date is a judgment call, unlike the five angas). The Calendar
+  screen already renders a gold dot and an a11y-announced name from whatever
+  `services/panchangam/content.ts`'s `FESTIVAL_FILES` map holds; no
+  samvatsara has a reviewed table yet, so it renders nothing until one lands
+  — see "Not met" below.
+- **Locale-aware date formatting** — `dateFormat.ts`'s `formatCalendarDate`
+  takes `uiLang` (`en-US`/`te-IN` `Intl` locales) instead of a hardcoded
+  `en-US`, so the Today screen's date dial and the full-Panchangam sheet's
+  header read in Telugu when the interface does; `weekdayNarrowLabels` and
+  `formatMonthYear` do the same for the Calendar screen's weekday row and
+  header.
+- **Accessibility pass** — audited in `docs/a11y.md`: every icon-only control
+  already had an `accessibilityLabel`; four fell short of a 44 pt hit target
+  (`TimingRow`'s bell, the My Profile edit icon, and two close buttons) and
+  are fixed. Confirmed the gold-on-cream contrast fix from §10 is already
+  structural (`Txt`'s `gold` tone resolves to `gold['700']`, not a lighter
+  step, so every screen gets it for free) rather than re-litigating it
+  per-screen. Added the reminder bell's `Haptics.selectionAsync()`, matching
+  the Puja Runner's existing haptics.
+
+### Gate
+
+`pnpm verify` green (lint + typecheck + test, all three packages touched:
+`@epooja/mobile`, `@epooja/content`, `@epooja/ui`); 223 mobile tests, 141
+content tests. `docs/a11y.md` written per §10's acceptance line.
+
+### Not met
+
+- **Festival markers don't show anything yet.** The schema and the Calendar
+  screen's rendering path are both ready (see "Built" above), but no
+  samvatsara has a pandit-signed `content/festivals/{samvatsara}.json` —
+  determining a festival's _observed_ day is exactly the kind of judgment
+  call §0.3/§0.4 reserve for a named reviewer, not something to approximate
+  here. Tracked in `content/REVIEW_QUEUE.md`'s non-code dependencies table,
+  the same way the pandit identification itself is.
+- **No on-device VoiceOver/TalkBack run.** Same constraint as every prior
+  phase's device-dependent item (ADR 0001): this machine has no iOS/Android
+  hardware or simulator. `docs/a11y.md` is a static-analysis audit
+  (role/label/state wiring, hit-target arithmetic); a real screen-reader pass
+  through onboarding → Today → a full puja still needs doing before release.
+- **Dark mode** — §10 lists it as optional ("if time allows"); skipped.
+  Every colour reference already goes through `@epooja/ui` tokens, so adding
+  a dark palette later is additive, not a rewrite.
+- The Calendar screen's new month-grid cells were not re-shot through the
+  Phase 1 screenshot harness at 130% Dynamic Type — they reuse that screen's
+  proven 40×44 cell sizing, but that's an inference, not a re-run.
+
+### Deviations
+
+- `formatCalendarDate`'s new `uiLang` parameter defaults to `'en'` rather
+  than being required, so every pre-Phase-9 call site (and the English
+  fixture in `acceptance.test.ts`) keeps its exact current output with no
+  call-site change needed beyond the two screens that now pass the devotee's
+  real preference through.
+
+### New `TODO_PANDIT` items
+
+None. This phase touched UI chrome strings (`i18n/locales/`, which §15
+exempts from the Telugu-literal ban) and reminder/notification text, not
+ritual content — nothing new in `content/`.
+
 ## [Phase 8] — Backend, auth, sync, content pipeline — 2026-10-07
 
 Scoped with the client before starting (§14 Q6 was open): full Google +

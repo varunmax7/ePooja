@@ -1,0 +1,32 @@
+/** Pooja detail, Preparation and Recipe screens (§8.4, §8.5). */
+export default {
+  notFound: "That pooja isn't in this app yet.",
+  duration: 'Duration',
+  short: 'Short',
+  full: 'Full',
+  durationA11y: '{{variant}}, about {{minutes}} minutes',
+  stepsSection: 'Steps',
+  sectionPoorvangam: 'Poorvangam',
+  sectionPradhana: 'Pradhana Puja',
+  sectionUttarangam: 'Uttarangam',
+  prepare: 'Prepare',
+  start: 'Start',
+
+  prepareHeaderTitle: 'Pooja Preparation',
+  essentials: "Essentials for Today's Ritual",
+  readyCount: '{{done}}/{{total}} ready',
+  recipePreviewEyebrow: 'Offerings Recipe Preview:',
+  viewRecipe: 'View Recipe',
+  pendingItems_one: '{{count}} item still unchecked — you can start anyway.',
+  pendingItems_other: '{{count}} items still unchecked — you can start anyway.',
+  startPooja: 'Start Pooja',
+
+  recipeNotFound: "That recipe isn't in this app yet.",
+  photoPending: 'PHOTO PENDING',
+  naivedyam: 'naivedyam',
+  servings: 'Servings',
+  fewerServingsA11y: 'Fewer servings',
+  moreServingsA11y: 'More servings',
+  ingredients: 'Ingredients',
+  ritualNotes: 'Ritual notes',
+};

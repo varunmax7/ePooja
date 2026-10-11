@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
+import { Stack } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Button, Card, Txt, colors, spacing } from '@epooja/ui';
 import { PUJAS, checkForUpdates, downloadPack } from '@/services/content';
 import { pujaTitle } from '@/lib/pujaDisplay';
@@ -15,18 +17,21 @@ import { env } from '@/lib/env';
  * backend, just always reporting "nothing to update" today.
  */
 
-const STATUS_LABEL: Record<DownloadStatus, string> = {
-  bundled: 'Bundled with the app',
-  'not-downloaded': 'Not downloaded',
-  downloading: 'Downloading…',
-  downloaded: 'Downloaded',
-  failed: 'Download failed',
-};
-
 export default function StorageScreen() {
   const statuses = useDownloadsStore((s) => s.statuses);
   const [checking, setChecking] = useState(false);
   const [updateCount, setUpdateCount] = useState<number | null>(null);
+  const { t } = useTranslation('account');
+  const { t: tProfile } = useTranslation('profile');
+  const { t: tCommon } = useTranslation('common');
+
+  const STATUS_LABEL: Record<DownloadStatus, string> = {
+    bundled: t('storage.statusBundled'),
+    'not-downloaded': t('storage.statusNotDownloaded'),
+    downloading: t('storage.statusDownloading'),
+    downloaded: t('storage.statusDownloaded'),
+    failed: t('storage.statusFailed'),
+  };
 
   async function handleCheckForUpdates() {
     setChecking(true);
@@ -45,6 +50,8 @@ export default function StorageScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}
     >
+      <Stack.Screen options={{ title: tProfile('storageAndPacks') }} />
+
       {PUJAS.map((puja) => (
         <Card key={puja.id} tone="cream" padding={4}>
           <View
@@ -61,20 +68,27 @@ export default function StorageScreen() {
       ))}
 
       <Button
-        label={checking ? 'Checking…' : 'Check for updates'}
+        label={checking ? t('storage.checking') : t('storage.checkForUpdates')}
         onPress={() => void handleCheckForUpdates()}
         disabled={checking || !env.hasSupabase}
         fullWidth
       />
-      {checking && <ActivityIndicator color={colors.maroon['700'] as string} />}
+      {checking && (
+        <ActivityIndicator
+          color={colors.maroon['700'] as string}
+          accessibilityLabel={tCommon('loading')}
+        />
+      )}
       {updateCount !== null && !checking && (
         <Txt variant="label" tone="inkMuted">
-          {updateCount === 0 ? 'Everything is up to date.' : `Updated ${updateCount} pack(s).`}
+          {updateCount === 0
+            ? t('storage.upToDate')
+            : t('storage.updatedCount', { count: updateCount })}
         </Txt>
       )}
       {!env.hasSupabase && (
         <Txt variant="label" tone="inkMuted">
-          This build has no backend configured — every puja above is the one bundled with the app.
+          {t('storage.noBackend')}
         </Txt>
       )}
     </ScrollView>

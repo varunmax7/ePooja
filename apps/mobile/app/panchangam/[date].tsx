@@ -1,6 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Card, Txt, colors, spacing } from '@epooja/ui';
 import { useDevoteeStore } from '@/stores/devotee';
@@ -20,8 +21,11 @@ export default function FullPanchangamSheet() {
   const insets = useSafeAreaInsets();
   const { date } = useLocalSearchParams<{ date: string }>();
   const script = useDevoteeStore((s) => s.devotee?.prefs.mantraScript ?? 'te');
-  const { view, isLoading, isError } = useFullPanchangamView(date, script);
-  const { weekday, day, month, year } = formatCalendarDate(date);
+  const uiLang = useDevoteeStore((s) => s.devotee?.prefs.uiLang ?? 'en');
+  const { view, isLoading, isError } = useFullPanchangamView(date, script, uiLang);
+  const { weekday, day, month, year } = formatCalendarDate(date, uiLang);
+  const { t } = useTranslation('today');
+  const { t: tCommon } = useTranslation('common');
 
   return (
     <View style={{ flex: 1 }} className="bg-cream-50">
@@ -40,7 +44,7 @@ export default function FullPanchangamSheet() {
         </Txt>
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Close"
+          accessibilityLabel={tCommon('close')}
           hitSlop={10}
           onPress={() => {
             router.back();
@@ -53,43 +57,43 @@ export default function FullPanchangamSheet() {
       <ScrollView
         contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}
       >
-        {isLoading ? <Txt tone="inkMuted">Computing…</Txt> : null}
-        {isError ? <Txt tone="danger">Could not compute the Panchangam for this date.</Txt> : null}
+        {isLoading ? <Txt tone="inkMuted">{t('sheet.computing')}</Txt> : null}
+        {isError ? <Txt tone="danger">{t('sheet.computeError')}</Txt> : null}
 
         {view ? (
           <>
             <Card tone="cream" padding={5}>
-              <Row label="Samvatsaram" value={view.samvatsara} />
-              <Row label="Ayanam" value={view.ayana} />
-              <Row label="Paksham" value={view.paksha} />
-              <Row label="Ruthuvu" value={view.ritu.value} last />
+              <Row label={t('sheet.samvatsaram')} value={view.samvatsara} />
+              <Row label={t('sheet.ayanam')} value={view.ayana} />
+              <Row label={t('sheet.paksham')} value={view.paksha} />
+              <Row label={t('sheet.ruthuvu')} value={view.ritu.value} last />
             </Card>
 
             <Card tone="cream" padding={5}>
-              <Row label="Tithi" value={view.tithi.value} />
-              <Row label="Nakshatram" value={view.nakshatra.value} />
-              <Row label="Yogam" value={view.yoga.value} />
-              <Row label="Karanam" value={view.karana.value} />
+              <Row label={t('sheet.tithi')} value={view.tithi.value} />
+              <Row label={t('sheet.nakshatram')} value={view.nakshatra.value} />
+              <Row label={t('sheet.yogam')} value={view.yoga.value} />
+              <Row label={t('sheet.karanam')} value={view.karana.value} />
               <Row
-                label="Masam"
+                label={t('sheet.masam')}
                 value={view.masa.value}
-                secondary={view.adhika ? 'Adhika' : undefined}
+                secondary={view.adhika ? t('sheet.adhika') : undefined}
               />
-              <Row label="Vasaram" value={view.vasara} last />
+              <Row label={t('sheet.vasaram')} value={view.vasara} last />
             </Card>
 
             <Card tone="cream" padding={5}>
               <Txt variant="sectionTitle" tone="ink">
-                Sun
+                {t('sheet.sun')}
               </Txt>
               <View style={{ height: spacing[2] }} />
-              <Row label="Sunrise" value={view.sunrise} />
-              <Row label="Sunset" value={view.sunset} last />
+              <Row label={t('sunrise')} value={view.sunrise} />
+              <Row label={t('sunset')} value={view.sunset} last />
             </Card>
 
             <Card tone="outlined" padding={5}>
               <Txt variant="sectionTitle" tone="ink">
-                Inauspicious Timings
+                {t('inauspiciousTimings')}
               </Txt>
               <View style={{ height: spacing[2] }} />
               {view.inauspicious.map((timing, index) => (

@@ -21,6 +21,7 @@ apps/mobile/web-build/
 !.env.example
 google-services.json
 GoogleService-Info.plist
+apps/mobile/google-play-service-account.json
 
 # test / coverage
 coverage/

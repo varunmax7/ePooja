@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Haptics from 'expo-haptics';
@@ -58,6 +59,8 @@ const KEEP_AWAKE_TAG = 'puja-runner';
 export default function PlayerScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation('player');
+  const { t: tCommon } = useTranslation('common');
   const { slug, variant: variantParam } = useLocalSearchParams<{
     slug: string;
     variant?: string;
@@ -219,7 +222,7 @@ export default function PlayerScreen() {
       <View style={{ flex: 1, padding: spacing[5] }} className="bg-cream-50">
         <Card tone="outlined" padding={5}>
           <Txt variant="body" tone="inkMuted">
-            That pooja isn&apos;t in this app yet.
+            {t('unknownPuja')}
           </Txt>
         </Card>
       </View>
@@ -229,7 +232,9 @@ export default function PlayerScreen() {
   if (snapshot.matches('completed')) {
     return (
       <CompletedScreen
-        title={pujaTitle(puja)}
+        heading={t('completed.title')}
+        body={t('completed.body', { title: pujaTitle(puja) })}
+        doneLabel={tCommon('done')}
         onDone={() => {
           router.back();
         }}
@@ -277,8 +282,8 @@ export default function PlayerScreen() {
   const selfReciteLabel =
     sankalpamRunner.activeItem?.kind === 'self_recite' &&
     sankalpamRunner.activeItem.slot === 'GOTRA'
-      ? 'Say your gotra aloud'
-      : 'Say your name aloud';
+      ? t('sayGotraAloud')
+      : t('sayNameAloud');
 
   return (
     <LinearGradient
@@ -296,7 +301,7 @@ export default function PlayerScreen() {
       >
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Close player"
+          accessibilityLabel={t('closePlayerA11y')}
           hitSlop={10}
           onPress={() => {
             send({ type: 'EXIT' });
@@ -315,7 +320,7 @@ export default function PlayerScreen() {
 
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Player options"
+          accessibilityLabel={t('optionsA11y')}
           hitSlop={10}
           onPress={() => {
             setShowSettings(true);
@@ -331,7 +336,7 @@ export default function PlayerScreen() {
 
       {!readyToStart ? (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Txt tone="maroon">Preparing today&rsquo;s Sankalpam…</Txt>
+          <Txt tone="maroon">{t('preparingSankalpam')}</Txt>
         </View>
       ) : (
         <>
@@ -346,7 +351,11 @@ export default function PlayerScreen() {
             <ChantDisc playing={audio.playing} />
 
             <StepProgress
-              caption={`Step ${snapshot.context.stepIndex + 1} of ${steps.length}: ${currentStep ? contentTextFor(currentStep.title, script) : ''}`}
+              caption={t('stepCaption', {
+                current: snapshot.context.stepIndex + 1,
+                total: steps.length,
+                title: currentStep ? contentTextFor(currentStep.title, script) : '',
+              })}
               progress={progress}
             />
 
@@ -383,17 +392,17 @@ export default function PlayerScreen() {
                 send({ type: 'NEXT' });
               }}
               labels={{
-                play: 'Play',
-                pause: 'Pause',
-                previous: 'Previous step',
-                next: 'Next step',
+                play: t('play'),
+                pause: t('pause'),
+                previous: t('previousStep'),
+                next: t('nextStep'),
               }}
             />
 
             <ModeToggle
               mode={snapshot.context.mode}
-              chantLabel="Chant Mode"
-              guidedLabel="Guided Narration Mode"
+              chantLabel={t('chantMode')}
+              guidedLabel={t('guidedMode')}
               onChange={(mode: PujaRunnerMode) => {
                 send({ type: 'SET_MODE', mode });
               }}
@@ -401,12 +410,13 @@ export default function PlayerScreen() {
 
             <Pressable
               accessibilityRole="button"
+              accessibilityLabel={t('samagriChecklist')}
               onPress={() => {
                 setShowSamagri(true);
               }}
             >
               <Txt variant="label" tone="maroon">
-                Samagri checklist
+                {t('samagriChecklist')}
               </Txt>
             </Pressable>
           </ScrollView>
@@ -460,7 +470,17 @@ export default function PlayerScreen() {
   );
 }
 
-function CompletedScreen({ title, onDone }: { title: string; onDone: () => void }) {
+function CompletedScreen({
+  heading,
+  body,
+  doneLabel,
+  onDone,
+}: {
+  heading: string;
+  body: string;
+  doneLabel: string;
+  onDone: () => void;
+}) {
   return (
     <LinearGradient
       colors={[...gradients.saffronHeader] as [string, string, string]}
@@ -474,21 +494,22 @@ function CompletedScreen({ title, onDone }: { title: string; onDone: () => void 
     >
       <MaterialCommunityIcons name="flower" size={56} color={colors.maroon['800'] as string} />
       <Txt variant="screenTitle" tone="maroon" align="center">
-        Pooja Sampoornam
+        {heading}
       </Txt>
       <Txt variant="body" tone="ink" align="center">
-        {title} is complete.
+        {body}
       </Txt>
-      <Button label="Done" tone="maroon" size="lg" onPress={onDone} />
+      <Button label={doneLabel} tone="maroon" size="lg" onPress={onDone} />
     </LinearGradient>
   );
 }
 
 function NamavaliTap({ count, total, onTap }: { count: number; total: number; onTap: () => void }) {
+  const { t } = useTranslation('player');
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={`Offer, ${count} of ${total}`}
+      accessibilityLabel={t('offerA11y', { count, total })}
       onPress={onTap}
       style={{ alignItems: 'center', gap: spacing[2] }}
     >
@@ -506,6 +527,7 @@ function NamavaliTap({ count, total, onTap }: { count: number; total: number; on
 
 function ActionPrompt({ text, onDone }: { text: string; onDone: () => void }) {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation('common');
   return (
     <View
       style={{
@@ -516,6 +538,10 @@ function ActionPrompt({ text, onDone }: { text: string; onDone: () => void }) {
       }}
     >
       <View
+        // Announces itself the moment it appears — a devotee mid-ritual is
+        // often not looking at the screen, so a screen reader needs to speak
+        // the instruction without a manual focus move.
+        accessibilityLiveRegion="polite"
         style={[
           {
             backgroundColor: colors.maroon['800'],
@@ -529,7 +555,7 @@ function ActionPrompt({ text, onDone }: { text: string; onDone: () => void }) {
         <Txt variant="mantraTeluguSmall" tone="cream" align="center">
           {text}
         </Txt>
-        <Button label="Done" tone="gold" onPress={onDone} />
+        <Button label={t('done')} tone="gold" onPress={onDone} />
       </View>
     </View>
   );
@@ -551,6 +577,7 @@ function SelfRecitePrompt({
   onContinue: () => void;
 }) {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation('common');
   return (
     <View
       style={{
@@ -559,8 +586,9 @@ function SelfRecitePrompt({
         right: spacing[5],
         bottom: Math.max(insets.bottom, spacing[5]),
       }}
+      accessibilityLiveRegion="polite"
     >
-      <Pressable onPress={onContinue} accessibilityRole="button" accessibilityLabel="Continue">
+      <Pressable onPress={onContinue} accessibilityRole="button" accessibilityLabel={t('continue')}>
         <View
           style={[
             {
@@ -600,19 +628,22 @@ function SettingsSheet({
   onRateChange: (rate: number) => void;
   onClose: () => void;
 }) {
+  const { t } = useTranslation('player');
   return (
-    <Sheet onClose={onClose} title="Player settings">
+    <Sheet onClose={onClose} title={t('settings.title')}>
       <CheckRow
-        label="Auto-advance to next step"
+        label={t('settings.autoAdvance')}
         checked={autoAdvance}
         onToggle={() => {
+          void Haptics.selectionAsync();
           onAutoAdvanceChange(!autoAdvance);
         }}
       />
       <CheckRow
-        label="Show meaning"
+        label={t('settings.showMeaning')}
         checked={showMeaning}
         onToggle={() => {
+          void Haptics.selectionAsync();
           onShowMeaningChange(!showMeaning);
         }}
       />
@@ -651,9 +682,10 @@ function SamagriSheet({
   const entries = useChecklistStore((s) => s.entries);
   const toggle = useChecklistStore((s) => s.toggle);
   const checkedIds = entries[`${puja.id}:${date}`] ?? [];
+  const { t } = useTranslation('player');
 
   return (
-    <Sheet onClose={onClose} title="Samagri checklist">
+    <Sheet onClose={onClose} title={t('samagriChecklist')}>
       {items.map((item) => (
         <CheckRow
           key={item.id}
@@ -679,6 +711,7 @@ function Sheet({
   onClose: () => void;
   children: React.ReactNode;
 }) {
+  const { t } = useTranslation('common');
   return (
     <View
       style={{
@@ -701,9 +734,11 @@ function Sheet({
           opacity: 0.3,
         }}
         onPress={onClose}
-        accessibilityLabel="Close"
+        accessibilityRole="button"
+        accessibilityLabel={t('close')}
       />
       <View
+        accessibilityViewIsModal
         style={{
           backgroundColor: colors.cream['50'],
           borderTopLeftRadius: radius.xl,

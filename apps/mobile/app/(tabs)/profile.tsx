@@ -1,6 +1,7 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import {
   AvatarRing,
   Card,
@@ -24,6 +25,7 @@ import { ENUM_FILES } from '@/services/panchangam';
 export default function ProfileScreen() {
   const router = useRouter();
   const devotee = useDevoteeStore((s) => s.devotee);
+  const { t } = useTranslation('profile');
 
   if (!devotee) return null;
 
@@ -34,7 +36,7 @@ export default function ProfileScreen() {
           const te = enumDisplay(enumValue(ENUM_FILES.gotra, devotee.gotraId as string), 'te');
           return isTodoPandit(te) ? (devotee.gotraId as string) : te;
         })()
-      : 'Not set';
+      : t('notSet');
 
   const nakshatraValue = devotee.nakshatraId
     ? enumValue(ENUM_FILES.nakshatra, devotee.nakshatraId)
@@ -47,7 +49,7 @@ export default function ProfileScreen() {
     ? isTodoPandit(rasiDisplay)
       ? devotee.rasiId!
       : rasiDisplay
-    : 'Not set';
+    : t('notSet');
 
   return (
     <ScrollView
@@ -56,14 +58,14 @@ export default function ProfileScreen() {
       contentContainerStyle={{ paddingBottom: spacing[8] }}
     >
       <CurvedHeader
-        title="My Profile"
+        title={t('title')}
         tone="saffron"
         height={210}
         action={
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Edit profile"
-            hitSlop={10}
+            accessibilityLabel={t('editA11y')}
+            hitSlop={11}
             onPress={() => {
               router.push('/profile/edit');
             }}
@@ -90,20 +92,20 @@ export default function ProfileScreen() {
       </CurvedHeader>
 
       <View style={{ paddingHorizontal: spacing[5], gap: spacing[4], marginTop: spacing[5] }}>
-        <FieldCard label="Name" value={displayName(devotee.name)} />
+        <FieldCard label={t('fieldName')} value={displayName(devotee.name)} />
         <FieldCard
-          label="Gotra"
+          label={t('fieldGotra')}
           value={gotra}
-          {...(devotee.gotraId ? {} : { secondary: 'pandit-supplied list (§9.2)' })}
+          {...(devotee.gotraId ? {} : { secondary: t('gotraPendingNote') })}
         />
         <FieldCard
-          label="Birth Star"
-          value={nakshatraDisplay ?? 'Not set'}
+          label={t('fieldBirthStar')}
+          value={nakshatraDisplay ?? t('notSet')}
           valueScript={nakshatraDisplay && !isTodoPandit(nakshatraDisplay) ? 'telugu' : 'latin'}
-          {...(devotee.nakshatraPada ? { secondary: `pada ${devotee.nakshatraPada}` } : {})}
+          {...(devotee.nakshatraPada ? { secondary: t('pada', { n: devotee.nakshatraPada }) } : {})}
         />
         <FieldCard
-          label="Moon Sign"
+          label={t('fieldMoonSign')}
           value={rasiText}
           valueScript={rasiDisplay && !isTodoPandit(rasiDisplay) ? 'telugu' : 'latin'}
         />
@@ -113,17 +115,17 @@ export default function ProfileScreen() {
             style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
           >
             <Txt variant="sectionTitle" tone="ink">
-              Family Members
+              {t('familyMembers')}
             </Txt>
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel="Manage family members"
+              accessibilityLabel={t('manageA11y')}
               onPress={() => {
                 router.push('/profile/family');
               }}
             >
               <Txt variant="label" tone="maroon">
-                Manage
+                {t('manage')}
               </Txt>
             </Pressable>
           </View>
@@ -134,7 +136,7 @@ export default function ProfileScreen() {
                 <FamilyChip key={member.id} name={displayName(member.name)} />
               ))}
               <FamilyChip
-                name="Add"
+                name={t('addChip')}
                 add
                 onPress={() => {
                   router.push('/profile/family');
@@ -145,7 +147,7 @@ export default function ProfileScreen() {
         </Card>
 
         <FieldCard
-          label="Location"
+          label={t('fieldLocation')}
           value={devotee.location.label}
           secondary={devotee.location.tz}
         />
@@ -153,7 +155,7 @@ export default function ProfileScreen() {
         <Card tone="cream" padding={5}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Preview today's Sankalpam"
+            accessibilityLabel={t('previewSankalpamA11y')}
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -164,7 +166,7 @@ export default function ProfileScreen() {
             }}
           >
             <Txt variant="sectionTitle" tone="ink">
-              Preview Sankalpam
+              {t('previewSankalpam')}
             </Txt>
             <MaterialCommunityIcons
               name="chevron-right"
@@ -177,7 +179,7 @@ export default function ProfileScreen() {
         <Card tone="cream" padding={5}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Account and sync settings"
+            accessibilityLabel={t('accountAndSyncA11y')}
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -188,7 +190,7 @@ export default function ProfileScreen() {
             }}
           >
             <Txt variant="sectionTitle" tone="ink">
-              Account & Sync
+              {t('accountAndSync')}
             </Txt>
             <MaterialCommunityIcons
               name="chevron-right"
@@ -201,7 +203,7 @@ export default function ProfileScreen() {
         <Card tone="cream" padding={5}>
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Storage and offline packs"
+            accessibilityLabel={t('storageAndPacksA11y')}
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -212,7 +214,7 @@ export default function ProfileScreen() {
             }}
           >
             <Txt variant="sectionTitle" tone="ink">
-              Storage & Offline Packs
+              {t('storageAndPacks')}
             </Txt>
             <MaterialCommunityIcons
               name="chevron-right"

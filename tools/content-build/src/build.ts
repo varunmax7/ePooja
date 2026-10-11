@@ -12,6 +12,7 @@ import {
 import { enrichDeep } from './transliterate';
 import { scanContent } from './scan';
 import { renderReviewQueue } from './reviewQueue';
+import { checkProductionGate } from './productionGate';
 import { parseUploadArgs, resolveUploadOptions, uploadPack } from './upload';
 
 /**
@@ -187,6 +188,21 @@ async function main(): Promise<void> {
   //    working with no backend configured at all (§5, guest-first).
   const { upload, channel } = parseUploadArgs(process.argv.slice(2));
   if (upload) {
+    // §10 Phase 10 acceptance: "build fails if any TODO_PANDIT or PENDING
+    // remains in the production channel." A preview upload is unaffected —
+    // placeholders are the expected state everywhere until a pandit's
+    // review lands (§0.4) — this only gates an actual production release.
+    const gateFailures = checkProductionGate(report, channel);
+    if (gateFailures.length > 0) {
+      console.error(
+        `\n✗ production content gate failed — ${gateFailures.length} problem${gateFailures.length === 1 ? '' : 's'}:\n`,
+      );
+      for (const failure of gateFailures) console.error(`  - ${failure.reason}`);
+      console.error('\nSee content/REVIEW_QUEUE.md. Nothing was uploaded.');
+      process.exitCode = 1;
+      return;
+    }
+
     console.log(`\nUploading ${builtPacks.length} pack(s) to the "${channel}" channel…`);
     const options = resolveUploadOptions(channel);
     for (const pack of builtPacks) {

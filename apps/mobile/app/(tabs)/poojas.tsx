@@ -1,7 +1,9 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Card, CurvedHeader, Txt, colors, radius, spacing } from '@epooja/ui';
+import type { PujaCategory } from '@epooja/content';
 import { catalogSections } from '@/services/content';
 import { durationLabel, pujaIcon, pujaTitle, shortStepCount } from '@/lib/pujaDisplay';
 
@@ -15,9 +17,17 @@ import { durationLabel, pujaIcon, pujaTitle, shortStepCount } from '@/lib/pujaDi
  * to Phase 8, where downloadable packs actually exist; showing a download
  * affordance now would promise something the app cannot do.
  */
+const CATEGORY_KEYS: Record<PujaCategory, 'categoryNitya' | 'categoryDeity' | 'categoryFestival'> =
+  {
+    nitya: 'categoryNitya',
+    deity: 'categoryDeity',
+    festival: 'categoryFestival',
+  };
+
 export default function PoojasScreen() {
   const router = useRouter();
   const sections = catalogSections();
+  const { t } = useTranslation('poojas');
 
   return (
     <ScrollView
@@ -25,13 +35,13 @@ export default function PoojasScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ paddingBottom: spacing[8] }}
     >
-      <CurvedHeader title="Poojas" tone="maroon" height={130} />
+      <CurvedHeader title={t('title')} tone="maroon" height={130} />
 
       <View style={{ paddingHorizontal: spacing[5], gap: spacing[6], marginTop: spacing[4] }}>
         {sections.map((section) => (
           <View key={section.category} style={{ gap: spacing[3] }}>
             <Txt variant="sectionTitle" tone="ink">
-              {section.title}
+              {t(CATEGORY_KEYS[section.category])}
             </Txt>
 
             {section.pujas.map((puja) => (
@@ -70,7 +80,8 @@ export default function PoojasScreen() {
                         {puja.title.te}
                       </Txt>
                       <Txt variant="label" tone="inkMuted">
-                        {durationLabel(puja)} · {shortStepCount(puja)} steps
+                        {durationLabel(puja, t('minUnit'))} ·{' '}
+                        {t('stepsCount', { count: shortStepCount(puja) })}
                       </Txt>
                     </View>
 

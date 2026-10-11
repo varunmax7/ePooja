@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { Button, Card, CheckRow, TextField, Txt, colors, spacing } from '@epooja/ui';
 import {
   enumDisplay,
@@ -12,14 +13,26 @@ import {
 import { EnumSearchPicker } from '@/components/onboarding/EnumSearchPicker';
 import { ENUM_FILES } from '@/services/panchangam';
 
-export const RELATIONS: { id: Relation; label: string }[] = [
-  { id: 'spouse', label: 'Spouse' },
-  { id: 'son', label: 'Son' },
-  { id: 'daughter', label: 'Daughter' },
-  { id: 'father', label: 'Father' },
-  { id: 'mother', label: 'Mother' },
-  { id: 'other', label: 'Other' },
-];
+/** `Relation` labels, localized — shared by onboarding and Profile's family CRUD. */
+export function useRelationLabels(): Record<Relation, string> {
+  const { t } = useTranslation('forms');
+  return {
+    spouse: t('relationSpouse'),
+    son: t('relationSon'),
+    daughter: t('relationDaughter'),
+    father: t('relationFather'),
+    mother: t('relationMother'),
+    other: t('relationOther'),
+  };
+}
+
+function useRelationOptions(): { id: Relation; label: string }[] {
+  const labels = useRelationLabels();
+  return (['spouse', 'son', 'daughter', 'father', 'mother', 'other'] as const).map((id) => ({
+    id,
+    label: labels[id],
+  }));
+}
 
 export type FamilyMemberDraft = Omit<FamilyMember, 'id'>;
 
@@ -59,6 +72,8 @@ export function FamilyMemberForm({
   const [rasiId, setRasiId] = useState<string | undefined>(base.rasiId);
   const [includeInSankalpam, setIncludeInSankalpam] = useState(base.includeInSankalpam);
   const [picker, setPicker] = useState<'nakshatra' | 'rasi' | null>(null);
+  const { t } = useTranslation('forms');
+  const relationOptions = useRelationOptions();
 
   const nakshatraLabel = nakshatraId
     ? (() => {
@@ -76,14 +91,14 @@ export function FamilyMemberForm({
   return (
     <Card tone="outlined" padding={4}>
       <View style={{ gap: spacing[4] }}>
-        <TextField label="Name" value={name} onChangeText={setName} placeholder="Name" />
+        <TextField label={t('name')} value={name} onChangeText={setName} placeholder={t('name')} />
 
         <View style={{ gap: spacing[2] }}>
           <Txt variant="fieldLabel" tone="inkMuted">
-            RELATION
+            {t('relation').toUpperCase()}
           </Txt>
           <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: spacing[2] }}>
-            {RELATIONS.map((option) => (
+            {relationOptions.map((option) => (
               <Pressable
                 key={option.id}
                 accessibilityRole="radio"
@@ -125,7 +140,7 @@ export function FamilyMemberForm({
             >
               <Card tone={gender === option ? 'cream' : 'outlined'} padding={2}>
                 <Txt variant="body" tone="ink" align="center">
-                  {option === 'male' ? 'Male' : 'Female'}
+                  {option === 'male' ? t('male') : t('female')}
                 </Txt>
               </Card>
             </Pressable>
@@ -142,12 +157,12 @@ export function FamilyMemberForm({
           >
             <View>
               <Txt variant="fieldLabel" tone="inkMuted">
-                NAKSHATRAM (OPTIONAL)
+                {t('nakshatram').toUpperCase()}
               </Txt>
               <View style={{ height: spacing[1] }} />
               <Card tone="outlined" padding={3}>
                 <Txt variant="body" tone={nakshatraLabel ? 'ink' : 'inkMuted'}>
-                  {nakshatraLabel || 'Not set'}
+                  {nakshatraLabel || t('notSet')}
                 </Txt>
               </Card>
             </View>
@@ -161,12 +176,12 @@ export function FamilyMemberForm({
           >
             <View>
               <Txt variant="fieldLabel" tone="inkMuted">
-                RASI (OPTIONAL)
+                {t('rasi').toUpperCase()}
               </Txt>
               <View style={{ height: spacing[1] }} />
               <Card tone="outlined" padding={3}>
                 <Txt variant="body" tone={rasiLabel ? 'ink' : 'inkMuted'}>
-                  {rasiLabel || 'Not set'}
+                  {rasiLabel || t('notSet')}
                 </Txt>
               </Card>
             </View>
@@ -174,7 +189,7 @@ export function FamilyMemberForm({
         </View>
 
         <CheckRow
-          label="Include in Sankalpam"
+          label={t('includeInSankalpam')}
           checked={includeInSankalpam}
           onToggle={() => {
             setIncludeInSankalpam((v) => !v);
@@ -182,7 +197,7 @@ export function FamilyMemberForm({
         />
 
         <View style={{ flexDirection: 'row', gap: spacing[3] }}>
-          <Button label="Cancel" tone="ghost" onPress={onCancel} />
+          <Button label={t('common:cancel')} tone="ghost" onPress={onCancel} />
           <View style={{ flex: 1 }}>
             <Button
               label={submitLabel}
@@ -206,7 +221,7 @@ export function FamilyMemberForm({
 
       <EnumSearchPicker
         visible={picker === 'nakshatra'}
-        title="Nakshatram"
+        title={t('nakshatramTitle')}
         file={ENUM_FILES.nakshatra}
         selectedId={nakshatraId ?? null}
         onSelect={(value) => {
@@ -221,7 +236,7 @@ export function FamilyMemberForm({
       />
       <EnumSearchPicker
         visible={picker === 'rasi'}
-        title="Rasi"
+        title={t('rasiTitle')}
         file={ENUM_FILES.rasi}
         selectedId={rasiId ?? null}
         onSelect={(value) => {

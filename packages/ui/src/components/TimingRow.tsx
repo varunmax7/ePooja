@@ -11,6 +11,8 @@ export interface TimingRowProps {
   /** Bell toggle for a reminder (§8.2). Omit for read-only rows. */
   reminderOn?: boolean;
   onToggleReminder?: () => void;
+  /** Already localized by the caller, e.g. "Reminder for {label}" (§15: this package takes no i18n dependency of its own). */
+  reminderA11yLabel?: string;
   /** Inauspicious windows (Rahu kalam and friends) are marked, not hidden. */
   caution?: boolean;
   last?: boolean;
@@ -26,6 +28,7 @@ export function TimingRow({
   range,
   reminderOn,
   onToggleReminder,
+  reminderA11yLabel,
   caution = false,
   last = false,
 }: TimingRowProps) {
@@ -78,9 +81,9 @@ export function TimingRow({
         <Pressable
           accessibilityRole="switch"
           accessibilityState={{ checked: reminderOn }}
-          accessibilityLabel={`Reminder for ${label}`}
+          accessibilityLabel={reminderA11yLabel ?? `Reminder for ${label}`}
           onPress={onToggleReminder}
-          hitSlop={8}
+          hitSlop={12}
         >
           <MaterialCommunityIcons
             name={reminderOn ? 'bell' : 'bell-off-outline'}

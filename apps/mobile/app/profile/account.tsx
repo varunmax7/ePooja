@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ActivityIndicator, ScrollView, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Button, Card, Txt, colors, spacing } from '@epooja/ui';
 import { useAuthStore } from '@/stores/auth';
 import { useConsentStore, hasAcceptedDpdpConsent } from '@/stores/consent';
@@ -24,15 +25,19 @@ import { env } from '@/lib/env';
 
 type Provider = 'google' | 'apple';
 
-const FAILURE_MESSAGES: Record<AuthFailureReason, string> = {
-  no_backend: 'Sign-in is not set up in this build yet.',
-  unsupported_platform: 'This sign-in method is not available on this device.',
-  cancelled: 'Sign-in was cancelled.',
-  provider_error: 'Something went wrong — please try again.',
-};
-
 export default function AccountScreen() {
   const router = useRouter();
+  const { t } = useTranslation('account');
+  const { t: tProfile } = useTranslation('profile');
+  const { t: tCommon } = useTranslation('common');
+
+  const FAILURE_MESSAGES: Record<AuthFailureReason, string> = {
+    no_backend: t('account.failureNoBackend'),
+    unsupported_platform: t('account.failureUnsupportedPlatform'),
+    cancelled: t('account.failureCancelled'),
+    provider_error: t('account.failureProviderError'),
+  };
+
   const authStatus = useAuthStore((s) => s.status);
   const email = useAuthStore((s) => s.email);
   const provider = useAuthStore((s) => s.provider);
@@ -76,7 +81,7 @@ export default function AccountScreen() {
       await signOut();
       setConfirmingDelete(false);
     } catch {
-      setDeleteError('Could not delete your account. Please try again, or contact support.');
+      setDeleteError(t('account.deleteGenericError'));
     } finally {
       setDeleting(false);
     }
@@ -88,29 +93,33 @@ export default function AccountScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}
     >
+      <Stack.Screen options={{ title: tProfile('accountAndSync') }} />
+
       <Card tone="cream" padding={5}>
         {authStatus === 'signed_in' ? (
           <View style={{ gap: spacing[2] }}>
             <Txt variant="sectionTitle" tone="ink">
-              Signed in
+              {t('account.signedIn')}
             </Txt>
             <Txt variant="body" tone="inkMuted">
-              {email ?? 'Account'}{' '}
-              {provider ? `· ${provider === 'google' ? 'Google' : 'Apple'}` : ''}
+              {email ?? t('account.accountFallback')}{' '}
+              {provider
+                ? `· ${provider === 'google' ? t('account.providerGoogle') : t('account.providerApple')}`
+                : ''}
             </Txt>
             <Txt variant="label" tone="inkMuted">
               {lastSyncedAt
-                ? `Last synced ${new Date(lastSyncedAt).toLocaleString()}`
-                : 'Not synced yet'}
+                ? t('account.lastSynced', { date: new Date(lastSyncedAt).toLocaleString() })
+                : t('account.notSyncedYet')}
             </Txt>
           </View>
         ) : (
           <View style={{ gap: spacing[2] }}>
             <Txt variant="sectionTitle" tone="ink">
-              You&apos;re using ePooja as a guest
+              {t('account.guestTitle')}
             </Txt>
             <Txt variant="body" tone="inkMuted">
-              Your profile stays on this device. Sign in to back it up and use it on another phone.
+              {t('account.guestBody')}
             </Txt>
           </View>
         )}
@@ -119,7 +128,9 @@ export default function AccountScreen() {
       {authStatus !== 'signed_in' && (
         <Card tone="cream" padding={5} style={{ gap: spacing[3] }}>
           <Button
-            label={pending === 'google' ? 'Opening Google…' : 'Sign in with Google'}
+            label={
+              pending === 'google' ? t('account.openingGoogle') : t('account.signInWithGoogle')
+            }
             icon="google"
             onPress={() => void startSignIn('google')}
             disabled={!available || pending !== null}
@@ -127,7 +138,7 @@ export default function AccountScreen() {
           />
           {isAppleSignInSupported() && (
             <Button
-              label={pending === 'apple' ? 'Opening Apple…' : 'Sign in with Apple'}
+              label={pending === 'apple' ? t('account.openingApple') : t('account.signInWithApple')}
               icon="apple"
               tone="ghost"
               onPress={() => void startSignIn('apple')}
@@ -135,7 +146,12 @@ export default function AccountScreen() {
               fullWidth
             />
           )}
-          {pending && <ActivityIndicator color={colors.maroon['700'] as string} />}
+          {pending && (
+            <ActivityIndicator
+              color={colors.maroon['700'] as string}
+              accessibilityLabel={tCommon('loading')}
+            />
+          )}
           {error && (
             <Txt variant="label" tone="danger">
               {error}
@@ -143,7 +159,7 @@ export default function AccountScreen() {
           )}
           {!available && (
             <Txt variant="label" tone="inkMuted">
-              This build has no backend configured — sign-in will work once one is.
+              {t('account.noBackend')}
             </Txt>
           )}
         </Card>
@@ -151,11 +167,16 @@ export default function AccountScreen() {
 
       {authStatus === 'signed_in' && (
         <Card tone="cream" padding={5} style={{ gap: spacing[3] }}>
-          <Button label="Sign out" tone="ghost" onPress={() => void signOut()} fullWidth />
+          <Button
+            label={t('account.signOut')}
+            tone="ghost"
+            onPress={() => void signOut()}
+            fullWidth
+          />
 
           {!confirmingDelete ? (
             <Button
-              label="Delete my account"
+              label={t('account.deleteMyAccount')}
               tone="ghost"
               onPress={() => {
                 setConfirmingDelete(true);
@@ -165,19 +186,18 @@ export default function AccountScreen() {
           ) : (
             <View style={{ gap: spacing[2] }}>
               <Txt variant="label" tone="danger">
-                This permanently deletes your account, synced profile and puja history from our
-                servers. Your profile stays on this device.
+                {t('account.deleteConfirmWarning')}
               </Txt>
               <View style={{ flexDirection: 'row', gap: spacing[3] }}>
                 <Button
-                  label="Cancel"
+                  label={tCommon('cancel')}
                   tone="ghost"
                   onPress={() => {
                     setConfirmingDelete(false);
                   }}
                 />
                 <Button
-                  label={deleting ? 'Deleting…' : 'Confirm delete'}
+                  label={deleting ? t('account.deleting') : t('account.confirmDelete')}
                   tone="maroon"
                   disabled={deleting}
                   onPress={() => void handleDeleteAccount()}
@@ -194,7 +214,7 @@ export default function AccountScreen() {
       )}
 
       <Button
-        label="Privacy Policy"
+        label={t('account.privacyPolicyLink')}
         tone="ghost"
         onPress={() => {
           router.push('/profile/privacy');

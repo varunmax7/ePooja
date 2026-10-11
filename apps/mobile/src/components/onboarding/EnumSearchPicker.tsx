@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { FlatList, Modal, Pressable, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Card, TextField, Txt, colors, spacing } from '@epooja/ui';
 import { enumDisplay, isTodoPandit, type EnumFile, type EnumValue } from '@epooja/content';
@@ -53,6 +54,7 @@ export function EnumSearchPicker({
   onUnknown,
 }: EnumSearchPickerProps) {
   const [query, setQuery] = useState('');
+  const { t } = useTranslation('forms');
 
   const results = useMemo(
     () => file.values.filter((value) => matches(value, query.trim())),
@@ -73,17 +75,22 @@ export function EnumSearchPicker({
           <Txt variant="screenTitle" tone="maroon">
             {title}
           </Txt>
-          <Pressable accessibilityRole="button" accessibilityLabel="Close" onPress={onClose}>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={t('common:close')}
+            hitSlop={10}
+            onPress={onClose}
+          >
             <MaterialCommunityIcons name="close" size={24} color={colors.maroon['800'] as string} />
           </Pressable>
         </View>
 
         <View style={{ paddingHorizontal: spacing[5] }}>
           <TextField
-            label="Search"
+            label={t('search')}
             value={query}
             onChangeText={setQuery}
-            placeholder="Type in Telugu or English…"
+            placeholder={t('searchPlaceholder')}
             autoFocus
           />
         </View>
@@ -94,7 +101,7 @@ export function EnumSearchPicker({
           contentContainerStyle={{ padding: spacing[5], gap: spacing[2] }}
           ListEmptyComponent={
             <Txt variant="body" tone="inkMuted" align="center">
-              No match. Try a different spelling.
+              {t('noMatch')}
             </Txt>
           }
           renderItem={({ item }) => {
@@ -136,7 +143,7 @@ export function EnumSearchPicker({
         {allowUnknown ? (
           <View style={{ padding: spacing[5] }}>
             <Button
-              label="I don't know"
+              label={t('iDontKnow')}
               tone="ghost"
               onPress={() => {
                 onUnknown?.();

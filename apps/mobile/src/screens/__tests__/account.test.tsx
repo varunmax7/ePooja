@@ -4,6 +4,10 @@ import AccountScreen from '../../../app/profile/account';
 
 jest.mock('expo-router', () => ({
   useRouter: () => ({ push: jest.fn(), back: jest.fn(), replace: jest.fn() }),
+  // `AccountScreen` sets its header title via a nested `<Stack.Screen>`
+  // (Phase 9, so the title re-renders on a language change) — a no-op here,
+  // since this suite is about the screen's own content, not header chrome.
+  Stack: { Screen: () => null },
 }));
 
 beforeEach(() => {

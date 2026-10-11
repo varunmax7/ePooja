@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, Stack } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Card, Txt, colors, radius, spacing } from '@epooja/ui';
 import { formatScaledAmount } from '@epooja/content';
 import { RECIPE_BY_ID } from '@/services/content';
@@ -22,13 +23,14 @@ export default function RecipeScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const recipe = id === undefined ? undefined : RECIPE_BY_ID.get(id);
   const [servings, setServings] = useState(recipe?.baseServings ?? 4);
+  const { t } = useTranslation('pooja');
 
   if (!recipe) {
     return (
       <View style={{ flex: 1, padding: spacing[5] }} className="bg-cream-50">
         <Card tone="outlined" padding={5}>
           <Txt variant="body" tone="inkMuted">
-            That recipe isn&apos;t in this app yet.
+            {t('recipeNotFound')}
           </Txt>
         </Card>
       </View>
@@ -41,6 +43,8 @@ export default function RecipeScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ padding: spacing[5], gap: spacing[5], paddingBottom: spacing[8] }}
     >
+      <Stack.Screen options={{ title: recipe.name.en ?? recipe.name.te }} />
+
       <View
         style={{
           height: 160,
@@ -52,7 +56,7 @@ export default function RecipeScreen() {
       >
         <MaterialCommunityIcons name="bowl-mix" size={56} color={colors.maroon['700'] as string} />
         <Txt variant="fieldLabel" tone="inkMuted">
-          PHOTO PENDING
+          {t('photoPending')}
         </Txt>
       </View>
 
@@ -64,7 +68,7 @@ export default function RecipeScreen() {
           {recipe.name.te}
         </Txt>
         <Txt variant="label" tone="inkMuted">
-          {recipe.timeMinutes} min · naivedyam
+          {recipe.timeMinutes} {t('poojas:minUnit')} · {t('naivedyam')}
         </Txt>
       </View>
 
@@ -73,12 +77,12 @@ export default function RecipeScreen() {
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
         >
           <Txt variant="cardTitle" tone="ink">
-            Servings
+            {t('servings')}
           </Txt>
           <View style={{ flexDirection: 'row', alignItems: 'center', gap: spacing[4] }}>
             <Stepper
               icon="minus"
-              label="Fewer servings"
+              label={t('fewerServingsA11y')}
               onPress={() => {
                 setServings((s) => Math.max(MIN_SERVINGS, s - 1));
               }}
@@ -88,7 +92,7 @@ export default function RecipeScreen() {
             </Txt>
             <Stepper
               icon="plus"
-              label="More servings"
+              label={t('moreServingsA11y')}
               onPress={() => {
                 setServings((s) => Math.min(MAX_SERVINGS, s + 1));
               }}
@@ -99,7 +103,7 @@ export default function RecipeScreen() {
 
       <Card tone="cream" padding={5}>
         <Txt variant="sectionTitle" tone="ink">
-          Ingredients
+          {t('ingredients')}
         </Txt>
         <View style={{ height: spacing[2] }} />
         {recipe.ingredients.map((ingredient, index) => (
@@ -126,7 +130,7 @@ export default function RecipeScreen() {
 
       <Card tone="cream" padding={5}>
         <Txt variant="sectionTitle" tone="ink">
-          Steps
+          {t('stepsSection')}
         </Txt>
         <View style={{ height: spacing[2] }} />
         {recipe.steps.map((step, index) => (
@@ -147,7 +151,7 @@ export default function RecipeScreen() {
       {recipe.ritualNotes && recipe.ritualNotes.length > 0 ? (
         <Card tone="outlined" padding={5}>
           <Txt variant="sectionTitle" tone="maroon">
-            Ritual notes
+            {t('ritualNotes')}
           </Txt>
           <View style={{ height: spacing[2] }} />
           {recipe.ritualNotes.map((note, index) => (

@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Pressable, ScrollView, View } from 'react-native';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter, Stack } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Button, Card, Txt, colors, spacing } from '@epooja/ui';
 import {
   stepsBySection,
@@ -11,12 +12,6 @@ import {
 } from '@epooja/content';
 import { pujaBySlug } from '@/services/content';
 import { pujaTitle } from '@/lib/pujaDisplay';
-
-const SECTION_TITLES: Record<StepSection, string> = {
-  poorvangam: 'Poorvangam',
-  pradhana: 'Pradhana Puja',
-  uttarangam: 'Uttarangam',
-};
 
 /**
  * Pooja detail (§8.4): description, the short/full duration variants, a steps
@@ -28,6 +23,13 @@ export default function PoojaDetailScreen() {
   const router = useRouter();
   const { slug } = useLocalSearchParams<{ slug: string }>();
   const puja = pujaBySlug(slug);
+  const { t } = useTranslation('pooja');
+
+  const SECTION_TITLES: Record<StepSection, string> = {
+    poorvangam: t('sectionPoorvangam'),
+    pradhana: t('sectionPradhana'),
+    uttarangam: t('sectionUttarangam'),
+  };
 
   const [variant, setVariant] = useState<PujaVariant>('short');
   const [open, setOpen] = useState<StepSection | null>('poorvangam');
@@ -37,7 +39,7 @@ export default function PoojaDetailScreen() {
       <View style={{ flex: 1, padding: spacing[5] }} className="bg-cream-50">
         <Card tone="outlined" padding={5}>
           <Txt variant="body" tone="inkMuted">
-            That pooja isn&apos;t in this app yet.
+            {t('notFound')}
           </Txt>
         </Card>
       </View>
@@ -53,6 +55,8 @@ export default function PoojaDetailScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ padding: spacing[5], gap: spacing[5], paddingBottom: spacing[8] }}
     >
+      <Stack.Screen options={{ title: pujaTitle(puja) }} />
+
       <Card tone="cream" padding={5}>
         <Txt variant="screenTitle" tone="ink">
           {pujaTitle(puja)}
@@ -69,18 +73,19 @@ export default function PoojaDetailScreen() {
       {hasShort ? (
         <Card tone="cream" padding={5}>
           <Txt variant="sectionTitle" tone="ink">
-            Duration
+            {t('duration')}
           </Txt>
           <View style={{ height: spacing[3] }} />
           <View style={{ flexDirection: 'row', gap: spacing[3] }}>
             {(['short', 'full'] as const).map((key) => {
               const minutes = key === 'short' ? puja.durations.short : puja.durations.full;
+              const variantLabel = key === 'short' ? t('short') : t('full');
               return (
                 <Pressable
                   key={key}
                   accessibilityRole="radio"
                   accessibilityState={{ selected: variant === key }}
-                  accessibilityLabel={`${key === 'short' ? 'Short' : 'Full'}, about ${minutes} minutes`}
+                  accessibilityLabel={t('durationA11y', { variant: variantLabel, minutes })}
                   onPress={() => {
                     setVariant(key);
                   }}
@@ -88,10 +93,11 @@ export default function PoojaDetailScreen() {
                 >
                   <Card tone={variant === key ? 'outlined' : 'cream'} padding={4}>
                     <Txt variant="cardTitle" tone={variant === key ? 'maroon' : 'ink'}>
-                      {key === 'short' ? 'Short' : 'Full'}
+                      {variantLabel}
                     </Txt>
                     <Txt variant="label" tone="inkMuted">
-                      ≈ {minutes} min · {stepsForVariant(puja, key).length} steps
+                      ≈ {minutes} {t('poojas:minUnit')} ·{' '}
+                      {t('poojas:stepsCount', { count: stepsForVariant(puja, key).length })}
                     </Txt>
                   </Card>
                 </Pressable>
@@ -103,7 +109,7 @@ export default function PoojaDetailScreen() {
 
       <Card tone="cream" padding={5}>
         <Txt variant="sectionTitle" tone="ink">
-          Steps
+          {t('stepsSection')}
         </Txt>
         <View style={{ height: spacing[2] }} />
         {sections.map((section, index) => (
@@ -158,7 +164,7 @@ export default function PoojaDetailScreen() {
 
       <View style={{ flexDirection: 'row', gap: spacing[3] }}>
         <Button
-          label="Prepare"
+          label={t('prepare')}
           tone="ghost"
           size="lg"
           icon="clipboard-check-outline"
@@ -168,7 +174,7 @@ export default function PoojaDetailScreen() {
           }}
         />
         <Button
-          label="Start"
+          label={t('start')}
           tone="maroon"
           size="lg"
           icon="play"

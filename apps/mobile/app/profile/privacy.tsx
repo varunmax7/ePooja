@@ -1,4 +1,6 @@
 import { ScrollView, View } from 'react-native';
+import { Stack } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Txt, spacing } from '@epooja/ui';
 
 /**
@@ -8,22 +10,30 @@ import { Txt, spacing } from '@epooja/ui';
  * retention, deletion) and needs the client's/legal sign-off before release,
  * the same way ritual content needs the pandit's — this file is the
  * non-ritual equivalent of a `PENDING_PANDIT_REVIEW` placeholder.
+ *
+ * Only the screen's own chrome (title, draft banner) goes through i18next
+ * (Phase 9) — the policy body below stays in English until legal signs off
+ * on a final text; translating draft legal copy ahead of that would just be
+ * two unreviewed texts to fix instead of one.
  */
 export default function PrivacyScreen() {
+  const { t } = useTranslation('account');
+
   return (
     <ScrollView
       style={{ flex: 1 }}
       className="bg-cream-50"
       contentContainerStyle={{ padding: spacing[5], paddingBottom: spacing[8] }}
     >
+      <Stack.Screen options={{ title: t('privacy.title') }} />
+
       <View style={{ gap: spacing[4] }}>
         <Txt variant="label" tone="danger">
-          Draft — not yet reviewed by legal counsel. Do not submit to an app store until this is
-          replaced with an approved policy and the placeholders below are filled in.
+          {t('privacy.draftBanner')}
         </Txt>
 
         <Txt variant="screenTitle" tone="ink">
-          Privacy Policy
+          {t('privacy.title')}
         </Txt>
         <Txt variant="label" tone="inkMuted">
           Last updated: [date] · Effective for: ePooja (com.epooja.app)

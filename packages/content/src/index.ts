@@ -151,6 +151,15 @@ export {
   type RelationKind,
 } from './sankalpam';
 
+export {
+  festivalSchema,
+  festivalFileSchema,
+  parseFestivalFile,
+  festivalsInMonth,
+  type Festival,
+  type FestivalFile,
+} from './festivals';
+
 export const CONTENT_PACKAGE = {
   name: '@epooja/content',
   schemaImplementedInPhase: 4,

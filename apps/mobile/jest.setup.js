@@ -1,3 +1,8 @@
+// Phase 9's i18next instance initializes itself as a side effect of being
+// imported (`src/i18n/index.ts`); every screen test renders real UI strings
+// through `useTranslation`, so it needs to exist before any test does.
+require('./src/i18n');
+
 // react-native-track-player has no JS fallback outside a native build; the puja
 // runner tests (Phase 6) drive it through this mock.
 jest.mock('react-native-track-player', () => require('./src/services/audio/__mocks__/trackPlayer'));

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Card, TextField, Txt, colors, spacing } from '@epooja/ui';
 import { searchCities, type City, type DevoteeLocation } from '@epooja/content';
@@ -17,6 +18,7 @@ type GpsStatus = 'idle' | 'requesting' | 'denied' | 'unavailable';
  */
 export default function LocationScreen() {
   const router = useRouter();
+  const { t } = useTranslation('onboarding');
   const draft = useOnboardingDraft();
   const createDevotee = useDevoteeStore((s) => s.createDevotee);
   const completeOnboarding = useDevoteeStore((s) => s.completeOnboarding);
@@ -60,16 +62,17 @@ export default function LocationScreen() {
 
   return (
     <View style={{ flex: 1 }} className="bg-cream-50">
-      <StepHeader step={4} title="Where are you?" />
+      <StepHeader step={4} title={t('location.title')} />
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[4] }}>
         <Txt variant="body" tone="inkMuted">
-          Your location is used to compute your local Panchangam and to say your Sankalpam with the
-          correct place.
+          {t('location.intro')}
         </Txt>
 
         <Button
-          label={gpsStatus === 'requesting' ? 'Finding you…' : 'Use my current location'}
+          label={
+            gpsStatus === 'requesting' ? t('location.findingYou') : t('location.useDeviceLocation')
+          }
           tone="maroon"
           icon="crosshairs-gps"
           fullWidth
@@ -81,20 +84,20 @@ export default function LocationScreen() {
 
         {gpsStatus === 'denied' ? (
           <Txt variant="label" tone="danger">
-            Location permission was declined. Search for your city below instead.
+            {t('location.permissionDenied')}
           </Txt>
         ) : null}
         {gpsStatus === 'unavailable' ? (
           <Txt variant="label" tone="danger">
-            Couldn&apos;t determine your location. Search for your city below instead.
+            {t('location.unavailable')}
           </Txt>
         ) : null}
 
         <TextField
-          label="Or search for your city"
+          label={t('location.searchLabel')}
           value={query}
           onChangeText={setQuery}
-          placeholder="Hyderabad, Dallas, London…"
+          placeholder={t('location.searchPlaceholder')}
         />
 
         {results.length > 0 ? (
@@ -140,7 +143,7 @@ export default function LocationScreen() {
 
       <View style={{ padding: spacing[5] }}>
         <Button
-          label="Finish"
+          label={t('location.finish')}
           tone="maroon"
           size="lg"
           fullWidth

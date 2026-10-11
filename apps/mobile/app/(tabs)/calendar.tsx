@@ -1,44 +1,59 @@
-import { ScrollView, View } from 'react-native';
+import { useMemo, useState } from 'react';
+import { Pressable, ScrollView, View } from 'react-native';
+import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Card, CurvedHeader, Txt, colors, radius, spacing } from '@epooja/ui';
-import today from '@/mocks/today.json';
+import { useDevoteeStore } from '@/stores/devotee';
+import { useMonthView, useTodayDate, type MonthDayView } from '@/services/panchangam';
+import { formatMonthYear, weekdayNarrowLabels, shiftMonth } from '@/lib/dateFormat';
 
 /**
- * Calendar (§8.8): a month grid where each cell carries the tithi short name
- * and a marker for ekadashi / purnima / amavasya.
+ * Calendar (§8.8): a month grid where each cell carries the tithi number and
+ * a marker for ekadashi / purnami / amavasya, and a gold dot for any
+ * pandit-reviewed festival (`content/festivals/{samvatsara}.json`, none yet —
+ * `content/REVIEW_QUEUE.md` tracks that as a non-code dependency).
  *
- * Phase 1 lays out September 2026 statically; Phase 9 fills it from
- * `getMonth(year, month, loc)`, which the engine already provides.
+ * Phase 1 laid this out statically with a placeholder tithi numbering; Phase 9
+ * fills it from `useMonthView`, which wraps the engine's `getMonth`.
  */
-const WEEKDAYS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-const DAYS_IN_MONTH = 30;
-const FIRST_WEEKDAY = 2; // 1 September 2026 is a Tuesday.
-
-/** Placeholder tithi numbering until Phase 9 wires the engine in. */
-function tithiShort(day: number): string {
-  const index = ((day + 7) % 30) + 1;
-  if (index === 15) return 'P';
-  if (index === 30) return 'A';
-  if (index === 11 || index === 26) return 'E';
-  return String(index <= 15 ? index : index - 15);
-}
-
-function marker(day: number): string | null {
-  const short = tithiShort(day);
-  return short === 'P' || short === 'A' || short === 'E' ? short : null;
-}
-
 export default function CalendarScreen() {
-  const cells: (number | null)[] = [
-    ...Array.from({ length: FIRST_WEEKDAY }, () => null),
-    ...Array.from({ length: DAYS_IN_MONTH }, (_, i) => i + 1),
-  ];
-  // Pad the last week out to seven: the cells are `flex: 1`, so a short final
-  // row would spread its days evenly across the card instead of leaving them
-  // under their weekday columns.
-  while (cells.length % 7 !== 0) cells.push(null);
+  const router = useRouter();
+  const location = useDevoteeStore((s) => s.devotee?.location);
+  const prefs = useDevoteeStore((s) => s.devotee?.prefs);
+  const uiLang = prefs?.uiLang ?? 'en';
+  const { t } = useTranslation('calendar');
 
-  const weeks: (number | null)[][] = [];
-  for (let i = 0; i < cells.length; i += 7) weeks.push(cells.slice(i, i + 7));
+  const { date: todayDate } = useTodayDate();
+  const [{ year, month }, setMonth] = useState(() => {
+    const [y, m] = todayDate.split('-').map(Number);
+    return { year: y ?? 2026, month: m ?? 1 };
+  });
+
+  const { view, isLoading, isError } = useMonthView(year, month, uiLang);
+  const weekdayLabels = useMemo(() => weekdayNarrowLabels(uiLang), [uiLang]);
+  const monthLabel = formatMonthYear(year, month, uiLang);
+
+  const markerLabel = (cell: MonthDayView): string => {
+    if (cell.marker === 'pournami') return 'P';
+    if (cell.marker === 'amavasya') return 'A';
+    if (cell.marker === 'ekadashi') return 'E';
+    return String(cell.tithiNumber);
+  };
+
+  const dayAccessibilityLabel = (cell: MonthDayView): string => {
+    const tithi = cell.marker ? t(cell.marker) : t('tithiLabel', { number: cell.tithiNumber });
+    const festivals = cell.festivalNames.length
+      ? t('festivalsSuffix', { names: cell.festivalNames.join(', ') })
+      : '';
+    return t('dayA11y', {
+      weekday: weekdayLabels[new Date(`${cell.date}T00:00:00Z`).getUTCDay()],
+      month: monthLabel,
+      day: cell.day,
+      tithi,
+      festivals,
+    });
+  };
 
   return (
     <ScrollView
@@ -46,73 +61,155 @@ export default function CalendarScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ paddingBottom: spacing[8] }}
     >
-      <CurvedHeader
-        title="Calendar"
-        subtitle={`${today.date.month} ${today.date.year}`}
-        height={130}
-      />
+      <CurvedHeader title={t('title')} subtitle={monthLabel} tone="maroon" height={130} />
 
       <View style={{ paddingHorizontal: spacing[5], marginTop: spacing[4], gap: spacing[4] }}>
-        <Card tone="cream" padding={4}>
-          <View style={{ flexDirection: 'row' }}>
-            {WEEKDAYS.map((label, index) => (
-              <Txt
-                key={index}
-                variant="fieldLabel"
-                tone="inkMuted"
-                align="center"
-                style={{ flex: 1 }}
-              >
-                {label}
-              </Txt>
-            ))}
+        {!location ? (
+          <Card tone="outlined" padding={5}>
+            <Txt variant="body" tone="inkMuted">
+              {t('setLocationPrompt')}
+            </Txt>
+          </Card>
+        ) : null}
+
+        {isError ? (
+          <Card tone="outlined" padding={5}>
+            <Txt variant="body" tone="danger">
+              {t('computeError')}
+            </Txt>
+          </Card>
+        ) : null}
+
+        {location ? (
+          <View
+            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+          >
+            <MonthNavButton
+              direction="previous"
+              onPress={() => {
+                setMonth(({ year: y, month: m }) => shiftMonth(y, m, -1));
+              }}
+            />
+            <Txt variant="sectionTitle" tone="ink">
+              {monthLabel}
+            </Txt>
+            <MonthNavButton
+              direction="next"
+              onPress={() => {
+                setMonth(({ year: y, month: m }) => shiftMonth(y, m, 1));
+              }}
+            />
           </View>
+        ) : null}
 
-          <View style={{ height: spacing[2] }} />
+        {location && isLoading && !view ? (
+          <Card tone="outlined" padding={5}>
+            <Txt variant="body" tone="inkMuted">
+              {t('loading')}
+            </Txt>
+          </Card>
+        ) : null}
 
-          {weeks.map((week, weekIndex) => (
-            <View key={weekIndex} style={{ flexDirection: 'row' }}>
-              {week.map((day, dayIndex) => {
-                const isToday = day === Number(today.date.day);
-                return (
+        {location && view ? (
+          <Card tone="cream" padding={4}>
+            <View style={{ flexDirection: 'row' }}>
+              {weekdayLabels.map((label, index) => (
+                <Txt
+                  key={index}
+                  variant="fieldLabel"
+                  tone="inkMuted"
+                  align="center"
+                  style={{ flex: 1 }}
+                >
+                  {label}
+                </Txt>
+              ))}
+            </View>
+
+            <View style={{ height: spacing[2] }} />
+
+            {view.weeks.map((week, weekIndex) => (
+              <View key={weekIndex} style={{ flexDirection: 'row' }}>
+                {week.map((cell, dayIndex) => (
                   <View
                     key={dayIndex}
                     style={{ flex: 1, alignItems: 'center', paddingVertical: spacing[2] }}
                   >
-                    {day === null ? (
-                      <View style={{ height: 40 }} />
+                    {cell === null ? (
+                      <View style={{ height: 44 }} />
                     ) : (
-                      <View
+                      <Pressable
+                        accessibilityRole="button"
+                        accessibilityLabel={dayAccessibilityLabel(cell)}
+                        hitSlop={4}
+                        onPress={() => {
+                          router.push(`/panchangam/${cell.date}`);
+                        }}
                         style={{
-                          width: 38,
-                          height: 40,
+                          width: 40,
+                          minHeight: 44,
                           borderRadius: radius.sm,
                           alignItems: 'center',
                           justifyContent: 'center',
-                          backgroundColor: isToday ? colors.gold['300'] : 'transparent',
+                          backgroundColor: cell.isToday ? colors.gold['300'] : 'transparent',
                         }}
                       >
-                        <Txt variant="label" tone={isToday ? 'maroon' : 'ink'}>
-                          {day}
+                        <Txt variant="label" tone={cell.isToday ? 'maroon' : 'ink'}>
+                          {cell.day}
                         </Txt>
-                        <Txt variant="fieldLabel" tone={marker(day) ? 'gold' : 'inkMuted'}>
-                          {tithiShort(day)}
+                        <Txt variant="fieldLabel" tone={cell.marker ? 'gold' : 'inkMuted'}>
+                          {markerLabel(cell)}
                         </Txt>
-                      </View>
+                        {cell.festivalNames.length > 0 ? (
+                          <View
+                            style={{
+                              width: 5,
+                              height: 5,
+                              borderRadius: 3,
+                              backgroundColor: colors.saffron['600'],
+                              marginTop: 2,
+                            }}
+                          />
+                        ) : null}
+                      </Pressable>
                     )}
                   </View>
-                );
-              })}
-            </View>
-          ))}
-        </Card>
+                ))}
+              </View>
+            ))}
+          </Card>
+        ) : null}
 
         <Card tone="outlined" padding={4}>
           <Txt variant="label" tone="inkMuted">
-            P = Pournami · A = Amavasya · E = Ekadashi. Numbers are the tithi of the day.
+            {t('legend')}
           </Txt>
         </Card>
       </View>
     </ScrollView>
+  );
+}
+
+function MonthNavButton({
+  direction,
+  onPress,
+}: {
+  direction: 'previous' | 'next';
+  onPress: () => void;
+}) {
+  const { t } = useTranslation('calendar');
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={direction === 'previous' ? t('previousMonthA11y') : t('nextMonthA11y')}
+      hitSlop={12}
+      onPress={onPress}
+    >
+      <MaterialCommunityIcons
+        name={direction === 'previous' ? 'chevron-left' : 'chevron-right'}
+        size={32}
+        color={colors.maroon['700'] as string}
+      />
+    </Pressable>
   );
 }

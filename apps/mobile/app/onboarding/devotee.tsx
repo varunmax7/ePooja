@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Card, TextField, Txt, colors, spacing } from '@epooja/ui';
 import { enumDisplay, enumValue, isTodoPandit, type Gender } from '@epooja/content';
@@ -11,20 +12,17 @@ import { TELUGU_NAME_PLACEHOLDER } from '@/i18n/onboarding';
 import { useOnboardingDraft } from '@/stores/onboardingDraft';
 import { ENUM_FILES } from '@/services/panchangam';
 
-const GENDERS: { id: Gender; label: string }[] = [
-  { id: 'male', label: 'Male' },
-  { id: 'female', label: 'Female' },
-];
-
 const PADAS = [1, 2, 3, 4] as const;
 
 function PickerField({
   label,
   value,
+  placeholder,
   onPress,
 }: {
   label: string;
   value: string;
+  placeholder: string;
   onPress: () => void;
 }) {
   return (
@@ -39,7 +37,7 @@ function PickerField({
             style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}
           >
             <Txt variant="fieldValue" tone={value ? 'ink' : 'inkMuted'}>
-              {value || 'Tap to choose'}
+              {value || placeholder}
             </Txt>
             <MaterialCommunityIcons
               name="chevron-right"
@@ -60,6 +58,12 @@ function PickerField({
 export default function DevoteeScreen() {
   const router = useRouter();
   const draft = useOnboardingDraft();
+  const { t } = useTranslation('onboarding');
+
+  const GENDERS: { id: Gender; label: string }[] = [
+    { id: 'male', label: t('devotee.male') },
+    { id: 'female', label: t('devotee.female') },
+  ];
 
   const [nameEn, setNameEn] = useState(draft.name.en ?? '');
   const [nameTe, setNameTe] = useState(draft.name.te);
@@ -112,27 +116,27 @@ export default function DevoteeScreen() {
 
   return (
     <View style={{ flex: 1 }} className="bg-cream-50">
-      <StepHeader step={2} title="Tell us about yourself" />
+      <StepHeader step={2} title={t('devotee.title')} />
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[5] }}>
         <TextField
-          label="Name (English)"
+          label={t('devotee.nameEnLabel')}
           value={nameEn}
           onChangeText={setNameEn}
-          placeholder="Your name"
+          placeholder={t('devotee.nameEnPlaceholder')}
         />
         <TextField
-          label="Name (Telugu)"
+          label={t('devotee.nameTeLabel')}
           script="telugu"
           value={nameTe}
           onChangeText={setNameTe}
           placeholder={TELUGU_NAME_PLACEHOLDER}
-          hint="Shown on screen for self-recite; optional."
+          hint={t('devotee.nameTeHint')}
         />
 
         <View style={{ gap: spacing[3] }}>
           <Txt variant="sectionTitle" tone="ink">
-            Gender
+            {t('devotee.gender')}
           </Txt>
           <View style={{ flexDirection: 'row', gap: spacing[3] }}>
             {GENDERS.map((option) => (
@@ -156,29 +160,31 @@ export default function DevoteeScreen() {
         </View>
 
         <PickerField
-          label="Gothram"
+          label={t('devotee.gothram')}
           value={gotraLabel}
+          placeholder={t('common:tapToChoose')}
           onPress={() => {
             setPickerOpen('gotra');
           }}
         />
         {ENUM_FILES.gotra.values.length === 0 ? (
           <TextField
-            label="Or type your gothram"
+            label={t('devotee.gothramCustomLabel')}
             script="telugu"
             value={gotraCustom}
             onChangeText={(text) => {
               setGotraCustom(text);
               setGotraId(null);
             }}
-            placeholder="e.g. Kashyapa"
-            hint="The pandit-supplied list isn't ready yet — your gothram is self-recited until it is."
+            placeholder={t('devotee.gothramCustomPlaceholder')}
+            hint={t('devotee.gothramCustomHint')}
           />
         ) : null}
 
         <PickerField
-          label="Janma Nakshatram"
+          label={t('devotee.nakshatram')}
           value={nakshatraLabel}
+          placeholder={t('common:tapToChoose')}
           onPress={() => {
             setPickerOpen('nakshatra');
           }}
@@ -187,7 +193,7 @@ export default function DevoteeScreen() {
         {nakshatraId ? (
           <View style={{ gap: spacing[2] }}>
             <Txt variant="fieldLabel" tone="inkMuted">
-              PADAM (OPTIONAL)
+              {t('devotee.padam').toUpperCase()}
             </Txt>
             <View style={{ flexDirection: 'row', gap: spacing[2] }}>
               {PADAS.map((p) => (
@@ -212,22 +218,23 @@ export default function DevoteeScreen() {
         ) : null}
 
         <PickerField
-          label="Rasi (Moon Sign)"
+          label={t('devotee.rasi')}
           value={rasiLabel}
+          placeholder={t('common:tapToChoose')}
           onPress={() => {
             setPickerOpen('rasi');
           }}
         />
         {nakshatraId && pada && !rasiEdited ? (
           <Txt variant="label" tone="inkMuted">
-            Suggested from your nakshatram and padam — tap to change it.
+            {t('devotee.rasiSuggested')}
           </Txt>
         ) : null}
       </ScrollView>
 
       <View style={{ padding: spacing[5] }}>
         <Button
-          label="Continue"
+          label={t('common:continue')}
           tone="maroon"
           size="lg"
           fullWidth
@@ -245,7 +252,7 @@ export default function DevoteeScreen() {
 
       <EnumSearchPicker
         visible={pickerOpen === 'gotra'}
-        title="Gothram"
+        title={t('devotee.gothram')}
         file={ENUM_FILES.gotra}
         selectedId={gotraId}
         onSelect={(value) => {
@@ -263,7 +270,7 @@ export default function DevoteeScreen() {
 
       <EnumSearchPicker
         visible={pickerOpen === 'nakshatra'}
-        title="Janma Nakshatram"
+        title={t('devotee.nakshatram')}
         file={ENUM_FILES.nakshatra}
         selectedId={nakshatraId}
         onSelect={(value) => {
@@ -280,7 +287,7 @@ export default function DevoteeScreen() {
 
       <EnumSearchPicker
         visible={pickerOpen === 'rasi'}
-        title="Rasi"
+        title={t('devotee.rasi')}
         file={ENUM_FILES.rasi}
         selectedId={rasiId}
         onSelect={(value) => {

@@ -10,6 +10,10 @@ import type { ReactNode } from 'react';
 // for a given devotee, not about navigation, so the router is a no-op stub.
 jest.mock('expo-router', () => ({
   useRouter: () => ({ push: jest.fn(), back: jest.fn(), replace: jest.fn() }),
+  // `FamilyListScreen` sets its header title via a nested `<Stack.Screen>`
+  // (Phase 9, so the title re-renders on a language change) — a no-op here,
+  // since this suite is about the list content, not the header chrome.
+  Stack: { Screen: () => null },
 }));
 
 // `CurvedHeader` draws its band with the imperative `Skia.Path.Make()` API,

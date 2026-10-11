@@ -1,23 +1,13 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Card, Txt, colors, spacing } from '@epooja/ui';
 import type { DevoteePrefs, Script } from '@epooja/content';
 import { StepHeader } from '@/components/onboarding/StepHeader';
 import { SCRIPT_SAMPLES, TELUGU_LANGUAGE_NAME } from '@/i18n/onboarding';
 import { useOnboardingDraft } from '@/stores/onboardingDraft';
-
-const UI_LANGUAGES: { id: DevoteePrefs['uiLang']; label: string }[] = [
-  { id: 'en', label: 'English' },
-  { id: 'te', label: TELUGU_LANGUAGE_NAME },
-];
-
-const MANTRA_SCRIPTS: { id: Script; label: string; sample: string }[] = [
-  { id: 'te', label: 'Telugu', sample: SCRIPT_SAMPLES.te },
-  { id: 'dev', label: 'Devanagari', sample: SCRIPT_SAMPLES.dev },
-  { id: 'iast', label: 'Roman (IAST)', sample: 'oṃ namaḥ śivāya' },
-];
 
 function OptionRow({
   label,
@@ -77,15 +67,27 @@ export default function LanguageScreen() {
   const draft = useOnboardingDraft();
   const [uiLang, setUiLang] = useState(draft.uiLang);
   const [mantraScript, setMantraScript] = useState(draft.mantraScript);
+  const { t } = useTranslation('onboarding');
+
+  const UI_LANGUAGES: { id: DevoteePrefs['uiLang']; label: string }[] = [
+    { id: 'en', label: 'English' },
+    { id: 'te', label: TELUGU_LANGUAGE_NAME },
+  ];
+
+  const MANTRA_SCRIPTS: { id: Script; label: string; sample: string }[] = [
+    { id: 'te', label: t('language.scriptTelugu'), sample: SCRIPT_SAMPLES.te },
+    { id: 'dev', label: t('language.scriptDevanagari'), sample: SCRIPT_SAMPLES.dev },
+    { id: 'iast', label: t('language.scriptRoman'), sample: 'oṃ namaḥ śivāya' },
+  ];
 
   return (
     <View style={{ flex: 1 }} className="bg-cream-50">
-      <StepHeader step={1} title="Choose your language" />
+      <StepHeader step={1} title={t('language.title')} />
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[6] }}>
         <View style={{ gap: spacing[3] }}>
           <Txt variant="sectionTitle" tone="ink">
-            App language
+            {t('language.appLanguage')}
           </Txt>
           {UI_LANGUAGES.map((option) => (
             <OptionRow
@@ -101,10 +103,10 @@ export default function LanguageScreen() {
 
         <View style={{ gap: spacing[3] }}>
           <Txt variant="sectionTitle" tone="ink">
-            Mantra script
+            {t('language.mantraScript')}
           </Txt>
           <Txt variant="body" tone="inkMuted">
-            Which script should chants and the Sankalpam be shown in?
+            {t('language.mantraScriptHint')}
           </Txt>
           {MANTRA_SCRIPTS.map((option) => (
             <OptionRow
@@ -122,7 +124,7 @@ export default function LanguageScreen() {
 
       <View style={{ padding: spacing[5] }}>
         <Button
-          label="Continue"
+          label={t('common:continue')}
           tone="maroon"
           size="lg"
           fullWidth

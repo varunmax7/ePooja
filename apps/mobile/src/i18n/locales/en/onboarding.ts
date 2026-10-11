@@ -1,0 +1,57 @@
+export default {
+  welcome: {
+    title: 'ePooja',
+    tagline: 'A digital Telugu Smartha purohit for your home.',
+    valueProp1: 'Your Panchangam, computed for exactly where you live',
+    valueProp2: 'A Sankalpam spoken correctly for you and your family',
+    valueProp3: 'Guided through every puja, step by step, in your own voice',
+  },
+  language: {
+    title: 'Choose your language',
+    appLanguage: 'App language',
+    mantraScript: 'Mantra script',
+    mantraScriptHint: 'Which script should chants and the Sankalpam be shown in?',
+    scriptTelugu: 'Telugu',
+    scriptDevanagari: 'Devanagari',
+    scriptRoman: 'Roman (IAST)',
+  },
+  devotee: {
+    title: 'Tell us about yourself',
+    nameEnLabel: 'Name (English)',
+    nameEnPlaceholder: 'Your name',
+    nameTeLabel: 'Name (Telugu)',
+    nameTeHint: 'Shown on screen for self-recite; optional.',
+    gender: 'Gender',
+    male: 'Male',
+    female: 'Female',
+    gothram: 'Gothram',
+    gothramCustomLabel: 'Or type your gothram',
+    gothramCustomPlaceholder: 'e.g. Kashyapa',
+    gothramCustomHint:
+      "The pandit-supplied list isn't ready yet — your gothram is self-recited until it is.",
+    nakshatram: 'Janma Nakshatram',
+    padam: 'Padam (optional)',
+    rasi: 'Rasi (Moon Sign)',
+    rasiSuggested: 'Suggested from your nakshatram and padam — tap to change it.',
+  },
+  family: {
+    title: 'Your family',
+    intro:
+      "Add the family members you'd like named in your Sankalpam. You can skip this and add them later from Profile.",
+    addMember: 'Add family member',
+    removeMember: 'Remove {{name}}',
+    inSankalpamSuffix: ' · in Sankalpam',
+  },
+  location: {
+    title: 'Where are you?',
+    intro:
+      'Your location is used to compute your local Panchangam and to say your Sankalpam with the correct place.',
+    useDeviceLocation: 'Use my current location',
+    findingYou: 'Finding you…',
+    permissionDenied: 'Location permission was declined. Search for your city below instead.',
+    unavailable: "Couldn't determine your location. Search for your city below instead.",
+    searchLabel: 'Or search for your city',
+    searchPlaceholder: 'Hyderabad, Dallas, London…',
+    finish: 'Finish',
+  },
+};

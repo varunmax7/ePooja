@@ -1,6 +1,7 @@
 import { Pressable, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { Txt, colors, spacing } from '@epooja/ui';
 
 const TOTAL_STEPS = 5;
@@ -20,6 +21,7 @@ export interface StepHeaderProps {
  */
 export function StepHeader({ step, title, canGoBack = true }: StepHeaderProps) {
   const router = useRouter();
+  const { t } = useTranslation('common');
 
   return (
     <View style={{ paddingTop: spacing[6], paddingHorizontal: spacing[5], gap: spacing[3] }}>
@@ -27,7 +29,7 @@ export function StepHeader({ step, title, canGoBack = true }: StepHeaderProps) {
         {canGoBack ? (
           <Pressable
             accessibilityRole="button"
-            accessibilityLabel="Back"
+            accessibilityLabel={t('back')}
             hitSlop={10}
             onPress={() => {
               router.back();

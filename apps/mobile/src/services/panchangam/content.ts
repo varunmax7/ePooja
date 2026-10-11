@@ -1,4 +1,10 @@
-import { parseEnumFile, parseTimingFile, type EnumFile, type TimingFile } from '@epooja/content';
+import {
+  parseEnumFile,
+  parseTimingFile,
+  type EnumFile,
+  type FestivalFile,
+  type TimingFile,
+} from '@epooja/content';
 import tithi from '@/../../../content/enums/tithi.json';
 import nakshatra from '@/../../../content/enums/nakshatra.json';
 import yoga from '@/../../../content/enums/yoga.json';
@@ -45,3 +51,14 @@ export type EnumKind = keyof typeof ENUM_FILES;
  * never passed back into the engine; it only labels what it already computed.
  */
 export const TIMINGS: TimingFile = parseTimingFile(timingsRaw);
+
+/**
+ * Pandit-reviewed festival tables (§10 Phase 9), keyed by `enums/samvatsara.json`
+ * id. None are checked in yet — `content/REVIEW_QUEUE.md` tracks the table as
+ * a non-code dependency the same way it tracks the pandit identification
+ * itself — so this starts empty. The Calendar screen already calls
+ * `festivalsInMonth` against whatever this map holds; add
+ * `content/festivals/{samvatsara}.json` and one import + entry here once a
+ * pandit signs a year's table off, and markers appear with no screen change.
+ */
+export const FESTIVAL_FILES: Partial<Record<string, FestivalFile>> = {};

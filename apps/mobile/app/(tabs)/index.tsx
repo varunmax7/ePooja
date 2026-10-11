@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Pressable, ScrollView, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
+import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import {
   AngaBadge,
   Button,
@@ -17,6 +18,8 @@ import {
 } from '@epooja/ui';
 import { useDevoteeStore } from '@/stores/devotee';
 import { useTodayView } from '@/services/panchangam';
+import { useNotificationsStore } from '@/stores/notifications';
+import { useToggleReminder } from '@/services/notifications';
 import { formatCalendarDate } from '@/lib/dateFormat';
 import { shiftDate } from '@/stores/settings';
 import today from '@/mocks/today.json';
@@ -38,8 +41,10 @@ export default function TodayScreen() {
   const uiLang = prefs?.uiLang ?? 'en';
 
   const { view, date, goToDate, isLoading, isError } = useTodayView(script, uiLang);
-  const [reminders, setReminders] = useState<Record<string, boolean>>({});
-  const { weekday, day, month, year } = formatCalendarDate(date);
+  const reminders = useNotificationsStore((s) => s.enabledTimingIds);
+  const toggleReminder = useToggleReminder();
+  const { weekday, day, month, year } = formatCalendarDate(date, uiLang);
+  const { t } = useTranslation('today');
 
   return (
     <ScrollView
@@ -48,8 +53,8 @@ export default function TodayScreen() {
       contentContainerStyle={{ paddingBottom: spacing[8] }}
     >
       <CurvedHeader
-        title="Vedic Calendar – Today"
-        subtitle={location?.label ?? 'Location not set'}
+        title={t('headerTitle')}
+        subtitle={location?.label ?? t('locationNotSet')}
         tone="maroon"
         height={150}
       />
@@ -60,7 +65,7 @@ export default function TodayScreen() {
         {!location ? (
           <Card tone="outlined" padding={5}>
             <Txt variant="body" tone="inkMuted">
-              Set your location in Profile to see today&apos;s Panchangam.
+              {t('setLocationPrompt')}
             </Txt>
           </Card>
         ) : null}
@@ -68,7 +73,7 @@ export default function TodayScreen() {
         {isError ? (
           <Card tone="outlined" padding={5}>
             <Txt variant="body" tone="danger">
-              Could not compute today&apos;s Panchangam for this location.
+              {t('computeError')}
             </Txt>
           </Card>
         ) : null}
@@ -111,7 +116,7 @@ export default function TodayScreen() {
                   onPress={() => {
                     router.push(`/panchangam/${date}`);
                   }}
-                  accessibilityLabel={`${weekday} ${month} ${day} ${year}. Tap for the full panchangam.`}
+                  accessibilityLabel={t('dialA11y', { weekday, month, day, year })}
                 />
                 <DaySwipeButton
                   direction="next"
@@ -139,15 +144,15 @@ export default function TodayScreen() {
             </View>
 
             <SunTimesCard
-              sunriseLabel="Sunrise"
+              sunriseLabel={t('sunrise')}
               sunrise={view.sunrise}
-              sunsetLabel="Sunset"
+              sunsetLabel={t('sunset')}
               sunset={view.sunset}
             />
 
             <Card tone="cream" padding={5}>
               <Txt variant="sectionTitle" tone="ink">
-                Daily Prayer Timings
+                {t('dailyPrayerTimings')}
               </Txt>
               <View style={{ height: spacing[2] }} />
               {view.prayerTimings.map((timing, index) => (
@@ -157,8 +162,10 @@ export default function TodayScreen() {
                   range={timing.range}
                   reminderOn={reminders[timing.id] ?? false}
                   onToggleReminder={() => {
-                    setReminders((prev) => ({ ...prev, [timing.id]: !prev[timing.id] }));
+                    void Haptics.selectionAsync();
+                    void toggleReminder(timing.id);
                   }}
+                  reminderA11yLabel={t('reminderA11y', { label: timing.label })}
                   last={index === view.prayerTimings.length - 1}
                 />
               ))}
@@ -166,7 +173,7 @@ export default function TodayScreen() {
 
             <Card tone="cream" padding={5}>
               <Txt variant="sectionTitle" tone="ink">
-                Inauspicious Timings
+                {t('inauspiciousTimings')}
               </Txt>
               <View style={{ height: spacing[2] }} />
               {view.inauspicious.map((timing, index) => (
@@ -184,13 +191,13 @@ export default function TodayScreen() {
 
         {location && isLoading && !view ? (
           <Txt variant="body" tone="inkMuted">
-            Computing today&apos;s Panchangam…
+            {t('computing')}
           </Txt>
         ) : null}
 
         <Card tone="outlined" padding={5}>
           <Txt variant="fieldLabel" tone="inkMuted">
-            TODAY&apos;S PUJA
+            {t('todaysPuja')}
           </Txt>
           <View style={{ height: spacing[1] }} />
           <Txt variant="cardTitle" tone="ink">
@@ -220,10 +227,11 @@ function DaySwipeButton({
   direction: 'previous' | 'next';
   onPress: () => void;
 }) {
+  const { t } = useTranslation('today');
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={direction === 'previous' ? 'Previous day' : 'Next day'}
+      accessibilityLabel={direction === 'previous' ? t('previousDayA11y') : t('nextDayA11y')}
       hitSlop={12}
       onPress={onPress}
     >

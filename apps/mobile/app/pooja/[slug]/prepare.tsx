@@ -1,6 +1,7 @@
 import { ScrollView, View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as Haptics from 'expo-haptics';
+import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   Button,
@@ -38,13 +39,15 @@ export default function PrepareScreen() {
   const puja = pujaBySlug(slug);
   const entries = useChecklistStore((s) => s.entries);
   const toggleItem = useChecklistStore((s) => s.toggle);
+  const { t } = useTranslation('pooja');
+  const { t: tPoojas } = useTranslation('poojas');
 
   if (!puja) {
     return (
       <View style={{ flex: 1, padding: spacing[5] }} className="bg-cream-50">
         <Card tone="outlined" padding={5}>
           <Txt variant="body" tone="inkMuted">
-            That pooja isn&apos;t in this app yet.
+            {t('notFound')}
           </Txt>
         </Card>
       </View>
@@ -71,8 +74,8 @@ export default function PrepareScreen() {
     <View style={{ flex: 1 }} className="bg-cream-50">
       <ScrollView contentContainerStyle={{ paddingBottom: spacing[9] * 2 }}>
         <CurvedHeader
-          title="Pooja Preparation"
-          subtitle={`${pujaTitle(puja)} · ${durationLabel(puja)}`}
+          title={t('prepareHeaderTitle')}
+          subtitle={`${pujaTitle(puja)} · ${durationLabel(puja, tPoojas('minUnit'))}`}
           tone="maroon"
           height={150}
         />
@@ -88,9 +91,13 @@ export default function PrepareScreen() {
               }}
             >
               <Txt variant="sectionTitle" tone="ink" style={{ flex: 1 }}>
-                Essentials for Today&apos;s Ritual
+                {t('essentials')}
               </Txt>
-              <ProgressPill label={`${doneCount}/${total} ready`} done={doneCount} total={total} />
+              <ProgressPill
+                label={t('readyCount', { done: doneCount, total })}
+                done={doneCount}
+                total={total}
+              />
             </View>
 
             <View style={{ height: spacing[2] }} />
@@ -117,9 +124,9 @@ export default function PrepareScreen() {
 
           {recipe ? (
             <RecipePreviewCard
-              eyebrow="Offerings Recipe Preview:"
+              eyebrow={t('recipePreviewEyebrow')}
               title={recipe.name.en ?? recipe.name.te}
-              buttonLabel="View Recipe"
+              buttonLabel={t('viewRecipe')}
               onPress={() => {
                 router.push(`/pooja/${puja.slug}/recipe/${recipe.id}`);
               }}
@@ -145,11 +152,11 @@ export default function PrepareScreen() {
       >
         {pending > 0 ? (
           <Txt variant="label" tone="inkMuted" align="center">
-            {pending} {pending === 1 ? 'item' : 'items'} still unchecked — you can start anyway.
+            {t('pendingItems', { count: pending })}
           </Txt>
         ) : null}
         <Button
-          label="Start Pooja"
+          label={t('startPooja')}
           tone="maroon"
           size="lg"
           icon="play"

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
+import { Stack } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Card, Txt, colors, spacing } from '@epooja/ui';
 import { useDevoteeStore } from '@/stores/devotee';
-import { FamilyMemberForm, RELATIONS } from '@/components/family/FamilyMemberForm';
+import { FamilyMemberForm, useRelationLabels } from '@/components/family/FamilyMemberForm';
 
 /**
  * Family Members (§8.7): add, edit and remove the family §8.1 already lets a
@@ -17,6 +19,11 @@ export default function FamilyListScreen() {
 
   const [editingId, setEditingId] = useState<string | null>(null);
   const [adding, setAdding] = useState(false);
+  const { t } = useTranslation('profile');
+  const { t: tForms } = useTranslation('forms');
+  const { t: tOnboarding } = useTranslation('onboarding');
+  const { t: tCommon } = useTranslation('common');
+  const relationLabels = useRelationLabels();
 
   return (
     <ScrollView
@@ -24,12 +31,14 @@ export default function FamilyListScreen() {
       className="bg-cream-50"
       contentContainerStyle={{ padding: spacing[5], gap: spacing[4], paddingBottom: spacing[8] }}
     >
+      <Stack.Screen options={{ title: t('familyList.title') }} />
+
       {family.map((member) =>
         editingId === member.id ? (
           <FamilyMemberForm
             key={member.id}
             initial={member}
-            submitLabel="Save"
+            submitLabel={tCommon('save')}
             onCancel={() => {
               setEditingId(null);
             }}
@@ -52,14 +61,16 @@ export default function FamilyListScreen() {
                   {member.name.en || member.name.te}
                 </Txt>
                 <Txt variant="label" tone="inkMuted">
-                  {RELATIONS.find((r) => r.id === member.relation)?.label}
-                  {member.includeInSankalpam ? ' · in Sankalpam' : ''}
+                  {relationLabels[member.relation]}
+                  {member.includeInSankalpam ? tOnboarding('family.inSankalpamSuffix') : ''}
                 </Txt>
               </View>
               <View style={{ flexDirection: 'row', gap: spacing[4] }}>
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel={`Edit ${member.name.en || member.name.te}`}
+                  accessibilityLabel={t('familyList.editA11y', {
+                    name: member.name.en || member.name.te,
+                  })}
                   hitSlop={10}
                   onPress={() => {
                     setEditingId(member.id);
@@ -73,7 +84,9 @@ export default function FamilyListScreen() {
                 </Pressable>
                 <Pressable
                   accessibilityRole="button"
-                  accessibilityLabel={`Remove ${member.name.en || member.name.te}`}
+                  accessibilityLabel={t('familyList.removeA11y', {
+                    name: member.name.en || member.name.te,
+                  })}
                   hitSlop={10}
                   onPress={() => {
                     removeFamilyMember(member.id);
@@ -93,7 +106,7 @@ export default function FamilyListScreen() {
 
       {adding ? (
         <FamilyMemberForm
-          submitLabel="Add"
+          submitLabel={tForms('add')}
           onCancel={() => {
             setAdding(false);
           }}
@@ -104,7 +117,7 @@ export default function FamilyListScreen() {
         />
       ) : (
         <Button
-          label="Add family member"
+          label={tOnboarding('family.addMember')}
           tone="ghost"
           icon="account-plus"
           onPress={() => {

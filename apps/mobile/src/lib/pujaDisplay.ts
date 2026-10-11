@@ -23,10 +23,14 @@ export function pujaIcon(puja: PujaCatalogItem): GlyphName {
   return DEITY_ICONS[puja.deity] ?? 'candle';
 }
 
-/** "15 / 35 min" when a puja has both variants, "35 min" when it has one. */
-export function durationLabel(puja: PujaCatalogItem): string {
+/**
+ * "15 / 35 min" when a puja has both variants, "35 min" when it has one.
+ * `unit` is the caller's translated minute-unit word (Phase 9, `t('poojas:minUnit')`)
+ * — this stays a plain function, not a hook, so it works outside components too.
+ */
+export function durationLabel(puja: PujaCatalogItem, unit = 'min'): string {
   const { short, full } = puja.durations;
-  return short === undefined ? `${full} min` : `${short} / ${full} min`;
+  return short === undefined ? `${full} ${unit}` : `${short} / ${full} ${unit}`;
 }
 
 /** How many steps the short variant runs — what the catalog card advertises. */

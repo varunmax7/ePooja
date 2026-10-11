@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button, Card, Txt, colors, spacing } from '@epooja/ui';
 import { StepHeader } from '@/components/onboarding/StepHeader';
-import { FamilyMemberForm, RELATIONS } from '@/components/family/FamilyMemberForm';
+import { FamilyMemberForm, useRelationLabels } from '@/components/family/FamilyMemberForm';
 import { useOnboardingDraft } from '@/stores/onboardingDraft';
 
 /**
@@ -16,15 +17,17 @@ export default function FamilyScreen() {
   const router = useRouter();
   const draft = useOnboardingDraft();
   const [adding, setAdding] = useState(false);
+  const { t } = useTranslation('onboarding');
+  const { t: tForms } = useTranslation('forms');
+  const relationLabels = useRelationLabels();
 
   return (
     <View style={{ flex: 1 }} className="bg-cream-50">
-      <StepHeader step={3} title="Your family" />
+      <StepHeader step={3} title={t('family.title')} />
 
       <ScrollView contentContainerStyle={{ padding: spacing[5], gap: spacing[4] }}>
         <Txt variant="body" tone="inkMuted">
-          Add the family members you&apos;d like named in your Sankalpam. You can skip this and add
-          them later from Profile.
+          {t('family.intro')}
         </Txt>
 
         {draft.family.map((member) => (
@@ -41,13 +44,15 @@ export default function FamilyScreen() {
                   {member.name.en || member.name.te}
                 </Txt>
                 <Txt variant="label" tone="inkMuted">
-                  {RELATIONS.find((r) => r.id === member.relation)?.label}
-                  {member.includeInSankalpam ? ' · in Sankalpam' : ''}
+                  {relationLabels[member.relation]}
+                  {member.includeInSankalpam ? t('family.inSankalpamSuffix') : ''}
                 </Txt>
               </View>
               <Pressable
                 accessibilityRole="button"
-                accessibilityLabel={`Remove ${member.name.en || member.name.te}`}
+                accessibilityLabel={t('family.removeMember', {
+                  name: member.name.en || member.name.te,
+                })}
                 hitSlop={10}
                 onPress={() => {
                   draft.removeFamilyDraft(member.draftId);
@@ -65,7 +70,7 @@ export default function FamilyScreen() {
 
         {adding ? (
           <FamilyMemberForm
-            submitLabel="Add"
+            submitLabel={tForms('add')}
             onCancel={() => {
               setAdding(false);
             }}
@@ -76,7 +81,7 @@ export default function FamilyScreen() {
           />
         ) : (
           <Button
-            label="Add family member"
+            label={t('family.addMember')}
             tone="ghost"
             icon="account-plus"
             onPress={() => {
@@ -88,7 +93,7 @@ export default function FamilyScreen() {
 
       <View style={{ padding: spacing[5] }}>
         <Button
-          label="Continue"
+          label={t('common:continue')}
           tone="maroon"
           size="lg"
           fullWidth

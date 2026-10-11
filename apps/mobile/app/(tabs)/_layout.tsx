@@ -1,4 +1,5 @@
 import { Redirect, Tabs } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { TabBar } from '@/components/TabBar';
 import { hasOnboarded, useDevoteeStore } from '@/stores/devotee';
 
@@ -11,16 +12,17 @@ import { hasOnboarded, useDevoteeStore } from '@/stores/devotee';
 export default function TabsLayout() {
   const hydrated = useDevoteeStore((s) => s.hydrated);
   const onboarded = useDevoteeStore(hasOnboarded);
+  const { t } = useTranslation('common');
 
   if (!hydrated) return null;
   if (!onboarded) return <Redirect href="/onboarding" />;
 
   return (
     <Tabs screenOptions={{ headerShown: false }} tabBar={(props) => <TabBar {...props} />}>
-      <Tabs.Screen name="index" options={{ title: 'Today' }} />
-      <Tabs.Screen name="poojas" options={{ title: 'Poojas' }} />
-      <Tabs.Screen name="calendar" options={{ title: 'Calendar' }} />
-      <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
+      <Tabs.Screen name="index" options={{ title: t('tabToday') }} />
+      <Tabs.Screen name="poojas" options={{ title: t('tabPoojas') }} />
+      <Tabs.Screen name="calendar" options={{ title: t('tabCalendar') }} />
+      <Tabs.Screen name="profile" options={{ title: t('tabProfile') }} />
     </Tabs>
   );
 }
