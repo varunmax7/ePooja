@@ -14,7 +14,18 @@ import { fetchPackManifest, type PackManifestEntry } from './packManifest';
  * exercise it with yet (same gap Phases 6 and 7 both recorded).
  */
 
-const PACKS_DIR = new Directory(Paths.document, 'packs');
+/**
+ * Built lazily rather than at module scope: `expo-file-system`'s web shim
+ * throws constructing a `Directory` at all (`this.validatePath is not a
+ * function`) — fine, since downloads are native-only anyway (there's
+ * nothing to download yet regardless, per the note above), but a top-level
+ * `new Directory(...)` would crash on *import*, taking down every screen
+ * that pulls in this module's barrel (`services/content`), not just the
+ * download path.
+ */
+function packsDir(): Directory {
+  return new Directory(Paths.document, 'packs');
+}
 
 /**
  * Which remote packs are worth fetching: present in the manifest and either
@@ -47,9 +58,10 @@ export async function downloadPack(entry: PackManifestEntry): Promise<boolean> {
   markDownloading(entry.id);
 
   try {
-    if (!PACKS_DIR.exists) PACKS_DIR.create({ intermediates: true });
+    const packs = packsDir();
+    if (!packs.exists) packs.create({ intermediates: true });
 
-    const packDir = new Directory(PACKS_DIR, `${entry.id}@${entry.version}`);
+    const packDir = new Directory(packs, `${entry.id}@${entry.version}`);
     if (!packDir.exists) packDir.create({ intermediates: true });
 
     const file = await File.downloadFileAsync(entry.manifestUrl, packDir, { idempotent: true });

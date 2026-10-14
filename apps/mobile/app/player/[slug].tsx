@@ -31,7 +31,14 @@ import type { PujaCatalogItem, PujaStep, PujaVariant } from '@epooja/content';
 import { pujaBySlug, runnableSteps, samagriForPuja } from '@/services/content';
 import { contentTextFor, pujaTitle } from '@/lib/pujaDisplay';
 import { pujaRunnerMachine, type PujaRunnerMode } from '@/machines/pujaRunner.machine';
-import { BUNDLED_AUDIO_MANIFEST, buildStepQueue, useQueuePlayback } from '@/services/audio';
+import {
+  BUNDLED_AUDIO_MANIFEST,
+  buildStepQueue,
+  DEV_PLACEHOLDER_AUDIO_ENABLED,
+  speechTextFor,
+  useDevSpeechPlayback,
+  useQueuePlayback,
+} from '@/services/audio';
 import {
   buildDevoteeSankalpam,
   buildDevoteeSankalpamAudioPlan,
@@ -45,6 +52,8 @@ import { useAuthStore } from '@/stores/auth';
 import { pushCompletedSession } from '@/services/sync';
 
 const KEEP_AWAKE_TAG = 'puja-runner';
+
+function noop(): void {}
 
 /**
  * Chant Player (§8.6, mockup screen 4) — wired to the Puja Runner machine
@@ -126,9 +135,46 @@ export default function PlayerScreen() {
   useEffect(() => {
     const awake =
       snapshot.matches('preparing') || snapshot.matches('step') || snapshot.matches('paused');
-    if (awake) void activateKeepAwakeAsync(KEEP_AWAKE_TAG);
+    // Only attempt activation when this render is actually in an awake state —
+    // an unconditional cleanup would try to deactivate a tag that was never
+    // activated at all (e.g. unmounting from `idle`/`exited`).
+    if (!awake) return undefined;
+
+    // `activateKeepAwakeAsync` is genuinely async (on web it awaits
+    // `navigator.wakeLock.request`), and `snapshot` can change again — re-
+    // running this effect — before that promise settles. `activated`/
+    // `cancelled` track which of "activation finished first" or "cleanup ran
+    // first" actually happened, so a deactivate is only ever attempted once
+    // a matching activate is known to have succeeded:
+    // - cleanup first: skip deactivating (nothing is actually held yet), but
+    //   still release it the moment activation does land, rather than
+    //   leaking the lock.
+    // - activation first: cleanup deactivates normally.
+    // Either way, `deactivateKeepAwake` is never called for a tag that was
+    // never activated — on web that throws "the wake lock with tag … has
+    // not activated yet" (`expo-keep-awake`'s own web shim only tracks a tag
+    // once `activate` resolves); the `.catch` below is a last-resort net for
+    // any other platform/timing quirk, not the primary fix.
+    let activated = false;
+    let cancelled = false;
+
+    void activateKeepAwakeAsync(KEEP_AWAKE_TAG)
+      .then(() => {
+        if (cancelled) void deactivateKeepAwake(KEEP_AWAKE_TAG).catch(() => {});
+        else activated = true;
+      })
+      .catch((error: unknown) => {
+        // `console.warn`, not `console.error` — an already-handled, expected
+        // degraded mode (same reasoning as `useQueuePlayback.ts`'s identical
+        // note): Metro/Expo's web LogBox promotes any `console.error` call to
+        // the same full-screen blocking overlay a true uncaught exception
+        // gets, defeating the point of catching this at all.
+        console.warn('activateKeepAwakeAsync failed; keep-awake is unavailable', error);
+      });
+
     return () => {
-      void deactivateKeepAwake(KEEP_AWAKE_TAG);
+      cancelled = true;
+      if (activated) void deactivateKeepAwake(KEEP_AWAKE_TAG).catch(() => {});
     };
   }, [snapshot]);
 
@@ -198,7 +244,36 @@ export default function PlayerScreen() {
     if (!isSankalpamChant) send({ type: 'AUDIO_ENDED' });
   }, [isSankalpamChant, send]);
 
-  const genericAudio = useQueuePlayback(queue, onAudioEnded);
+  // The same phase's text, in reading order — what `useDevSpeechPlayback`
+  // below actually speaks. Always `te` (`speechTextFor`), never the
+  // devotee's display-script preference (`script`, used for `lines` further
+  // down) — see that helper's own note on why. This has to exist earlier
+  // than `lines`, since a hook needs it before any early `return` in this
+  // component.
+  const speechTexts = useMemo((): string[] => {
+    if (!currentStep || !phase || isSankalpamChant) return [];
+    if (phase === 'instruction') {
+      return currentStep.instruction ? [speechTextFor(currentStep.instruction.text)] : [];
+    }
+    const source = currentStep.namavali?.names ?? currentStep.chant?.lines ?? [];
+    return source.map((line) => speechTextFor(line.text));
+  }, [currentStep, phase, isSankalpamChant]);
+
+  // Dev-only: before §9.6 recording exists, either a non-speech chime
+  // (`useQueuePlayback`'s own manifest stays empty, see its note) or —
+  // naturally enough to actually sound like a puja — the device's own TTS
+  // voice speaking the step's real text (`useDevSpeechPlayback`). Exactly
+  // one of the two ever drives `AUDIO_ENDED`: whichever is NOT selected gets
+  // a no-op `onEnded`, so its own "nothing resolved" auto-advance (both
+  // hooks have one) never fires behind the active hook's back. Never shipped
+  // (`DEV_PLACEHOLDER_AUDIO_ENABLED` is `false` in any production build
+  // regardless of `__DEV__`), never in a test run either, and never pandit
+  // content either way — `isProductionSafe` has nothing to approve here.
+  const genericAudio = useQueuePlayback(queue, DEV_PLACEHOLDER_AUDIO_ENABLED ? noop : onAudioEnded);
+  const devSpeech = useDevSpeechPlayback(
+    speechTexts,
+    DEV_PLACEHOLDER_AUDIO_ENABLED ? onAudioEnded : noop,
+  );
 
   const onSankalpamComplete = useCallback(() => {
     send({ type: 'AUDIO_ENDED' });
@@ -209,9 +284,10 @@ export default function PlayerScreen() {
     BUNDLED_AUDIO_MANIFEST,
     isSankalpamChant,
     onSankalpamComplete,
+    sankalpamText,
   );
 
-  const audio = genericAudio;
+  const audio = DEV_PLACEHOLDER_AUDIO_ENABLED ? devSpeech : genericAudio;
 
   const [showSettings, setShowSettings] = useState(false);
   const [showSamagri, setShowSamagri] = useState(false);

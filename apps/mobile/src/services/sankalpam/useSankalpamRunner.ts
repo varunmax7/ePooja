@@ -5,8 +5,38 @@ import {
   groupPlanIntoRuns,
   type AudioPlanItem,
   type PlanRun,
+  type SankalpamText,
 } from '@epooja/sankalpam';
-import { useQueuePlayback, type AudioQueueTrack } from '@/services/audio';
+import {
+  DEV_PLACEHOLDER_AUDIO_ENABLED,
+  speechTextFor,
+  useDevSpeechPlayback,
+  useQueuePlayback,
+  type AudioQueueTrack,
+} from '@/services/audio';
+
+function noop(): void {}
+
+/**
+ * The real sankalpam phrase for one `clip` run's segments, in order — what
+ * `useDevSpeechPlayback` speaks in place of the still-unresolved token
+ * clips (same dev-only purpose as `app/player/[slug].tsx`'s own
+ * `speechTexts`; see that file's note). A segment the text renderer itself
+ * could not resolve (`omit`/`missing`) contributes nothing — there is
+ * nothing real to say for it either way.
+ */
+function clipRunSpeechTexts(
+  items: readonly Extract<AudioPlanItem, { kind: 'clip' }>[],
+  sankalpamText: SankalpamText | undefined,
+): string[] {
+  if (!sankalpamText) return [];
+  const texts: string[] = [];
+  for (const item of items) {
+    const segment = sankalpamText.segments.find((candidate) => candidate.id === item.segmentId);
+    if (segment?.resolution.status === 'resolved') texts.push(speechTextFor(segment.resolution.text));
+  }
+  return texts;
+}
 
 export interface SankalpamRunner {
   /** The plan item a devotee should currently see — the self-recite prompt's own text, or whichever clip run is loaded. */
@@ -33,12 +63,20 @@ const NO_TRACKS: AudioQueueTrack[] = [];
  * caller not currently in this step passes `false` and gets back an inert
  * runner, rather than this hook trying to guess when it should run from the
  * plan alone.
+ *
+ * `sankalpamText` is the same devotee's rendered Sankalpam (§9.3's
+ * `buildSankalpamText`) the caller already builds for display — passed
+ * through here only so a `clips` run's dev-only speech stand-in
+ * (`clipRunSpeechTexts`) has the real phrase to speak. `undefined` (a
+ * caller with no Sankalpam context yet) just means that stand-in has
+ * nothing to say, same as an empty plan would.
  */
 export function useSankalpamRunner(
   plan: readonly AudioPlanItem[],
   manifest: readonly AudioClip[],
   active: boolean,
   onComplete: () => void,
+  sankalpamText?: SankalpamText,
 ): SankalpamRunner {
   const runs = useMemo(() => groupPlanIntoRuns(plan), [plan]);
   // One past the last run (rather than clamped) is the "finished" state —
@@ -126,7 +164,30 @@ export function useSankalpamRunner(
     if (currentRun?.kind === 'clips' || currentRun?.kind === 'pandit_clone') advanceRun();
   }, [active, currentRun, advanceRun]);
 
-  const audio = useQueuePlayback(active ? tracks : NO_TRACKS, onRunEnded, trackManifest);
+  // Dev-only: before §9.6 recording exists, a `clips` run's tokens never
+  // resolve against `manifest` (`useQueuePlayback`'s own manifest stays
+  // empty) — speaking the real sankalpam phrase instead
+  // (`clipRunSpeechTexts`) is the only one of the two engines allowed to
+  // drive `onRunEnded` while that's true, so the unresolved-clip queue's own
+  // "nothing resolved" auto-advance never fires behind its back. A
+  // `pandit_clone` run has a genuinely resolvable clip regardless of this
+  // flag (§9.6.1's cached voice clone), so it always keeps using the real
+  // audio engine — never routed through speech.
+  const speakingClipRun = DEV_PLACEHOLDER_AUDIO_ENABLED && currentRun?.kind === 'clips';
+  const speechTexts = useMemo(
+    () => (currentRun?.kind === 'clips' ? clipRunSpeechTexts(currentRun.items, sankalpamText) : []),
+    [currentRun, sankalpamText],
+  );
+
+  const audio = useQueuePlayback(
+    active ? tracks : NO_TRACKS,
+    speakingClipRun ? noop : onRunEnded,
+    trackManifest,
+  );
+  const devSpeech = useDevSpeechPlayback(
+    active && speakingClipRun ? speechTexts : [],
+    speakingClipRun ? onRunEnded : noop,
+  );
 
   const activeItem =
     currentRun === undefined
@@ -139,6 +200,6 @@ export function useSankalpamRunner(
     activeItem,
     awaitingSelfRecite: active && currentRun?.kind === 'self_recite',
     continueSelfRecite,
-    playing: audio.playing,
+    playing: speakingClipRun ? devSpeech.playing : audio.playing,
   };
 }

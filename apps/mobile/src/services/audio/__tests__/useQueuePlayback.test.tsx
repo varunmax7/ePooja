@@ -95,4 +95,59 @@ describe('useQueuePlayback', () => {
     expect(TrackPlayer.pause).toHaveBeenCalledTimes(1);
     expect(TrackPlayer.setRate).toHaveBeenCalledWith(1.25);
   });
+
+  it('calls onEnded, without throwing, when setupTrackPlayer itself fails', async () => {
+    // Observed for real on react-native-track-player's web shim, which loads
+    // `shaka-player` as part of setup and can fail to initialize it.
+    (TrackPlayer.setupPlayer as jest.Mock).mockRejectedValueOnce(
+      new Error('shaka-player failed to load'),
+    );
+    const onEnded = jest.fn();
+
+    await renderHook(() => useQueuePlayback([CHANT_TRACK], onEnded, MANIFEST));
+
+    await waitFor(() => {
+      expect(onEnded).toHaveBeenCalledTimes(1);
+    });
+    expect(TrackPlayer.add).not.toHaveBeenCalled();
+  });
+
+  it('swallows a synchronous throw from play/pause/setRate rather than crashing the caller', async () => {
+    const { result } = await renderHook(() => useQueuePlayback([CHANT_TRACK], jest.fn(), MANIFEST));
+    await waitFor(() => {
+      expect(TrackPlayer.play).toHaveBeenCalledTimes(1);
+    });
+
+    // The exact failure mode reported from the web shim: a *synchronous*
+    // throw, not a rejected promise, from calling a method before setup
+    // actually completed.
+    (TrackPlayer.play as jest.Mock).mockImplementationOnce(() => {
+      throw new Error('You must call setupPlayer prior to interacting with the player.');
+    });
+
+    expect(() => {
+      result.current.play();
+    }).not.toThrow();
+  });
+
+  it('stops calling into TrackPlayer at all, on any tap, once setup is known to have failed', async () => {
+    (TrackPlayer.setupPlayer as jest.Mock).mockRejectedValueOnce(
+      new Error('shaka-player failed to load'),
+    );
+    const { result } = await renderHook(() => useQueuePlayback([CHANT_TRACK], jest.fn(), MANIFEST));
+
+    await waitFor(() => {
+      expect(TrackPlayer.add).not.toHaveBeenCalled();
+    });
+
+    result.current.play();
+    result.current.pause();
+    result.current.setRate(1.25);
+
+    // Not just "didn't throw" — genuinely never called, on every one of the
+    // three transport controls, every repeated tap.
+    expect(TrackPlayer.play).not.toHaveBeenCalled();
+    expect(TrackPlayer.pause).not.toHaveBeenCalled();
+    expect(TrackPlayer.setRate).not.toHaveBeenCalled();
+  });
 });

@@ -7,6 +7,20 @@ import TrackPlayer, {
 } from 'react-native-track-player';
 
 let setupPromise: Promise<void> | null = null;
+let setupFailed = false;
+
+/**
+ * Whether a previous `setupTrackPlayer()` call is known to have failed —
+ * observed for real on the web platform, whose RNTP shim can fail
+ * `setupPlayer` outright (it loads `shaka-player` under the hood). Checked
+ * by `useQueuePlayback`'s `play`/`pause`/`setRate` *before* calling into
+ * `TrackPlayer` at all, so a devotee tapping a transport control repeatedly
+ * never re-attempts a call already known to throw — not just catching the
+ * throw after the fact, but not making it in the first place.
+ */
+export function isTrackPlayerUnavailable(): boolean {
+  return setupFailed;
+}
 
 /**
  * Idempotent player setup (§9.6). A puja may be started, backgrounded and
@@ -46,7 +60,10 @@ export function setupTrackPlayer(): Promise<void> {
       ],
       progressUpdateEventInterval: 1,
     });
-  })();
+  })().catch((error: unknown) => {
+    setupFailed = true;
+    throw error;
+  });
 
   return setupPromise;
 }
@@ -54,4 +71,5 @@ export function setupTrackPlayer(): Promise<void> {
 /** Test seam: forget the memoised setup (used by unit tests only). */
 export function resetTrackPlayerSetupForTests(): void {
   setupPromise = null;
+  setupFailed = false;
 }
