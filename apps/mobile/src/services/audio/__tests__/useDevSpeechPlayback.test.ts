@@ -165,6 +165,29 @@ describe('useDevSpeechPlayback', () => {
     expect(Speech.resume).toHaveBeenCalledTimes(1);
   });
 
+  it('replays from the start when Play is pressed after the queue already finished on its own', async () => {
+    const onEnded = jest.fn();
+    // A single-line queue (the common case: the "not yet recorded" notice,
+    // or a step with just one real chant line) auto-starts and finishes on
+    // its own, with nothing ever explicitly paused.
+    const { result } = await renderHook(() => useDevSpeechPlayback(['line one'], onEnded));
+    await waitFor(() => expect(Speech.speak).toHaveBeenCalledTimes(1));
+
+    await act(() => {
+      lastSpeakOptions()?.onDone?.();
+    });
+    await advanceToNextLine();
+    expect(onEnded).toHaveBeenCalledTimes(1);
+    expect(result.current.playing).toBe(false);
+
+    await act(() => {
+      result.current.play();
+    });
+
+    expect(Speech.speak).toHaveBeenCalledTimes(2);
+    expect(Speech.speak).toHaveBeenLastCalledWith('line one', expect.anything());
+  });
+
   it('applies a new rate starting with the next line, not the one already speaking', async () => {
     const { result } = await renderHook(() =>
       useDevSpeechPlayback(['line one', 'line two'], jest.fn()),

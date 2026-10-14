@@ -1,5 +1,5 @@
 import type { MaterialCommunityIcons } from '@expo/vector-icons';
-import { stepsForVariant, type ContentText, type PujaCatalogItem } from '@epooja/content';
+import { isTodoPandit, stepsForVariant, type ContentText, type PujaCatalogItem } from '@epooja/content';
 import type { MantraScript } from '@epooja/ui';
 
 /**
@@ -44,12 +44,26 @@ export function pujaTitle(puja: PujaCatalogItem): string {
 }
 
 /**
+ * §0.4's own convention tags unauthored ritual text with its raw
+ * `⟨TODO_PANDIT: id⟩` placeholder token, so it's easy to grep
+ * (`content/REVIEW_QUEUE.md`'s whole point) — but that internal token
+ * leaking onto a devotee's screen reads as the app being broken, not as a
+ * known, tracked gap. Only ever reachable running a dev build against
+ * incomplete content in the first place: the Phase 10 production gate
+ * refuses to ship while any placeholder remains, so a plain, deliberately
+ * non-ritual English label here (regardless of `uiLang`/`script`) is fine —
+ * same reasoning as `services/audio/devSpeech.ts`'s spoken
+ * `NOT_YET_RECORDED_NOTICE`.
+ */
+const NOT_YET_RECORDED_LABEL = '(not yet recorded)';
+
+/**
  * A `ContentText` in the devotee's chosen mantra script (§7.3), falling back
  * to Telugu for a script a piece of content has no form in yet — content is
  * never silently blank just because `dev`/`iast` have not been authored.
  */
 export function contentTextFor(text: ContentText, script: MantraScript): string {
-  if (script === 'dev') return text.dev ?? text.te;
-  if (script === 'iast') return text.iast ?? text.te;
-  return text.te;
+  const resolved =
+    script === 'dev' ? text.dev ?? text.te : script === 'iast' ? text.iast ?? text.te : text.te;
+  return isTodoPandit(resolved) ? NOT_YET_RECORDED_LABEL : resolved;
 }
